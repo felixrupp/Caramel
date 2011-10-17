@@ -1,0 +1,42 @@
+<?xml encoding="UTF-8"?>
+
+<!ELEMENT database (page)+>
+<!ATTLIST database
+    xmlns CDATA #FIXED ''
+    version CDATA #REQUIRED>
+
+<!ELEMENT page (record|page)+>
+<!ATTLIST page
+    xmlns CDATA #FIXED ''
+    name CDATA #REQUIRED>
+    
+<!ELEMENT record (content|navigation|title|titletag|meta|facebook-like)+>
+<!ATTLIST page
+    xmlns CDATA #FIXED ''
+    lang NMTOKEN #REQUIRED>
+
+<!ELEMENT content (#PCDATA)>
+<!ATTLIST content
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT navigation (#PCDATA)>
+<!ATTLIST navigation
+    xmlns CDATA #FIXED ''
+    pos CDATA #REQUIRED>
+
+<!ELEMENT title (#PCDATA)>
+<!ATTLIST title
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT titletag (#PCDATA)>
+<!ATTLIST titletag
+    xmlns CDATA #FIXED ''>
+
+<!ELEMENT meta (#PCDATA)>
+<!ATTLIST meta
+    xmlns CDATA #FIXED ''
+    name NMTOKEN #REQUIRED>
+    
+<!ELEMENT facebook-like (#PCDATA)>
+<!ATTLIST facebook-like
+    xmlns CDATA #FIXED ''>

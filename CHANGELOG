@@ -1,0 +1,97 @@
+2011-02-11  Felix Rupp  <felix.rupp@sierupp.com>
+
+	* inc/functions.php (whole file): Renamend, new name is "Caramel.php"
+	* inc/Caramel.php (whole class): Sourcecode completely rewritten, now object-oriented
+	* inc/content.php (whole file): Renamend, new name is "redirect.php"
+	* inc/redirect.php (Language Redirect): Rewritten for use with Caramel-class
+	* config/admin.xml (whole file): New file for admin-config
+	* config/site.xml (whole file): New file for site-config
+
+
+2011-02-13  Felix Rupp  <felix.rupp@sierupp.com>
+
+	* inc/Caramel.php (all functions): Redesign of all functions for use with config/site.xml-file
+	* doc1.xml (whole file): Completely rewritten for use with config-files and Caramel-class, language selection now based on attributes, default language (e.g. english) now always on top
+	* index.php (print title): Rewritten for use with Caramel-class
+	  (print navigation): Rewritten for use with Caramel-class
+	  (print content): Rewritten for use with Caramel-class
+	  (head-tag-area): Added significant meta-information
+
+
+2011-02-20  Felix Rupp  <felix.rupp@sierupp.com>
+
+	* doc/data.xml (whole file): New file for storing the pages
+	* inc/Caramel.php (navigation): Re-structured for use with new Database-file
+	  (title): Re-structured for use with new Database-file
+	  (content): Re-structured for use with new Database-file
+	* dtd/caramel-database.dtd (whole file): Doctype-Definition for Caramel database-file
+	* dtd/caramel-plist.dtd (whole file): Doctype-Definition for Caramel config-file
+
+
+2011-03-06  Felix Rupp  <felix.rupp@sierupp.com>
+
+	* inc/Configurator.php (whole file): New file with Singleton-Class "Configurator". This class manages the site-config
+	* inc/redirect.php (whole file): Rewritten for use with speaking urls
+	* inc/Caramel.php (navigation): Re-structured for use with speaking urls
+	  (getParametersBehind): Re-structured for use with speaking urls
+	* inc/settings.php (whole file): New file with setting-constants
+	* .htaccess (whole file): New file for speaking url setup
+
+
+2011-03-20  Felix Rupp  <felix.rupp@sierupp.com>  version 0.6 
+
+	* inc/Caramel.php (navigation): Changed method for receiving language part in speaking-urls section. Method is now getParametersBefore()
+	  (getParametersBefore): Re-structured for use with speaking urls
+
+
+2011-04-03  Felix Rupp  <felix.rupp@sierupp.com>  version 0.6
+
+	* inc/Configurator.php (constructor): Added parameter $configFileName for providing name of designated config-file
+	  (getConfigurator): Added parameter $configFileName for providing name of designated config-file
+	* inc/Caramel.php (constructor): Changed class-method call of getConfigurator to fit new method-declaration. Giving name for config-file "site"
+	* inc/redirect.php (Language Redirect): Changed class-method call of getConfigurator to fit new method-declaration. Giving name for config-file "site"
+
+
+2011-04-21  Felix Rupp  <felix.rupp@sierupp.com>  version 0.7
+
+	* doc/data.xml: Added tags for meta-information
+	* inc/Caramel.php (meta): New method for printing meta-information
+	  (versionInformation): New method for printing version information on top of sourcecode
+	  (languageSelector): New method for printing language selectors in multilanguage environments
+
+
+2011-04-27  Felix Rupp  <felix.rupp@sierupp.com>  version 0.7.1
+
+	* doc/data.xml: Added subpage
+	* inc/Caramel.php (navigation): Added output for subpages
+
+
+2011-04-30  Felix Rupp  <felix.rupp@sierupp.com>  version 0.7.1
+
+	* .htaccess: New rule to exclude "admin" and "download" folders and favicon.ico file
+
+
+2011-05-08  Felix Rupp  <felix.rupp@sierupp.com>  version 0.8
+
+	* doc/database.xml: Rewritten for use with "records" instead of pages, reorganized language attribute. Record now identifies language. You can add multiple records with different languages for one page
+	* inc/Caramel.php (navigation, content, meta, title): Rewritten for new database-structure
+
+
+2011-05-09  Felix Rupp  <felix.rupp@sierupp.com>  version 0.8
+
+	* doc/database.xml: Added facebook-like support
+	* inc/Caramel.php (footer, facebookLikeButton): New methods to implement facebook-like support
+	  (getDisplay): Now refers to STARTPAGE-setting in site-config as default "homepage"
+	* index.php: Footer is now printed with "footer"-method
+
+
+2011-05-22  Felix Rupp  <felix.rupp@sierupp.com>  version 0.8.1
+
+	* inc/Caramel.php: Sourcecode reorganized
+	* inc/contact.php: Added call for contact-receiver
+	* index.php: Sourcecode reorganized
+	* config/site.xml: Language selector settings added
+	* Setup for css and js minifier
+
+
+

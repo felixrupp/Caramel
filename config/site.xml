@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE caramel-plist SYSTEM "http://www.sierupp.com/dtd/caramel-plist.dtd">
+
+<caramel-plist version="1.0">
+
+	<!-- Essentials -->
+	<setting key="DOCUMENT_SUBFOLDER" blank="false"><![CDATA[/doc]]></setting>
+	<setting key="STARTPAGE" blank="false"><![CDATA[home]]></setting>
+	<setting key="BASE" blank="false"><![CDATA[http://test.felixrupp.com/]]></setting>
+	
+	
+	<!-- Robots, Meta, etc. -->
+	<setting key="ROBOTS" blank="false"><![CDATA[index,follow]]></setting>
+	<setting key="REVISIT_AFTER" blank="false"><![CDATA[1 days]]></setting>
+	
+	
+	<!-- Website specific -->
+	<setting key="WEBSITE_TITLE" blank="false"><![CDATA[Fill in your Title]]></setting>
+	<setting key="WEBSITE_TITLE_SEPERATOR" blank="false"><![CDATA[&nbsp;&ndash;&nbsp;]]></setting>
+	
+	
+	<!-- Navigation -->
+	<setting key="NAVIGATION_ACTIVE_MARKER_POSITION" blank="false"><![CDATA[before]]></setting>
+	<setting key="NAVIGATION_ACTIVE_MARKER" blank="true"><![CDATA[&raquo; ]]></setting>
+	<setting key="NAVIGATION_CLASS" blank="true"><![CDATA[ class="menuLink"]]></setting>
+	<setting key="NAVIGATION_REL" blank="true"><![CDATA[ rel="internal"]]></setting>
+	
+	<!-- URL Setup -->
+	<setting key="SPEAKING_URLS" blank="false">true</setting>
+	
+	<!-- Footer -->
+	<setting key="FACEBOOK_LIKE_MODE"><![CDATA[global]]></setting> <!-- Possibilities: 'global' for your domain only or 'site-specific' for each subpage itself -->
+	<setting key="LANGUAGE_SELECTOR_IN_FOOTER">true</setting> <!-- if false then include footer yourself -->
+	<setting key="LANGUAGE_SELECTOR_SEPERATOR"><![CDATA[&nbsp;|&nbsp;]]></setting>
+	
+	
+</caramel-plist>

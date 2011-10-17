@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE caramel-plist SYSTEM "http://www.sierupp.com/dtd/caramel-plist.dtd">
+
+<caramel-plist version="1.0">
+
+	<!-- Admin setup -->
+	<setting key="ADMIN_USERNAME">admin</setting>
+	<setting key="ADMIN_PASSWORD">admin</setting>
+	<setting key="ADMIN_EMAIL">admin@sierupp.com</setting>
+	
+	<!-- E-Mail used in contactform -->
+	<setting key="CONTACT_EMAIL">info@sierupp.com</setting>
+	
+</caramel-plist>

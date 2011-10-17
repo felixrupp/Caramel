@@ -1,0 +1,10 @@
+Options +FollowSymlinks
+RewriteEngine on
+
+# Exclude the following directories and files from rewriting
+RewriteRule ^(admin|download|min|favicon\.ico)/ - [L]
+
+# Rewrite for speaking URLs
+RewriteRule ^([a-z]{2})(/?)$ ?lang=$1 [QSA,L]
+RewriteRule ^([a-z]{2})/([a-z0-9]+)(/?)$ ?lang=$1&display=$2 [QSA,L]
+RewriteRule ^([a-z]{2})/([a-z0-9]+)/([a-z0-9]+)(/?)$ ?lang=$1&display=$2/$3 [QSA,L]
