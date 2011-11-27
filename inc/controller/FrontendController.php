@@ -1,10 +1,11 @@
 <?php
 
+define("BASEDIR", substr($_SERVER["SCRIPT_FILENAME"], 0, strrpos($_SERVER["SCRIPT_FILENAME"],"/")));
+
 # Imports
-#require_once(dirname(__FILE__).'/settings.php'); # Settings with Constants
-#require_once(dirname(__FILE__).'/ConfigurationModel.php'); # Singleton for Configfile
-#require_once(dirname(__FILE__).'/Browser.php'); # Browserselection
-//TODO: Imports einfügen
+require_once BASEDIR.'/inc/model/DatabaseModel.php';
+require_once BASEDIR.'/inc/model/ConfigurationModel.php';
+require_once BASEDIR.'/inc/view/TemplateView.php';
 
 /**
  *
@@ -21,7 +22,6 @@ class FrontendController {
 	private $_config;
 	private $_dataBase;
 	private $_allLanguages = array();
-	private $_templateModel;
 	private $_templateView;
 	
 	# Constants
@@ -33,15 +33,12 @@ class FrontendController {
 	 * Constructor
 	 */
 	public function FrontendController() {
-		
-		# Get TemplateModel
-		$this->_templateModel = TemplateModel::getTemplateModel();
-		
-		# Get TemplatingEngine
-		$this->_templateView = TemplateView::getTemplate($this->_templateModel->getActiveTemplate());
-		
+
 		# Get Configurator 
 		$this->_config = ConfigurationModel::getConfigurator("site");
+		
+		# Get TemplatingEngine
+		$this->_templateView = TemplateView::getTemplate($this->_config.getConfigString("TEMPLATE"));
 		
 		# Get Database 
 		$this->_dataBase = DatabaseModel::getDatabase();
@@ -62,16 +59,21 @@ class FrontendController {
 	
 # Main content functions:
 
+	/**
+	 * 
+	 * frontednOutput method
+	 * This method assigns needed content to our template engine and renders the template.
+	 * 
+	 */
 	public function frontendOutput() {
+				
+		$this->_templateView->assign("content", $this->content());
 		
-		$comment = $this->versionInformation();		
-		$this->_templateView->assign("caramelComment", $comment);
+		$this->_templateView->assign("navigation", $this->navigation());
 		
-		$language = $this->languageCode();
-		$this->_templateView->assign("caramelLanguage", $language);
+		$this->_templateView->assign("languageSelector", $this->languageSelector());
 		
-		//TODO: Weitere Frontendausgaben einbauen
-		
+		$this->_templateView->assign("footer", $this->footer());
 		
 		$this->_templateView->render();
 		
@@ -123,6 +125,11 @@ class FrontendController {
 	} // End of method declaration
 
 
+	
+	
+	
+	
+	
 	/**
 	 * 
 	 * Print out the content in index.php

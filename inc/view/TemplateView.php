@@ -1,5 +1,6 @@
 <?php
 
+define("BASEDIR", substr($_SERVER["SCRIPT_FILENAME"], 0, strrpos($_SERVER["SCRIPT_FILENAME"],"/")));
 
 /**
 *
@@ -15,16 +16,16 @@ class TemplateView {
 	
 	# Attributes
 	private $values;
-	private $activeTemplatePath;
+	private $activeTemplate;
 	
 	
 	/**
 	 * Constructor
 	 * 
 	 */
-	public function TemplateView($activeTemplatePath) {
+	public function TemplateView($activeTemplate) {
 		
-		$this->activeTemplatePath = $activeTemplatePath;
+		$this->activeTemplate = $activeTemplate;
 		
 		$this->values = array();
 		
@@ -47,8 +48,13 @@ class TemplateView {
 	
 	public function render() {
 		
-		//TODO: Render algorithmus bauen, der html template lädt und verarbeitet
+		if($this->values) {
+			foreach($this->values as $key => $val) {
+				$$key = $val;
+			}
+		}
 		
+		include BASEDIR.'/template/'.$this->activeTemplate.'/index.tpl.php';
 		
 	}
 	

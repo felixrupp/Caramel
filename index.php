@@ -1,42 +1,31 @@
 <?php
-	require_once(dirname(__FILE__).'/inc/redirect.php');
-	require_once(dirname(__FILE__).'/inc/Caramel.php');
+
+ini_set('display_errors',1);
+error_reporting(E_ALL|E_STRICT);
+
+
+define("BASEDIR", substr($_SERVER["SCRIPT_FILENAME"], 0, strrpos($_SERVER["SCRIPT_FILENAME"],"/")));
+
+require_once(BASEDIR.'/inc/redirect.php');
+require_once(BASEDIR.'/inc/controller/FrontendController.php');
 	
-	$caramel = new Caramel();
+$frontendController = new FrontendController();
 
 ?>
 <!DOCTYPE HTML>
-<?php print($caramel->versionInformation()); ?>
+<?php echo($frontendController->versionInformation()); ?>
 
-<html lang="<?php print($caramel->languageCode()); ?>">
+<html lang="<?php echo($frontendController->languageCode()); ?>">
 
 <head>
 
-<?php print($caramel->headTag()); ?>
+<?php echo($frontendController->headTag()); ?>
 
 </head>
 
 <body>
-<a id="top"></a>
 
-
-<div id="header"></div>
-
-
-<div id="mainContent">  
-<?php print($caramel->content()); ?>  
-</div>
-
-
-<div id="nav">
-<?php print($caramel->navigation()); ?>
-</div>
-
-
-<div id="footer">
-<?php print($caramel->footer()); ?>
-</div>
-
+<?php echo $frontendController->frontendOutput(); ?>
 
 </body>
 

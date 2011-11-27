@@ -1,8 +1,6 @@
 <?php
 
-# Imports
-//TODO: Imports einfügen
-
+define("BASEDIR", substr($_SERVER["SCRIPT_FILENAME"], 0, strrpos($_SERVER["SCRIPT_FILENAME"],"/")));
 
 /**
  *
