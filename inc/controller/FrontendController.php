@@ -1,31 +1,28 @@
 <?php
 
 # Imports
-require_once(dirname(__FILE__).'/settings.php'); # Settings with Constants
-require_once(dirname(__FILE__).'/Configurator.php'); # Singleton for Configfile
-require_once(dirname(__FILE__).'/Browser.php'); # Browserselection
+#require_once(dirname(__FILE__).'/settings.php'); # Settings with Constants
+#require_once(dirname(__FILE__).'/ConfigurationModel.php'); # Singleton for Configfile
+#require_once(dirname(__FILE__).'/Browser.php'); # Browserselection
+//TODO: Imports einfügen
 
 /**
  *
- * Caramel Main-Class
+ * FrontendController class
  * 
- * @author SieRupp GbR
- * @version 0.8
- * 
- * Date: 09.05.2011 16:18 CET
- * 
- * Copyright (c) by SieRupp GbR, Nathanael Siering and Felix Rupp
- * All rights reserved.
- * No copy, reproduction or use without written permission of SieRupp GbR.
- * http://www.sierupp.com/
+ * @author Felix Rupp
+ * @version 0.1
+ * @date: 27.11.2011
  * 
  */
-class Caramel {
+class FrontendController {
 
 	# Attributes
 	private $_config;
 	private $_dataBase;
 	private $_allLanguages = array();
+	private $_templateModel;
+	private $_templateView;
 	
 	# Constants
 	const VERSION = "0.8.1";
@@ -33,33 +30,31 @@ class Caramel {
 		
 
 	/**
-	 *
-	 * Caramel class-constructor
-	 * Last changed: 03.04.2011
-	 *
+	 * Constructor
 	 */
-	public function Caramel() {
+	public function FrontendController() {
 		
-		# Get Configurator Singleton
-		$this->_config = Configurator::getConfigurator("site");
+		# Get TemplateModel
+		$this->_templateModel = TemplateModel::getTemplateModel();
 		
-		# Try to import the database-file
-		try {			
-			# Import dataBase-file:
-			$this->_dataBase = simplexml_load_file(BASEDIR.$this->_config->getConfigString("DOCUMENT_SUBFOLDER").'/data.xml', 'SimpleXMLElement', LIBXML_NOCDATA);
-		}
-		catch(Exception $e) {
-			var_dump($e->getMessage());
-			printf("\n\nAchtung: Eine der relevanten Dateien konnte nicht geladen werden!");
-		}
+		# Get TemplatingEngine
+		$this->_templateView = TemplateView::getTemplate($this->_templateModel->getActiveTemplate());
 		
+		# Get Configurator 
+		$this->_config = ConfigurationModel::getConfigurator("site");
+		
+		# Get Database 
+		$this->_dataBase = DatabaseModel::getDatabase();
+	
+	
 		# Fill our languages array
 		$xPathResult = $this->_dataBase->xpath('//@lang'); # Find all lang-elements
-		$xPathResult= array_unique($xPathResult); # Remove double entries
+		$xPathResult = array_unique($xPathResult); # Remove double entries
 		
 		foreach($xPathResult as $langCode) {
 			array_push($this->_allLanguages, (string)$langCode); # Convert SimpleXMLElements into strings
-		}		
+		}
+		
 				
 	} // End of constructor declaration
 	
@@ -67,18 +62,32 @@ class Caramel {
 	
 # Main content functions:
 
+	public function frontendOutput() {
+		
+		$comment = $this->versionInformation();		
+		$this->_templateView->assign("caramelComment", $comment);
+		
+		$language = $this->languageCode();
+		$this->_templateView->assign("caramelLanguage", $language);
+		
+		//TODO: Weitere Frontendausgaben einbauen
+		
+		
+		$this->_templateView->render();
+		
+	}
+
 
 	/**
 	 * 
 	 * Print out version-information in index.php
-	 * Last changed: 22.04.2011
 	 * @return Version information comment
 	 * 
 	 */
 	public function versionInformation() {
 		
 		$comment = "<!-- \n######### Caramel CMS by SieRupp GbR\n######### Version: ".Caramel::VERSION."\n######### Release: ".Caramel::VERSION_DATE."\n\n######### WARNING: No copy, reproduction or use without written permission of SieRupp GbR.\n\n######### Copyright (c) by SieRupp GbR, Nathanael Siering and Felix Rupp\n######### All rights reserved.\n\n######### http://www.sierupp.com/\n -->\n";
-		
+				
 		return $comment;
 	
 	} // End of method declaration
@@ -87,7 +96,6 @@ class Caramel {
 	/**
 	 * 
 	 * Print out current language code in index.php
-	 * Last changed: 27.04.2011
 	 * @return Language code for current language
 	 * 
 	 */
@@ -101,7 +109,6 @@ class Caramel {
 	/**
 	 * 
 	 * Print out head-tag in index.php
-	 * Last changed: 22.05.2011
 	 * @return Whole head-tag
 	 * 
 	 */	
@@ -119,7 +126,6 @@ class Caramel {
 	/**
 	 * 
 	 * Print out the content in index.php
-	 * Last changed: 20.02.2011
 	 * @return Localized content
 	 * 
 	 */
@@ -146,7 +152,6 @@ class Caramel {
 	/**
 	 * 
 	 * Print out navigation in index.php
-	 * Last changed: 20.03.2011
 	 * @return Localized navigation
 	 * 
 	 */
@@ -359,7 +364,6 @@ class Caramel {
 	/**
 	 * 
 	 * Print out language selector in index.php
-	 * Last changed: 22.04.2011
 	 * @return All language selectors
 	 * 
 	 */
@@ -406,7 +410,6 @@ class Caramel {
 	/**
 	 * 
 	 * Print out footer in footer of index.php
-	 * Last changed: 09.05.2011
 	 * @return Website footer
 	 * 
 	 */
@@ -433,7 +436,6 @@ class Caramel {
 	/**
 	 *
 	 * Get Language from GET-query
-	 * Last changed: 13.02.2011
 	 * @return Actual language
 	 *
 	 */
@@ -454,7 +456,6 @@ class Caramel {
 	/**
 	 *
 	 * Get display from GET-query
-	 * Last changed: 13.02.2011
 	 * @return Actual page displayed
 	 *
 	 */
@@ -474,7 +475,6 @@ class Caramel {
 	/**
 	 *
 	 * Get parameters of GET-query before ampersand 
-	 * Last changed: 20.03.2011
 	 * @return New querystring for building correct URL
 	 *
 	 */
@@ -507,7 +507,6 @@ class Caramel {
 	/**
 	 *
 	 * Get parameters of GET-query behind ampersand 
-	 * Last changed: 06.03.2011
 	 * @return New querystring for building correct URL
 	 *
 	 */
@@ -555,7 +554,6 @@ class Caramel {
 	/**
 	 * 
 	 * Print out title in title-tag in index.php
-	 * Last changed: 13.02.2011
 	 * @return Localized website-title
 	 * 
 	 */
@@ -581,7 +579,6 @@ class Caramel {
 	/**
 	 * 
 	 * Print out base url in index.php
-	 * Last changed: 27.04.2011
 	 * @return Base url
 	 * 
 	 */
@@ -599,7 +596,6 @@ class Caramel {
 	/**
 	 * 
 	 * Print out meta-tags in index.php
-	 * Last changed: 22.04.2011
 	 * @return Meta-tags for author, keywords and description
 	 * 
 	 */
@@ -654,7 +650,6 @@ class Caramel {
 	/**
 	 * 
 	 * Return minified JS and CSS files
-	 * Last changed: 22.05.2011
 	 * @return Minified js and css
 	 * 
 	 */
@@ -671,7 +666,6 @@ class Caramel {
 	/**
 	 * 
 	 * Print out facebook like button in index.php
-	 * Last changed: 09.05.2011
 	 * @return Facebook like button
 	 * 
 	 */

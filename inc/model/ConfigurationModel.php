@@ -1,25 +1,19 @@
 <?php
 
 # Imports
-require_once('settings.php');
+//TODO: Imports einfügen
 
 
 /**
  *
- * Caramel Configurator-Class
+ * ConfigurationModel class
  * 
- * @author SieRupp GbR
- * @version 0.6
- * 
- * Date: 03.04.2011 16:06 CET
- * 
- * Copyright (c) by SieRupp GbR, Nathanael Siering and Felix Rupp
- * All rights reserved.
- * No copy, reproduction or use without written permission of SieRupp GbR.
- * http://www.sierupp.com/
+ * @author Felix Rupp
+ * @version 0.1
+ * @date: 27.11.2011
  * 
  */
- class Configurator {
+ class ConfigurationModel {
  
  	# Attributes
  	private static $_configurator = NULL;
@@ -34,7 +28,7 @@ require_once('settings.php');
  	 * @param string $configFileName Filename for config-file to load
  	 *
  	 */
- 	private function Configurator($configFileName) {
+ 	private function ConfigurationModel($configFileName) {
  		# Import config-file:
  		try {
  			$this->_configFile = simplexml_load_file(BASEDIR.'/config/'.$configFileName.'.xml', 'SimpleXMLElement', LIBXML_NOCDATA);
