@@ -1,7 +1,5 @@
 <?php
 
-define("BASEDIR", substr($_SERVER["SCRIPT_FILENAME"], 0, strrpos($_SERVER["SCRIPT_FILENAME"],"/")));
-
 /**
  *
  * DatabaseModel class
@@ -53,6 +51,13 @@ class DatabaseModel {
 
 	# Prevent cloning
 	private function __clone() {}
+	
+	
+	public function getDatabaseFile() {
+		
+		return $this->_dataBaseFile;
+		
+	}
 
 }
 ?>

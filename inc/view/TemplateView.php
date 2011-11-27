@@ -1,17 +1,14 @@
 <?php
 
-define("BASEDIR", substr($_SERVER["SCRIPT_FILENAME"], 0, strrpos($_SERVER["SCRIPT_FILENAME"],"/")));
-
 /**
-*
-* TemplateView class
-*
-* @author Felix Rupp
-* @version 0.1
-* @date: 27.11.2011
-*
-*/
-
+ *
+ * TemplateView class
+ *
+ * @author Felix Rupp
+ * @version 0.1
+ * @date: 27.11.2011
+ *
+ */
 class TemplateView {
 	
 	# Attributes

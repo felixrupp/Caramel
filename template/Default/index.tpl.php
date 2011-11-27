@@ -1,3 +1,5 @@
+<!-- This is our default template -->
+
 <div id="nav">
 	<?php echo $navigation; ?>
 </div>
@@ -7,10 +9,6 @@
 	<?php echo $content; ?>
 </div>
 
-
-<div id="languageSelector">
-	<?php echo $languageSelector; ?>
-</div>
 
 <div id="footer">
 	<?php echo $footer; ?>

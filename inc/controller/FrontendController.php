@@ -1,7 +1,5 @@
 <?php
 
-define("BASEDIR", substr($_SERVER["SCRIPT_FILENAME"], 0, strrpos($_SERVER["SCRIPT_FILENAME"],"/")));
-
 # Imports
 require_once BASEDIR.'/inc/model/DatabaseModel.php';
 require_once BASEDIR.'/inc/model/ConfigurationModel.php';
@@ -25,8 +23,8 @@ class FrontendController {
 	private $_templateView;
 	
 	# Constants
-	const VERSION = "0.8.1";
-	const VERSION_DATE = "2011-05-22";
+	const VERSION = "0.1";
+	const VERSION_DATE = "2011-11-27";
 		
 
 	/**
@@ -35,13 +33,14 @@ class FrontendController {
 	public function FrontendController() {
 
 		# Get Configurator 
-		$this->_config = ConfigurationModel::getConfigurator("site");
+		$this->_config = ConfigurationModel::getConfigurationModel("site");
 		
 		# Get TemplatingEngine
-		$this->_templateView = TemplateView::getTemplate($this->_config.getConfigString("TEMPLATE"));
+		$this->_templateView = new TemplateView($this->_config->getConfigString("TEMPLATE"));
 		
 		# Get Database 
-		$this->_dataBase = DatabaseModel::getDatabase();
+		$dataBaseModel = DatabaseModel::getDatabaseModel();
+		$this->_dataBase = $dataBaseModel->getDatabaseFile();
 	
 	
 		# Fill our languages array
@@ -78,6 +77,49 @@ class FrontendController {
 		$this->_templateView->render();
 		
 	}
+	
+	
+	/**
+	 * 
+	 * languageRedirect
+	 * Redirects the user to the language set in browser
+	 * 
+	 */
+	public function languageRedirect() {
+		
+		if(!isset($_GET['lang'])) {
+		
+			if($this->_config->getConfigString("SPEAKING_URLS") == "false") {
+		
+				$language = explode(',',$_SERVER['HTTP_ACCEPT_LANGUAGE']);
+				$language = strtolower(substr(chop($language[0]),0,2));
+		
+		
+				if(preg_match("/[a-z]{2}/", $language)) {
+					header("Location: ./?lang=".$language);
+				}
+				else {
+					header("Location: ./?lang=en");
+				}
+		
+			}
+			elseif($this->_config->getConfigString("SPEAKING_URLS") == "true"){
+		
+				$language = explode(',',$_SERVER['HTTP_ACCEPT_LANGUAGE']);
+				$language = strtolower(substr(chop($language[0]),0,2));
+		
+				if(preg_match("/[a-z]{2}/", $language)) {
+					header("Location: ./".$language."/");
+				}
+				else {
+					header("Location: ./en/");
+				}
+		
+			}
+		
+		}
+		
+	}
 
 
 	/**
@@ -88,7 +130,7 @@ class FrontendController {
 	 */
 	public function versionInformation() {
 		
-		$comment = "<!-- \n######### Caramel CMS by SieRupp GbR\n######### Version: ".Caramel::VERSION."\n######### Release: ".Caramel::VERSION_DATE."\n\n######### WARNING: No copy, reproduction or use without written permission of SieRupp GbR.\n\n######### Copyright (c) by SieRupp GbR, Nathanael Siering and Felix Rupp\n######### All rights reserved.\n\n######### http://www.sierupp.com/\n -->\n";
+		$comment = "<!-- \n######### Caramel CMS\n######### Version: ".self::VERSION."\n######### Release: ".self::VERSION_DATE."\n\n######### WARNING: No copy, reproduction or use without written permission of SieRupp GbR.\n\n######### Copyright (c) by SieRupp GbR, Nathanael Siering and Felix Rupp\n######### All rights reserved.\n\n######### http://www.sierupp.com/\n -->\n";
 				
 		return $comment;
 	
@@ -644,7 +686,7 @@ class FrontendController {
 		
 		$metaAudiences = '<meta name="audience" content="all">';
 		
-		$metaGenerator = "<meta name=\"generator\" content=\"Caramel CMS".self::VERSION."\">";
+		$metaGenerator = "<meta name=\"generator\" content=\"Caramel CMS ".self::VERSION."\">";
 		
 		$metaTags = $metaDescription."\n".$metaKeywords."\n".$metaAuthor."\n".$metaRobots."\n".$metaRevisit."\n".$metaAudiences."\n".$metaGenerator."\n";
 		

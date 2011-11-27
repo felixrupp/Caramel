@@ -1,7 +1,5 @@
 <?php
 
-define("BASEDIR", substr($_SERVER["SCRIPT_FILENAME"], 0, strrpos($_SERVER["SCRIPT_FILENAME"],"/")));
-
 /**
  *
  * ConfigurationModel class
@@ -46,7 +44,7 @@ define("BASEDIR", substr($_SERVER["SCRIPT_FILENAME"], 0, strrpos($_SERVER["SCRIP
  	 * @return Single instance of Configurator-Class
  	 * 
  	 */
- 	public static function getConfigurator($configFileName) {
+ 	public static function getConfigurationModel($configFileName) {
  	
 		if (self::$_configurator === NULL) {
 			self::$_configurator = new self($configFileName);
