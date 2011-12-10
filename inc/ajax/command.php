@@ -1,11 +1,23 @@
 <?php
 
-# Copyright (c) by SieRupp GbR, Nathanael Siering und Felix Rupp. All rights reserved.
-# No copy, reproduction or use without written permission of Felix Rupp.
-# For contact see: http://www.sierupp.com/
+/**
+ * @package inc
+ * @subpackage ajax
+ */
 
-require_once("Configurator.php");
-$config = Configurator::getConfigurator("admin");
+/**
+ *
+ * Contact script
+ *
+ * @author Felix Rupp <kontakt@felixrupp.com>
+ * @version $Id$
+ * @copyright Copyright (c) 2011, Felix Rupp, Nicole Reinhardt
+ * @license http://www.opensource.org/licenses/mit-license.php MIT-License
+ * 
+ */
+
+#require_once("Configurator.php");
+#$config = Configurator::getConfigurator("admin");
 
 
 if(!$_POST) {
