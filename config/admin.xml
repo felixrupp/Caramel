@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE caramel-plist SYSTEM "http://www.sierupp.com/dtd/caramel-plist.dtd">
 
+<!-- 
+ *
+ * Database for page-content
+ * 
+ * @author Felix Rupp <kontakt@felixrupp.com>
+ * @version $Id$
+ * @copyright Copyright (c) 2011, Felix Rupp, Nicole Reinhardt
+ * @license http://www.opensource.org/licenses/mit-license.php MIT-License
+ * 
+-->
 <caramel-plist version="1.0">
 
 	<!-- Admin setup -->

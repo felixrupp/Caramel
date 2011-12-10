@@ -1,24 +1,40 @@
 <?php
 
 /**
+ * @package inc
+ * @subpackage model
+ */
+
+/**
  *
  * DatabaseModel class
  *
- * @author Felix Rupp
- * @version 0.1
- * @date: 27.11.2011
- *
+ * @author Felix Rupp <kontakt@felixrupp.com>
+ * @version $Id$
+ * @copyright Copyright (c) 2011, Felix Rupp, Nicole Reinhardt
+ * @license http://www.opensource.org/licenses/mit-license.php MIT-License
+ * 
  */
 class DatabaseModel {
 
 	# Attributes
+	/**
+	 * @var DatabaseModel $_databaseModel Contains single instance of our DatabaseModel
+	 * @staticvar
+	 */
 	private static $_databaseModel = NULL;
 
-	private $_dataBaseFile;
 
 	/**
+	 * @var SimpleXMLElement $_dataBaseFile Contains the SimpleXMLElement of our xml-database
+	 */
+	private $_dataBaseFile;
+
+	
+	/**
 	 * Configurator class-constructor
-	 *
+	 * 
+	 * @return void
 	 */
 	private function DatabaseModel() {
 		# Try to import the database-file
@@ -34,10 +50,11 @@ class DatabaseModel {
 
 
 	/**
-	 *
 	 * Singleton-create-method
-	 * @return Single instance of DatabaseModel-Class
-	 *
+	 * 
+	 * @static
+	 * @return DatabaseModel Single instance of DatabaseModel-Class
+	 * @return void
 	 */
 	public static function getDatabaseModel() {
 	
@@ -50,9 +67,20 @@ class DatabaseModel {
 
 
 	# Prevent cloning
+	/**
+	 * Overwrite __clone() method to prevent instance-cloning
+	 * 
+	 * @return void
+	 */
 	private function __clone() {}
 	
 	
+	/**
+	 * Enter description here ...
+	 * 
+	 * @return SimpleXMLElement Returns the SimpleXMLElement-object containing our database
+	 * @return void
+	 */
 	public function getDatabaseFile() {
 		
 		return $this->_dataBaseFile;

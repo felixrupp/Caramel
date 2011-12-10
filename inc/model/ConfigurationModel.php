@@ -1,28 +1,41 @@
 <?php
 
 /**
+ * @package inc
+ * @subpackage model
+ */
+
+/**
  *
  * ConfigurationModel class
  * 
- * @author Felix Rupp
- * @version 0.1
- * @date: 27.11.2011
+ * @author Felix Rupp <kontakt@felixrupp.com>
+ * @version $Id$
+ * @copyright Copyright (c) 2011, Felix Rupp, Nicole Reinhardt
+ * @license http://www.opensource.org/licenses/mit-license.php MIT-License
  * 
  */
  class ConfigurationModel {
  
  	# Attributes
+ 	/**
+ 	 * @var ConfigurationModel $_configurator Contains single instance of our ConfigurationModel
+ 	 * @staticvar
+ 	 */
  	private static $_configurator = NULL;
  	
+ 
+ 	/**
+ 	 * @var SimpleXMLElement $_configFile Contains the SimpleXMLElement of our xml-configfile
+ 	 */
  	private $_configFile;
  
  	
  	/**
- 	 * 
  	 * Configurator class-constructor
- 	 * Last changed: 03.04.2011
+ 	 * 
  	 * @param string $configFileName Filename for config-file to load
- 	 *
+ 	 * @return void
  	 */
  	private function ConfigurationModel($configFileName) {
  		# Import config-file:
@@ -37,12 +50,10 @@
  	
  	
  	/**
- 	 * 
  	 * Singleton-create-method
- 	 * Last changed: 03.04.2011
- 	 * @param string $configFileName Filename for config-file to load
- 	 * @return Single instance of Configurator-Class
  	 * 
+ 	 * @param string $configFileName Filename for config-file to load
+ 	 * @return ConfigurationModel Single instance of ConfigurationModel
  	 */
  	public static function getConfigurationModel($configFileName) {
  	
@@ -55,16 +66,19 @@
  	
  	
  	# Prevent cloning
+ 	/**
+ 	* Overwrite __clone() method to prevent instance-cloning
+ 	* 
+ 	* @return void
+ 	*/
  	private function __clone() {}
  	 
  	
  	/**
- 	 *
  	 * Get String from key of config-file 
- 	 * Last changed: 13.02.2011
+ 	 * 
  	 * @param string $key Key to lookup in config-file
- 	 * @return Value for given key
- 	 *
+ 	 * @return string Value for given key
  	 */
  	public function getConfigString($key) {
  		
@@ -82,11 +96,9 @@
  	
  	
  	/**
- 	 *
  	 * Set String from key of config-file 
- 	 * Last changed: 11.02.2011
+ 	 * 
  	 * @return void
- 	 *
  	 */
  	public function setConfigString($key, $string) {
  	

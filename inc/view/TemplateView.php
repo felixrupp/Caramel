@@ -1,24 +1,39 @@
 <?php
 
 /**
+ * @package inc
+ * @subpackage view
+ */
+
+/**
  *
  * TemplateView class
  *
- * @author Felix Rupp
- * @version 0.1
- * @date: 27.11.2011
- *
+ * @author Felix Rupp <kontakt@felixrupp.com>
+ * @version $Id$
+ * @copyright Copyright (c) 2011, Felix Rupp, Nicole Reinhardt
+ * @license http://www.opensource.org/licenses/mit-license.php MIT-License
+ * 
  */
 class TemplateView {
 	
 	# Attributes
+	/**
+	 * @var array $values Will contain all template-values
+	 */
 	private $values;
+
+	/**
+	 * @var String Path to active template directory
+	 */
 	private $activeTemplate;
 	
 	
 	/**
-	 * Constructor
+	 * Constructor of TemplateView
 	 * 
+	 * @param String $activeTemplate Path to active template directory
+	 * @return void
 	 */
 	public function TemplateView($activeTemplate) {
 		
@@ -30,10 +45,11 @@ class TemplateView {
 	
 	
 	/**
-	 * assign-method
+	 * Method to assign all template values to our template
 	 * 
-	 * @param String $key
-	 * @param String $value
+	 * @param String $key Array-key
+	 * @param String $value Array-value for key
+	 * @return void
 	 */
 	public function assign($key, $value) {
 		
@@ -42,7 +58,11 @@ class TemplateView {
 	} // End of method declaration
 	
 	
-	
+	/**
+	 * Function which renders the template
+	 * 
+	 * @return void
+	 */
 	public function render() {
 		
 		if($this->values) {
@@ -53,7 +73,7 @@ class TemplateView {
 		
 		include BASEDIR.'/template/'.$this->activeTemplate.'/index.tpl.php';
 		
-	}
+	} // End of method declaration
 	
 	
 }

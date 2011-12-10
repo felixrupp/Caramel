@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @package inc
+ * @subpackage controller
+ */
+
 # Imports
 require_once BASEDIR.'/inc/model/DatabaseModel.php';
 require_once BASEDIR.'/inc/model/ConfigurationModel.php';
@@ -9,9 +14,10 @@ require_once BASEDIR.'/inc/view/TemplateView.php';
  *
  * FrontendController class
  * 
- * @author Felix Rupp
- * @version 0.1
- * @date: 27.11.2011
+ * @author Felix Rupp <kontakt@felixrupp.com>
+ * @version $Id$
+ * @copyright Copyright (c) 2011, Felix Rupp, Nicole Reinhardt
+ * @license http://www.opensource.org/licenses/mit-license.php MIT-License
  * 
  */
 class FrontendController {
