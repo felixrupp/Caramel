@@ -29,8 +29,8 @@ class FrontendController {
 	private $_templateView;
 	
 	# Constants
-	const VERSION = "0.1";
-	const VERSION_DATE = "2011-11-27";
+	const VERSION = "0.2";
+	const VERSION_DATE = "2011-12-10";
 		
 
 	/**
@@ -65,31 +65,26 @@ class FrontendController {
 # Main content functions:
 
 	/**
-	 * 
-	 * frontednOutput method
 	 * This method assigns needed content to our template engine and renders the template.
 	 * 
+	 * @return void
 	 */
 	public function frontendOutput() {
 				
-		$this->_templateView->assign("content", $this->content());
-		
-		$this->_templateView->assign("navigation", $this->navigation());
-		
-		$this->_templateView->assign("languageSelector", $this->languageSelector());
-		
-		$this->_templateView->assign("footer", $this->footer());
+		$this->_templateView->assign("content", $this->getContent());
+		$this->_templateView->assign("navigation", $this->getNavigation());
+		$this->_templateView->assign("languageSelector", $this->getLanguageSelector());
+		$this->_templateView->assign("footer", $this->getFooter());
 		
 		$this->_templateView->render();
 		
-	}
+	} // End of method declaration
 	
 	
 	/**
-	 * 
-	 * languageRedirect
 	 * Redirects the user to the language set in browser
 	 * 
+	 * @return void
 	 */
 	public function languageRedirect() {
 		
@@ -125,14 +120,13 @@ class FrontendController {
 		
 		}
 		
-	}
+	} // End of method declaration
 
 
 	/**
-	 * 
 	 * Print out version-information in index.php
-	 * @return Version information comment
 	 * 
+	 * @return string Version information comment
 	 */
 	public function versionInformation() {
 		
@@ -144,10 +138,9 @@ class FrontendController {
 	
 	
 	/**
-	 * 
 	 * Print out current language code in index.php
-	 * @return Language code for current language
 	 * 
+	 * @return string Language code for current language
 	 */
 	 public function languageCode() {
 	 
@@ -157,10 +150,9 @@ class FrontendController {
 	
 	
 	/**
-	 * 
 	 * Print out head-tag in index.php
-	 * @return Whole head-tag
 	 * 
+	 * @return string Whole head-tag
 	 */	
 	public function headTag() {
 			
@@ -177,14 +169,17 @@ class FrontendController {
 	
 	
 	
+##################################################
+### Helper functions:
+##################################################
+	
 	
 	/**
-	 * 
 	 * Print out the content in index.php
-	 * @return Localized content
 	 * 
+	 * @return string Localized content
 	 */
-	public function content() {
+	protected function getContent() {
 		
 		$lang = $this->getLanguage();
 		$pageName = $this->getDisplay();
@@ -205,12 +200,11 @@ class FrontendController {
 	
  
 	/**
-	 * 
 	 * Print out navigation in index.php
-	 * @return Localized navigation
 	 * 
+	 * @return string Localized navigation
 	 */
-	public function navigation() {
+	protected function getNavigation() {
 	
 		$orderedNavi = array();	
 		$orderedSubNavi = array();	
@@ -417,12 +411,11 @@ class FrontendController {
 		
 	
 	/**
-	 * 
 	 * Print out language selector in index.php
-	 * @return All language selectors
 	 * 
+	 * @return string All language selectors
 	 */
-	public function languageSelector() {
+	protected function getLanguageSelector() {
 		
 		$selectorLinks = array();
 		
@@ -463,12 +456,11 @@ class FrontendController {
 	
 	
 	/**
-	 * 
 	 * Print out footer in footer of index.php
-	 * @return Website footer
 	 * 
+	 * @return string Website footer
 	 */
-	public function footer() {
+	protected function getFooter() {
 
 		$facebookLike = $this->getFacebookLikeButton();
 		
@@ -484,15 +476,10 @@ class FrontendController {
 	
 
 
-
-
-# Helper functions:
-
 	/**
-	 *
-	 * Get Language from GET-query
-	 * @return Actual language
-	 *
+	 * Extract language from GET-query
+	 * 
+	 * @return string Actual language
 	 */
 	protected function getLanguage() {
 	
@@ -509,10 +496,9 @@ class FrontendController {
 	
 	
 	/**
-	 *
 	 * Get display from GET-query
-	 * @return Actual page displayed
-	 *
+	 * 
+	 * @return string Actual page displayed
 	 */
 	protected function getDisplay() {
 		if(isset($_GET['display'])) {
@@ -528,10 +514,9 @@ class FrontendController {
 	
 	
 	/**
-	 *
 	 * Get parameters of GET-query before ampersand 
-	 * @return New querystring for building correct URL
-	 *
+	 * 
+	 * @return string New querystring for building correct URL
 	 */
 	protected function getParametersBefore() {
 		$serverQueryString = $_SERVER['QUERY_STRING'];
@@ -560,10 +545,9 @@ class FrontendController {
 	
 	
 	/**
-	 *
 	 * Get parameters of GET-query behind ampersand 
-	 * @return New querystring for building correct URL
-	 *
+	 * 
+	 * @return string New querystring for building correct URL
 	 */
 	protected function getParametersBehind() {
 		$serverQueryString = $_SERVER['QUERY_STRING'];
@@ -607,10 +591,9 @@ class FrontendController {
 	
 	
 	/**
-	 * 
 	 * Print out title in title-tag in index.php
-	 * @return Localized website-title
 	 * 
+	 * @return string Localized website-title
 	 */
 	protected function getTitle() {
 		$lang = $this->getLanguage();
@@ -632,10 +615,9 @@ class FrontendController {
 	
 	
 	/**
-	 * 
 	 * Print out base url in index.php
-	 * @return Base url
 	 * 
+	 * @return string Base url
 	 */
 	protected function getBaseUrl() {
 	
@@ -649,10 +631,9 @@ class FrontendController {
 	
 	
 	/**
-	 * 
 	 * Print out meta-tags in index.php
-	 * @return Meta-tags for author, keywords and description
 	 * 
+	 * @return string Meta-tags for author, keywords and description
 	 */
 	protected function getMeta() {
 		$lang = $this->getLanguage();
@@ -703,10 +684,9 @@ class FrontendController {
 	
 	
 	/**
-	 * 
 	 * Return minified JS and CSS files
-	 * @return Minified js and css
 	 * 
+	 * @return string Minified js and css
 	 */
 	protected function getJsAndCss() {
 		
@@ -719,10 +699,9 @@ class FrontendController {
 	
 	
 	/**
-	 * 
 	 * Print out facebook like button in index.php
-	 * @return Facebook like button
 	 * 
+	 * @return string Facebook like button
 	 */
 	protected function getFacebookLikeButton() {
 	 
