@@ -465,7 +465,7 @@ class FrontendController {
 		$facebookLike = $this->getFacebookLikeButton();
 		
 		if($this->_config->getConfigString("LANGUAGE_SELECTOR_IN_FOOTER") == 'true') {
-			$languageSelector = $this->languageSelector()."&nbsp;";
+			$languageSelector = $this->getLanguageSelector()."&nbsp;";
 		}
 		
 		$footer = $languageSelector.$facebookLike;
