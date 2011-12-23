@@ -744,7 +744,7 @@ class FrontendController {
 		 
 		 }
 		 else {
-		 	echo "Error in xml-data.";
+		 	echo "Error in xml-data. 1";
 		 	exit;
 		 }
 			 
