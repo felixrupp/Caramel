@@ -58,6 +58,16 @@ class TemplateView {
 	} // End of method declaration
 	
 	
+	public function addCssJs() {
+		
+		$cssJs = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".dirname($_SERVER['PHP_SELF'])."/template/".$this->activeTemplate."/css/styles.css\">\n";
+		$cssJs .= "<script type=\"text/javascript\" src=\"".dirname($_SERVER['PHP_SELF'])."/template/".$this->activeTemplate."/js/scripts.js\"></script>";
+		
+		return $cssJs;
+		
+	}
+	
+	
 	/**
 	 * Function which renders the template
 	 * 

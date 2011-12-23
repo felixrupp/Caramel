@@ -18,7 +18,7 @@ require_once(BASEDIR.'/inc/controller/FrontendController.php');
 $frontendController = new FrontendController();
 
 # Automatical language redirect
-$frontendController->languageRedirect();
+$frontendController->languageRedirectAction();
 
 # Error reporting for testing
 ini_set('display_errors',1);
@@ -27,19 +27,19 @@ error_reporting(E_ALL|E_STRICT);
 ?>
 
 <!DOCTYPE HTML>
-<?php echo($frontendController->versionInformation()); ?>
+<?php echo($frontendController->versionInformationAction()); ?>
 
-<html lang="<?php echo($frontendController->languageCode()); ?>">
+<html lang="<?php echo($frontendController->languageCodeAction()); ?>">
 
 <head>
 
-<?php echo($frontendController->headTag()); ?>
+<?php echo($frontendController->headTagAction()); ?>
 
 </head>
 
 <body>
 
-<?php echo $frontendController->frontendOutput(); ?>
+<?php echo $frontendController->frontendOutputAction(); ?>
 
 </body>
 

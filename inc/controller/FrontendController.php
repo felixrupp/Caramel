@@ -62,14 +62,14 @@ class FrontendController {
 	
 	
 	
-# Main content functions:
+# Main content actions:
 
 	/**
 	 * This method assigns needed content to our template engine and renders the template.
 	 * 
 	 * @return void
 	 */
-	public function frontendOutput() {
+	public function frontendOutputAction() {
 				
 		$this->_templateView->assign("content", $this->getContent());
 		$this->_templateView->assign("navigation", $this->getNavigation());
@@ -86,7 +86,7 @@ class FrontendController {
 	 * 
 	 * @return void
 	 */
-	public function languageRedirect() {
+	public function languageRedirectAction() {
 		
 		if(!isset($_GET['lang'])) {
 		
@@ -128,7 +128,7 @@ class FrontendController {
 	 * 
 	 * @return string Version information comment
 	 */
-	public function versionInformation() {
+	public function versionInformationAction() {
 		
 		$comment = "<!-- \n######### Caramel CMS\n######### Version: ".self::VERSION."\n######### Release: ".self::VERSION_DATE."\n\n######### WARNING: No copy, reproduction or use without written permission of SieRupp GbR.\n\n######### Copyright (c) by SieRupp GbR, Nathanael Siering and Felix Rupp\n######### All rights reserved.\n\n######### http://www.sierupp.com/\n -->\n";
 				
@@ -142,7 +142,7 @@ class FrontendController {
 	 * 
 	 * @return string Language code for current language
 	 */
-	 public function languageCode() {
+	 public function languageCodeAction() {
 	 
 	 	return $this->getLanguage();
 	 	
@@ -154,11 +154,11 @@ class FrontendController {
 	 * 
 	 * @return string Whole head-tag
 	 */	
-	public function headTag() {
+	public function headTagAction() {
 			
 		$headTag = $this->getBaseUrl()."\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$this->getMeta()."\n<link rel=\"shortcut icon\" href=\"favicon.ico\" type=\"image/ico\">\n\n<title>".$this->getTitle()."</title>\n\n";
 		
-		$headTag .= $this->getJsAndCss();
+		$headTag .= $this->_templateView->addCssJs();
 		
 		return $headTag;
 		
@@ -462,7 +462,7 @@ class FrontendController {
 	 */
 	protected function getFooter() {
 
-		$facebookLike = $this->getFacebookLikeButton();
+		$facebookLike = $this->getSocialbar();
 		
 		if($this->_config->getConfigString("LANGUAGE_SELECTOR_IN_FOOTER") == 'true') {
 			$languageSelector = $this->getLanguageSelector()."&nbsp;";
@@ -687,6 +687,7 @@ class FrontendController {
 	 * Return minified JS and CSS files
 	 * 
 	 * @return string Minified js and css
+	 * @deprecated
 	 */
 	protected function getJsAndCss() {
 		
@@ -703,12 +704,12 @@ class FrontendController {
 	 * 
 	 * @return string Facebook like button
 	 */
-	protected function getFacebookLikeButton() {
+	protected function getSocialbar() {
 	 
 		$lang = $this->getLanguage();
 		$pageName = $this->getDisplay();
 		 
-		$xPathResultFacebook = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/facebook-like');
+		$xPathResultFacebook = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/socialbar');
 		 
 		if(count($xPathResultFacebook)>0) {
 		 	
@@ -724,12 +725,7 @@ class FrontendController {
 	
 		 		$url .= $_SERVER['SERVER_NAME'];
 		 		
-		 		if(((string)$this->_config->getConfigString("FACEBOOK_LIKE_MODE")) == "site-specific") {
-		 			$url .= $_SERVER['REQUEST_URI'];
-		 		}
-		 		else {
-		 			$url .= "/";
-		 		}
+		 		$url .= "/";
 		 		
 		 		$url = urlencode($url);
 		 	

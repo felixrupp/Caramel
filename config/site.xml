@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE caramel-plist SYSTEM "http://www.sierupp.com/dtd/caramel-plist.dtd">
 
 <!-- 
  *
@@ -40,9 +39,8 @@
 	<setting key="SPEAKING_URLS" blank="false">true</setting>
 	
 	<!-- Footer -->
-	<setting key="FACEBOOK_LIKE_MODE"><![CDATA[global]]></setting> <!-- Possibilities: 'global' for your domain only or 'site-specific' for each subpage itself -->
-	<setting key="LANGUAGE_SELECTOR_IN_FOOTER">true</setting> <!-- if false then include footer yourself -->
-	<setting key="LANGUAGE_SELECTOR_SEPERATOR"><![CDATA[&nbsp;|&nbsp;]]></setting>
+	<setting key="LANGUAGE_SELECTOR_IN_FOOTER" blank="false">true</setting> <!-- if false then include footer yourself -->
+	<setting key="LANGUAGE_SELECTOR_SEPERATOR" blank="false"><![CDATA[&nbsp;|&nbsp;]]></setting>
 	
 	
 </caramel-plist>
