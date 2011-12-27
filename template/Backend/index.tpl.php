@@ -8,7 +8,8 @@
 			<li><a href="?q=editpages">Bestehende Seiten verwalten</a></li>
 			<li><a href="?q=editusers">Benutzer verwalten</a></li>
 			<li><a href="?q=edittemplates">Templates verwalten</a></li>
-			<li><a href="?q=editglobals">Globale Konfiguration</a></li>	
+			<li><a href="?q=editglobals">Globale Konfiguration</a></li>
+			<li><a href="?q=logout">Logout</a></li>		
 		</ul>
 	</div>
 
@@ -16,8 +17,18 @@
 
 
 <div id="content">
+
+	<?php if(isset($welcome) && $welcome!=FALSE) {?>
+		<div id="welcome">
 	
-	<?php if(isset($content) && $content=="login") {?>
+			<h1>Welcome at admin backend of Caramel CMS</h1>
+			<p>It's great to have you here!</p>
+		
+		</div>
+	<?php } ?>
+
+	
+	<?php if(isset($login) && $login!=FALSE) {?>
 		<div id="adminlogin">
 	
 			<p>Please login below:</p>

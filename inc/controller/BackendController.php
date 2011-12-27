@@ -72,16 +72,16 @@ class BackendController {
 	 */
 	public function backendOutputAction() {
 		
+		$navigation = FALSE;
+		$login = FALSE;
+		$welcome = FALSE;
 		
 		if($this->getSession() == FALSE) {
 			
-			echo "session is false";
-			
-				
+			$login = TRUE;
+							
 			if(isset($_POST) && isset($_POST["username"]) && isset($_POST["password"])) {
 
-				echo "We are posting";
-					
 				# Check login data
 				$realAdmin = "";
 				$realPassword = "";
@@ -100,71 +100,58 @@ class BackendController {
 					$_SESSION["loggedin"] = true;
 					$_SESSION["timestamp"] = time();
 					
-					
-					$navigation = true;
-					$content = "welcome";
+					$navigation = TRUE;
+					$login = FALSE;
+					$welcome = TRUE;
 					
 				} else {
 					
-					$navigation = false;
-					$content = "login";
+					$navigation = FALSE;
+					$login = TRUE;
+					$welcome = FALSE;
 					
 				}
 			}
 			else {
-					
-				echo "We are not posting";
-				$navigation = false;
-				$content = "login";
+				
+				$navigation = FALSE;
+				$login = TRUE;
+				$welcome = FALSE;
 				
 			}			
 			
 		}
 		else {
 			
-			echo "session is true";
-			
 			$navigation = TRUE;
-
-			# Find out which sector to show
-			if(isset($_GET["q"])) {
-
-				if($_GET["q"]=="newpage") {
-					//TODO Show form for new content page
-					$content = "newpage";
-				}
-				if($_GET["q"]=="editpages") {
-					//TODO Show site for content page administration
-					$content = "editpages";
-				}
-				if($_GET["q"]=="editusers") {
-					//TODO Show site for user administration
-					$content = "editusers";
-				}
-				if($_GET["q"]=="edittemplates") {
-					//TODO Show site for template administration
-					$content = "edittemplates";
-				}
-				if($_GET["q"]=="editglobals") {
-					//TODO Show site for global site administration
-					$content = "editglobals";
-				}
-
-			}
-			else {//TODO Add default welcome page
-				
-				$content = "welcome"; 
-
-			}
+			$login = FALSE;
+			$welcome = TRUE;
 
 		}
-
+		
 		$this->_templateView->assign("navigation", $navigation);
-		$this->_templateView->assign("content", $content);
+		$this->_templateView->assign("login", $login);
+		$this->_templateView->assign("welcome", $welcome);
 
 		$this->_templateView->render();
 		
 	} // End of method declaration
+	
+	
+	
+	/**
+	 * Method to make ajax requests
+	 * 
+	 * @param String $actionName Name of the ajax action to perform
+	 * 
+	 * @return Content of templatefile
+	 */
+	public function ajaxAction($actionName) {
+		
+		$this->_templateView->setTemplateFile($actionName);
+		return $this->_templateView->returnTemplate();
+		
+	}
 	
 	
 	
@@ -179,7 +166,6 @@ class BackendController {
 		session_start();
 		
 	} // End of method declaration
-	
 	
 	
 
@@ -218,6 +204,8 @@ class BackendController {
 			
 		$headTag = "\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$meta."\n<link rel=\"shortcut icon\" href=\"favicon.ico\" type=\"image/ico\">\n\n<title>".$title."</title>\n\n";
 	
+		$headTag .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."/Backend/js/jquery.min.js\"></script>";
+		
 		$headTag .= $this->_templateView->addCssJs();
 	
 		return $headTag;
@@ -246,6 +234,22 @@ class BackendController {
 		}
 		
 	} // End of method declaration
+	
+	
+	
+	/**
+	* This action logs the user off
+	*
+	* @return void
+	*/
+	protected function logout() {
+	
+		if($this->getSession()==TRUE) {
+			session_destroy();
+		}
+	
+	} // End of method declaration
+	
 	
 	
 	/**

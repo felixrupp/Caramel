@@ -28,6 +28,11 @@ class TemplateView {
 	 */
 	private $_activeTemplate;
 	
+	/**
+	 * @var String Name of the template file to use. DEFAULT ist index
+	 */
+	private $_templateFile;
+	
 	
 	/**
 	 * Constructor of TemplateView
@@ -39,9 +44,12 @@ class TemplateView {
 		
 		$this->_activeTemplate = $activeTemplate;
 		
+		$this->_templateFile = "index";
+		
 		$this->_values = array();
 		
 	} // End of constructor declaration
+	
 	
 	
 	/**
@@ -58,14 +66,34 @@ class TemplateView {
 	} // End of method declaration
 	
 	
+	
+	/**
+	 * Method to add correct JS and CSS files from template
+	 * 
+	 * @return String with html content of JS and CSS files
+	 */
 	public function addCssJs() {
 		
-		$cssJs = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".TEMPLATEDIR."template/".$this->_activeTemplate."/css/styles.css\">\n";
-		$cssJs .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."template/".$this->_activeTemplate."/js/scripts.js\"></script>";
+		$cssJs = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".TEMPLATEDIR."/".$this->_activeTemplate."/css/styles.css\">\n";
+		$cssJs .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."/".$this->_activeTemplate."/js/scripts.js\"></script>";
 		
 		return $cssJs;
 		
-	}
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Method to set different template filename
+	 * 
+	 * @param String $templateFile
+	 */
+	public function setTemplateFile($templateFile) {
+		
+		$this->_templateFile = $templateFile;
+		
+	} // End of method declaration
+	
 	
 	
 	/**
@@ -81,7 +109,22 @@ class TemplateView {
 			}
 		}
 		
-		include BASEDIR.'/template/'.$this->_activeTemplate.'/index.tpl.php';
+		$this->_templateFile = "index";
+		
+		include TEMPLATEDIR.'/'.$this->_activeTemplate.'/'.$this->_templateFile.'.tpl.php';
+		
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Method to return template content as string
+	 * 
+	 * @return Content of templatefile
+	 */
+	public function returnTemplate() {
+		
+		return file_get_contents(TEMPLATEDIR.'/'.$this->_activeTemplate.'/'.$this->_templateFile.'.tpl.php');
 		
 	} // End of method declaration
 	

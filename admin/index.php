@@ -12,7 +12,7 @@
  */
 
 define("BASEDIR", substr($_SERVER["SCRIPT_FILENAME"], 0, strrpos($_SERVER["SCRIPT_FILENAME"],"/admin/")));
-define("TEMPLATEDIR", "../".substr(dirname($_SERVER["SCRIPT_NAME"]), 0, strrpos(dirname($_SERVER["SCRIPT_NAME"]),"/admin/")));
+define("TEMPLATEDIR", "../".substr(dirname($_SERVER["SCRIPT_NAME"]), 0, strrpos(dirname($_SERVER["SCRIPT_NAME"]),"/admin/"))."template");
 
 require_once(BASEDIR.'/inc/controller/BackendController.php');
 
