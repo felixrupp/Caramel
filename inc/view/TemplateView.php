@@ -21,12 +21,12 @@ class TemplateView {
 	/**
 	 * @var array $values Will contain all template-values
 	 */
-	private $values;
+	private $_values;
 
 	/**
 	 * @var String Path to active template directory
 	 */
-	private $activeTemplate;
+	private $_activeTemplate;
 	
 	
 	/**
@@ -37,9 +37,9 @@ class TemplateView {
 	 */
 	public function TemplateView($activeTemplate) {
 		
-		$this->activeTemplate = $activeTemplate;
+		$this->_activeTemplate = $activeTemplate;
 		
-		$this->values = array();
+		$this->_values = array();
 		
 	} // End of constructor declaration
 	
@@ -53,15 +53,15 @@ class TemplateView {
 	 */
 	public function assign($key, $value) {
 		
-		$this->values[$key] = $value;
+		$this->_values[$key] = $value;
 		
 	} // End of method declaration
 	
 	
 	public function addCssJs() {
 		
-		$cssJs = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".dirname($_SERVER['PHP_SELF'])."/template/".$this->activeTemplate."/css/styles.css\">\n";
-		$cssJs .= "<script type=\"text/javascript\" src=\"".dirname($_SERVER['PHP_SELF'])."/template/".$this->activeTemplate."/js/scripts.js\"></script>";
+		$cssJs = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".TEMPLATEDIR."template/".$this->_activeTemplate."/css/styles.css\">\n";
+		$cssJs .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."template/".$this->_activeTemplate."/js/scripts.js\"></script>";
 		
 		return $cssJs;
 		
@@ -75,13 +75,13 @@ class TemplateView {
 	 */
 	public function render() {
 		
-		if($this->values) {
-			foreach($this->values as $key => $val) {
+		if($this->_values) {
+			foreach($this->_values as $key => $val) {
 				$$key = $val;
 			}
 		}
 		
-		include BASEDIR.'/template/'.$this->activeTemplate.'/index.tpl.php';
+		include BASEDIR.'/template/'.$this->_activeTemplate.'/index.tpl.php';
 		
 	} // End of method declaration
 	

@@ -13,7 +13,7 @@ require_once BASEDIR.'/inc/utility/CaramelException.php';
 
 /**
  *
- * FrontendController class
+ * BackendController class
  * 
  * @author Felix Rupp <kontakt@felixrupp.com>
  * @version $Id$
@@ -21,29 +21,29 @@ require_once BASEDIR.'/inc/utility/CaramelException.php';
  * @license http://www.opensource.org/licenses/mit-license.php MIT-License
  * 
  */
-class FrontendController {
+class BackendController {
 
 	# Attributes
 	private $_config;
 	private $_dataBase;
 	private $_allLanguages = array();
 	private $_templateView;
-	
+		
 	# Constants
 	const VERSION = "0.3";
 	const VERSION_DATE = "2011-12-27";
-		
+	
 
 	/**
 	 * Constructor
 	 */
-	public function FrontendController() {
+	public function BackendController() {
 
 		# Get Configurator 
 		$this->_config = ConfigurationModel::getConfigurationModel();
 		
-		# Get TemplatingEngine
-		$this->_templateView = new TemplateView($this->_config->getConfigString("TEMPLATE"));
+		# Get TemplatingEngine for Backend
+		$this->_templateView = new TemplateView("Backend");
 		
 		# Get Database 
 		$dataBaseModel = DatabaseModel::getDatabaseModel();
@@ -70,70 +70,118 @@ class FrontendController {
 	 * 
 	 * @return void
 	 */
-	public function frontendOutputAction() {
+	public function backendOutputAction() {
 		
-		$navigation = "";
-		$content = "";
 		
-		try {
-			$navigation = $this->getNavigation();
-			$content = $this->getContent();
-		}
-		catch(CaramelException $e) {
-			echo $e->getDetails();
-		}
+		if($this->getSession() == FALSE) {
+			
+			echo "session is false";
+			
 				
-		$this->_templateView->assign("content", $content);
+			if(isset($_POST) && isset($_POST["username"]) && isset($_POST["password"])) {
+
+				echo "We are posting";
+					
+				# Check login data
+				$realAdmin = "";
+				$realPassword = "";
+					
+				try {
+					$realAdmin = $this->_config->getAdminConfigString("ADMIN_USERNAME");
+					$realPassword = $this->_config->getAdminConfigString("ADMIN_PASSWORD");
+				}
+				catch(CaramelException $e) {
+					echo $e->getDetails();
+				}
+					
+				if($_POST["username"]==$realAdmin && $_POST["password"]==$realPassword) {
+
+					# Set loggedin
+					$_SESSION["loggedin"] = true;
+					$_SESSION["timestamp"] = time();
+					
+					
+					$navigation = true;
+					$content = "welcome";
+					
+				} else {
+					
+					$navigation = false;
+					$content = "login";
+					
+				}
+			}
+			else {
+					
+				echo "We are not posting";
+				$navigation = false;
+				$content = "login";
+				
+			}			
+			
+		}
+		else {
+			
+			echo "session is true";
+			
+			$navigation = TRUE;
+
+			# Find out which sector to show
+			if(isset($_GET["q"])) {
+
+				if($_GET["q"]=="newpage") {
+					//TODO Show form for new content page
+					$content = "newpage";
+				}
+				if($_GET["q"]=="editpages") {
+					//TODO Show site for content page administration
+					$content = "editpages";
+				}
+				if($_GET["q"]=="editusers") {
+					//TODO Show site for user administration
+					$content = "editusers";
+				}
+				if($_GET["q"]=="edittemplates") {
+					//TODO Show site for template administration
+					$content = "edittemplates";
+				}
+				if($_GET["q"]=="editglobals") {
+					//TODO Show site for global site administration
+					$content = "editglobals";
+				}
+
+			}
+			else {//TODO Add default welcome page
+				
+				$content = "welcome"; 
+
+			}
+
+		}
+
 		$this->_templateView->assign("navigation", $navigation);
-		$this->_templateView->assign("languageSelector", $this->getLanguageSelector());
-		$this->_templateView->assign("footer", $this->getFooter());
-		
+		$this->_templateView->assign("content", $content);
+
 		$this->_templateView->render();
 		
 	} // End of method declaration
 	
 	
+	
 	/**
-	 * Redirects the user to the language set in browser
+	 * Method to initialize login session
 	 * 
 	 * @return void
 	 */
-	public function languageRedirectAction() {
+	public function sessionAction() {
 		
-		if(!isset($_GET['lang'])) {
-		
-			if($this->_config->getConfigString("SPEAKING_URLS") == "false") {
-		
-				$language = explode(',',$_SERVER['HTTP_ACCEPT_LANGUAGE']);
-				$language = strtolower(substr(chop($language[0]),0,2));
-		
-		
-				if(preg_match("/[a-z]{2}/", $language)) {
-					header("Location: ./?lang=".$language);
-				}
-				else {
-					header("Location: ./?lang=en");
-				}
-		
-			}
-			elseif($this->_config->getConfigString("SPEAKING_URLS") == "true"){
-		
-				$language = explode(',',$_SERVER['HTTP_ACCEPT_LANGUAGE']);
-				$language = strtolower(substr(chop($language[0]),0,2));
-		
-				if(preg_match("/[a-z]{2}/", $language)) {
-					header("Location: ./".$language."/");
-				}
-				else {
-					header("Location: ./en/");
-				}
-		
-			}
-		
-		}
+		session_set_cookie_params(604800); # Cookie stays for 7 days
+		session_start();
 		
 	} // End of method declaration
-
+	
+	
+	
 
 	/**
 	 * Print out version-information in index.php
@@ -149,28 +197,17 @@ class FrontendController {
 	} // End of method declaration
 	
 	
-	/**
-	 * Print out current language code in index.php
-	 * 
-	 * @return string Language code for current language
-	 */
-	 public function languageCodeAction() {
-	 
-	 	return $this->getLanguage();
-	 	
-	 } // End of method declaration
-	
 	
 	/**
-	 * Print out head-tag in index.php
-	 * 
-	 * @return string Whole head-tag
-	 */	
+	* Print out head-tag in index.php
+	*
+	* @return string Whole head-tag
+	*/
 	public function headTagAction() {
-		
+	
 		$meta = "";
 		$title = "";
-		
+	
 		try {
 			$meta = $this->getMeta();
 			$title = $this->getTitle();
@@ -179,14 +216,13 @@ class FrontendController {
 			echo $e->getDetails();
 		}
 			
-		$headTag = $this->getBaseUrl()."\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$meta."\n<link rel=\"shortcut icon\" href=\"favicon.ico\" type=\"image/ico\">\n\n<title>".$title."</title>\n\n";
-		
+		$headTag = "\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$meta."\n<link rel=\"shortcut icon\" href=\"favicon.ico\" type=\"image/ico\">\n\n<title>".$title."</title>\n\n";
+	
 		$headTag .= $this->_templateView->addCssJs();
-		
+	
 		return $headTag;
-		
+	
 	} // End of method declaration
-
 
 	
 	
@@ -195,6 +231,21 @@ class FrontendController {
 ##################################################
 ### Helper functions:
 ##################################################
+
+	/**
+	 * Check if session is active or not
+	 * 
+	 * @return TRUE or FALSE, wether a session is active or not
+	 */
+	protected function getSession() {
+		
+		if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"]==FALSE) {
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+		
+	} // End of method declaration
 	
 	
 	/**
@@ -664,42 +715,12 @@ class FrontendController {
 	 * @return string Meta-tags for author, keywords and description
 	 */
 	protected function getMeta() {
-		$lang = $this->getLanguage();
-		$pageName = $this->getDisplay();
 		
-		$xPathResultMetaDescription = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="description"]');
-		if(count($xPathResultMetaDescription)>0) {
-			$metaDescription = "<meta name=\"description\" content=\"".$xPathResultMetaDescription[0]."\">";
-		}
-		else {
-			throw new CaramelException(10);
-		}
-		
-		$xPathResultMetaKeywords = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="keywords"]');
-		if(count($xPathResultMetaKeywords)>0) {
-			$metaKeywords = "<meta name=\"keywords\" content=\"".$xPathResultMetaKeywords[0]."\">";
-		}
-		else {
-			throw new CaramelException(10);
-		}
-		
-		$xPathResultMetaAuthor = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="author"]');
-		if(count($xPathResultMetaAuthor)>0) {
-			$metaAuthor = "<meta name=\"author\" content=\"".$xPathResultMetaAuthor[0]."\">";
-		}
-		else {
-			throw new CaramelException(10);
-		}
-		
-		
-		$metaRobots = '<meta name="robots" content="'.$this->_config->getConfigString('ROBOTS').'">';
-		
-		$metaRevisit = '<meta name="revisit-after" content="'.$this->_config->getConfigString('REVISIT_AFTER').'">';
+		$metaAuthor = "<meta name=\"author\" content=\"Felix Rupp, Nicole Reinhardt\">";
 		
 		$metaGenerator = "<meta name=\"generator\" content=\"Caramel CMS ".self::VERSION."\">";
 		
-		$metaTags = $metaDescription."\n".$metaKeywords."\n".$metaAuthor."\n".$metaRobots."\n".$metaRevisit."\n".$metaGenerator."\n";
-		
+		$metaTags = $metaAuthor."\n".$metaGenerator."\n";
 						
 		return $metaTags;
 	

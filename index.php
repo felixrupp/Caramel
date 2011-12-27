@@ -12,6 +12,8 @@
  */
 
 define("BASEDIR", substr($_SERVER["SCRIPT_FILENAME"], 0, strrpos($_SERVER["SCRIPT_FILENAME"],"/")));
+define("TEMPLATEDIR", dirname($_SERVER["SCRIPT_NAME"])."/");
+
 require_once(BASEDIR.'/inc/controller/FrontendController.php');
 
 # New frontend controller

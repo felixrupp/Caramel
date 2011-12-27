@@ -13,8 +13,8 @@
 <caramel-plist version="1.0">
 
 	<!-- Admin setup -->
-	<setting key="ADMIN_USERNAME" blank="false">admin</setting>
-	<setting key="ADMIN_PASSWORD" blank="false">admin</setting>
+	<setting key="ADMIN_USERNAME" blank="false"><![CDATA[admin]]></setting>
+	<setting key="ADMIN_PASSWORD" blank="false"><![CDATA[admin]]></setting>
 	<setting key="ADMIN_EMAIL" blank="false">admin@sierupp.com</setting>
 	
 	<!-- E-Mail used in contactform -->
