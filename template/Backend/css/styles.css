@@ -20,6 +20,24 @@ h1 {
 }
 
 
+fieldset {
+	border:none;
+	margin:10px 0;
+}
+
+input {
+	margin-bottom:6px;
+}
+
+label {
+	display:block;
+	width:120px;
+	float:left;
+	clear:left;
+	margin-bottom:6px;
+}
+
+
 
 /*** Divisions ***/
 #header {
@@ -31,31 +49,33 @@ h1 {
 #logo {
 	position:absolute;
 	width:300px;
-	height:100px;
+	height:121px;
 	top:25px;
 	left:25px;
-	background-color:red;
 }
 
 #logo  a {
 	display:block;
 	width:300px;
-	height:100px;
+	height:121px;
+	background-image:url("../images/logo.png");
+	text-indent:-9999px;
 }
 
 #logoutbutton {
 	position:absolute;
 	width:300px;
-	height:100px;
+	height:122px;
 	top:25px;
 	right:25px;
-	background-color:blue;
 }
 
 #logoutbutton a {
 	display:block;
 	width:300px;
-	height:100px;
+	height:122px;
+	background-image:url("../images/logout.png");
+	text-indent:-9999px;
 }
 
 /* Menu */
@@ -64,8 +84,9 @@ div#nav {
 	height:60px;
 	font-size:1.2em;
 	font-weight:bold;
-	border-bottom:3px dashed #E89F0E;
-	margin-bottom:35px;
+	margin:35px 0;
+	background-image:url("../images/menu-background-normal.png");
+	background-repeat:repeat-x;
 }
 
 ul#adminnavigation {
@@ -82,19 +103,40 @@ ul#adminnavigation li {
 ul#adminnavigation li a {
 	display:block;
 	height:30px;
-	padding:15px 40px;
+	padding:17px 40px 13px 40px;
 }
 
 ul#adminnavigation li a:link, ul#adminnavigation li a:visited {
-	color:#E89F0E;
+	color:#FFF;
 	text-decoration:none;
-	background-color:#FFF;
+	background-image:url("../images/menu-background-normal.png");
+	background-repeat:repeat-x;
 }
 
 ul#adminnavigation li a:hover, ul#adminnavigation li a:active {
-	color:#FEBA32;
+	color:#E6E6E6;
 	text-decoration:none;
-	background-color:#e6e6e6;
+	background-image:url("../images/menu-background-flipped.png");
+	background-repeat:repeat-x;
+}
+
+/* Admin login */
+#adminlogin {
+	position:absolute;
+	top:300px;
+	left:0;
+	width:100%;
+	height:150px;
+	background-color:#FEBA32;
+	background-image:url("../images/login-background.png");
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+
+#adminlogin #wrapper {
+	width:300px;
+	margin:18px auto 0 auto;
+	
 }
 
 /* Main content */

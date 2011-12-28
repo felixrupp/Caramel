@@ -136,6 +136,46 @@ class BackendController {
 				$welcome = FALSE;
 				
 			}
+			if(isset($_GET["q"]) && $_GET["q"]=="newpage") {
+			
+				$navigation = TRUE;
+				$login = FALSE;
+				$welcome = FALSE;
+				$this->_templateView->assign("newpage", TRUE);
+			
+			}
+			if(isset($_GET["q"]) && $_GET["q"]=="editpages") {
+					
+				$navigation = TRUE;
+				$login = FALSE;
+				$welcome = FALSE;
+				$this->_templateView->assign("editpages", TRUE);
+					
+			}
+			if(isset($_GET["q"]) && $_GET["q"]=="editusers") {
+					
+				$navigation = TRUE;
+				$login = FALSE;
+				$welcome = FALSE;
+				$this->_templateView->assign("editusers", TRUE);
+					
+			}
+			if(isset($_GET["q"]) && $_GET["q"]=="edittemplates") {
+					
+				$navigation = TRUE;
+				$login = FALSE;
+				$welcome = FALSE;
+				$this->_templateView->assign("edittemplates", TRUE);
+					
+			}
+			if(isset($_GET["q"]) && $_GET["q"]=="editglobals") {
+					
+				$navigation = TRUE;
+				$login = FALSE;
+				$welcome = FALSE;
+				$this->_templateView->assign("editglobals", TRUE);
+					
+			}
 
 		}
 		
@@ -155,6 +195,8 @@ class BackendController {
 	 * @param String $actionName Name of the ajax action to perform
 	 * 
 	 * @return Content of templatefile
+	 * 
+	 * @deprecated
 	 */
 	public function ajaxAction($actionName) {
 		
@@ -212,7 +254,7 @@ class BackendController {
 			echo $e->getDetails();
 		}
 			
-		$headTag = "\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$meta."\n<link rel=\"shortcut icon\" href=\"favicon.ico\" type=\"image/ico\">\n\n<title>".$title."</title>\n\n";
+		$headTag = "\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$meta."\n\n<title>".$title."</title>\n\n";
 	
 		$headTag .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."/Backend/js/jquery.min.js\"></script>";
 		

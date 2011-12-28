@@ -3,7 +3,7 @@ $(document).ready(function(){
 	
 	
 	// Menu
-	if($("#adminnavigation").length>0) {
+	/*if($("#adminnavigation").length>0) {
 		
 		$("#adminnavigation li a").click(function(event){
 			event.preventDefault();
@@ -27,6 +27,6 @@ $(document).ready(function(){
 			
 		});
 		
-	}
+	}*/
 	
 });

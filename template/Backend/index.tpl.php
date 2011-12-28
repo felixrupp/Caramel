@@ -1,6 +1,3 @@
-<!-- This is our admin template -->
-
-
 <div id="header">
 	<div id="logo"><a href="./" title="back to start of AdminPanel">CARAMEL LOGO HERE</a></div>
 	
@@ -15,11 +12,11 @@
 
 	<div id="nav">
 		<ul id="adminnavigation">
-			<li><a href="?q=newpage">Neue Seite anlegen</a></li>
-			<li><a href="?q=editpages">Bestehende Seiten verwalten</a></li>
-			<li><a href="?q=editusers">Benutzer verwalten</a></li>
-			<li><a href="?q=edittemplates">Templates verwalten</a></li>
-			<li><a href="?q=editglobals">Globale Konfiguration</a></li>
+			<li><a href="?q=newpage">Add new page</a></li>
+			<li><a href="?q=editpages">Manage pages</a></li>
+			<li><a href="?q=editusers">Manage user</a></li>
+			<li><a href="?q=edittemplates">Manage templates</a></li>
+			<li><a href="?q=editglobals">Global config</a></li>
 		</ul>
 	</div>
 	
@@ -44,20 +41,46 @@
 	
 	<?php if(isset($login) && $login!=FALSE) {?>
 		<div id="adminlogin">
+		
+			<div id="wrapper">
 	
-			<p>Please login below:</p>
+				<h2>Please login below:</h2>
 
-			<form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
-				<label for="username">Username:</label> <input type="text" name="username" id="username">
-				<br>
-				<label for="password">Password:</label> <input type="password" name="password" id="password">
-				<br>
-				<label>&nbsp;</label> <input type="submit" value="Login" id="submit" name="submit">
-			</form>
+				<form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
+					<fieldset>
+						<label for="username">Username:</label> <input type="text" name="username" id="username">
+						<br>
+						<label for="password">Password:</label> <input type="password" name="password" id="password">
+					</fieldset>
+					
+					<label>&nbsp;</label> <input type="submit" value="Login" id="submit" name="submit">
+				</form>
+			
+			</div>
 		
 		</div>
 	<?php } ?>
-
+	
+	
+	<?php 
+	
+	if(isset($newpage) && $newpage!=FALSE) {
+		include "newpage.tpl.php";
+	}
+	if(isset($editpages) && $editpages!=FALSE) {
+		include "editpages.tpl.php";
+	}
+	if(isset($editusers) && $editusers!=FALSE) {
+		include "editusers.tpl.php";
+	}
+	if(isset($edittemplates) && $edittemplates!=FALSE) {
+		include "edittemplates.tpl.php";
+	}
+	if(isset($editglobals) && $editglobals!=FALSE) {
+		include "editglobals.tpl.php";
+	}
+	
+	?>
 
 </div>
 

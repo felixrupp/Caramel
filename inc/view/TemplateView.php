@@ -74,7 +74,8 @@ class TemplateView {
 	 */
 	public function addCssJs() {
 		
-		$cssJs = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".TEMPLATEDIR."/".$this->_activeTemplate."/css/styles.css\">\n";
+		$cssJs = "<link rel=\"shortcut icon\" href=\"".TEMPLATEDIR."/".$this->_activeTemplate."/images/favicon.ico\" type=\"image/ico\">\n";
+		$cssJs .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"".TEMPLATEDIR."/".$this->_activeTemplate."/css/styles.css\">\n";
 		$cssJs .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."/".$this->_activeTemplate."/js/scripts.js\"></script>";
 		
 		return $cssJs;
@@ -123,6 +124,12 @@ class TemplateView {
 	 * @return Content of templatefile
 	 */
 	public function returnTemplate() {
+		
+		if($this->_values) {
+			foreach($this->_values as $key => $val) {
+				$$key = $val;
+			}
+		}
 		
 		return file_get_contents(TEMPLATEDIR.'/'.$this->_activeTemplate.'/'.$this->_templateFile.'.tpl.php');
 		
