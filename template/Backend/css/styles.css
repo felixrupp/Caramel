@@ -107,14 +107,14 @@ ul#adminnavigation li a {
 }
 
 ul#adminnavigation li a:link, ul#adminnavigation li a:visited {
-	color:#FFF;
+	color:#474747;
 	text-decoration:none;
 	background-image:url("../images/menu-background-normal.png");
 	background-repeat:repeat-x;
 }
 
 ul#adminnavigation li a:hover, ul#adminnavigation li a:active {
-	color:#E6E6E6;
+	color:#FFF;
 	text-decoration:none;
 	background-image:url("../images/menu-background-flipped.png");
 	background-repeat:repeat-x;

@@ -20,7 +20,7 @@
 		</ul>
 	</div>
 	
-	<div class="clearboth"><div>
+	<div class="clearboth"></div>
 
 <?php } ?>
 

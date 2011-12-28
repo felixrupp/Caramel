@@ -48,7 +48,7 @@
 		<page name="home/info">
 			
 			<record lang="en">
-				<navigation pos="1"><![CDATA[Info]]></navigation>
+				<navigation pos="11"><![CDATA[Info]]></navigation>
 				<title><![CDATA[Title of the Infopage]]></title>
 				<titletag><![CDATA[Title of the Infopage]]></titletag>
 				<meta name="description"><![CDATA[English description for Info]]></meta>
@@ -63,7 +63,7 @@
 			</record>
 			
 			<record lang="de">
-				<navigation pos="1"><![CDATA[Info]]></navigation>
+				<navigation pos="11"><![CDATA[Info]]></navigation>
 				<title><![CDATA[Titel der Infoseite]]></title>
 				<titletag><![CDATA[Titel der Infoseite]]></titletag>
 				<meta name="description"><![CDATA[Deutsche Beschreibung für Info]]></meta>

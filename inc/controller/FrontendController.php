@@ -6,10 +6,11 @@
  */
 
 # Imports
+require_once BASEDIR.'/inc/utility/CaramelException.php';
 require_once BASEDIR.'/inc/model/DatabaseModel.php';
 require_once BASEDIR.'/inc/model/ConfigurationModel.php';
 require_once BASEDIR.'/inc/view/TemplateView.php';
-require_once BASEDIR.'/inc/utility/CaramelException.php';
+
 
 /**
  *
@@ -46,18 +47,7 @@ class FrontendController {
 		$this->_templateView = new TemplateView($this->_config->getConfigString("TEMPLATE"));
 		
 		# Get Database 
-		$dataBaseModel = DatabaseModel::getDatabaseModel();
-		$this->_dataBase = $dataBaseModel->getDatabaseFile();
-	
-	
-		# Fill our languages array
-		$xPathResult = $this->_dataBase->xpath('//@lang'); # Find all lang-elements
-		$xPathResult = array_unique($xPathResult); # Remove double entries
-		
-		foreach($xPathResult as $langCode) {
-			array_push($this->_allLanguages, (string)$langCode); # Convert SimpleXMLElements into strings
-		}
-		
+		$this->_dataBase = DatabaseModel::getDatabaseModel();		
 				
 	} // End of constructor declaration
 	
@@ -73,15 +63,19 @@ class FrontendController {
 	public function frontendOutputAction() {
 		
 		$navigation = "";
-		$content = "";
+		
 		
 		try {
 			$navigation = $this->getNavigation();
-			$content = $this->getContent();
 		}
 		catch(CaramelException $e) {
 			echo $e->getDetails();
 		}
+		
+		$lang = $this->getLanguage();
+		$pageName = $this->getDisplay();
+		
+		$content = $this->_dataBase->getWebsiteContentAction($lang, $pageName);
 				
 		$this->_templateView->assign("content", $content);
 		$this->_templateView->assign("navigation", $navigation);
@@ -168,19 +162,18 @@ class FrontendController {
 	 */	
 	public function headTagAction() {
 		
-		$meta = "";
-		$title = "";
+		$metaRobots = '<meta name="robots" content="'.$this->_config->getConfigString('ROBOTS').'">';
+		$metaRevisit = '<meta name="revisit-after" content="'.$this->_config->getConfigString('REVISIT_AFTER').'">';
+		$metaGenerator = "<meta name=\"generator\" content=\"Caramel CMS ".self::VERSION."\">";
 		
-		try {
-			$meta = $this->getMeta();
-			$title = $this->getTitle();
-		}
-		catch(CaramelException $e) {
-			echo $e->getDetails();
-		}
+		$lang = $this->getLanguage();
+		$pageName = $this->getDisplay();
+		
+		$meta = $this->_dataBase->getAllMetaTagsAction($lang, $pageName).$metaRobots."\n".$metaRevisit."\n".$metaGenerator."\n";
+		
+		$title = $this->_config->getConfigString("WEBSITE_TITLE").$this->_config->getConfigString("WEBSITE_TITLE_SEPERATOR").$this->_dataBase->getWebsiteTitleAction($lang, $pageName);
 			
 		$headTag = $this->getBaseUrl()."\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$meta."\n<link rel=\"shortcut icon\" href=\"favicon.ico\" type=\"image/ico\">\n\n<title>".$title."</title>\n\n";
-		
 		$headTag .= $this->_templateView->addCssJs();
 		
 		return $headTag;
@@ -196,29 +189,6 @@ class FrontendController {
 ### Helper functions:
 ##################################################
 	
-	
-	/**
-	 * Print out the content in index.php
-	 * 
-	 * @return string Localized content
-	 */
-	protected function getContent() {
-		
-		$lang = $this->getLanguage();
-		$pageName = $this->getDisplay();
-			
-		$xPathResultContent = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/content');
-		
-		if(count($xPathResultContent)>0) {
-			$contentLocalized = $xPathResultContent[0];
-		}
-		else {
-			throw new CaramelException(10);
-		}			
-					
-		return $contentLocalized;	
-		   
-	} // End of method declaration
 	
  
 	/**
@@ -512,7 +482,7 @@ class FrontendController {
 	 */
 	protected function getLanguage() {
 	
-		if(isset($_GET['lang']) and in_array($_GET['lang'], $this->_allLanguages)) { # Test if set language is in our language array
+		if(isset($_GET['lang']) and in_array($_GET['lang'], $this->_dataBase->getAllLanguagesAction())) { # Test if set language is in our language array
 			$language = $_GET['lang'];
 		}
 		else {
@@ -619,27 +589,6 @@ class FrontendController {
 	} // End of method declaration
 	
 	
-	/**
-	 * Print out title in title-tag in index.php
-	 * 
-	 * @return string Localized website-title
-	 */
-	protected function getTitle() {
-		$lang = $this->getLanguage();
-		$pageName = $this->getDisplay();
-		
-		$xPathResultTitle = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/title');
-		
-		if(count($xPathResultTitle)>0) {
-			$titleLocalized = $this->_config->getConfigString("WEBSITE_TITLE").$this->_config->getConfigString("WEBSITE_TITLE_SEPERATOR").(string)$xPathResultTitle[0];
-		}
-		else {
-			throw new CaramelException(10);
-		}
-						
-		return $titleLocalized;
-	
-	} // End of method declaration
 	
 	
 	/**
@@ -658,52 +607,7 @@ class FrontendController {
 	} // End of method declaration
 	
 	
-	/**
-	 * Print out meta-tags in index.php
-	 * 
-	 * @return string Meta-tags for author, keywords and description
-	 */
-	protected function getMeta() {
-		$lang = $this->getLanguage();
-		$pageName = $this->getDisplay();
-		
-		$xPathResultMetaDescription = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="description"]');
-		if(count($xPathResultMetaDescription)>0) {
-			$metaDescription = "<meta name=\"description\" content=\"".$xPathResultMetaDescription[0]."\">";
-		}
-		else {
-			throw new CaramelException(10);
-		}
-		
-		$xPathResultMetaKeywords = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="keywords"]');
-		if(count($xPathResultMetaKeywords)>0) {
-			$metaKeywords = "<meta name=\"keywords\" content=\"".$xPathResultMetaKeywords[0]."\">";
-		}
-		else {
-			throw new CaramelException(10);
-		}
-		
-		$xPathResultMetaAuthor = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="author"]');
-		if(count($xPathResultMetaAuthor)>0) {
-			$metaAuthor = "<meta name=\"author\" content=\"".$xPathResultMetaAuthor[0]."\">";
-		}
-		else {
-			throw new CaramelException(10);
-		}
-		
-		
-		$metaRobots = '<meta name="robots" content="'.$this->_config->getConfigString('ROBOTS').'">';
-		
-		$metaRevisit = '<meta name="revisit-after" content="'.$this->_config->getConfigString('REVISIT_AFTER').'">';
-		
-		$metaGenerator = "<meta name=\"generator\" content=\"Caramel CMS ".self::VERSION."\">";
-		
-		$metaTags = $metaDescription."\n".$metaKeywords."\n".$metaAuthor."\n".$metaRobots."\n".$metaRevisit."\n".$metaGenerator."\n";
-		
-						
-		return $metaTags;
 	
-	} // End of method declaration
 	
 	
 	/**
