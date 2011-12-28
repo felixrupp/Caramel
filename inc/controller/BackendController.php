@@ -211,8 +211,21 @@ class BackendController {
 		return $headTag;
 	
 	} // End of method declaration
-
 	
+	
+	
+	/**
+	* This action logs the user off
+	*
+	* @return void
+	*/
+	public function logoutAction() {
+	
+		if($this->getSession()==TRUE) {
+			session_destroy();
+		}
+	
+	} // End of method declaration
 	
 	
 	
@@ -234,22 +247,7 @@ class BackendController {
 		}
 		
 	} // End of method declaration
-	
-	
-	
-	/**
-	* This action logs the user off
-	*
-	* @return void
-	*/
-	protected function logout() {
-	
-		if($this->getSession()==TRUE) {
-			session_destroy();
-		}
-	
-	} // End of method declaration
-	
+
 	
 	
 	/**

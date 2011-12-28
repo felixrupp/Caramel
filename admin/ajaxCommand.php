@@ -7,9 +7,6 @@ require_once(BASEDIR.'/inc/controller/BackendController.php');
 # New backend controller
 $backendController = new BackendController();
 
-# Initialize session
-$backendController->sessionAction();
-
 
 if($_GET) {
 	
@@ -27,9 +24,6 @@ if($_GET) {
 	}
 	if($_GET["q"]=="editglobals") {
 		echo $backendController->ajaxAction("editglobals");
-	}
-	if($_GET["q"]=="logout") {
-		echo $backendController->ajaxAction("logout");
 	}
 	
 }

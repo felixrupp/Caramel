@@ -1,5 +1,10 @@
 <!-- This is our admin template -->
 
+
+iv id="header>"d<
+
+
+
 <?php if(isset($navigation) && $navigation!=FALSE) {?>
 
 	<div id="nav">
@@ -9,7 +14,6 @@
 			<li><a href="?q=editusers">Benutzer verwalten</a></li>
 			<li><a href="?q=edittemplates">Templates verwalten</a></li>
 			<li><a href="?q=editglobals">Globale Konfiguration</a></li>
-			<li><a href="?q=logout">Logout</a></li>		
 		</ul>
 	</div>
 
