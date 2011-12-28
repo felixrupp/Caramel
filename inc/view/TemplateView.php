@@ -111,7 +111,7 @@ class TemplateView {
 		
 		$this->_templateFile = "index";
 		
-		include TEMPLATEDIR.'/'.$this->_activeTemplate.'/'.$this->_templateFile.'.tpl.php';
+		include BASEDIR.'/template/'.$this->_activeTemplate.'/'.$this->_templateFile.'.tpl.php';
 		
 	} // End of method declaration
 	

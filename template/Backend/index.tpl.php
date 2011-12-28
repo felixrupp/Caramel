@@ -1,7 +1,13 @@
 <!-- This is our admin template -->
 
 
-iv id="header>"d<
+<div id="header">
+	<div id="logo"><a href="./" title="back to start of AdminPanel">CARAMEL LOGO HERE</a></div>
+	
+	<?php if(isset($navigation) && $navigation!=FALSE) {?>
+		<div id="logoutbutton"><a href="?q=logout" title="Logout">Logout</a></div>
+	<?php } ?>
+</div>
 
 
 
@@ -16,8 +22,12 @@ iv id="header>"d<
 			<li><a href="?q=editglobals">Globale Konfiguration</a></li>
 		</ul>
 	</div>
+	
+	<div class="clearboth"><div>
 
 <?php } ?>
+
+
 
 
 <div id="content">

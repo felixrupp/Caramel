@@ -126,6 +126,16 @@ class BackendController {
 			$navigation = TRUE;
 			$login = FALSE;
 			$welcome = TRUE;
+			
+			
+			if(isset($_GET["q"]) && $_GET["q"]=="logout") {
+				$this->logoutAction();
+				
+				$navigation = FALSE;
+				$login = TRUE;
+				$welcome = FALSE;
+				
+			}
 
 		}
 		
