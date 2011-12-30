@@ -26,15 +26,19 @@ fieldset {
 }
 
 input {
-	margin-bottom:6px;
+	margin-bottom:10px;
+}
+
+input[type="text"] {
+	width:250px;
 }
 
 label {
 	display:block;
-	width:120px;
+	width:320px;
 	float:left;
 	clear:left;
-	margin-bottom:6px;
+	margin-bottom:10px;
 }
 
 
@@ -137,6 +141,10 @@ ul#adminnavigation li a:hover, ul#adminnavigation li a:active {
 	width:300px;
 	margin:18px auto 0 auto;
 	
+}
+
+#adminlogin label {
+	width:120px;
 }
 
 /* Main content */

@@ -1,121 +1,243 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- *
- * Database for page-content
- * 
- * @author Felix Rupp <kontakt@felixrupp.com>
- * @version $Id$
- * @copyright Copyright (c) 2011, Felix Rupp, Nicole Reinhardt
- * @license http://www.opensource.org/licenses/mit-license.php MIT-License
- * 
+<!--
+*
+* Database for page-content
+*
+* @author Felix Rupp <kontakt@felixrupp.com>
+* @version $Id$
+* @copyright Copyright (c) 2011, Felix Rupp, Nicole Reinhardt
+* @license http://www.opensource.org/licenses/mit-license.php MIT-License
+*
 -->
 <database version="1.0">
 
-	<page name="home">
-	
+	<page id="1" path="home">
+
 		<record lang="en">
-			<navigation pos="1"><![CDATA[Home]]></navigation>
-			<title><![CDATA[Title of the Homepage]]></title>
-			<titletag><![CDATA[Title of the Homepage]]></titletag>
-			<meta name="description"><![CDATA[English description for Home]]></meta>
-			<meta name="keywords"><![CDATA[English keywords for Home]]></meta>
-			<meta name="author"><![CDATA[Felix Rupp english]]></meta>
+			<navigation pos="1">
+				<![CDATA[Home]]>
+			</navigation>
+			<title>
+				<![CDATA[Title of the Homepage]]>
+			</title>
+			<titletag>
+				<![CDATA[Title of the Homepage]]>
+			</titletag>
+			<meta name="description">
+				<![CDATA[English description for Home]]>
+			</meta>
+			<meta name="keywords">
+				<![CDATA[English keywords for Home]]>
+			</meta>
+			<meta name="author">
+				<![CDATA[Felix Rupp english]]>
+			</meta>
 			<socialbar>false</socialbar>
 			<content>
-			<![CDATA[
-			Homepage in english.
-			]]>
+				<![CDATA[
+				Homepage in english.
+				]]>
 			</content>
 		</record>
-	
 		<record lang="de">
-			<navigation pos="1"><![CDATA[Start]]></navigation>
-			<title><![CDATA[Titel der Startseite]]></title>
-			<titletag><![CDATA[Titel der Startseite]]></titletag>
-			<meta name="description"><![CDATA[Deutsche Beschreibung für Start]]></meta>
-			<meta name="keywords"><![CDATA[Deutsche Schlüsselwörter für Start]]></meta>
-			<meta name="author"><![CDATA[Felix Rupp deutsch]]></meta>
+			<navigation pos="1">
+				<![CDATA[Start]]>
+			</navigation>
+			<title>
+				<![CDATA[Titel der Startseite]]>
+			</title>
+			<titletag>
+				<![CDATA[Titel der Startseite]]>
+			</titletag>
+			<meta name="description">
+				<![CDATA[Deutsche Beschreibung für Start]]>
+			</meta>
+			<meta name="keywords">
+				<![CDATA[Deutsche Schlüsselwörter für Start]]>
+			</meta>
+			<meta name="author">
+				<![CDATA[Felix Rupp deutsch]]>
+			</meta>
 			<socialbar>false</socialbar>
 			<content>
-			<![CDATA[
-			Startseite auf deutsch.
-			]]>
+				<![CDATA[
+				Startseite auf deutsch.
+				]]>
 			</content>
 		</record>
 		
 		
-		<page name="home/info">
-			
+		<page id="2" path="home/info">
+
 			<record lang="en">
-				<navigation pos="11"><![CDATA[Info]]></navigation>
-				<title><![CDATA[Title of the Infopage]]></title>
-				<titletag><![CDATA[Title of the Infopage]]></titletag>
-				<meta name="description"><![CDATA[English description for Info]]></meta>
-				<meta name="keywords"><![CDATA[English keywords for Info]]></meta>
-				<meta name="author"><![CDATA[Felix Rupp english]]></meta>
+				<navigation pos="1">
+					<![CDATA[Info]]>
+				</navigation>
+				<title>
+					<![CDATA[Title of the Infopage]]>
+				</title>
+				<titletag>
+					<![CDATA[Title of the Infopage]]>
+				</titletag>
+				<meta name="description">
+					<![CDATA[English description for Info]]>
+				</meta>
+				<meta name="keywords">
+					<![CDATA[English keywords for Info]]>
+				</meta>
+				<meta name="author">
+					<![CDATA[Felix Rupp english]]>
+				</meta>
 				<socialbar>false</socialbar>
 				<content>
-				<![CDATA[
-				Infopage in english.
-				]]>
+					<![CDATA[
+					Infopage in english.
+					]]>
 				</content>
 			</record>
-			
 			<record lang="de">
-				<navigation pos="11"><![CDATA[Info]]></navigation>
-				<title><![CDATA[Titel der Infoseite]]></title>
-				<titletag><![CDATA[Titel der Infoseite]]></titletag>
-				<meta name="description"><![CDATA[Deutsche Beschreibung für Info]]></meta>
-				<meta name="keywords"><![CDATA[Deutsche Schlüsselwörter für Info]]></meta>
-				<meta name="author"><![CDATA[Felix Rupp deutsch]]></meta>
+				<navigation pos="1">
+					<![CDATA[Info]]>
+				</navigation>
+				<title>
+					<![CDATA[Titel der Infoseite]]>
+				</title>
+				<titletag>
+					<![CDATA[Titel der Infoseite]]>
+				</titletag>
+				<meta name="description">
+					<![CDATA[Deutsche Beschreibung für Info]]>
+				</meta>
+				<meta name="keywords">
+					<![CDATA[Deutsche Schlüsselwörter für Info]]>
+				</meta>
+				<meta name="author">
+					<![CDATA[Felix Rupp deutsch]]>
+				</meta>
 				<socialbar>false</socialbar>
 				<content>
-				<![CDATA[
-				Infoseite auf deutsch.
-				]]>
+					<![CDATA[
+					Infoseite auf deutsch.
+					]]>
 				</content>
 			</record>
-							
 		</page>
+		
+		
+		<page id="4" path="home/second">
+
+			<record lang="en">
+				<navigation pos="1">
+					<![CDATA[Second Child]]>
+				</navigation>
+				<title>
+					<![CDATA[Title of the childpage]]>
+				</title>
+				<titletag>
+					<![CDATA[Title of the childpage]]>
+				</titletag>
+				<meta name="description">
+					<![CDATA[English description for child]]>
+				</meta>
+				<meta name="keywords">
+					<![CDATA[English keywords for child]]>
+				</meta>
+				<meta name="author">
+					<![CDATA[Felix Rupp english]]>
+				</meta>
+				<socialbar>false</socialbar>
+				<content>
+					<![CDATA[
+					This is the second child.
+					]]>
+				</content>
+			</record>
+			<record lang="de">
+				<navigation pos="1">
+					<![CDATA[Zweite Unterseite]]>
+				</navigation>
+				<title>
+					<![CDATA[Titel der Unterseite]]>
+				</title>
+				<titletag>
+					<![CDATA[Titel der Unterseite]]>
+				</titletag>
+				<meta name="description">
+					<![CDATA[Deutsche Beschreibung für Unterseite]]>
+				</meta>
+				<meta name="keywords">
+					<![CDATA[Deutsche Schlüsselwörter für Unterseite]]>
+				</meta>
+				<meta name="author">
+					<![CDATA[Felix Rupp deutsch]]>
+				</meta>
+				<socialbar>false</socialbar>
+				<content>
+					<![CDATA[
+					Zweite Unterseite.
+					]]>
+				</content>
+			</record>
 			
+		</page>
+		
 	</page>
 	
 	
-	
-	<page name="test">
-		
+	<page id="3" path="test">
+
 		<record lang="en">
-			<navigation pos="2"><![CDATA[Test]]></navigation>
-			<title><![CDATA[Test-title]]></title>
-			<titletag><![CDATA[Title of testpage]]></titletag>
-			<meta name="description"><![CDATA[English description for Test]]></meta>
-			<meta name="keywords"><![CDATA[English keywords for Test]]></meta>
-			<meta name="author"><![CDATA[Felix Rupp english]]></meta>
+			<navigation pos="2">
+				<![CDATA[Test]]>
+			</navigation>
+			<title>
+				<![CDATA[Test-title]]>
+			</title>
+			<titletag>
+				<![CDATA[Title of testpage]]>
+			</titletag>
+			<meta name="description">
+				<![CDATA[English description for Test]]>
+			</meta>
+			<meta name="keywords">
+				<![CDATA[English keywords for Test]]>
+			</meta>
+			<meta name="author">
+				<![CDATA[Felix Rupp english]]>
+			</meta>
 			<socialbar>false</socialbar>
 			<content>
-			<![CDATA[
-			This is testcontent.	
-			]]>
+				<![CDATA[
+				This is testcontent.
+				]]>
 			</content>
 		</record>
-		
 		<record lang="de">
-			<navigation pos="2"><![CDATA[Test]]></navigation>
-			<title><![CDATA[Testtitel]]></title>
-			<titletag><![CDATA[Titel der Testseite]]></titletag>
-			<meta name="description"><![CDATA[Deutsche Beschreibung für Test]]></meta>
-			<meta name="keywords"><![CDATA[Deutsche Schlüsselwörter für Test]]></meta>
-			<meta name="author"><![CDATA[Felix Rupp deutsch]]></meta>
+			<navigation pos="2">
+				<![CDATA[Test]]>
+			</navigation>
+			<title>
+				<![CDATA[Testtitel]]>
+			</title>
+			<titletag>
+				<![CDATA[Titel der Testseite]]>
+			</titletag>
+			<meta name="description">
+				<![CDATA[Deutsche Beschreibung für Test]]>
+			</meta>
+			<meta name="keywords">
+				<![CDATA[Deutsche Schlüsselwörter für Test]]>
+			</meta>
+			<meta name="author">
+				<![CDATA[Felix Rupp deutsch]]>
+			</meta>
 			<socialbar>false</socialbar>
 			<content>
-			<![CDATA[
-			Das ist testinhalt.
-			]]>
+				<![CDATA[
+				Das ist testinhalt.
+				]]>
 			</content>
 		</record>
-		
 	</page>
-
-
 </database>

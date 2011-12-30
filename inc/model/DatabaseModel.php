@@ -39,7 +39,7 @@ class DatabaseModel {
 	private function DatabaseModel() {
 		# Try to import the database-file
 		try {			
-			$this->_dataBaseFile = simplexml_load_file(BASEDIR.'/database/data.xml', 'SimpleXMLElement', LIBXML_NOCDATA);
+			$this->_dataBase = simplexml_load_file(BASEDIR.'/database/data.xml', 'SimpleXMLElement', LIBXML_NOCDATA);
 		}
 		catch(Exception $e) {
 			var_dump($e->getMessage());
@@ -79,6 +79,7 @@ class DatabaseModel {
 	/**
 	 * Method to get all used languages out of database
 	 * 
+	 * @throws CaramelException
 	 * @return Array with all used language-codes
 	 */
 	public function getAllLanguagesAction() {
@@ -86,11 +87,16 @@ class DatabaseModel {
 		$allLanguages = array();
 		
 		# Fill our languages array
-		$xPathResult = $this->_dataBase->xpath('//@lang'); # Find all lang-elements
-		$xPathResult = array_unique($xPathResult); # Remove double entries
-		
-		foreach($xPathResult as $langCode) {
-			array_push($allLanguages, (string)$langCode); # Convert SimpleXMLElements into strings
+		try{
+			
+			$xPathResult = $this->_dataBase->xpath('//@lang'); # Find all lang-elements
+			$xPathResult = array_unique($xPathResult); # Remove double entries
+			
+			foreach($xPathResult as $langCode) {
+				array_push($allLanguages, (string)$langCode); # Convert SimpleXMLElements into strings
+			}
+		} catch(CaramelException $e) {
+			$e->getDetails();
 		}
 		
 		return $allLanguages;
@@ -110,7 +116,7 @@ class DatabaseModel {
 	 */
 	public function getAllMetaTagsAction($lang, $pageName) {
 		
-		$xPathResultMetaDescription = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="description"]');
+		$xPathResultMetaDescription = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="description"]');
 		if(count($xPathResultMetaDescription)>0) {
 			$metaDescription = "<meta name=\"description\" content=\"".$xPathResultMetaDescription[0]."\">";
 		}
@@ -118,7 +124,7 @@ class DatabaseModel {
 			throw new CaramelException(10);
 		}
 		
-		$xPathResultMetaKeywords = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="keywords"]');
+		$xPathResultMetaKeywords = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="keywords"]');
 		if(count($xPathResultMetaKeywords)>0) {
 			$metaKeywords = "<meta name=\"keywords\" content=\"".$xPathResultMetaKeywords[0]."\">";
 		}
@@ -126,7 +132,7 @@ class DatabaseModel {
 			throw new CaramelException(10);
 		}
 		
-		$xPathResultMetaAuthor = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="author"]');
+		$xPathResultMetaAuthor = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="author"]');
 		if(count($xPathResultMetaAuthor)>0) {
 			$metaAuthor = "<meta name=\"author\" content=\"".$xPathResultMetaAuthor[0]."\">";
 		}
@@ -151,7 +157,7 @@ class DatabaseModel {
 	 */
 	public function getWebsiteTitleAction($lang, $pageName) {
 		
-		$xPathResultTitle = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/title');
+		$xPathResultTitle = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/title');
 		
 		if(count($xPathResultTitle)>0) {
 			$title = (string)$xPathResultTitle[0];
@@ -177,7 +183,7 @@ class DatabaseModel {
 	 */
 	public function getWebsiteContentAction($lang, $pageName) {
 		
-		$xPathResultContent = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/content');
+		$xPathResultContent = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/content');
 		
 		if(count($xPathResultContent)>0) {
 			$content = $xPathResultContent[0];
@@ -192,229 +198,71 @@ class DatabaseModel {
 	
 	
 	
-	
-	public function getWebsiteNavigationAction($lang, $pageName) {
-		
+	/**
+	 * Method to return array with localized navigation
+	 * Note: Navigation is restricted to one sublevel
+	 * 
+	 * @param string $lang Current language
+	 * 
+	 * @return Array with localized navigation information
+	 */
+	public function getWebsiteNavigationAction($lang) {
+				
 		$orderedNavi = array();
-		$orderedSubNavi = array();
-
-		#$navigation = "<ul>";
-
-
-
+		
 		foreach($this->_dataBase->page as $page) {
-
+			
+			## Get records
 			$xPathResultRecord = $page->xpath('record[@lang="'.$lang.'"]');
-
+			
 			if(count($xPathResultRecord) > 0) {
-
-				foreach($xPathResultRecord as $record) {
-
-					/*
-					 $navigationLocalized = "";
-					$active = "";
-					$titletagLocalized = "";
-
-					# Localized navigation-tag
-					$navigationLocalized = (string)$record->navigation;
-
-					# Get navi-position
-					$naviPosition = (int)$record->navigation->attributes()->pos;
-
-					# Build active marker
-					//TODO: Do it not here!
-					#if(((string)$page->attributes()->name) == $pageName) {
-					#	$active = $this->_config->getConfigString("NAVIGATION_ACTIVE_MARKER");
-					#}
-
-					# Localized title-tag
-					$titletagLocalized = (string)$record->titletag;
-					*/
+			
+				$record = $xPathResultRecord[0];
+			
+				$orderedNavi[(int)$page->attributes()->id] = array(
+					"path" => (string)$page->attributes()->path, 
+					"pos" => (int)$record->navigation->attributes()->pos,
+					"navigation" => (string)$record->navigation,
+					"title" => (string)$record->title,
+					"titletag" => (string)$record->titletag,
+				);
+				
+			}
+			
+			$orderedNavi[(int)$page->attributes()->id]["subpages"] = array();
+			
+			
+			## SubPages
+			$subPages = $page->page;
+			
+			foreach($subPages as $subPage) {
+				
+				## Get subrecords
+				$xPathResultRecord = $subPage->xpath('record[@lang="'.$lang.'"]');
 						
-					$orderedNavi[(string)$page->attributes()->name] = array(
-										"name" => (string)$page->attributes()->name, 
-										"pos" => (int)$record->navigation->attributes()->pos,
-										"navigation" => (string)$record->navigation,
-										"title" => (string)$record->title,
-										"titletag" => (string)$record->titletag
+				if(count($xPathResultRecord) > 0) {
+							
+					$subRecord = $xPathResultRecord[0];
+							
+					$orderedNavi[(int)$page->attributes()->id]["subpages"][(int)$subPage->attributes()->id] = array(
+						"path" => (string)$subPage->attributes()->path,
+						"pos" => (int)$subRecord->navigation->attributes()->pos,
+						"navigation" => (string)$subRecord->navigation,
+						"title" => (string)$subRecord->title,
+						"titletag" => (string)$subRecord->titletag,
 					);
-						
-
-					# Get Parameters before ampersand
-					//TODO: Do it not here!
-					#$newQueryString = $this->getParametersBefore();
-
-					# Concatenate link for navigation
-					//TODO: Do it not here!
-					#$naviLink = (empty($_SERVER['QUERY_STRING']) ? '?' : $newQueryString).'display=';
-
-
-					# Build single navigation links in <li>-Tags
-					//TODO: Do it not here!
-					/*if($naviPosition!=-1) {
-
-					$sPush = "\n\t<li><a";
-
-					# Set navigation class
-					if($this->_config->getConfigString("NAVIGATION_CLASS") !="disabled") {
-					$sPush .= $this->_config->getConfigString("NAVIGATION_CLASS");
-					}
-
-					# Define link-syntax (speaking urls or not)
-					if($this->_config->getConfigString("SPEAKING_URLS") == "false") {
-					$sPush .= " href=\"".$naviLink.(string)$page->attributes()->name."\"";
-					}
-					elseif($this->_config->getConfigString("SPEAKING_URLS") == "true") {
-					$sPush .= " href=\"".$this->getParametersBefore().'/'.(string)$page->attributes()->name."/\"";
-					}
-
-
-					# Set rel-attribute
-					# DEACTIVATED BECAUSE OF HTML5 DOCTYPE
-					#if($this->_config->getConfigString("NAVIGATION_REL") !="disabled") {
-					#	$sPush .= $this->_config->getConfigString("NAVIGATION_REL");
-					#}
-
-					$sPush .= " title=\"".$titletagLocalized."\">";
-
-					# Evaluate position of NAVIGATION_ACTIVE_MARKER
-					if($this->_config->getConfigString("NAVIGATION_ACTIVE_MARKER_POSITION") == "before") {
-					$sPush .= $active.$navigationLocalized;
-					}
-					elseif($this->_config->getConfigString("NAVIGATION_ACTIVE_MARKER_POSITION") == "after") {
-					$sPush .= $navigationLocalized.$active;
-					}
-					elseif($this->_config->getConfigString("NAVIGATION_ACTIVE_MARKER_POSITION") == "disabled") {
-					$sPush .= $navigationLocalized;
-					}
-
-					$sPush .="</a>";
-
-					# Add entry ordered to array
-					$orderedNavi[$naviPosition] = $sPush;
-						
-					}*/
-
+	
 				}
 
-			} else {
-				throw new CaramelException(10);
+				
 			}
-
-		}
 			
-
-		#### Subpages
-
-		/*foreach($this->_dataBase->page->page as $subpage) {
-				
-			$xPathResultSubRecord = $subpage->xpath('record[@lang="'.$lang.'"]');
-
-			if(count($xPathResultSubRecord) > 0) {
-
-				foreach($xPathResultSubRecord as $subrecord) {
-						
-					$navigationLocalized = "";
-					$active = "";
-					$titletagLocalized = "";
-						
-					# Localized navigation-tag
-					$navigationLocalized = (string)$subrecord->navigation;
-						
-					# Get navi-position
-					$naviPosition = (int)$subrecord->navigation->attributes()->pos;
-						
-					# Build active marker
-					if(((string)$subpage->attributes()->name) == $pageName) {
-						$active = $this->_config->getConfigString("NAVIGATION_ACTIVE_MARKER");
-					}
-						
-					# Localized title-tag
-					$titletagLocalized = (string)$subrecord->titletag;
-						
-					# Get Parameters before ampersand
-					$newQueryString = $this->getParametersBefore();
-						
-					# Concatenate link for navigation
-					$naviLink = (empty($_SERVER['QUERY_STRING']) ? '?' : $newQueryString).'display=';
-
-
-					# Build single navigation links in <li>-Tags
-					if($naviPosition!=-1) {
-
-						$sPush = "\n\t\t<ul>\n\t\t\t<li><a";
-							
-						# Set navigation class
-						if($this->_config->getConfigString("NAVIGATION_CLASS") !="disabled") {
-							$sPush .= $this->_config->getConfigString("NAVIGATION_CLASS");
-						}
-						 
-						# Define link-syntax (speaking urls or not)
-
-
-						if($this->_config->getConfigString("SPEAKING_URLS") == "false") {
-							$sPush .= " href=\"".$naviLink.(string)$subpage->attributes()->name."\"";
-						}
-						elseif($this->_config->getConfigString("SPEAKING_URLS") == "true") {
-							$sPush .= " href=\"".$this->getParametersBefore().'/'.(string)$subpage->attributes()->name."/\"";
-						}
-							
-
-						# Set rel-attribute
-						# DEACTIVATED BECAUSE OF HTML5 DOCTYPE
-						#if($this->_config->getConfigString("NAVIGATION_REL") !="disabled") {
-						#	$sPush .= $this->_config->getConfigString("NAVIGATION_REL");
-						#}
-
-						$sPush .= " title=\"".$titletagLocalized."\">";
-
-						# Evaluate position of NAVIGATION_ACTIVE_MARKER
-						if($this->_config->getConfigString("NAVIGATION_ACTIVE_MARKER_POSITION") == "before") {
-							$sPush .= $active.$navigationLocalized;
-						}
-						elseif($this->_config->getConfigString("NAVIGATION_ACTIVE_MARKER_POSITION") == "after") {
-							$sPush .= $navigationLocalized.$active;
-						}
-						elseif($this->_config->getConfigString("NAVIGATION_ACTIVE_MARKER_POSITION") == "disabled") {
-							$sPush .= $navigationLocalized;
-						}
-
-						$sPush .="</a></li>\n\t\t</ul>";
-							
-						# Add entry ordered to array
-						$orderedSubNavi[$naviPosition] = $sPush;
-
-					}
-
-				}
-
-			} else {
-				throw new CaramelException(10);
-			}
-
-		}*/
-
-
-		# Read ordered array entries
-		//TODO: Do it not here!
-		for($i=1; $i<=sizeof($orderedNavi); $i++) {
-			$navigation .= $orderedNavi[$i];
-				
-			# Insert subpage if exists
-			if(!empty($orderedSubNavi[$i])) {
-				$navigation .= $orderedSubNavi[$i]."\n\t";
-			}
-				
-			$navigation .= "</li>";
-		}
-
-		$navigation .= "\n</ul>\n";
-		
-		
 			
-		return $navigation;
+		}
 		
-	}
+		return $orderedNavi;
+		
+	} // End of method declaration
 
 }
 ?>

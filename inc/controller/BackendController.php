@@ -6,10 +6,10 @@
  */
 
 # Imports
+require_once BASEDIR.'/inc/utility/CaramelException.php';
 require_once BASEDIR.'/inc/model/DatabaseModel.php';
 require_once BASEDIR.'/inc/model/ConfigurationModel.php';
 require_once BASEDIR.'/inc/view/TemplateView.php';
-require_once BASEDIR.'/inc/utility/CaramelException.php';
 
 /**
  *
@@ -26,7 +26,6 @@ class BackendController {
 	# Attributes
 	private $_config;
 	private $_dataBase;
-	private $_allLanguages = array();
 	private $_templateView;
 		
 	# Constants
@@ -46,17 +45,7 @@ class BackendController {
 		$this->_templateView = new TemplateView("Backend");
 		
 		# Get Database 
-		$dataBaseModel = DatabaseModel::getDatabaseModel();
-		$this->_dataBase = $dataBaseModel->getDatabaseFile();
-	
-	
-		# Fill our languages array
-		$xPathResult = $this->_dataBase->xpath('//@lang'); # Find all lang-elements
-		$xPathResult = array_unique($xPathResult); # Remove double entries
-		
-		foreach($xPathResult as $langCode) {
-			array_push($this->_allLanguages, (string)$langCode); # Convert SimpleXMLElements into strings
-		}
+		$this->_dataBase = DatabaseModel::getDatabaseModel();
 		
 				
 	} // End of constructor declaration
@@ -87,8 +76,8 @@ class BackendController {
 				$realPassword = "";
 					
 				try {
-					$realAdmin = $this->_config->getAdminConfigString("ADMIN_USERNAME");
-					$realPassword = $this->_config->getAdminConfigString("ADMIN_PASSWORD");
+					$realAdmin = $this->_config->getAdminConfigStringAction("ADMIN_USERNAME");
+					$realPassword = $this->_config->getAdminConfigStringAction("ADMIN_PASSWORD");
 				}
 				catch(CaramelException $e) {
 					echo $e->getDetails();
@@ -97,7 +86,7 @@ class BackendController {
 				if($_POST["username"]==$realAdmin && $_POST["password"]==$realPassword) {
 
 					# Set loggedin
-					$_SESSION["loggedin"] = true;
+					$_SESSION["loggedin"] = TRUE;
 					$_SESSION["timestamp"] = time();
 					
 					$navigation = TRUE;
@@ -169,10 +158,41 @@ class BackendController {
 					
 			}
 			if(isset($_GET["q"]) && $_GET["q"]=="editglobals") {
+				
+				$globals =$this->_config->getGlobalsAction();
 					
 				$navigation = TRUE;
 				$login = FALSE;
 				$welcome = FALSE;
+				$this->_templateView->assign("globals", $globals);
+				$this->_templateView->assign("editglobals", TRUE);
+					
+			}
+			if(isset($_POST["editglobals"])) {
+				
+				$globals = $this->_config->getGlobalsAction();
+				
+				foreach($_POST as $key => $value) {
+					
+					if($key != "editglobals" && $key != "submit") {
+					
+						$globals[$key]["value"] = $value;
+					}
+				}
+
+				try{
+					$result = $this->_config->setGlobalsAction($globals);
+					
+				} catch(CaramelException $e) {
+					$e->getDetails();
+				}
+				
+				$globals = $this->_config->getGlobalsAction();
+					
+				$navigation = TRUE;
+				$login = FALSE;
+				$welcome = FALSE;
+				$this->_templateView->assign("globals", $globals);
 				$this->_templateView->assign("editglobals", TRUE);
 					
 			}
@@ -242,19 +262,10 @@ class BackendController {
 	* @return string Whole head-tag
 	*/
 	public function headTagAction() {
-	
-		$meta = "";
-		$title = "";
-	
-		try {
-			$meta = $this->getMeta();
-			$title = $this->getTitle();
-		}
-		catch(CaramelException $e) {
-			echo $e->getDetails();
-		}
-			
-		$headTag = "\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$meta."\n\n<title>".$title."</title>\n\n";
+		
+		$meta = $this->getMeta();
+		
+		$headTag = "\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$meta."\n\n<title>Caramel CMS Backend</title>\n\n";
 	
 		$headTag .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."/Backend/js/jquery.min.js\"></script>";
 		
@@ -299,352 +310,7 @@ class BackendController {
 		}
 		
 	} // End of method declaration
-
 	
-	
-	/**
-	 * Print out the content in index.php
-	 * 
-	 * @return string Localized content
-	 */
-	protected function getContent() {
-		
-		$lang = $this->getLanguage();
-		$pageName = $this->getDisplay();
-			
-		$xPathResultContent = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/content');
-		
-		if(count($xPathResultContent)>0) {
-			$contentLocalized = $xPathResultContent[0];
-		}
-		else {
-			throw new CaramelException(10);
-		}			
-					
-		return $contentLocalized;	
-		   
-	} // End of method declaration
-	
- 
-	/**
-	 * Print out navigation in index.php
-	 * 
-	 * @return string Localized navigation
-	 */
-	protected function getNavigation() {
-	
-		$orderedNavi = array();	
-		$orderedSubNavi = array();	
-		
-		$navigation = "<ul>";
-		
-				
-		foreach($this->_dataBase->page as $page) {
-			
-			$xPathResultRecord = $page->xpath('record[@lang="'.$this->getLanguage().'"]');
-			
-			if(count($xPathResultRecord) > 0) {
-			
-				foreach($xPathResultRecord as $record) {
-				
-					$navigationLocalized = "";
-					$active = "";
-					$titletagLocalized = "";
-						
-					# Localized navigation-tag			
-					$navigationLocalized = (string)$record->navigation;
-					
-					# Get navi-position
-					$naviPosition = (int)$record->navigation->attributes()->pos;
-					
-					# Build active marker
-					if(((string)$page->attributes()->name) == $this->getDisplay()) {
-						$active = $this->_config->getConfigString("NAVIGATION_ACTIVE_MARKER");
-					}
-					
-					# Localized title-tag
-					$titletagLocalized = (string)$record->titletag;
-					
-					# Get Parameters before ampersand
-					$newQueryString = $this->getParametersBefore();
-					
-					# Concatenate link for navigation
-					$naviLink = (empty($_SERVER['QUERY_STRING']) ? '?' : $newQueryString).'display=';
-										
-					
-					# Build single navigation links in <li>-Tags
-					if($naviPosition!=-1) {
-					
-						$sPush = "\n\t<li><a";
-						
-						# Set navigation class
-						if($this->_config->getConfigString("NAVIGATION_CLASS") !="disabled") {
-							$sPush .= $this->_config->getConfigString("NAVIGATION_CLASS");
-						}
-						
-						# Define link-syntax (speaking urls or not)
-						if($this->_config->getConfigString("SPEAKING_URLS") == "false") {
-							$sPush .= " href=\"".$naviLink.(string)$page->attributes()->name."\"";
-						}
-						elseif($this->_config->getConfigString("SPEAKING_URLS") == "true") {
-							$sPush .= " href=\"".$this->getParametersBefore().'/'.(string)$page->attributes()->name."/\"";
-						}
-						
-						
-						# Set rel-attribute
-						# DEACTIVATED BECAUSE OF HTML5 DOCTYPE
-						#if($this->_config->getConfigString("NAVIGATION_REL") !="disabled") {
-						#	$sPush .= $this->_config->getConfigString("NAVIGATION_REL");
-						#}
-						
-						$sPush .= " title=\"".$titletagLocalized."\">";
-						
-						# Evaluate position of NAVIGATION_ACTIVE_MARKER
-						if($this->_config->getConfigString("NAVIGATION_ACTIVE_MARKER_POSITION") == "before") {
-							$sPush .= $active.$navigationLocalized;
-						}
-						elseif($this->_config->getConfigString("NAVIGATION_ACTIVE_MARKER_POSITION") == "after") {
-							$sPush .= $navigationLocalized.$active;
-						}
-						elseif($this->_config->getConfigString("NAVIGATION_ACTIVE_MARKER_POSITION") == "disabled") {
-							$sPush .= $navigationLocalized;
-						}
-						
-						$sPush .="</a>";
-						
-						# Add entry ordered to array
-					    $orderedNavi[$naviPosition] = $sPush;
-					    
-					}
-					
-				}
-				
-			} else {
-				throw new CaramelException(10);
-			}
-			
-		}
-			
-		
-		#### Subpages
-		
-		foreach($this->_dataBase->page->page as $subpage) {
-			
-			$xPathResultSubRecord = $subpage->xpath('record[@lang="'.$this->getLanguage().'"]');
-				
-			if(count($xPathResultSubRecord) > 0) {
-				
-				foreach($xPathResultSubRecord as $subrecord) {
-					        
-		        	$navigationLocalized = "";
-					$active = "";
-					$titletagLocalized = "";
-					
-					# Localized navigation-tag			
-					$navigationLocalized = (string)$subrecord->navigation;
-					
-					# Get navi-position
-					$naviPosition = (int)$subrecord->navigation->attributes()->pos;
-					
-					# Build active marker
-					if(((string)$subpage->attributes()->name) == $this->getDisplay()) {
-						$active = $this->_config->getConfigString("NAVIGATION_ACTIVE_MARKER");
-					}
-					
-					# Localized title-tag
-					$titletagLocalized = (string)$subrecord->titletag;
-					
-					# Get Parameters before ampersand
-					$newQueryString = $this->getParametersBefore();
-					
-					# Concatenate link for navigation
-					$naviLink = (empty($_SERVER['QUERY_STRING']) ? '?' : $newQueryString).'display=';
-		            
-		            
-		            # Build single navigation links in <li>-Tags
-		            if($naviPosition!=-1) {
-		            
-		            	$sPush = "\n\t\t<ul>\n\t\t\t<li><a";
-		            	
-		            	# Set navigation class
-		            	if($this->_config->getConfigString("NAVIGATION_CLASS") !="disabled") {
-		            		$sPush .= $this->_config->getConfigString("NAVIGATION_CLASS");
-		            	}
-		            	
-						# Define link-syntax (speaking urls or not)
-						
-						
-						if($this->_config->getConfigString("SPEAKING_URLS") == "false") {
-							$sPush .= " href=\"".$naviLink.(string)$subpage->attributes()->name."\"";
-						}
-						elseif($this->_config->getConfigString("SPEAKING_URLS") == "true") {
-							$sPush .= " href=\"".$this->getParametersBefore().'/'.(string)$subpage->attributes()->name."/\"";
-						}    
-											
-						
-						# Set rel-attribute
-						# DEACTIVATED BECAUSE OF HTML5 DOCTYPE
-						#if($this->_config->getConfigString("NAVIGATION_REL") !="disabled") {
-						#	$sPush .= $this->_config->getConfigString("NAVIGATION_REL");
-				    	#}
-				    	
-				    	$sPush .= " title=\"".$titletagLocalized."\">";
-				    	
-				    	# Evaluate position of NAVIGATION_ACTIVE_MARKER
-				    	if($this->_config->getConfigString("NAVIGATION_ACTIVE_MARKER_POSITION") == "before") {
-				    		$sPush .= $active.$navigationLocalized;
-				    	}
-				    	elseif($this->_config->getConfigString("NAVIGATION_ACTIVE_MARKER_POSITION") == "after") {
-				    		$sPush .= $navigationLocalized.$active;
-				    	}
-				    	elseif($this->_config->getConfigString("NAVIGATION_ACTIVE_MARKER_POSITION") == "disabled") {
-				    		$sPush .= $navigationLocalized;
-				    	}
-				    	
-						$sPush .="</a></li>\n\t\t</ul>";
-				    	
-				    	# Add entry ordered to array
-				        $orderedSubNavi[$naviPosition] = $sPush;
-				        
-				     }
-		        	
-		        }
-				
-			} else {
-				throw new CaramelException(10);
-			}
-		
-	
-		}
-		
-		
-		# Read ordered array entries
-		for($i=1; $i<=sizeof($orderedNavi); $i++) {
-			$navigation .= $orderedNavi[$i];
-			
-			# Insert subpage if exists
-			if(!empty($orderedSubNavi[$i])) {
-				$navigation .= $orderedSubNavi[$i]."\n\t";
-			}
-			
-			$navigation .= "</li>";
-		}
-						
-		$navigation .= "\n</ul>\n";
-							
-		return $navigation;	
-				
-	} // End of method declaration
-		
-	
-	/**
-	 * Print out language selector in index.php
-	 * 
-	 * @return string All language selectors
-	 */
-	protected function getLanguageSelector() {
-		
-		$selectorLinks = array();
-		
-		foreach($this->_allLanguages as $langCode) {
-			if($this->getLanguage() != $langCode) {
-			
-				# Get Parameters before ampersand
-				$newQueryString = $this->getParametersBehind();
-			
-				if($this->_config->getConfigString("SPEAKING_URLS") == "false") {
-					array_push($selectorLinks, '<a title="" href="?lang=en'.$newQueryString.'">'.strtoupper($langCode).'</a>');
-				}
-				elseif($this->_config->getConfigString("SPEAKING_URLS") == "true") {
-					array_push($selectorLinks, '<a title="" href="'.substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], $this->getLanguage())).$langCode.$newQueryString.'">'.strtoupper($langCode).'</a>');
-				}	
-
-			} else {
-				array_push($selectorLinks, strtoupper($langCode));
-			}
-		}
-		
-		$languageSelector = "";
-		
-		if(count($selectorLinks) > 1) {
-			foreach($selectorLinks as $key => $link) {
-			
-				if($key == count($selectorLinks)-1) {
-					$languageSelector .= $link;
-				} else {
-					$languageSelector .= $link.$this->_config->getConfigString("LANGUAGE_SELECTOR_SEPERATOR");
-				}
-			}
-		}
-		
-		return "\t".$languageSelector."\n";	
-		
-	} // End of method declaration
-	
-	
-	/**
-	 * Print out footer in footer of index.php
-	 * 
-	 * @return string Website footer
-	 */
-	protected function getFooter() {
-
-		$facebookLike = "";
-		
-		try {
-			$facebookLike = $this->getSocialbar();
-		}
-		catch(CaramelException $e) {
-			echo $e->getDetails();
-		}
-		
-		if($this->_config->getConfigString("LANGUAGE_SELECTOR_IN_FOOTER") == 'true') {
-			$languageSelector = $this->getLanguageSelector()."&nbsp;";
-		}
-		
-		$footer = $languageSelector.$facebookLike;
-		
-		return $footer;
-	
-	} // End of method declaration
-	
-
-
-	/**
-	 * Extract language from GET-query
-	 * 
-	 * @return string Actual language
-	 */
-	protected function getLanguage() {
-	
-		if(isset($_GET['lang']) and in_array($_GET['lang'], $this->_allLanguages)) { # Test if set language is in our language array
-			$language = $_GET['lang'];
-		}
-		else {
-			$language = "en";
-		}
-		
-		return $language;
-		
-	} // End of method declaration
-	
-	
-	/**
-	 * Get display from GET-query
-	 * 
-	 * @return string Actual page displayed
-	 */
-	protected function getDisplay() {
-		if(isset($_GET['display'])) {
-			$display = $_GET['display'];
-		}
-		else {
-			$display = $this->_config->getConfigString("STARTPAGE");
-		}
-		
-		return $display;
-		
-	} // End of method declaration
 	
 	
 	/**
@@ -655,7 +321,7 @@ class BackendController {
 	protected function getParametersBefore() {
 		$serverQueryString = $_SERVER['QUERY_STRING'];
 					
-		if($this->_config->getConfigString("SPEAKING_URLS") == "false") {
+		if($this->_config->getConfigStringAction("SPEAKING_URLS") == "false") {
 				
 			if(preg_match('/lang/',$serverQueryString)) {		
 				$newQueryString = '?'.substr($serverQueryString,0,7).'&amp;';
@@ -669,13 +335,14 @@ class BackendController {
 			
 		}
 		
-		if($this->_config->getConfigString("SPEAKING_URLS") == "true") {
+		if($this->_config->getConfigStringAction("SPEAKING_URLS") == "true") {
 			$newQueryString = substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], $this->getLanguage())+strlen($this->getLanguage()));
 		}
 		
 		return $newQueryString;
 		
 	} // End of method declaration
+	
 	
 	
 	/**
@@ -686,7 +353,7 @@ class BackendController {
 	protected function getParametersBehind() {
 		$serverQueryString = $_SERVER['QUERY_STRING'];
 					
-		if($this->_config->getConfigString("SPEAKING_URLS") == "false") {
+		if($this->_config->getConfigStringAction("SPEAKING_URLS") == "false") {
 		
 			if(preg_match('/lang/',$serverQueryString)) {				
 						
@@ -709,7 +376,7 @@ class BackendController {
 			
 		}
 		
-		elseif($this->_config->getConfigString("SPEAKING_URLS") == "true") {
+		elseif($this->_config->getConfigStringAction("SPEAKING_URLS") == "true") {
 				
 			if(isset($_GET['display'])) {
 				$newQueryString = '/'.substr($serverQueryString,16).'/';
@@ -724,28 +391,6 @@ class BackendController {
 	} // End of method declaration
 	
 	
-	/**
-	 * Print out title in title-tag in index.php
-	 * 
-	 * @return string Localized website-title
-	 */
-	protected function getTitle() {
-		$lang = $this->getLanguage();
-		$pageName = $this->getDisplay();
-		
-		$xPathResultTitle = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/title');
-		
-		if(count($xPathResultTitle)>0) {
-			$titleLocalized = $this->_config->getConfigString("WEBSITE_TITLE").$this->_config->getConfigString("WEBSITE_TITLE_SEPERATOR").(string)$xPathResultTitle[0];
-		}
-		else {
-			throw new CaramelException(10);
-		}
-						
-		return $titleLocalized;
-	
-	} // End of method declaration
-	
 	
 	/**
 	 * Print out base url in index.php
@@ -754,13 +399,14 @@ class BackendController {
 	 */
 	protected function getBaseUrl() {
 	
-		if($this->_config->getConfigString("SPEAKING_URLS") == "true") {
-			return "<base href=\"".$this->_config->getConfigString('BASE')."\">\n";
+		if($this->_config->getConfigStringAction("SPEAKING_URLS") == "true") {
+			return "<base href=\"".$this->_config->getConfigStringAction('BASE')."\">\n";
 		} else {
 			return "";
 		}
 		
 	} // End of method declaration
+	
 	
 	
 	/**
@@ -779,76 +425,6 @@ class BackendController {
 		return $metaTags;
 	
 	} // End of method declaration
-	
-	
-	/**
-	 * Return minified JS and CSS files
-	 * 
-	 * @return string Minified js and css
-	 * @deprecated
-	 */
-	protected function getJsAndCss() {
-		
-		$jsAndCss = "<link rel=\"stylesheet\" type=\"text/css\" href=\"caramel/min/?f=caramel/css/screen.css\">\n";
-		$jsAndCss .= "<script type=\"text/javascript\" src=\"caramel/min/?f=caramel/js/script.js\"></script>";
-				
-		return $jsAndCss;
-		
-	} // End of method declaration
-	
-	
-	/**
-	 * Print out facebook like button in index.php
-	 * 
-	 * @return string Facebook like button
-	 */
-	protected function getSocialbar() {
-	 
-		$lang = $this->getLanguage();
-		$pageName = $this->getDisplay();
-		 
-		$xPathResultFacebook = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/socialbar');
-		 
-		if(count($xPathResultFacebook)>0) {
-		 	
-			if(((string)$xPathResultFacebook[0]) == "true") {
-		 		
-				if(isset($_SERVER['HTTPS'])) {
-					if($_SERVER['HTTPS'] == "" or $_SERVER['HTTPS'] == null) {
-						$url = "https://";
-					}
-				} else {
-					$url = "http://";
-				}
-	
-		 		$url .= $_SERVER['SERVER_NAME'];
-		 		
-		 		$url .= "/";
-		 		
-		 		$url = urlencode($url);
-		 	
-		 		# Define locale if not english
-		 		if($this->getLanguage()!="en") {
-		 			$facebookLang = "locale=".$this->getLanguage()."_".strtoupper($this->getLanguage())."&amp;";
-		 		} else {
-		 			$facebookLang = "";
-		 		}
-			 		
-		 		$facebookLike = '<iframe src="http://www.facebook.com/plugins/like.php?href='.$url.'&amp;'.$facebookLang.'send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" style="border:none; overflow:hidden; width:150px; height:20px; background:transparent;"></iframe>';
-			 		
-		 	} else {
-		 		$facebookLike = "";
-	 		}
-		 
-		 }
-		 else {
-		 	throw new CaramelException(10);
-		 }
-			 
-		 return $facebookLike;
-		 
-	} // End of method declaration
-
 
 } // End of class declaration
 
