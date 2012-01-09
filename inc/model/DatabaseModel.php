@@ -147,6 +147,35 @@ class DatabaseModel {
 	
 	
 	/**
+	 * Method to return only all page paths
+	 * 
+	 * @return Array with all page paths.
+	 */
+	public function getAllPageNamesAction() {
+		
+		$pageNames = array();
+		
+		$xPathResultPages = $this->_dataBase->xpath("//page");
+		
+		if(count($xPathResultPages)>0) {
+						
+			foreach($xPathResultPages as $page) {
+			
+				$pageNames[] = (string)$page->attributes()->path;
+				
+			}
+		}
+		else{
+			throw new CaramelException(10);
+		}
+		
+		return $pageNames;		
+		
+	} // End of method declaration
+	
+	
+	
+	/**
 	 * Method to return the needed website title
 	 * 
 	 * @param string $lang Current language used

@@ -159,7 +159,7 @@ class BackendController {
 			}
 			if(isset($_GET["q"]) && $_GET["q"]=="editglobals") {
 				
-				$globals =$this->_config->getGlobalsAction();
+				$globals = $this->getGlobalConfig();
 					
 				$navigation = TRUE;
 				$login = FALSE;
@@ -170,7 +170,7 @@ class BackendController {
 			}
 			if(isset($_POST["editglobals"])) {
 				
-				$globals = $this->_config->getGlobalsAction();
+				$globals = $this->getGlobalConfig();
 				
 				foreach($_POST as $key => $value) {
 					
@@ -187,8 +187,8 @@ class BackendController {
 					$e->getDetails();
 				}
 				
-				$globals = $this->_config->getGlobalsAction();
-					
+				$globals = $this->getGlobalConfig();
+									
 				$navigation = TRUE;
 				$login = FALSE;
 				$welcome = FALSE;
@@ -425,6 +425,17 @@ class BackendController {
 		return $metaTags;
 	
 	} // End of method declaration
+	
+	
+	protected function getGlobalConfig() {
+		
+		$globals = $this->_config->getGlobalsAction();
+				
+		$globals["startpage"]["acceptedValues"] = $this->_dataBase->getAllPageNamesAction();
+				
+		return $globals;
+		
+	}
 
 } // End of class declaration
 

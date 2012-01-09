@@ -22,7 +22,8 @@ class CaramelException extends Exception {
 	 * @var Array $_codeArray Array which assigns messages to errorcodes 
 	 */
 	private $_codeArray = array(
-		10 => "XML-Error"
+		10 => "XML-Error",
+		11 => "XML-file could not be loaded"
 	);
 	
 	

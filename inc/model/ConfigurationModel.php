@@ -44,12 +44,11 @@
  	private function ConfigurationModel() {
  		# Import config-file:
  		try {
- 			$this->_configFile = simplexml_load_file(BASEDIR.'/config/site.xml', 'SimpleXMLElement', LIBXML_NOCDATA);
- 			$this->_adminConfigFile = simplexml_load_file(BASEDIR.'/config/admin.xml', 'SimpleXMLElement', LIBXML_NOCDATA);
+ 			$this->updateConfigFile();
+ 			$this->updateAdminConfigFile();
  		}
- 		catch(Exception $e) {
- 			var_dump($e->getMessage());
- 			printf("\n\nAchtung: Eine der relevanten Dateien konnte nicht geladen werden!");
+ 		catch(CaramelException $e) {
+ 			$e->getDetails();
  		}
  	} // End of constructor declaration
  	
@@ -134,20 +133,22 @@
  	 */
  	public function getGlobalsAction() {
  		
- 		return array(
- 			"website_title" => array("label" => "Global website-title:", "value" => $this->getConfigStringAction("WEBSITE_TITLE"), "blank" => false),
- 			"website_title_seperator" => array("label" => "Website-title seperator:", "value" => $this->getConfigStringAction("WEBSITE_TITLE_SEPERATOR"), "blank" => false),
- 			"startpage" => array("label" => "Homepage:", "value" => $this->getConfigStringAction("STARTPAGE"), "blank" => false),
- 			"base" => array("label" => "Basepath:", "value" => $this->getConfigStringAction("BASE"), "blank" => false),
- 			"robots" => array("label" => "Robot settings:", "value" => $this->getConfigStringAction("ROBOTS"), "blank" => false),
- 			"revisit_after" => array("label" => "Robots revisit after:", "value" => $this->getConfigStringAction("REVISIT_AFTER"), "blank" => false),
- 			"speaking_urls" => array("label" => "Speaking URLs", "value" => $this->getConfigStringAction("SPEAKING_URLS"), "blank" => false),
- 			"navigation_active_marker_position" => array("label" => "Position of active-navigation-marker", "value" => $this->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION"), "blank" => false),
- 			"navigation_active_marker" => array("label" => "Marker for active-navigation:", "value" => $this->getConfigStringAction("NAVIGATION_ACTIVE_MARKER"), "blank" => true),
- 			"navigation_class" => array("label" => "Navigation class:", "value" => $this->getConfigStringAction("NAVIGATION_CLASS"), "blank" => true),
- 			"language_selector_in_footer" => array("label" => "Language selector in footer:", "value" => $this->getConfigStringAction("LANGUAGE_SELECTOR_IN_FOOTER"), "blank" => false),
- 			"language_selector_seperator" => array("label" => "Language selector seperator:", "value" => $this->getConfigStringAction("LANGUAGE_SELECTOR_SEPERATOR"), "blank" => false),
+ 		$globals = array(
+ 			"website_title" => array("label" => "Global website-title:", "value" => stripslashes($this->getConfigStringAction("WEBSITE_TITLE")), "blank" => false),
+ 			"website_title_seperator" => array("label" => "Website-title seperator:", "value" => stripslashes($this->getConfigStringAction("WEBSITE_TITLE_SEPERATOR")), "blank" => false),
+ 			"startpage" => array("label" => "Homepage:", "value" => stripslashes($this->getConfigStringAction("STARTPAGE")), "acceptedValues" => array(), "blank" => false),
+ 			"base" => array("label" => "Basepath:", "value" => stripslashes($this->getConfigStringAction("BASE")), "blank" => false),
+ 			"robots" => array("label" => "Robot settings:", "value" => stripslashes($this->getConfigStringAction("ROBOTS")), "blank" => false),
+ 			"revisit_after" => array("label" => "Robots revisit after:", "value" => stripslashes($this->getConfigStringAction("REVISIT_AFTER")), "blank" => false),
+ 			"speaking_urls" => array("label" => "Speaking URLs", "value" => stripslashes($this->getConfigStringAction("SPEAKING_URLS")), "blank" => false),
+ 			"navigation_active_marker_position" => array("label" => "Position of active-navigation-marker", "value" => stripslashes($this->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION")), "blank" => false),
+ 			"navigation_active_marker" => array("label" => "Marker for active-navigation:", "value" => stripslashes($this->getConfigStringAction("NAVIGATION_ACTIVE_MARKER")), "blank" => true),
+ 			"navigation_class" => array("label" => "Navigation class:", "value" => stripslashes($this->getConfigStringAction("NAVIGATION_CLASS")), "blank" => true),
+ 			"language_selector_in_footer" => array("label" => "Language selector in footer:", "value" => stripslashes($this->getConfigStringAction("LANGUAGE_SELECTOR_IN_FOOTER")), "blank" => false),
+ 			"language_selector_seperator" => array("label" => "Language selector seperator:", "value" => stripslashes($this->getConfigStringAction("LANGUAGE_SELECTOR_SEPERATOR")), "blank" => false),
  		);
+ 		
+ 		return $globals;
  		
  	} // End of method declaration
  	
@@ -162,7 +163,7 @@
  	 * @return void
  	 */
  	public function setGlobalsAction($globals) {
- 		
+ 		 		
  		foreach($globals as $key => $valueArray) {
  			
  			if($key != "submit") {
@@ -170,14 +171,12 @@
  				$key = strtoupper($key);
  				 			
  				$setting = $this->_configFile->xpath('//setting[@key="'.$key.'"]');
-
+ 				
  				if(count($setting)>0) {
  					
- 					$setting[0] = null;
- 					$setting[0] = $valueArray["value"];
- 					
- 					echo $setting[0]."\n";
- 						
+ 					$setting[0][0] = null;
+ 					$setting[0][0] = stripslashes($valueArray["value"]);
+ 					 						
  				}
  				else {
  					throw new CaramelException(10);
@@ -185,7 +184,7 @@
  			}
  		}
  		 		
- 		return file_put_contents(BASEDIR.'/config/site2.xml', $this->_configFile->asXML());
+ 		return file_put_contents(BASEDIR.'/config/site.xml', $this->_configFile->asXML());
  		
  	} // End of method declaration
  	
@@ -214,6 +213,44 @@
  			
  	} // End of method declaration
  	
+ 	
+ 	
+ 	/**
+ 	 * This method updates the contents of the local configFile in our singleton.
+ 	 * 
+ 	 * @throws CaramelException
+ 	 * @return void
+ 	 */
+ 	protected function updateConfigFile() {
+ 		
+ 		try {
+ 			$this->_configFile = simplexml_load_file(BASEDIR.'/config/site.xml', 'SimpleXMLElement', LIBXML_NOCDATA);
+ 		}
+ 		catch(Exception $e) {
+ 			throw new CaramelException(11);
+ 		}
+ 		
+ 	} // End of method declaration
+ 	
+ 	
+ 	
+ 	/**
+ 	* This method updates the contents of the local adminConfigFile in our singleton.
+ 	*
+ 	* @throws CaramelException
+ 	* @return void
+ 	*/
+ 	protected function updateAdminConfigFile() {
+ 			
+ 		try {
+ 			$this->_adminConfigFile = simplexml_load_file(BASEDIR.'/config/admin.xml', 'SimpleXMLElement', LIBXML_NOCDATA);
+ 		}
+ 		catch(Exception $e) {
+ 			throw new CaramelException(11);
+ 		}
+ 			
+ 	} // End of method declaration
+
  
  }
  ?>
