@@ -1,3 +1,14 @@
+<?php 
+/**
+ * @package template
+ * @subpackage Backend
+ */
+
+/**
+ * Index template
+ */
+?>
+
 <div id="container">
 
   <div id="header">

@@ -5,7 +5,9 @@
  * @subpackage controller
  */
 
-# Imports
+/**
+ * Imports
+ */
 require_once BASEDIR.'/inc/utility/CaramelException.php';
 require_once BASEDIR.'/inc/model/DatabaseModel.php';
 require_once BASEDIR.'/inc/model/ConfigurationModel.php';
@@ -20,6 +22,8 @@ require_once BASEDIR.'/inc/view/TemplateView.php';
  * @copyright Copyright (c) 2011, Felix Rupp, Nicole Reinhardt
  * @license http://www.opensource.org/licenses/mit-license.php MIT-License
  * 
+ * @package inc
+ * @subpackage controller
  */
 class FrontendController {
 

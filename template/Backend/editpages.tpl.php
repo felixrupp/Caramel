@@ -1,4 +1,11 @@
-<h1>Edit Pages</h1>
+<?php 
+/**
+ * @package template
+ * @subpackage Backend
+ */
+?>
+
+<h1>Page Management</h1>
 
 <div>
 

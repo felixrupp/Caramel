@@ -1,5 +1,16 @@
 <?php
+
+/**
+* @package admin
+*/
+
+/**
+ * @var string BASEDIR Constant which represents the basedir of the server
+ */
 define("BASEDIR", substr($_SERVER["SCRIPT_FILENAME"], 0, strrpos($_SERVER["SCRIPT_FILENAME"],"/admin/")));
+/**
+* @var string TEMPLATEDIR Constant which represents the template directory of Caramel CMS installation
+*/
 define("TEMPLATEDIR", "../".substr(dirname($_SERVER["SCRIPT_NAME"]), 0, strrpos(dirname($_SERVER["SCRIPT_NAME"]),"/admin/"))."template");
 
 require_once(BASEDIR.'/inc/controller/BackendController.php');

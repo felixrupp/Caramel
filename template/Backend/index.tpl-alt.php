@@ -1,3 +1,14 @@
+<?php 
+/**
+ * @package template
+ * @subpackage Backend
+ */
+
+/**
+ * Index template
+ */
+?>
+
 <div id="header">
 	<div id="logo"><a href="./" title="back to start of AdminPanel">CARAMEL LOGO HERE</a></div>
 	

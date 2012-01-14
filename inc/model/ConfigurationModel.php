@@ -14,13 +14,15 @@
  * @copyright Copyright (c) 2011, Felix Rupp, Nicole Reinhardt
  * @license http://www.opensource.org/licenses/mit-license.php MIT-License
  *
+ * @package inc
+ * @subpackage model
  */
 class ConfigurationModel {
 
 	# Attributes
 	/**
 	* @var ConfigurationModel $_configurator Contains single instance of our ConfigurationModel
-	* @staticvar
+	* @staticvar $_configurator
 	*/
 		private static $_configurator = NULL;
 	

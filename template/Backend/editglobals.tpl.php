@@ -1,4 +1,11 @@
-<h1>Global Settings:</h1>
+<?php 
+/**
+ * @package template
+ * @subpackage Backend
+ */
+?>
+
+<h1>Global Settings</h1>
 
 <div>
 

@@ -13,7 +13,9 @@
  * @version $Id$
  * @copyright Copyright (c) 2011, Felix Rupp, Nicole Reinhardt
  * @license http://www.opensource.org/licenses/mit-license.php MIT-License
- *
+ * 
+ * @package inc
+ * @subpackage utility
  */
 class CaramelException extends Exception {
 	

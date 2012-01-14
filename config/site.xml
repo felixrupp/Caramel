@@ -13,7 +13,7 @@
 <caramel-plist version="1.0">
 
 	<!-- Essentials -->
-	<setting key="DOCUMENT_SUBFOLDER" blank="false"><![CDATA[/doc]]></setting>
+	<!--<setting key="DOCUMENT_SUBFOLDER" blank="false"><![CDATA[/database]]></setting>-->
 	<setting key="STARTPAGE" blank="false"><![CDATA[home]]></setting>
 	<setting key="BASE" blank="false"><![CDATA[http://test.felixrupp.com/]]></setting>
 	<setting key="TEMPLATE" blank="false"><![CDATA[Default]]></setting>
@@ -32,7 +32,7 @@
 	<setting key="NAVIGATION_ACTIVE_MARKER_POSITION" blank="false"><![CDATA[before]]></setting>
 	<setting key="NAVIGATION_ACTIVE_MARKER" blank="true"><![CDATA[&raquo; ]]></setting>
 	<setting key="NAVIGATION_CLASS" blank="true"><![CDATA[menuLink]]></setting>
-	<setting key="NAVIGATION_REL" blank="true"><![CDATA[ rel="internal"]]></setting>
+	<!-- <setting key="NAVIGATION_REL" blank="true"><![CDATA[ rel="internal"]]></setting> -->
 	
 	<!-- URL Setup -->
 	<setting key="SPEAKING_URLS" blank="false">true</setting>

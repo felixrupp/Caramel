@@ -1,4 +1,11 @@
-<h1>Administrator:</h1>
+<?php 
+/**
+ * @package template
+ * @subpackage Backend
+ */
+?>
+
+<h1>Administrator</h1>
 
 <div>
 

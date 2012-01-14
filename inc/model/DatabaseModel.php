@@ -14,13 +14,15 @@
  * @copyright Copyright (c) 2011, Felix Rupp, Nicole Reinhardt
  * @license http://www.opensource.org/licenses/mit-license.php MIT-License
  * 
+ * @package inc
+ * @subpackage model
  */
 class DatabaseModel {
 
 	# Attributes
 	/**
 	 * @var DatabaseModel $_databaseModel Contains single instance of our DatabaseModel
-	 * @staticvar
+	 * @staticvar $_databaseModel
 	 */
 	private static $_databaseModel = NULL;
 
@@ -54,7 +56,6 @@ class DatabaseModel {
 	 * 
 	 * @static
 	 * @return DatabaseModel Single instance of DatabaseModel-Class
-	 * @return void
 	 */
 	public static function getDatabaseModel() {
 	

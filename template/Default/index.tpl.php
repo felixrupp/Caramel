@@ -1,5 +1,12 @@
 <!-- This is our default template -->
 
+<?php 
+/**
+ * @package template
+ * @subpackage Default
+ */
+?>
+
 <div id="menu">
 
 	<ul>
