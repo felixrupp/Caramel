@@ -14,7 +14,7 @@
 
 	<!-- Admin setup -->
 	<setting key="ADMIN_USERNAME" blank="false"><![CDATA[admin]]></setting>
-	<setting key="ADMIN_PASSWORD" blank="false"><![CDATA[admin]]></setting>
+	<setting key="ADMIN_PASSWORD" blank="false"><![CDATA[21232f297a57a5a743894a0e4a801fc3]]></setting>
 	<setting key="ADMIN_EMAIL" blank="false">admin@sierupp.com</setting>
 	
 	<!-- E-Mail used in contactform -->

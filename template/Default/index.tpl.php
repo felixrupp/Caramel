@@ -1,11 +1,12 @@
 <!-- This is our default template -->
 
-<div id="nav">
+<div id="menu">
 
 	<ul>
-	<?php foreach($navigation as $naventry) { ?>
+	 <li class="logo">Caramel</li>
+  <?php foreach($navigation as $naventry) { ?>
 			
-		<li><?php echo $naventry["link"]; ?></li>
+		<li><?php echo $naventry["link"]; ?>
 		
 		<?php 
 		if(isset($naventry["subpages"]) && count($naventry["subpages"]>0)) {?>
@@ -15,7 +16,7 @@
 		<?php } ?>
 			</ul>
 		<?php } ?>
-		
+		  </li>
 	<?php } ?>
 	</ul>
 </div>

@@ -83,7 +83,7 @@ class BackendController {
 					echo $e->getDetails();
 				}
 					
-				if($_POST["username"]==$realAdmin && $_POST["password"]==$realPassword) {
+				if($_POST["username"]==$realAdmin && md5($_POST["password"])==$realPassword) {
 
 					# Set loggedin
 					$_SESSION["loggedin"] = TRUE;
@@ -143,9 +143,13 @@ class BackendController {
 			}
 			if(isset($_GET["q"]) && $_GET["q"]=="editusers") {
 					
+				$admin = $this->_config->getAdminAction();
+				
 				$navigation = TRUE;
 				$login = FALSE;
 				$welcome = FALSE;
+				
+				$this->_templateView->assign("admin", $admin);
 				$this->_templateView->assign("editusers", TRUE);
 					
 			}
@@ -210,6 +214,46 @@ class BackendController {
 				$welcome = FALSE;
 				$this->_templateView->assign("globals", $globals);
 				$this->_templateView->assign("editglobals", TRUE);
+					
+			}
+			
+			if(isset($_POST["editusers"])) {
+			
+				#var_dump($_POST);
+			
+				$admin = $this->_config->getAdminAction();
+			
+				foreach($_POST as $key => $value) {
+					
+					if($key != "editusers" && $key != "submit" && $key != "admin_password") {
+						$admin[$key]["value"] = $value;
+					}
+					
+					# Handle password
+					if($key=="admin_password" && $value!="" && $_POST["password_verification"]!="") {
+						
+						if($value==$_POST["password_verification"]) { # verifiy password
+							$admin["admin_password"]["value"] = md5($value);
+						}
+					}
+					
+				}
+			
+				try{
+					
+					$result = $this->_config->setAdminAction($admin);
+					
+				} catch(CaramelException $e) {
+					$e->getDetails();
+				}
+			
+				$admin = $this->_config->getAdminAction();
+					
+				$navigation = TRUE;
+				$login = FALSE;
+				$welcome = FALSE;
+				$this->_templateView->assign("admin", $admin);
+				$this->_templateView->assign("editusers", TRUE);
 					
 			}
 
