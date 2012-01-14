@@ -21,7 +21,6 @@
 	
 	<!-- Robots, Meta, etc. -->
 	<setting key="ROBOTS" blank="false"><![CDATA[index,follow]]></setting>
-	<setting key="REVISIT_AFTER" blank="false"><![CDATA[1 days]]></setting>
 	
 	
 	<!-- Website specific -->
@@ -32,7 +31,7 @@
 	<!-- Navigation -->
 	<setting key="NAVIGATION_ACTIVE_MARKER_POSITION" blank="false"><![CDATA[before]]></setting>
 	<setting key="NAVIGATION_ACTIVE_MARKER" blank="true"><![CDATA[&raquo; ]]></setting>
-	<setting key="NAVIGATION_CLASS" blank="true"><![CDATA[ class="menuLink"]]></setting>
+	<setting key="NAVIGATION_CLASS" blank="true"><![CDATA[menuLink]]></setting>
 	<setting key="NAVIGATION_REL" blank="true"><![CDATA[ rel="internal"]]></setting>
 	
 	<!-- URL Setup -->

@@ -29,8 +29,8 @@ class BackendController {
 	private $_templateView;
 		
 	# Constants
-	const VERSION = "0.3";
-	const VERSION_DATE = "2011-12-27";
+	const VERSION = "0.1.5";
+	const VERSION_DATE = "2012-01-14";
 	
 
 	/**
@@ -170,14 +170,30 @@ class BackendController {
 			}
 			if(isset($_POST["editglobals"])) {
 				
+				#var_dump($_POST);
+								
 				$globals = $this->getGlobalConfig();
+				
+				$globals["speaking_urls"]["value"] = "false";
+				$globals["language_selector_in_footer"]["value"] = "false";
+				
 				
 				foreach($_POST as $key => $value) {
 					
 					if($key != "editglobals" && $key != "submit") {
-					
 						$globals[$key]["value"] = $value;
 					}
+					
+					# Cover Speaking URLs
+					if($key == "speaking_urls") {
+						$globals["speaking_urls"]["value"] = "true";
+					}
+					
+					# Cover language_selector_in_footer
+					if($key == "language_selector_in_footer") {
+						$globals["language_selector_in_footer"]["value"] = "true";
+					}
+					
 				}
 
 				try{
@@ -432,6 +448,8 @@ class BackendController {
 		$globals = $this->_config->getGlobalsAction();
 				
 		$globals["startpage"]["acceptedValues"] = $this->_dataBase->getAllPageNamesAction();
+		$globals["robots"]["acceptedValues"] = array("index,follow", "index,nofollow", "noindex,follow", "noindex,nofollow");
+		$globals["navigation_active_marker_position"]["acceptedValues"] = array("disabled", "before", "after");
 				
 		return $globals;
 		

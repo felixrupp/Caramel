@@ -112,15 +112,15 @@
  		
  		if(count($setting)>0) {
  			
- 			$setting[0] = $newValue;
- 			$this->_configFile->asXML(BASEDIR.'/config/site.xml');
+ 			$setting[0][0] = null;
+ 			$setting[0][0] = $newValue;
  			
  		}
  		else {
  			throw new CaramelException(10);
  		}
  	
- 		#_configFile->caramel-plist->setting->key[$keys]->nodeValue = $string;
+ 		return file_put_contents(BASEDIR.'/config/site.xml', $this->_configFile->asXML());
  		
  	} // End of method declaration
  	
@@ -138,10 +138,9 @@
  			"website_title_seperator" => array("label" => "Website-title seperator:", "value" => stripslashes($this->getConfigStringAction("WEBSITE_TITLE_SEPERATOR")), "blank" => false),
  			"startpage" => array("label" => "Homepage:", "value" => stripslashes($this->getConfigStringAction("STARTPAGE")), "acceptedValues" => array(), "blank" => false),
  			"base" => array("label" => "Basepath:", "value" => stripslashes($this->getConfigStringAction("BASE")), "blank" => false),
- 			"robots" => array("label" => "Robot settings:", "value" => stripslashes($this->getConfigStringAction("ROBOTS")), "blank" => false),
- 			"revisit_after" => array("label" => "Robots revisit after:", "value" => stripslashes($this->getConfigStringAction("REVISIT_AFTER")), "blank" => false),
- 			"speaking_urls" => array("label" => "Speaking URLs", "value" => stripslashes($this->getConfigStringAction("SPEAKING_URLS")), "blank" => false),
- 			"navigation_active_marker_position" => array("label" => "Position of active-navigation-marker", "value" => stripslashes($this->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION")), "blank" => false),
+ 			"robots" => array("label" => "Robot settings:", "value" => stripslashes($this->getConfigStringAction("ROBOTS")), "acceptedValues" => array(), "blank" => false),
+ 			"speaking_urls" => array("label" => "Speaking URLs:", "value" => stripslashes($this->getConfigStringAction("SPEAKING_URLS")), "blank" => false),
+ 			"navigation_active_marker_position" => array("label" => "Position of active-navigation-marker:", "value" => stripslashes($this->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION")), "blank" => false),
  			"navigation_active_marker" => array("label" => "Marker for active-navigation:", "value" => stripslashes($this->getConfigStringAction("NAVIGATION_ACTIVE_MARKER")), "blank" => true),
  			"navigation_class" => array("label" => "Navigation class:", "value" => stripslashes($this->getConfigStringAction("NAVIGATION_CLASS")), "blank" => true),
  			"language_selector_in_footer" => array("label" => "Language selector in footer:", "value" => stripslashes($this->getConfigStringAction("LANGUAGE_SELECTOR_IN_FOOTER")), "blank" => false),
@@ -163,28 +162,23 @@
  	 * @return void
  	 */
  	public function setGlobalsAction($globals) {
+ 		
+ 		$result = false;
  		 		
  		foreach($globals as $key => $valueArray) {
  			
  			if($key != "submit") {
  				
  				$key = strtoupper($key);
- 				 			
- 				$setting = $this->_configFile->xpath('//setting[@key="'.$key.'"]');
  				
- 				if(count($setting)>0) {
- 					
- 					$setting[0][0] = null;
- 					$setting[0][0] = stripslashes($valueArray["value"]);
- 					 						
- 				}
- 				else {
- 					throw new CaramelException(10);
- 				}
+ 				$valueArray = stripslashes((string)$valueArray["value"]);
+ 				 			
+ 				$result = $this->setConfigStringAction($key, $valueArray);
+ 				
  			}
  		}
- 		 		
- 		return file_put_contents(BASEDIR.'/config/site.xml', $this->_configFile->asXML());
+ 		
+ 		return $result;
  		
  	} // End of method declaration
  	

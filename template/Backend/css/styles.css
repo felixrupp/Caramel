@@ -7,30 +7,63 @@
 
 
 body {
-	background-color:#FFF;
-	font-family: "Helvetica", "Tahoma", Arial, sans-serif;
-	font-size:16px;
-	color:#333;
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica", "Tahoma", Arial, sans-serif;
 }
-
+  
+div#container {
+  margin: 50px;
+  background: #DDD;
+}
 
 h1 {
-	font-size:1.8em;
-	margin:0 0 1.4em 0;
+	font-size:1.4em;
+	margin:0 0 1.0em 0;
+	color: #E97820;
 }
-
 
 fieldset {
 	border:none;
-	margin:10px 0;
+	margin:15px 0;
+}
+
+fieldset.formButtons {
+  left: 320px;
 }
 
 input {
 	margin-bottom:10px;
 }
 
-input[type="text"] {
+input[type="text"], input[type="password"] {
 	width:250px;
+	border: 2px inset #AAA; 
+	padding: 2px 2px;
+}
+
+input[type="submit"] {
+  width: 100px;
+  border: 2px outset #AAA; 
+  background-color: #666;
+  color: #FFF;
+}
+
+input[type="submit"]:hover {
+  border: 2px inset #AAA; 
+  background-color: #EEE;
+  color: #666;
+}
+
+input[type="radio"] {
+  margin: 10px 6px;
+}
+
+select {
+  margin-bottom:10px;
+  width:250px;
+	border: 2px inset #AAA; 
+	padding: 2px 2px;
 }
 
 label {
@@ -41,120 +74,173 @@ label {
 	margin-bottom:10px;
 }
 
-
-
-/*** Divisions ***/
-#header {
-	position:relative;
-	width:100%;
-	height:150px;
+th {
+  background-color: #666;
+  vertical-align: middle;
+  padding: 5px 4px;
+  color: #FFF;
+}
+td {
+  background-color: #EEE;
+  vertical-align: middle;
+  padding: 0px 4px;
 }
 
-#logo {
-	position:absolute;
-	width:300px;
-	height:121px;
-	top:25px;
-	left:25px;
+img.position {
+  border: 0;
+  width: 25px;
+  margin: 0 5px;
+  vertical-align:middle;
+}
+/*********************************
+ * header
+ *********************************/ 
+  
+div#header {
+  height: 25px;
+  margin: 0;
+  padding: 0;
+  background: #E97820;
 }
 
-#logo  a {
-	display:block;
-	width:300px;
-	height:121px;
-	background-image:url("../images/logo.png");
-	text-indent:-9999px;
+.header_left {
+  position: absolute;
+  left:50px;
+  height: inherit;
+  width: 25px;
+  margin: 0;
+  background: url(../images/header_left.gif) no-repeat;
 }
 
-#logoutbutton {
-	position:absolute;
-	width:300px;
-	height:122px;
-	top:25px;
-	right:25px;
+.header_center {
+  position: absolute;
+  color: #FFF;
+  height: inherit;
+  margin: 0 25px;
+  padding: 2px 0;
+  font-weight: bold;
 }
 
-#logoutbutton a {
-	display:block;
-	width:300px;
-	height:122px;
-	background-image:url("../images/logout.png");
-	text-indent:-9999px;
+.header_right {
+  position: absolute;
+  right:50px;
+  height: inherit;
+  width: 40px;
+  margin: 0;
+  padding: 3px 0;
+  background: url(../images/header_right.gif) no-repeat right top;
 }
 
-/* Menu */
-div#nav {
-	width:100%;
-	height:60px;
-	font-size:1.2em;
-	font-weight:bold;
-	margin:35px 0;
-	background-image:url("../images/menu-background-normal.png");
-	background-repeat:repeat-x;
+.right {
+  text-align: right;
 }
 
-ul#adminnavigation {
-	display:inline;
-	clear:both;
-	text-align:center;
+/*********************************
+ * main menu
+ *********************************/ 
+  
+div#menu {
+  margin: 5px 10px 5px 0;
+  float:left;
+  width: 150px;
 }
 
-ul#adminnavigation li {
-	list-style-type:none;
-	float:left;
+div#menu ul {
+  list-style: none; 
 }
 
-ul#adminnavigation li a {
-	display:block;
-	height:30px;
-	padding:17px 40px 13px 40px;
+div#menu ul li {
+  margin-top: 10px;
 }
 
-ul#adminnavigation li a:link, ul#adminnavigation li a:visited {
-	color:#474747;
-	text-decoration:none;
-	background-image:url("../images/menu-background-normal.png");
-	background-repeat:repeat-x;
+div#menu a {
+  background: url(../images/menu.png);
+  width: 80px;
+  height: 80px;
+  display: block;
 }
 
-ul#adminnavigation li a:hover, ul#adminnavigation li a:active {
-	color:#FFF;
-	text-decoration:none;
-	background-image:url("../images/menu-background-flipped.png");
-	background-repeat:repeat-x;
+div#menu a.settings {
+  background-position: 0 0;
 }
 
-/* Admin login */
-#adminlogin {
-	position:absolute;
-	top:300px;
-	left:0;
-	width:100%;
-	height:150px;
-	background-color:#FEBA32;
-	background-image:url("../images/login-background.png");
-	background-repeat:no-repeat;
-	background-position:center center;
+div#menu a.settings:hover{
+  background-position: 0 -80px;
 }
 
-#adminlogin #wrapper {
-	width:300px;
-	margin:18px auto 0 auto;
-	
+div#menu a.admin {
+  display: block;
+  background-position: -80px 0;
 }
 
-#adminlogin label {
-	width:120px;
+div#menu a.admin:hover {
+  background-position: -80px -80px;
 }
 
-/* Main content */
-#content {
-	padding:0 25px;
+div#menu a.site {
+  display: block;
+  background-position: -160px 0;
 }
 
+div#menu a.site:hover {
+  background-position: -160px -80px;
+}
 
+div#menu a.template {
+  display: block;
+  background-position: -240px 0;
+}
 
-/*** Misc classes ***/
-.clearboth {
-	clear:both;
+div#menu a.template:hover {
+  background-position: -240px -80px;
+}
+
+/*********************************
+ * content
+ *********************************/ 
+  
+div#content {
+  min-height: 350px;
+  min-width: 500px;
+  margin: 5px 0 5px 160px;
+  padding: 20px; 
+  border-left: 3px outset #BBB;
+}
+
+/*********************************
+ * footer
+ *********************************/ 
+  
+div#footer {
+  height: 25px;
+  background: #E97820;
+  clear:both;
+}
+
+.footer_left {
+  position: absolute;
+  left:50px;
+  height: inherit;
+  width: 25px;
+  background: url(../images/footer_left.gif) no-repeat;
+}
+
+.footer_center {
+  position: absolute;
+  color: #FFF;
+  font-size: 0.8em;
+  height: inherit;
+  margin: 0 25px;
+  
+}
+
+.footer_right {
+  position: absolute;
+  width: 120px;
+  right:50px;
+  height: inherit;
+  background: url(../images/footer_right.gif) no-repeat right top;
+  padding: 4px 0;
+  color: #FFF;
+  font-size: 0.8em;
 }

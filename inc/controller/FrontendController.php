@@ -29,8 +29,8 @@ class FrontendController {
 	private $_templateView;
 	
 	# Constants
-	const VERSION = "0.4";
-	const VERSION_DATE = "2011-12-30";
+	const VERSION = "0.1.5";
+	const VERSION_DATE = "2012-01-14";
 		
 
 	/**
@@ -156,13 +156,12 @@ class FrontendController {
 	public function headTagAction() {
 		
 		$metaRobots = '<meta name="robots" content="'.$this->_config->getConfigStringAction('ROBOTS').'">';
-		$metaRevisit = '<meta name="revisit-after" content="'.$this->_config->getConfigStringAction('REVISIT_AFTER').'">';
 		$metaGenerator = "<meta name=\"generator\" content=\"Caramel CMS ".self::VERSION."\">";
 		
 		$lang = $this->getLanguage();
 		$pageName = $this->getDisplay();
 		
-		$meta = $this->_dataBase->getAllMetaTagsAction($lang, $pageName).$metaRobots."\n".$metaRevisit."\n".$metaGenerator."\n";
+		$meta = $this->_dataBase->getAllMetaTagsAction($lang, $pageName).$metaRobots."\n".$metaGenerator."\n";
 		
 		$title = $this->_config->getConfigStringAction("WEBSITE_TITLE").$this->_config->getConfigStringAction("WEBSITE_TITLE_SEPERATOR").$this->_dataBase->getWebsiteTitleAction($lang, $pageName);
 			
@@ -202,8 +201,8 @@ class FrontendController {
 		$naviLink = (empty($_SERVER['QUERY_STRING']) ? '?' : $newQueryString).'display=';
 	
 		# Set navigation class
-		if($this->_config->getConfigStringAction("NAVIGATION_CLASS") !="disabled") {
-			$navigationClass = $this->_config->getConfigStringAction("NAVIGATION_CLASS");
+		if($this->_config->getConfigStringAction("NAVIGATION_CLASS") !="") {
+			$navigationClass = ' class="'.$this->_config->getConfigStringAction("NAVIGATION_CLASS").'"';
 		} else {
 			$navigationClass = "";
 		}
@@ -374,6 +373,7 @@ class FrontendController {
 	protected function getFooter() {
 
 		$facebookLike = "";
+		$languageSelector = "";
 		
 		/*try {
 			$facebookLike = $this->getSocialbar();
