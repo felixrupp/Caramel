@@ -16,10 +16,10 @@
 
 		<record lang="en">
 			<navigation pos="1">
-				<![CDATA[Home]]>
+				<![CDATA[Caramel]]>
 			</navigation>
 			<title>
-				<![CDATA[Title of the Homepage]]>
+				<![CDATA[Caramel]]>
 			</title>
 			<titletag>
 				<![CDATA[Title of the Homepage]]>
@@ -42,10 +42,10 @@
 		</record>
 		<record lang="de">
 			<navigation pos="1">
-				<![CDATA[Start]]>
+				<![CDATA[Caramel]]>
 			</navigation>
 			<title>
-				<![CDATA[Titel der Startseite]]>
+				<![CDATA[Caramel]]>
 			</title>
 			<titletag>
 				<![CDATA[Titel der Startseite]]>
@@ -185,14 +185,14 @@
 	</page>
 	
 	
-	<page id="3" path="test">
+	<page id="3" path="documentation">
 
 		<record lang="en">
 			<navigation pos="2">
-				<![CDATA[Test]]>
+				<![CDATA[Documentation]]>
 			</navigation>
 			<title>
-				<![CDATA[Test-title]]>
+				<![CDATA[Documentation]]>
 			</title>
 			<titletag>
 				<![CDATA[Title of testpage]]>
@@ -215,10 +215,122 @@
 		</record>
 		<record lang="de">
 			<navigation pos="2">
-				<![CDATA[Test]]>
+				<![CDATA[Dokumentation]]>
 			</navigation>
 			<title>
-				<![CDATA[Testtitel]]>
+				<![CDATA[Dokumentation]]>
+			</title>
+			<titletag>
+				<![CDATA[Titel der Testseite]]>
+			</titletag>
+			<meta name="description">
+				<![CDATA[Deutsche Beschreibung für Test]]>
+			</meta>
+			<meta name="keywords">
+				<![CDATA[Deutsche Schlüsselwörter für Test]]>
+			</meta>
+			<meta name="author">
+				<![CDATA[Felix Rupp deutsch]]>
+			</meta>
+			<socialbar>false</socialbar>
+			<content>
+				<![CDATA[
+				Das ist testinhalt.
+				]]>
+			</content>
+		</record>
+	</page>
+	
+	<page id="5" path="download">
+
+		<record lang="en">
+			<navigation pos="2">
+				<![CDATA[Download]]>
+			</navigation>
+			<title>
+				<![CDATA[Download]]>
+			</title>
+			<titletag>
+				<![CDATA[Title of testpage]]>
+			</titletag>
+			<meta name="description">
+				<![CDATA[English description for Test]]>
+			</meta>
+			<meta name="keywords">
+				<![CDATA[English keywords for Test]]>
+			</meta>
+			<meta name="author">
+				<![CDATA[Felix Rupp english]]>
+			</meta>
+			<socialbar>false</socialbar>
+			<content>
+				<![CDATA[
+				This is testcontent.
+				]]>
+			</content>
+		</record>
+		<record lang="de">
+			<navigation pos="2">
+				<![CDATA[Download]]>
+			</navigation>
+			<title>
+				<![CDATA[Download]]>
+			</title>
+			<titletag>
+				<![CDATA[Titel der Testseite]]>
+			</titletag>
+			<meta name="description">
+				<![CDATA[Deutsche Beschreibung für Test]]>
+			</meta>
+			<meta name="keywords">
+				<![CDATA[Deutsche Schlüsselwörter für Test]]>
+			</meta>
+			<meta name="author">
+				<![CDATA[Felix Rupp deutsch]]>
+			</meta>
+			<socialbar>false</socialbar>
+			<content>
+				<![CDATA[
+				Das ist testinhalt.
+				]]>
+			</content>
+		</record>
+	</page>
+	
+		<page id="6" path="contact">
+
+		<record lang="en">
+			<navigation pos="2">
+				<![CDATA[Contact]]>
+			</navigation>
+			<title>
+				<![CDATA[Contact]]>
+			</title>
+			<titletag>
+				<![CDATA[Title of testpage]]>
+			</titletag>
+			<meta name="description">
+				<![CDATA[English description for Test]]>
+			</meta>
+			<meta name="keywords">
+				<![CDATA[English keywords for Test]]>
+			</meta>
+			<meta name="author">
+				<![CDATA[Felix Rupp english]]>
+			</meta>
+			<socialbar>false</socialbar>
+			<content>
+				<![CDATA[
+				This is testcontent.
+				]]>
+			</content>
+		</record>
+		<record lang="de">
+			<navigation pos="2">
+				<![CDATA[Kontakt]]>
+			</navigation>
+			<title>
+				<![CDATA[Kontakt]]>
 			</title>
 			<titletag>
 				<![CDATA[Titel der Testseite]]>

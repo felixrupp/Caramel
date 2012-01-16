@@ -3,14 +3,18 @@
 body {
   margin: 0 20px;
   padding: 0;
+  font-family: "Helvetica", "Tahoma", Arial, sans-serif;
+  height: 100%;
 }
 
 /* menu */
 div#menu {
   margin: 0; 
   padding: 0;
-  line-height:45px;
+  height:45px;
   color:#fff;
+  font-weight: bold;
+  background: #172322 url(../images/menu_right.png) no-repeat bottom right;
 }
 
 div#menu a { 
@@ -25,21 +29,22 @@ div#menu ul{
   list-style:none;   
   float:left; 
   z-index:1000; 
-  background: #172322 url(../images/menu_right.png) no-repeat bottom right;
+  
 }
 
-div#menu ul li {
-  background:#172322; 
+div#menu ul li { 
   cursor:pointer;
   float:left; 
   position:relative;
-  padding:0px 10px;
+  padding:10px 10px;
 }
 
 div#menu ul li.logo {
-  background: orange url(../images/menu_left.png) no-repeat bottom left; 
-  padding:0px;
-  width: 150px;
+  height: inherit;
+  background: #E97820 url(../images/menu_left.png) no-repeat bottom left; 
+  padding: 0 0 0 20px;
+  width: 130px;
+  height: 45px;
 }
 
 div#menu ul li a:hover {
@@ -56,7 +61,7 @@ div#menu ul ul{
   padding:0px; 
   margin:0px; 
   display:inline;
-  /*background: url(../images/menu_left.png) no-repeat bottom left;*/
+  background: url(../images/menu_right.png) no-repeat bottom right;
 }
 
 div#menu ul li ul { 
@@ -77,7 +82,7 @@ div#menu ul li ul li{
   margin:5px 20px; 
   padding: 5px 0px;  
   border-top: dotted 1px #606060;
-  list-style-type:none; 
+  list-style-type:none;
 }
 
 div#menu ul li ul li:first-child { 
@@ -96,4 +101,29 @@ div#content {
   clear:both;
   margin: 20px;
   padding: 20px 0;
+  min-height: 100%;
+}
+
+div#footer {
+  height: 45px;
+  background: #172322 url(../images/footer_right.png) no-repeat right top;
+  clear:both;
+  color: #FFF;
+  font-size: 1.0em;
+}
+
+.footer_left {
+  position: absolute;
+  height: inherit;
+  width: 25px;
+  background: url(../images/footer_left.png) no-repeat left top;
+  padding: 12px 25px;
+}
+
+div#footer a {
+  color: #FFF;
+}
+
+div#footer a:hover {
+  color: #E97820;
 }

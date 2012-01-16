@@ -1,14 +1,6 @@
 <!-- This is our default template -->
 
-<?php 
-/**
- * @package template
- * @subpackage Default
- */
-?>
-
 <div id="menu">
-
 	<ul>
 	 <li class="logo">Caramel</li>
   <?php foreach($navigation as $naventry) { ?>
@@ -35,5 +27,5 @@
 
 
 <div id="footer">
-	<?php echo $footer; ?>
+	<div class="footer_left"><?php echo $footer; ?></div>
 </div>
