@@ -1,6 +1,7 @@
 Caramel CMS
 =============
 Version 0.1.5
+
 2012-01-14
 
 
@@ -39,4 +40,4 @@ License
 
 Licensed under the [MIT-License](http://www.opensource.org/licenses/mit-license.php).
 
-Copyright &copy Felix Rupp, Nicole Reinhardt.
+Copyright © Felix Rupp, Nicole Reinhardt.
