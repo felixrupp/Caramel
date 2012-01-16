@@ -40,4 +40,4 @@ License
 
 Licensed under the [MIT-License](http://www.opensource.org/licenses/mit-license.php).
 
-Copyright © Felix Rupp, Nicole Reinhardt.
+Copyright (c) Felix Rupp, Nicole Reinhardt.
