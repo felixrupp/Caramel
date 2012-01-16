@@ -1,11 +1,5 @@
 @CHARSET "UTF-8";
 
-* {
-	margin:0;
-	padding:0;
-}
-
-
 body {
   margin: 0;
   padding: 0;
@@ -25,7 +19,7 @@ h1 {
 
 fieldset {
 	border:none;
-	margin:15px 0;
+	margin:10px 0;
 }
 
 fieldset.formButtons {
@@ -61,7 +55,7 @@ input[type="radio"] {
 
 select {
   margin-bottom:10px;
-  width:250px;
+  width:257px;
 	border: 2px inset #AAA; 
 	padding: 2px 2px;
 }
@@ -143,6 +137,7 @@ div#menu {
   margin: 5px 10px 5px 0;
   float:left;
   width: 150px;
+  text-align: center;
 }
 
 div#menu ul {
