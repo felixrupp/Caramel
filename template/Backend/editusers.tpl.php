@@ -24,7 +24,7 @@
 		</fieldset>
 			
 		<input type="hidden" name="editusers" id="editusers">
-		<label>&nbsp;</label> <input type="submit" name="submit" id="submit" value="Save">
+		<input type="submit" name="submit" id="submit" value="Save">
 	</form>
 
 </div>

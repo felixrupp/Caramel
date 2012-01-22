@@ -244,7 +244,8 @@ class ConfigurationModel {
 		else {
 			throw new CaramelException(10);
 		}
-	
+		
+		//TODO: Don't save on every run of this method
 		return file_put_contents(BASEDIR.'/config/site.xml', $this->_configFile->asXML());
 	
 	} // End of method declaration
@@ -295,6 +296,7 @@ class ConfigurationModel {
 			throw new CaramelException(10);
 		}
 	
+		//TODO: Don't save on every run of this method
 		return file_put_contents(BASEDIR.'/config/admin.xml', $this->_adminConfigFile->asXML());
 	
 	} // End of method declaration

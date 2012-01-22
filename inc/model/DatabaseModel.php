@@ -29,7 +29,7 @@ class DatabaseModel {
 
 
 	/**
-	 * @var SimpleXMLElement $_dataBase Contains the SimpleXMLElement of our xml-database
+	 * @var SimpleXMLExtended $_dataBase Contains the SimpleXMLExtended of our xml-database
 	 */
 	private $_dataBase;
 
@@ -40,14 +40,8 @@ class DatabaseModel {
 	 * @return void
 	 */
 	private function DatabaseModel() {
-		# Try to import the database-file
-		try {			
-			$this->_dataBase = simplexml_load_file(BASEDIR.'/database/data.xml', 'SimpleXMLElement', LIBXML_NOCDATA);
-		}
-		catch(Exception $e) {
-			var_dump($e->getMessage());
-			printf("\n\nAchtung: Eine der relevanten Dateien konnte nicht geladen werden!");
-		}
+		
+		$this->reloadDatabaseFile();
 			
 	} // End of constructor declaration
 
@@ -361,11 +355,11 @@ class DatabaseModel {
 	} // End of method declaration
 	
 	
+	
 	/**
-	 * 
+	 * Method to get all page information incl. records for one page-id
 	 * 
 	 * @param int $id Id from one specific page
-	 * @param string $lang Current language
 	 * 
 	 * @throws CaramelException
 	 * @return Array with all information to page with $id
@@ -420,6 +414,76 @@ class DatabaseModel {
 		
 	}
 	
+	
+	
+	/**
+	* Method to get all page information incl. records for one page-id
+	*
+	* @param int $id Id from one specific page
+	* @param array $page Array with modified page information
+	*
+	* @throws CaramelException
+	* @return Array with all information to page with $id
+	*/
+	public function setPageInformation($id, $page) {	
+		
+		foreach($page["records"] as $lang => $record) {
+			
+			$xPathResultRecord = $this->_dataBase->xpath('//page[@id="'.$id.'"]/record[@lang="'.$lang.'"]');
+			
+			if(count($xPathResultRecord)>0) {
+				
+				$xPathResultRecord[0]->navigation = null;
+				$xPathResultRecord[0]->navigation->addCData(stripslashes(trim($record["navigation"]["value"])));
+				$xPathResultRecord[0]->title = null;
+				$xPathResultRecord[0]->title->addCData(stripslashes(trim($record["title"]["value"])));
+				$xPathResultRecord[0]->titletag = null;
+				$xPathResultRecord[0]->titletag->addCData(stripslashes(trim($record["titletag"]["value"])));
+				$xPathResultRecord[0]->meta[0] = null;
+				$xPathResultRecord[0]->meta[0]->addCData(stripslashes(trim($record["metadescription"]["value"])));
+				$xPathResultRecord[0]->meta[1] = null;
+				$xPathResultRecord[0]->meta[1]->addCData(stripslashes(trim($record["metakeywords"]["value"])));
+				$xPathResultRecord[0]->meta[2] = null;
+				$xPathResultRecord[0]->meta[2]->addCData(stripslashes(trim($record["metaauthor"]["value"])));
+				$xPathResultRecord[0]->socialbar = null;
+				$xPathResultRecord[0]->socialbar->addCData(stripslashes(trim($record["socialbar"]["value"])));
+				$xPathResultRecord[0]->content = null;
+				$xPathResultRecord[0]->content->addCData(stripslashes(trim($record["content"]["value"])));
+				
+			}
+			else {
+				throw new CaramelException(10);
+			}
+			
+			
+		}
+		
+		$result = file_put_contents(BASEDIR.'/database/data.xml', $this->_dataBase->asXML());
+		
+		$this->reloadDatabaseFile();
+		
+		return $result;
+		
+	}
+	
+	
+	
+########################
+##
+## Helper methods
+##
+########################
 
+	protected function reloadDatabaseFile() {
+		# Try to import the database-file
+		try {
+			$this->_dataBase = simplexml_load_file(BASEDIR.'/database/data.xml', "SimpleXMLExtended", LIBXML_NOCDATA);
+		}
+		catch(Exception $e) {
+			var_dump($e->getMessage());
+			printf("\n\nAchtung: Eine der relevanten Dateien konnte nicht geladen werden!");
+		}
+	}
+	
 }
 ?>

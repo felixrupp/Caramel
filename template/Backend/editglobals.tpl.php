@@ -51,7 +51,7 @@
 		</fieldset>
 			
 		<input type="hidden" name="editglobals" id="editglobals">
-		<label>&nbsp;</label> <input type="submit" name="submit" id="submit" value="Save">
+		<input type="submit" name="submit" id="submit" value="Save">
 	</form>
 
 </div>

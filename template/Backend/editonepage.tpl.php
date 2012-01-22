@@ -14,7 +14,7 @@
 		<?php foreach($page["records"] as $language => $record) { ?>
 	
 			<fieldset name="fieldset_<?php echo $language ?>">
-				<legend>Language: <?php echo $language ?></legend>
+				<legend class="collapsableFieldset">Language: <?php echo $language ?></legend>
 								
 				<label for="navigation_<?php echo $language ?>"><?php echo $record["navigation"]["label"]; ?></label> <input type="text" name="navigation_<?php echo $language ?>" id="navigation_<?php echo $language ?>" value='<?php echo $record["navigation"]["value"]; ?>'>
 				<br>
@@ -53,7 +53,7 @@
 			
 		<input type="hidden" name="editonepage" id="editonepage">
 		<input type="hidden" name="pageid" id="pageid" value="<?php echo $page["id"] ?>">
-		<label>&nbsp;</label> <input type="submit" name="submit" id="submit" value="Save">
+		<input type="submit" name="submit" id="submit" value="Save">
 	</form>
 
 

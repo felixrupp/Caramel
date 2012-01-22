@@ -18,13 +18,11 @@
 				<option value="<?php echo $option; ?>"<?php if($option==$template["template"]["value"]){echo ' selected';} ?>><?php echo $option; ?></option>
 				<?php } ?>		
 			</select>
-			
-			<br>
-			
+						
 		</fieldset>
 			
 		<input type="hidden" name="edittemplates" id="edittemplates">
-		<label>&nbsp;</label> <input type="submit" name="submit" id="submit" value="Save">
+		<input type="submit" name="submit" id="submit" value="Save">
 	</form>
 
 </div>

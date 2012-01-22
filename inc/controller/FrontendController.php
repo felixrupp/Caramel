@@ -8,6 +8,7 @@
 /**
  * Imports
  */
+require_once BASEDIR.'/inc/utility/SimpleXMLExtended.php';
 require_once BASEDIR.'/inc/utility/CaramelException.php';
 require_once BASEDIR.'/inc/model/DatabaseModel.php';
 require_once BASEDIR.'/inc/model/ConfigurationModel.php';

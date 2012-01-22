@@ -9,6 +9,7 @@
 /**
  * Imports
  */
+require_once BASEDIR.'/inc/utility/SimpleXMLExtended.php';
 require_once BASEDIR.'/inc/utility/CaramelException.php';
 require_once BASEDIR.'/inc/model/DatabaseModel.php';
 require_once BASEDIR.'/inc/model/ConfigurationModel.php';
@@ -207,6 +208,50 @@ class BackendController {
 			}
 			
 			####### POST
+			
+			if(isset($_POST["editonepage"]) && isset($_POST["pageid"])) {
+				
+				#var_dump($_POST);
+				
+				$id = (int)trim($_POST["pageid"]);
+				
+				$page = $this->_dataBase->getPageInformation($id);
+				
+				foreach($_POST as $key => $value) {
+					
+					if($key != "editonepage" && $key != "submit" && $key != "pageid") {
+						
+						# Current language
+						$lang = substr($key, strrpos($key, "_")+1, strlen($key));
+							
+						$key = substr($key, 0, strrpos($key, "_"));
+							
+						#var_dump($key);
+						
+						$page["records"][$lang][$key]["value"] = $value;
+					}
+				}
+				
+				#var_dump($page);
+				
+				//TODO: Set the new page information
+				try{
+					$result = $this->_dataBase->setPageInformation($id, $page);	
+						
+				} catch(CaramelException $e) {
+					$e->getDetails();
+				}
+				
+				$navigation = TRUE;
+				$login = FALSE;
+				$welcome = FALSE;
+				
+				$page = $this->_dataBase->getPageInformation($id);
+					
+				$this->_templateView->assign("page", $page);
+				$this->_templateView->assign("editonepage", TRUE);
+				
+			}
 			
 			if(isset($_POST["edittemplates"])) {
 				

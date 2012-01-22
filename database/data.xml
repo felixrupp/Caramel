@@ -19,10 +19,10 @@
 				<![CDATA[Caramel]]>
 			</navigation>
 			<title>
-				<![CDATA[Caramel]]>
+				<![CDATA[Open Source CMS]]>
 			</title>
 			<titletag>
-				<![CDATA[Title of the Homepage]]>
+				<![CDATA[Caramel]]>
 			</titletag>
 			<meta name="description">
 				<![CDATA[English description for Home]]>
@@ -36,7 +36,17 @@
 			<socialbar>false</socialbar>
 			<content>
 				<![CDATA[
-				Homepage in english.
+				<h2>Overview</h2>
+				<p>CARAMEL is a Content Managemant System for small sites and waived on an external database and an extensive user management. 
+        Otherwise CARAMEL provides a lot of features to create a website according to your wishes. In addition, CARAMEL released under 
+        the MIT license and may be used both for private and commercial purposes freely.
+				</p>
+				<h3>Features</h3>
+				<ul>
+				  <li>Easy to use interface</li>
+				  <li>Support for multilingual websites</li>
+				  <li>Integration of individual templates</li>
+				</ul>
 				]]>
 			</content>
 		</record>
@@ -45,10 +55,10 @@
 				<![CDATA[Caramel]]>
 			</navigation>
 			<title>
-				<![CDATA[Caramel]]>
+				<![CDATA[Open Source CMS]]>
 			</title>
 			<titletag>
-				<![CDATA[Titel der Startseite]]>
+				<![CDATA[Caramel]]>
 			</titletag>
 			<meta name="description">
 				<![CDATA[Deutsche Beschreibung für Start]]>
@@ -62,23 +72,99 @@
 			<socialbar>false</socialbar>
 			<content>
 				<![CDATA[
-				Startseite auf deutsch.
+				<h2>Überblick</h2>
+				<p>CARAMEL ist ein Content-Managemant-System für kleine Websites und verzichtet daher auf eine externe Datenbank und eine umfangreiche 
+				Benutzerverwaltung. Ansonsten bietet CARAMEL eine Menge Funktionen, um eine Website nach Ihren Wünschen zu erstellen. Zudem steht CARAMEL unter
+				der MIT-Lizenz und darf somit sowohl privat als auch kommerziell frei verwendet werden. 
+				</p>
+				<h3>Features</h3>
+				<ul>
+				  <li>Einfach zu bedienende Oberfläche</li>
+				  <li>Unterstützung mehrsprachiger Websites</li>
+				  <li>Integration individueller Templates</li>
+				</ul>
+				]]>
+			</content>
+		</record>
+	</page>
+	
+	
+	<page id="2" path="documentation">
+
+		<record lang="en">
+			<navigation pos="2">
+				<![CDATA[Documentation]]>
+			</navigation>
+			<title>
+				<![CDATA[Documentation]]>
+			</title>
+			<titletag>
+				<![CDATA[Documentation]]>
+			</titletag>
+			<meta name="description">
+				<![CDATA[English description for Test]]>
+			</meta>
+			<meta name="keywords">
+				<![CDATA[English keywords for Test]]>
+			</meta>
+			<meta name="author">
+				<![CDATA[Felix Rupp english]]>
+			</meta>
+			<socialbar>false</socialbar>
+			<content>
+				<![CDATA[
+				<h2>Documentation</h2>
+				<p>The CARAMEL-team provide here all information about the Open Source CMS CARAMEL.</p>
+        <ul>
+          <li>User documentation</li>
+          <li>Frequently Asked Questions</li>
+        </ul> 
+				]]>
+			</content>
+		</record>
+		<record lang="de">
+			<navigation pos="2">
+				<![CDATA[Dokumentation]]>
+			</navigation>
+			<title>
+				<![CDATA[Dokumentation]]>
+			</title>
+			<titletag>
+				<![CDATA[Dokumentation]]>
+			</titletag>
+			<meta name="description">
+				<![CDATA[Deutsche Beschreibung für Test]]>
+			</meta>
+			<meta name="keywords">
+				<![CDATA[Deutsche Schlüsselwörter für Test]]>
+			</meta>
+			<meta name="author">
+				<![CDATA[Felix Rupp deutsch]]>
+			</meta>
+			<socialbar>false</socialbar>
+			<content>
+				<![CDATA[
+				<h2>Dokumentation</h2>
+				<p>Das CARAMEL-Team stellt hier alle Informationen rund um das Open Source CMS CARAMEL zur Verfügung.</p>
+        <ul>
+          <li>Benutzerdokumentation</li>
+          <li>Häufige Fragen (FAQ)</li>
+        </ul> 
 				]]>
 			</content>
 		</record>
 		
-		
-		<page id="2" path="home/info">
+		<page id="3" path="documentation/user">
 
 			<record lang="en">
 				<navigation pos="1">
-					<![CDATA[Info]]>
+					<![CDATA[User documentation]]>
 				</navigation>
 				<title>
-					<![CDATA[Title of the Infopage]]>
+					<![CDATA[user documentation]]>
 				</title>
 				<titletag>
-					<![CDATA[Title of the Infopage]]>
+					<![CDATA[user documentation]]>
 				</titletag>
 				<meta name="description">
 					<![CDATA[English description for Info]]>
@@ -92,19 +178,26 @@
 				<socialbar>false</socialbar>
 				<content>
 					<![CDATA[
-					Infopage in english.
+					<h3>User documentation</h3>
+					<ul>
+					 <li>Installation</li>
+					 <li>Global Settings</li>
+					 <li>Administrator</li>
+					 <li>Page Management</li>
+					 <li>Template Management</li>
+					</ul>
 					]]>
 				</content>
 			</record>
 			<record lang="de">
 				<navigation pos="1">
-					<![CDATA[Info]]>
+					<![CDATA[Benutzerdokumentation]]>
 				</navigation>
 				<title>
-					<![CDATA[Titel der Infoseite]]>
+					<![CDATA[Benutzerdokumentation]]>
 				</title>
 				<titletag>
-					<![CDATA[Titel der Infoseite]]>
+					<![CDATA[Benutzerdokumentation]]>
 				</titletag>
 				<meta name="description">
 					<![CDATA[Deutsche Beschreibung für Info]]>
@@ -118,24 +211,31 @@
 				<socialbar>false</socialbar>
 				<content>
 					<![CDATA[
-					Infoseite auf deutsch.
+					<h3>Benutzerdokumentation</h3>
+					<ul>
+					 <li>Installation</li>
+					 <li>Globale Einstellungen</li>
+					 <li>Administrator</li>
+					 <li>Seitenverwaltung</li>
+					 <li>Templateverwaltung</li>
+					</ul>
 					]]>
 				</content>
 			</record>
 		</page>
 		
 		
-		<page id="4" path="home/second">
+		<page id="4" path="documentation/faq">
 
 			<record lang="en">
 				<navigation pos="2">
-					<![CDATA[Second Child]]>
+					<![CDATA[FAQ]]>
 				</navigation>
 				<title>
-					<![CDATA[Title of the childpage]]>
+					<![CDATA[FAQ]]>
 				</title>
 				<titletag>
-					<![CDATA[Title of the childpage]]>
+					<![CDATA[Frequently Asked Questions]]>
 				</titletag>
 				<meta name="description">
 					<![CDATA[English description for child]]>
@@ -149,19 +249,25 @@
 				<socialbar>false</socialbar>
 				<content>
 					<![CDATA[
-					This is the second child.
+					<h2>Frequently Asked Questions</h2>
+					<p>This section provides answers to questions frequently asked.</p>
+					<h3>Common Questions</h3>
+					<ul>
+            <li>What are the licence terms of CARAMEL?</li>
+            <li>I have forgotten my admin password, what should I do?</li>
+          </ul>
 					]]>
 				</content>
 			</record>
 			<record lang="de">
 				<navigation pos="2">
-					<![CDATA[Zweite Unterseite]]>
+					<![CDATA[Häufige Fragen (FAQ)]]>
 				</navigation>
 				<title>
-					<![CDATA[Titel der Unterseite]]>
+					<![CDATA[FAQ]]>
 				</title>
 				<titletag>
-					<![CDATA[Titel der Unterseite]]>
+					<![CDATA[Häufige Fragen (FAQ)]]>
 				</titletag>
 				<meta name="description">
 					<![CDATA[Deutsche Beschreibung für Unterseite]]>
@@ -175,70 +281,19 @@
 				<socialbar>false</socialbar>
 				<content>
 					<![CDATA[
-					Zweite Unterseite.
+					<h2>Häufig gestellte Fragen (FAQ)</h2>
+					<p>FAQ ist die englische Abkürzung für Frequently Asked Questions, zu Deutsch "Häufig gestellte Fragen". Hier werden die Antworten 
+          zu den Fragen gegeben.</p>
+          <h3>Allgemeine Fragen</h3>
+          <ul>
+            <li>Unter welcher Lizenz steht CARAMEL?</li>
+            <li>Ich habe mein Admin-Passwort vergessen, was kann ich tun?</li>
+          </ul>
 					]]>
 				</content>
 			</record>
 			
 		</page>
-		
-	</page>
-	
-	
-	<page id="3" path="documentation">
-
-		<record lang="en">
-			<navigation pos="2">
-				<![CDATA[Documentation]]>
-			</navigation>
-			<title>
-				<![CDATA[Documentation]]>
-			</title>
-			<titletag>
-				<![CDATA[Title of testpage]]>
-			</titletag>
-			<meta name="description">
-				<![CDATA[English description for Test]]>
-			</meta>
-			<meta name="keywords">
-				<![CDATA[English keywords for Test]]>
-			</meta>
-			<meta name="author">
-				<![CDATA[Felix Rupp english]]>
-			</meta>
-			<socialbar>false</socialbar>
-			<content>
-				<![CDATA[
-				This is testcontent.
-				]]>
-			</content>
-		</record>
-		<record lang="de">
-			<navigation pos="2">
-				<![CDATA[Dokumentation]]>
-			</navigation>
-			<title>
-				<![CDATA[Dokumentation]]>
-			</title>
-			<titletag>
-				<![CDATA[Titel der Testseite]]>
-			</titletag>
-			<meta name="description">
-				<![CDATA[Deutsche Beschreibung für Test]]>
-			</meta>
-			<meta name="keywords">
-				<![CDATA[Deutsche Schlüsselwörter für Test]]>
-			</meta>
-			<meta name="author">
-				<![CDATA[Felix Rupp deutsch]]>
-			</meta>
-			<socialbar>false</socialbar>
-			<content>
-				<![CDATA[
-				Das ist testinhalt.
-				]]>
-			</content>
-		</record>
 	</page>
 	
 	<page id="5" path="download">
@@ -251,7 +306,7 @@
 				<![CDATA[Download]]>
 			</title>
 			<titletag>
-				<![CDATA[Title of testpage]]>
+				<![CDATA[Download]]>
 			</titletag>
 			<meta name="description">
 				<![CDATA[English description for Test]]>
@@ -265,7 +320,8 @@
 			<socialbar>false</socialbar>
 			<content>
 				<![CDATA[
-				This is testcontent.
+				<h2>Download</h2>
+				<p>Here you can download the latest release as a zip package.</p>
 				]]>
 			</content>
 		</record>
@@ -277,7 +333,7 @@
 				<![CDATA[Download]]>
 			</title>
 			<titletag>
-				<![CDATA[Titel der Testseite]]>
+				<![CDATA[Download]]>
 			</titletag>
 			<meta name="description">
 				<![CDATA[Deutsche Beschreibung für Test]]>
@@ -291,23 +347,24 @@
 			<socialbar>false</socialbar>
 			<content>
 				<![CDATA[
-				Das ist testinhalt.
+				<h2>Download</h2>
+				<p>Hier können Sie  die aktuellste Version als Zip-Archiv herunterladen.</p>
 				]]>
 			</content>
 		</record>
 	</page>
 	
-		<page id="6" path="contact">
+	<page id="6" path="impressum">
 
 		<record lang="en">
 			<navigation pos="4">
-				<![CDATA[Contact]]>
+				<![CDATA[Impressum]]>
 			</navigation>
 			<title>
-				<![CDATA[Contact]]>
+				<![CDATA[Impressum]]>
 			</title>
 			<titletag>
-				<![CDATA[Title of testpage]]>
+				<![CDATA[Impressum]]>
 			</titletag>
 			<meta name="description">
 				<![CDATA[English description for Test]]>
@@ -321,19 +378,25 @@
 			<socialbar>false</socialbar>
 			<content>
 				<![CDATA[
-				This is testcontent.
+				<h2>Impressum</h2>
+				<h4>Disclaimer</h4>
+				<p>The contents of this website was created with the utmost care and in good conscience. Nevertheless, be given no guarantee on the 
+        completeness, accuracy and currency of the information. Furthermore, no responsibility be assumed for damages incurred directly or 
+        indirectly from the use of this site.<br>
+        <br>
+        Also for the content of external links is not liable. For the content of external sites are solely responsible.</p>
 				]]>
 			</content>
 		</record>
 		<record lang="de">
 			<navigation pos="4">
-				<![CDATA[Kontakt]]>
+				<![CDATA[Impressum]]>
 			</navigation>
 			<title>
-				<![CDATA[Kontakt]]>
+				<![CDATA[Impressum]]>
 			</title>
 			<titletag>
-				<![CDATA[Titel der Testseite]]>
+				<![CDATA[Impressum]]>
 			</titletag>
 			<meta name="description">
 				<![CDATA[Deutsche Beschreibung für Test]]>
@@ -347,7 +410,14 @@
 			<socialbar>false</socialbar>
 			<content>
 				<![CDATA[
-				Das ist testinhalt.
+				<h2>Impressum</h2>
+				<h4>Haftungshinweis</h4>
+				<p>Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt und nach bestem Gewissen erstellt. Dennoch wird keine Garantie für 
+        die Vollständigkeit, Richtigkeit und Aktualität der dargestellten Informationen übernommen. Des Weiteren kann keine Verantwortung 
+        für Schäden übernommen werden, die direkt oder indirekt aus der Nutzung dieser Website entstehen.<br>
+        <br>
+        Auch für die Inhalte externer Links wird keine Haftung übernommen. Für den Inhalt externer Seiten sind ausschließlich deren 
+        Betreiber verantwortlich. </p>
 				]]>
 			</content>
 		</record>
