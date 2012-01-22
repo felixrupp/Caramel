@@ -217,7 +217,7 @@ class DatabaseModel {
 		$xPathResultContent = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/content');
 		
 		if(count($xPathResultContent)>0) {
-			$content = $xPathResultContent[0];
+			$content = (string)$xPathResultContent[0];
 		}
 		else {
 			throw new CaramelException(10);
@@ -294,6 +294,132 @@ class DatabaseModel {
 		return $orderedNavi;
 		
 	} // End of method declaration
+	
+	
+	/**
+	* Method to return array with all pages and subpages
+	* Note: Navigation is restricted to one sublevel
+	*
+	* @param string $lang Current language
+	*
+	* @return Array with all pages
+	*/
+	public function getWebsitePagesAction($lang) {
+	
+		$orderedNavi = array();
+	
+		foreach($this->_dataBase->page as $page) {
+				
+			## Get records
+			$xPathResultRecord = $page->xpath('record[@lang="'.$lang.'"]');
+			
+			if(count($xPathResultRecord) > 0) {
+				
+				$record = $xPathResultRecord[0];
+				
+				$orderedNavi[(int)$page->attributes()->id] = array(
+						"path" => (string)$page->attributes()->path, 
+						"pos" => (int)$record->navigation->attributes()->pos,
+						"id" => (int)$page->attributes()->id,
+						"navigation" => (string)$record->navigation,
+				);
+	
+			}
+			
+			$orderedNavi[(int)$page->attributes()->id]["subpages"] = array();
+			
+			
+			## SubPages
+			$subPages = $page->page;
+			
+			foreach($subPages as $subPage) {
+	
+				## Get subrecords
+				$xPathResultRecord = $subPage->xpath('record[@lang="'.$lang.'"]');
+							
+				if(count($xPathResultRecord) > 0) {
+				
+					$subRecord = $xPathResultRecord[0];
+			
+					$orderedNavi[(int)$page->attributes()->id]["subpages"][(int)$subPage->attributes()->id] = array(
+						"path" => (string)$subPage->attributes()->path,
+						"pos" => (int)$subRecord->navigation->attributes()->pos,
+						"id" => (int)$subPage->attributes()->id,
+						"navigation" => (string)$subRecord->navigation,
+					);
+	
+				}
+	
+					
+			}
+			
+			
+		}
+	
+		return $orderedNavi;
+	
+	} // End of method declaration
+	
+	
+	/**
+	 * 
+	 * 
+	 * @param int $id Id from one specific page
+	 * @param string $lang Current language
+	 * 
+	 * @throws CaramelException
+	 * @return Array with all information to page with $id
+	 */
+	public function getPageInformation($id) {
+		
+		$xPathResultPage = $this->_dataBase->xpath('//page[@id="'.$id.'"]');
+		
+		$page = array();
+		
+		$page["id"] = $id;
+		$page["path"] = (string)$xPathResultPage[0]->attributes()->path;
+		
+		if(count($xPathResultPage)>0) {
+			
+			foreach($xPathResultPage[0]->record as $record) {
+				
+				$lang = (string)$record->attributes()->lang;
+				
+				$page["records"][$lang]["navigation"]["label"] = "Name used in navigation:";
+				$page["records"][$lang]["navigation"]["value"] = stripslashes(trim((string)$record->navigation));
+				
+				$page["records"][$lang]["title"]["label"] = "Website title:";
+				$page["records"][$lang]["title"]["value"] = stripslashes(trim((string)$record->title));
+				
+				$page["records"][$lang]["titletag"]["label"] = "Title-tag used in navigation:";
+				$page["records"][$lang]["titletag"]["value"] = stripslashes(trim((string)$record->titletag));
+				
+				$page["records"][$lang]["metadescription"]["label"] = "Description:";
+				$page["records"][$lang]["metadescription"]["value"] = stripslashes(trim((string)$record->meta[0]));
+				
+				$page["records"][$lang]["metakeywords"]["label"] = "Keywords:";
+				$page["records"][$lang]["metakeywords"]["value"] = stripslashes(trim((string)$record->meta[1]));
+				
+				$page["records"][$lang]["metaauthor"]["label"] = "Author:";
+				$page["records"][$lang]["metaauthor"]["value"] = stripslashes(trim((string)$record->meta[2]));
+				
+				$page["records"][$lang]["socialbar"]["label"] = "Activate Socialbar:";
+				$page["records"][$lang]["socialbar"]["value"] = stripslashes(trim((string)$record->socialbar));
+				
+				$page["records"][$lang]["content"]["label"] = "Page content:";
+				$page["records"][$lang]["content"]["value"] = trim((string)$record->content);
+				
+			}
+			
+		}
+		else {
+			throw new CaramelException(10);
+		}
+			
+		return $page;
+		
+	}
+	
 
 }
 ?>

@@ -83,6 +83,9 @@
   	if(isset($editpages) && $editpages!=FALSE) {
   		include "editpages.tpl.php";
   	}
+  	if(isset($editonepage) && $editonepage!=FALSE) {
+  		include "editonepage.tpl.php";
+  	}
   	if(isset($editusers) && $editusers!=FALSE) {
   		include "editusers.tpl.php";
   	}

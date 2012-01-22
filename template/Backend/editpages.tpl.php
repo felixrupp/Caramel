@@ -9,7 +9,24 @@
 
 <div>
 
-	<form action="#" method="post">
+
+<ul>
+	<?php foreach($pages as $naventry) { ?>
+
+		<li><a href="?q=editpages&id=<?php echo $naventry["id"] ?>"><?php echo $naventry["navigation"]; ?></a>
+		
+		<?php if(isset($naventry["subpages"]) && count($naventry["subpages"]>0)) {?>
+			<ul>
+				<?php foreach($naventry["subpages"] as $subentry) {?>
+					<li><a href="?q=editpages&id=<?php echo $subentry["id"] ?>"><?php echo $subentry["navigation"]; ?></a></li>
+				<?php } ?>
+			</ul>
+		<?php } ?>
+		</li>
+	<?php } ?>
+</ul>
+
+	<!-- <form action="#" method="post">
 		<fieldset>
 		  <table>
 		    <thead>
@@ -54,6 +71,9 @@
 		<fieldset class="formButtons">
 		  <label>&nbsp;</label> <input type="submit" name="submit" id="submit" value="Save">
 		</fieldset>
-	</form>
+	</form> -->
+	
+	
+	
 
 </div>

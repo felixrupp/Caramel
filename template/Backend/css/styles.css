@@ -18,7 +18,7 @@ h1 {
 }
 
 fieldset {
-	border:none;
+	border:2px dashed #E97820;
 	margin:10px 0;
 }
 

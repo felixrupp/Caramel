@@ -139,12 +139,34 @@ class BackendController {
 				$this->_templateView->assign("newpage", TRUE);
 			
 			}
-			if(isset($_GET["q"]) && $_GET["q"]=="editpages") {
+			if(isset($_GET["q"]) && $_GET["q"]=="editpages" && !isset($_GET["id"])) {
+				
+				$allPages = $this->_dataBase->getWebsitePagesAction("en");
 					
+				#var_dump($allPages);
+				
 				$navigation = TRUE;
 				$login = FALSE;
 				$welcome = FALSE;
+				
+				$this->_templateView->assign("pages", $allPages);
 				$this->_templateView->assign("editpages", TRUE);
+					
+			}
+			if(isset($_GET["q"]) && $_GET["q"]=="editpages" && isset($_GET["id"])) {
+			
+				$id = (int)trim($_GET["id"]);
+				
+				$page = $this->_dataBase->getPageInformation($id);
+				
+				#var_dump($page);
+							
+				$navigation = TRUE;
+				$login = FALSE;
+				$welcome = FALSE;
+			
+				$this->_templateView->assign("page", $page);
+				$this->_templateView->assign("editonepage", TRUE);
 					
 			}
 			if(isset($_GET["q"]) && $_GET["q"]=="editusers") {
@@ -360,7 +382,10 @@ class BackendController {
 		
 		$headTag = "\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$meta."\n\n<title>Caramel CMS Backend</title>\n\n";
 	
-		$headTag .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."/Backend/js/jquery.min.js\"></script>";
+		$headTag .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."/Backend/js/jquery.min.js\"></script>\n";
+		
+		$headTag .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."/Backend/js/ckeditor/ckeditor.js\"></script>\n";
+		$headTag .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."/Backend/js/ckeditor/adapters/jquery.js\"></script>\n";
 		
 		$headTag .= $this->_templateView->addCssJs();
 	
