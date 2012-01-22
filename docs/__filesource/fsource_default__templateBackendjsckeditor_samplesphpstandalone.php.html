@@ -1,0 +1,90 @@
+<div class='page_content'>
+        <h1>Source for file standalone.php</h1>
+    <p>Documentation is available at <a rel="contents" href="default/_template---Backend---js---ckeditor---_samples---php---standalone.php.html">standalone.php</a></p>
+    <div class="src-code">
+    <ol><li><div class="src-line"><a name="a1"></a>&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;&quot;-//W3C//DTD&nbsp;XHTML&nbsp;1.0&nbsp;Transitional//EN&quot;&nbsp;&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a2"></a>&lt;!--</div></li>
+<li><div class="src-line"><a name="a3"></a>Copyright&nbsp;(c)&nbsp;2003-2011,&nbsp;CKSource&nbsp;-&nbsp;Frederico&nbsp;Knabben.&nbsp;All&nbsp;rights&nbsp;reserved.</div></li>
+<li><div class="src-line"><a name="a4"></a>For&nbsp;licensing,&nbsp;see&nbsp;LICENSE.html&nbsp;or&nbsp;http://ckeditor.com/license</div></li>
+<li><div class="src-line"><a name="a5"></a>--&gt;</div></li>
+<li><div class="src-line"><a name="a6"></a>&lt;html&nbsp;xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a7"></a>&lt;head&gt;</div></li>
+<li><div class="src-line"><a name="a8"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Creating&nbsp;CKEditor&nbsp;Instances&nbsp;&amp;mdash;&nbsp;CKEditor&nbsp;Sample&lt;/title&gt;</div></li>
+<li><div class="src-line"><a name="a9"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta&nbsp;content=&quot;text/html;&nbsp;charset=utf-8&quot;&nbsp;http-equiv=&quot;content-type&quot;/&gt;</div></li>
+<li><div class="src-line"><a name="a10"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;link&nbsp;href=&quot;../sample.css&quot;&nbsp;rel=&quot;stylesheet&quot;&nbsp;type=&quot;text/css&quot;/&gt;</div></li>
+<li><div class="src-line"><a name="a11"></a>&lt;/head&gt;</div></li>
+<li><div class="src-line"><a name="a12"></a>&lt;body&gt;</div></li>
+<li><div class="src-line"><a name="a13"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&nbsp;class=&quot;samples&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a14"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CKEditor&nbsp;Sample&nbsp;&amp;mdash;&nbsp;Creating&nbsp;CKEditor&nbsp;Instances</div></li>
+<li><div class="src-line"><a name="a15"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/h1&gt;</div></li>
+<li><div class="src-line"><a name="a16"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class=&quot;description&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a17"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;</div></li>
+<li><div class="src-line"><a name="a18"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;sample&nbsp;shows&nbsp;how&nbsp;to&nbsp;create&nbsp;a&nbsp;CKEditor&nbsp;instance&nbsp;with&nbsp;PHP.</div></li>
+<li><div class="src-line"><a name="a19"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;</div></li>
+<li><div class="src-line"><a name="a20"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;pre&nbsp;class=&quot;samples&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a21"></a>&amp;lt;?php</div></li>
+<li><div class="src-line"><a name="a22"></a>include_once&nbsp;&quot;ckeditor/ckeditor.php&quot;;</div></li>
+<li><div class="src-line"><a name="a23"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a24"></a>//&nbsp;Create&nbsp;a&nbsp;class&nbsp;instance.</div></li>
+<li><div class="src-line"><a name="a25"></a>$CKEditor&nbsp;=&nbsp;new&nbsp;CKEditor();</div></li>
+<li><div class="src-line"><a name="a26"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a27"></a>//&nbsp;Path&nbsp;to&nbsp;the&nbsp;CKEditor&nbsp;directory.</div></li>
+<li><div class="src-line"><a name="a28"></a>$CKEditor-&gt;basePath&nbsp;=&nbsp;'/ckeditor/';</div></li>
+<li><div class="src-line"><a name="a29"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a30"></a>//&nbsp;Create&nbsp;a&nbsp;textarea&nbsp;element&nbsp;and&nbsp;attach&nbsp;CKEditor&nbsp;to&nbsp;it.</div></li>
+<li><div class="src-line"><a name="a31"></a>$CKEditor-&gt;editor(&quot;textarea_id&quot;,&nbsp;&quot;This&nbsp;is&nbsp;some&nbsp;sample&nbsp;text&quot;);</div></li>
+<li><div class="src-line"><a name="a32"></a>?&amp;gt;&lt;/pre&gt;</div></li>
+<li><div class="src-line"><a name="a33"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;</div></li>
+<li><div class="src-line"><a name="a34"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;that&nbsp;&lt;code&gt;&lt;em&gt;textarea_id&lt;/em&gt;&lt;/code&gt;&nbsp;in&nbsp;the&nbsp;code&nbsp;above&nbsp;is&nbsp;the&nbsp;&lt;code&gt;id&lt;/code&gt;&nbsp;and&nbsp;&lt;code&gt;name&lt;/code&gt;&nbsp;attribute&nbsp;of</div></li>
+<li><div class="src-line"><a name="a35"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;&lt;code&gt;&amp;lt;textarea&amp;gt;&lt;/code&gt;&nbsp;element&nbsp;that&nbsp;will&nbsp;be&nbsp;created.</div></li>
+<li><div class="src-line"><a name="a36"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;</div></li>
+<li><div class="src-line"><a name="a37"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</div></li>
+<li><div class="src-line"><a name="a38"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;This&nbsp;&lt;div&gt;&nbsp;holds&nbsp;alert&nbsp;messages&nbsp;to&nbsp;be&nbsp;display&nbsp;in&nbsp;the&nbsp;sample&nbsp;page.&nbsp;--&gt;</div></li>
+<li><div class="src-line"><a name="a39"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;id=&quot;alerts&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a40"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;noscript&gt;</div></li>
+<li><div class="src-line"><a name="a41"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;</div></li>
+<li><div class="src-line"><a name="a42"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;strong&gt;CKEditor&nbsp;requires&nbsp;JavaScript&nbsp;to&nbsp;run&lt;/strong&gt;.&nbsp;In&nbsp;a&nbsp;browser&nbsp;with&nbsp;no&nbsp;JavaScript</div></li>
+<li><div class="src-line"><a name="a43"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;support,&nbsp;like&nbsp;yours,&nbsp;you&nbsp;should&nbsp;still&nbsp;see&nbsp;the&nbsp;contents&nbsp;(HTML&nbsp;data)&nbsp;and&nbsp;you&nbsp;should</div></li>
+<li><div class="src-line"><a name="a44"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;able&nbsp;to&nbsp;edit&nbsp;it&nbsp;normally,&nbsp;without&nbsp;a&nbsp;rich&nbsp;editor&nbsp;interface.</div></li>
+<li><div class="src-line"><a name="a45"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;</div></li>
+<li><div class="src-line"><a name="a46"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/noscript&gt;</div></li>
+<li><div class="src-line"><a name="a47"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</div></li>
+<li><div class="src-line"><a name="a48"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;This&nbsp;&lt;fieldset&gt;&nbsp;holds&nbsp;the&nbsp;HTML&nbsp;code&nbsp;that&nbsp;you&nbsp;will&nbsp;usually&nbsp;find&nbsp;in&nbsp;your&nbsp;pages.&nbsp;--&gt;</div></li>
+<li><div class="src-line"><a name="a49"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;form&nbsp;action=&quot;../sample_posteddata.php&quot;&nbsp;method=&quot;post&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a50"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;</div></li>
+<li><div class="src-line"><a name="a51"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&nbsp;for=&quot;editor1&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a52"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Editor&nbsp;1:&lt;/label&gt;</div></li>
+<li><div class="src-line"><a name="a53"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;</div></li>
+<li><div class="src-line"><a name="a54"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;</div></li>
+<li><div class="src-line"><a name="a55"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><a name="a56"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;Include&nbsp;the&nbsp;CKEditor&nbsp;class.</span></div></li>
+<li><div class="src-line"><a name="a57"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-inc">include_once&nbsp;</span><span class="src-str">&quot;../../ckeditor.php&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a58"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;The&nbsp;initial&nbsp;value&nbsp;to&nbsp;be&nbsp;displayed&nbsp;in&nbsp;the&nbsp;editor.</span></div></li>
+<li><div class="src-line"><a name="a59"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$initialValue&nbsp;</span>=&nbsp;<span class="src-str">'&lt;p&gt;This&nbsp;is&nbsp;some&nbsp;&lt;strong&gt;sample&nbsp;text&lt;/strong&gt;.&lt;/p&gt;'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a60"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;Create&nbsp;a&nbsp;class&nbsp;instance.</span></div></li>
+<li><div class="src-line"><a name="a61"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$CKEditor&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a rel="contents" href="default/CKEditor.html">CKEditor</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a62"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;Path&nbsp;to&nbsp;the&nbsp;CKEditor&nbsp;directory,&nbsp;ideally&nbsp;use&nbsp;an&nbsp;absolute&nbsp;path&nbsp;instead&nbsp;of&nbsp;a&nbsp;relative&nbsp;dir.</span></div></li>
+<li><div class="src-line"><a name="a63"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;&nbsp;&nbsp;$CKEditor-&gt;basePath&nbsp;=&nbsp;'/ckeditor/'</span></div></li>
+<li><div class="src-line"><a name="a64"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;If&nbsp;not&nbsp;set,&nbsp;CKEditor&nbsp;will&nbsp;try&nbsp;to&nbsp;detect&nbsp;the&nbsp;correct&nbsp;path.</span></div></li>
+<li><div class="src-line"><a name="a65"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$CKEditor</span><span class="src-sym">-&gt;</span><span class="src-id">basePath&nbsp;</span>=&nbsp;<span class="src-str">'../../'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a66"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;Create&nbsp;a&nbsp;textarea&nbsp;element&nbsp;and&nbsp;attach&nbsp;CKEditor&nbsp;to&nbsp;it.</span></div></li>
+<li><div class="src-line"><a name="a67"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$CKEditor</span><span class="src-sym">-&gt;</span><span class="src-id">editor</span><span class="src-sym">(</span><span class="src-str">&quot;editor1&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-var">$initialValue</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a68"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-php">?&gt;</span></div></li>
+<li><div class="src-line"><a name="a69"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input&nbsp;type=&quot;submit&quot;&nbsp;value=&quot;Submit&quot;/&gt;</div></li>
+<li><div class="src-line"><a name="a70"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;</div></li>
+<li><div class="src-line"><a name="a71"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/form&gt;</div></li>
+<li><div class="src-line"><a name="a72"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;id=&quot;footer&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a73"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;hr&nbsp;/&gt;</div></li>
+<li><div class="src-line"><a name="a74"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;</div></li>
+<li><div class="src-line"><a name="a75"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CKEditor&nbsp;-&nbsp;The&nbsp;text&nbsp;editor&nbsp;for&nbsp;the&nbsp;Internet&nbsp;-&nbsp;&lt;a&nbsp;class=&quot;samples&quot;&nbsp;href=&quot;http://ckeditor.com/&quot;&gt;http://ckeditor.com&lt;/a&gt;</div></li>
+<li><div class="src-line"><a name="a76"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;</div></li>
+<li><div class="src-line"><a name="a77"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&nbsp;id=&quot;copy&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a78"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copyright&nbsp;&amp;copy;&nbsp;2003-2011,&nbsp;&lt;a&nbsp;class=&quot;samples&quot;&nbsp;href=&quot;http://cksource.com/&quot;&gt;CKSource&lt;/a&gt;&nbsp;-&nbsp;Frederico</div></li>
+<li><div class="src-line"><a name="a79"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Knabben.&nbsp;All&nbsp;rights&nbsp;reserved.</div></li>
+<li><div class="src-line"><a name="a80"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;</div></li>
+<li><div class="src-line"><a name="a81"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</div></li>
+<li><div class="src-line"><a name="a82"></a>&lt;/body&gt;</div></li>
+<li><div class="src-line"><a name="a83"></a>&lt;/html&gt;</div></li>
+</ol>
+    </div>
+</div>

@@ -22,6 +22,7 @@ require_once BASEDIR.'/inc/view/TemplateView.php';
  * @version $Id$
  * @copyright Copyright (c) 2011, Felix Rupp, Nicole Reinhardt
  * @license http://www.opensource.org/licenses/mit-license.php MIT-License
+ * @license http://www.gnu.org/licenses/gpl.html GNU GPL
  * 
  * @package inc
  * @subpackage controller
@@ -160,9 +161,13 @@ class BackendController {
 			}
 			if(isset($_GET["q"]) && $_GET["q"]=="edittemplates") {
 					
+				$template = $this->getTemplateConfig();
+				
 				$navigation = TRUE;
 				$login = FALSE;
 				$welcome = FALSE;
+				
+				$this->_templateView->assign("template", $template);
 				$this->_templateView->assign("edittemplates", TRUE);
 					
 			}
@@ -173,10 +178,33 @@ class BackendController {
 				$navigation = TRUE;
 				$login = FALSE;
 				$welcome = FALSE;
+				
 				$this->_templateView->assign("globals", $globals);
 				$this->_templateView->assign("editglobals", TRUE);
 					
 			}
+			
+			####### POST
+			
+			if(isset($_POST["edittemplates"])) {
+				
+				#var_dump($_POST);
+				
+				$newTemplate = $_POST["template"];
+				
+				$this->_config->setConfigStringAction("TEMPLATE", $newTemplate);
+				
+				$navigation = TRUE;
+				$login = FALSE;
+				$welcome = FALSE;
+				
+				$template = $this->getTemplateConfig();
+				
+				$this->_templateView->assign("template", $template);
+				$this->_templateView->assign("edittemplates", TRUE);
+								
+			}
+			
 			if(isset($_POST["editglobals"])) {
 				
 				#var_dump($_POST);
@@ -492,6 +520,12 @@ class BackendController {
 	} // End of method declaration
 	
 	
+	
+	/**
+	 * This method returns a correct formatted array with all global settings
+	 * 
+	 * @return Array with global configuration
+	 */
 	protected function getGlobalConfig() {
 		
 		$globals = $this->_config->getGlobalsAction();
@@ -502,7 +536,47 @@ class BackendController {
 				
 		return $globals;
 		
-	}
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * This method returns a correct formatted array with our template settings
+	 * 
+	 * @return Array with template configuration
+	 */
+	protected function getTemplateConfig() {
+		
+		$template = $this->_config->getConfigStringAction("TEMPLATE");
+		
+		$acceptedValues = array();
+		
+		## Find all possible templates
+		$dirIterator = new DirectoryIterator(BASEDIR.'/template/');
+		
+		foreach($dirIterator as $dirItem) {
+			
+			if($dirItem->isDir() && !$dirItem->isDot() && strpos($dirItem->getPathname(), "Backend")==FALSE) { # All folders without dots and NOT Backend-Template
+				
+				if(is_file($dirItem->getPathname()."/index.tpl.php")) {
+				
+					$acceptedValues[] = substr($dirItem->getPathname(), strrpos($dirItem->getPathname(), "/")+1, strlen($dirItem->getPathname()));
+					
+				}
+							
+			}
+			
+		}
+		
+		
+		$templateArray["template"]["label"] = "Template";
+		$templateArray["template"]["value"] = $template;
+		$templateArray["template"]["blank"] = "false";
+		$templateArray["template"]["acceptedValues"] = $acceptedValues;
+		
+		return $templateArray;
+		
+	} // End of method declaration
 
 } // End of class declaration
 

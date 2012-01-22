@@ -14,13 +14,14 @@ The following features are implemented until now:
 * XML based setting files with predefined settings for whole site and backend administrator-account
 * Self-written templating-engine with HTML, CSS and JS support. No complex XSL-Transformations!
 * Object-oriented PHP5 code with mvc-architecture
+* Selecting between multiple templates
 
 
 Todo
 ----
 
-* Ajax readyness
 * Backend functionality for changing page-contents
+* Ajax readyness
 
 
 Installation
@@ -38,6 +39,6 @@ Coming soon!
 License
 -------
 
-Licensed under the [MIT-License](http://www.opensource.org/licenses/mit-license.php).
+Dual-licensed under the [MIT-License](http://www.opensource.org/licenses/mit-license.php) and the [GNU GPL](http://www.gnu.org/licenses/gpl.html)
 
 Copyright (c) Felix Rupp, Nicole Reinhardt.

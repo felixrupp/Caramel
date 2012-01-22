@@ -13,6 +13,7 @@
  * @version $Id$
  * @copyright Copyright (c) 2011, Felix Rupp, Nicole Reinhardt
  * @license http://www.opensource.org/licenses/mit-license.php MIT-License
+ * @license http://www.gnu.org/licenses/gpl.html GNU GPL
  *
  * @package inc
  * @subpackage model
@@ -230,7 +231,7 @@ class ConfigurationModel {
 	 * @throws CaramelException
 	 * @return void
 	 */
-	protected function setConfigString($key, $newValue) {
+	public function setConfigStringAction($key, $newValue) {
 	
 		$setting = $this->_configFile->xpath('//setting[@key="'.$key.'"]');
 	
@@ -280,7 +281,7 @@ class ConfigurationModel {
 	* @throws CaramelException
 	* @return void
 	*/
-	protected function setAdminConfigString($key, $newValue) {
+	public function setAdminConfigStringAction($key, $newValue) {
 	
 		$setting = $this->_adminConfigFile->xpath('//setting[@key="'.$key.'"]');
 	

@@ -1,0 +1,160 @@
+<div class='page_content'>
+        <h1>Source for file events.php</h1>
+    <p>Documentation is available at <a rel="contents" href="default/_template---Backend---js---ckeditor---_samples---php---events.php.html">events.php</a></p>
+    <div class="src-code">
+    <ol><li><div class="src-line"><a name="a1"></a>&lt;!DOCTYPE&nbsp;html&nbsp;PUBLIC&nbsp;&quot;-//W3C//DTD&nbsp;XHTML&nbsp;1.0&nbsp;Transitional//EN&quot;&nbsp;&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a2"></a>&lt;!--</div></li>
+<li><div class="src-line"><a name="a3"></a>Copyright&nbsp;(c)&nbsp;2003-2011,&nbsp;CKSource&nbsp;-&nbsp;Frederico&nbsp;Knabben.&nbsp;All&nbsp;rights&nbsp;reserved.</div></li>
+<li><div class="src-line"><a name="a4"></a>For&nbsp;licensing,&nbsp;see&nbsp;LICENSE.html&nbsp;or&nbsp;http://ckeditor.com/license</div></li>
+<li><div class="src-line"><a name="a5"></a>--&gt;</div></li>
+<li><div class="src-line"><a name="a6"></a>&lt;html&nbsp;xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a7"></a>&lt;head&gt;</div></li>
+<li><div class="src-line"><a name="a8"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Adding&nbsp;Event&nbsp;Handlers&nbsp;&amp;mdash;&nbsp;CKEditor&nbsp;Sample&lt;/title&gt;</div></li>
+<li><div class="src-line"><a name="a9"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta&nbsp;content=&quot;text/html;&nbsp;charset=utf-8&quot;&nbsp;http-equiv=&quot;content-type&quot;/&gt;</div></li>
+<li><div class="src-line"><a name="a10"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;link&nbsp;href=&quot;../sample.css&quot;&nbsp;rel=&quot;stylesheet&quot;&nbsp;type=&quot;text/css&quot;/&gt;</div></li>
+<li><div class="src-line"><a name="a11"></a>&lt;/head&gt;</div></li>
+<li><div class="src-line"><a name="a12"></a>&lt;body&gt;</div></li>
+<li><div class="src-line"><a name="a13"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&nbsp;class=&quot;samples&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a14"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CKEditor&nbsp;Sample&nbsp;&amp;mdash;&nbsp;Adding&nbsp;Event&nbsp;Handlers</div></li>
+<li><div class="src-line"><a name="a15"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/h1&gt;</div></li>
+<li><div class="src-line"><a name="a16"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;class=&quot;description&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a17"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;</div></li>
+<li><div class="src-line"><a name="a18"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;sample&nbsp;shows&nbsp;how&nbsp;to&nbsp;add&nbsp;event&nbsp;handlers&nbsp;to&nbsp;CKEditor&nbsp;with&nbsp;PHP.</div></li>
+<li><div class="src-line"><a name="a19"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;</div></li>
+<li><div class="src-line"><a name="a20"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;</div></li>
+<li><div class="src-line"><a name="a21"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;snippet&nbsp;of&nbsp;the&nbsp;configuration&nbsp;code&nbsp;can&nbsp;be&nbsp;seen&nbsp;below;&nbsp;check&nbsp;the&nbsp;source&nbsp;code&nbsp;of&nbsp;this&nbsp;page&nbsp;for</div></li>
+<li><div class="src-line"><a name="a22"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;full&nbsp;definition:</div></li>
+<li><div class="src-line"><a name="a23"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;</div></li>
+<li><div class="src-line"><a name="a24"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;pre&nbsp;class=&quot;samples&quot;&gt;&amp;lt;?php</div></li>
+<li><div class="src-line"><a name="a25"></a>//&nbsp;Include&nbsp;the&nbsp;CKEditor&nbsp;class.</div></li>
+<li><div class="src-line"><a name="a26"></a>include(&quot;ckeditor/ckeditor.php&quot;);</div></li>
+<li><div class="src-line"><a name="a27"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a28"></a>//&nbsp;Create&nbsp;a&nbsp;class&nbsp;instance.</div></li>
+<li><div class="src-line"><a name="a29"></a>$CKEditor&nbsp;=&nbsp;new&nbsp;CKEditor();</div></li>
+<li><div class="src-line"><a name="a30"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a31"></a>//&nbsp;Path&nbsp;to&nbsp;the&nbsp;CKEditor&nbsp;directory.</div></li>
+<li><div class="src-line"><a name="a32"></a>$CKEditor-&gt;basePath&nbsp;=&nbsp;'/ckeditor/';</div></li>
+<li><div class="src-line"><a name="a33"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a34"></a>//&nbsp;The&nbsp;initial&nbsp;value&nbsp;to&nbsp;be&nbsp;displayed&nbsp;in&nbsp;the&nbsp;editor.</div></li>
+<li><div class="src-line"><a name="a35"></a>$initialValue&nbsp;=&nbsp;'This&nbsp;is&nbsp;some&nbsp;sample&nbsp;text.';</div></li>
+<li><div class="src-line"><a name="a36"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a37"></a>//&nbsp;Add&nbsp;event&nbsp;handler,&nbsp;&lt;em&gt;instanceReady&lt;/em&gt;&nbsp;is&nbsp;fired&nbsp;when&nbsp;editor&nbsp;is&nbsp;loaded.</div></li>
+<li><div class="src-line"><a name="a38"></a>$CKEditor-&gt;&lt;strong&gt;addEventHandler&lt;/strong&gt;('instanceReady',&nbsp;'function&nbsp;(evt)&nbsp;{</div></li>
+<li><div class="src-line"><a name="a39"></a>&nbsp;&nbsp;&nbsp;&nbsp;alert(&quot;Loaded&nbsp;editor:&nbsp;&quot;&nbsp;+&nbsp;evt.editor.name);</div></li>
+<li><div class="src-line"><a name="a40"></a>}');</div></li>
+<li><div class="src-line"><a name="a41"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a42"></a>//&nbsp;Create&nbsp;an&nbsp;editor&nbsp;instance.</div></li>
+<li><div class="src-line"><a name="a43"></a>$CKEditor-&gt;editor(&quot;editor1&quot;,&nbsp;$initialValue);</div></li>
+<li><div class="src-line"><a name="a44"></a>&lt;/pre&gt;</div></li>
+<li><div class="src-line"><a name="a45"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</div></li>
+<li><div class="src-line"><a name="a46"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;This&nbsp;&lt;div&gt;&nbsp;holds&nbsp;alert&nbsp;messages&nbsp;to&nbsp;be&nbsp;display&nbsp;in&nbsp;the&nbsp;sample&nbsp;page.&nbsp;--&gt;</div></li>
+<li><div class="src-line"><a name="a47"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;id=&quot;alerts&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a48"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;noscript&gt;</div></li>
+<li><div class="src-line"><a name="a49"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;</div></li>
+<li><div class="src-line"><a name="a50"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;strong&gt;CKEditor&nbsp;requires&nbsp;JavaScript&nbsp;to&nbsp;run&lt;/strong&gt;.&nbsp;In&nbsp;a&nbsp;browser&nbsp;with&nbsp;no&nbsp;JavaScript</div></li>
+<li><div class="src-line"><a name="a51"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;support,&nbsp;like&nbsp;yours,&nbsp;you&nbsp;should&nbsp;still&nbsp;see&nbsp;the&nbsp;contents&nbsp;(HTML&nbsp;data)&nbsp;and&nbsp;you&nbsp;should</div></li>
+<li><div class="src-line"><a name="a52"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;able&nbsp;to&nbsp;edit&nbsp;it&nbsp;normally,&nbsp;without&nbsp;a&nbsp;rich&nbsp;editor&nbsp;interface.</div></li>
+<li><div class="src-line"><a name="a53"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;</div></li>
+<li><div class="src-line"><a name="a54"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/noscript&gt;</div></li>
+<li><div class="src-line"><a name="a55"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</div></li>
+<li><div class="src-line"><a name="a56"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;form&nbsp;action=&quot;../sample_posteddata.php&quot;&nbsp;method=&quot;post&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a57"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&gt;Editor&nbsp;1:&lt;/label&gt;</div></li>
+<li><div class="src-line"><a name="a58"></a><span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><a name="a59"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a60"></a><span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a61"></a><span class="src-doc">&nbsp;*&nbsp;Adds&nbsp;a&nbsp;global&nbsp;event,&nbsp;will&nbsp;hide&nbsp;the&nbsp;&quot;Target&quot;&nbsp;tab&nbsp;in&nbsp;the&nbsp;&quot;Link&quot;&nbsp;dialog&nbsp;window&nbsp;in&nbsp;all&nbsp;instances.</span></div></li>
+<li><div class="src-line"><a name="a62"></a><span class="src-doc">&nbsp;*/</span></div></li>
+<li><div class="src-line"><a name="a63"></a><span class="src-key">function&nbsp;</span><a rel="contents" href="default/_template---Backend---js---ckeditor---_samples---php---events.php.html#functionCKEditorHideLinkTargetTab">CKEditorHideLinkTargetTab</a><span class="src-sym">(</span><span class="src-sym">&amp;</span><span class="src-var">$CKEditor</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a64"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a65"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$function&nbsp;</span>=&nbsp;<span class="src-str">'function&nbsp;(ev)&nbsp;{</span></div></li>
+<li><div class="src-line"><a name="a66"></a><span class="src-str">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Take&nbsp;the&nbsp;dialog&nbsp;window&nbsp;name&nbsp;and&nbsp;its&nbsp;definition&nbsp;from&nbsp;the&nbsp;event&nbsp;data.</span></div></li>
+<li><div class="src-line"><a name="a67"></a><span class="src-str">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;dialogName&nbsp;=&nbsp;ev.data.name;</span></div></li>
+<li><div class="src-line"><a name="a68"></a><span class="src-str">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;dialogDefinition&nbsp;=&nbsp;ev.data.definition;</span></div></li>
+<li><div class="src-line"><a name="a69"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a70"></a><span class="src-str">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Check&nbsp;if&nbsp;the&nbsp;definition&nbsp;comes&nbsp;from&nbsp;the&nbsp;&quot;Link&quot;&nbsp;dialog&nbsp;window.</span></div></li>
+<li><div class="src-line"><a name="a71"></a><span class="src-str">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;dialogName&nbsp;==&nbsp;&quot;link&quot;&nbsp;)</span></div></li>
+<li><div class="src-line"><a name="a72"></a><span class="src-str">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dialogDefinition.removeContents(&quot;target&quot;)</span></div></li>
+<li><div class="src-line"><a name="a73"></a><span class="src-str">&nbsp;&nbsp;&nbsp;&nbsp;}'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a74"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a75"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$CKEditor</span><span class="src-sym">-&gt;</span><span class="src-id">addGlobalEventHandler</span><span class="src-sym">(</span><span class="src-str">'dialogDefinition'</span><span class="src-sym">,&nbsp;</span><span class="src-var">$function</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a76"></a><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a77"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a78"></a><span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a79"></a><span class="src-doc">&nbsp;*&nbsp;Adds&nbsp;a&nbsp;global&nbsp;event,&nbsp;will&nbsp;notify&nbsp;about&nbsp;an&nbsp;open&nbsp;dialog&nbsp;window.</span></div></li>
+<li><div class="src-line"><a name="a80"></a><span class="src-doc">&nbsp;*/</span></div></li>
+<li><div class="src-line"><a name="a81"></a><span class="src-key">function&nbsp;</span><a rel="contents" href="default/_template---Backend---js---ckeditor---_samples---php---events.php.html#functionCKEditorNotifyAboutOpenedDialog">CKEditorNotifyAboutOpenedDialog</a><span class="src-sym">(</span><span class="src-sym">&amp;</span><span class="src-var">$CKEditor</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a82"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$function&nbsp;</span>=&nbsp;<span class="src-str">'function&nbsp;(evt)&nbsp;{</span></div></li>
+<li><div class="src-line"><a name="a83"></a><span class="src-str">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(&quot;Loading&nbsp;a&nbsp;dialog&nbsp;window:&nbsp;&quot;&nbsp;+&nbsp;evt.data.name);</span></div></li>
+<li><div class="src-line"><a name="a84"></a><span class="src-str">&nbsp;&nbsp;&nbsp;&nbsp;}'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a85"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a86"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$CKEditor</span><span class="src-sym">-&gt;</span><span class="src-id">addGlobalEventHandler</span><span class="src-sym">(</span><span class="src-str">'dialogDefinition'</span><span class="src-sym">,&nbsp;</span><span class="src-var">$function</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a87"></a><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a88"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a89"></a><span class="src-comm">//&nbsp;Include&nbsp;the&nbsp;CKEditor&nbsp;class.</span></div></li>
+<li><div class="src-line"><a name="a90"></a><span class="src-inc">include</span><span class="src-sym">(</span><span class="src-str">&quot;../../ckeditor.php&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a91"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a92"></a><span class="src-comm">//&nbsp;Create&nbsp;a&nbsp;class&nbsp;instance.</span></div></li>
+<li><div class="src-line"><a name="a93"></a><span class="src-var">$CKEditor&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a rel="contents" href="default/CKEditor.html">CKEditor</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a94"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a95"></a><span class="src-comm">//&nbsp;Set&nbsp;a&nbsp;configuration&nbsp;option&nbsp;for&nbsp;all&nbsp;editors.</span></div></li>
+<li><div class="src-line"><a name="a96"></a><span class="src-var">$CKEditor</span><span class="src-sym">-&gt;</span><span class="src-id">config</span><span class="src-sym">[</span><span class="src-str">'width'</span><span class="src-sym">]&nbsp;</span>=&nbsp;<span class="src-num">750</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a97"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a98"></a><span class="src-comm">//&nbsp;Path&nbsp;to&nbsp;the&nbsp;CKEditor&nbsp;directory,&nbsp;ideally&nbsp;use&nbsp;an&nbsp;absolute&nbsp;path&nbsp;instead&nbsp;of&nbsp;a&nbsp;relative&nbsp;dir.</span></div></li>
+<li><div class="src-line"><a name="a99"></a><span class="src-comm">//&nbsp;&nbsp;&nbsp;$CKEditor-&gt;basePath&nbsp;=&nbsp;'/ckeditor/'</span></div></li>
+<li><div class="src-line"><a name="a100"></a><span class="src-comm">//&nbsp;If&nbsp;not&nbsp;set,&nbsp;CKEditor&nbsp;will&nbsp;try&nbsp;to&nbsp;detect&nbsp;the&nbsp;correct&nbsp;path.</span></div></li>
+<li><div class="src-line"><a name="a101"></a><span class="src-var">$CKEditor</span><span class="src-sym">-&gt;</span><span class="src-id">basePath&nbsp;</span>=&nbsp;<span class="src-str">'../../'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a102"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a103"></a><span class="src-comm">//&nbsp;The&nbsp;initial&nbsp;value&nbsp;to&nbsp;be&nbsp;displayed&nbsp;in&nbsp;the&nbsp;editor.</span></div></li>
+<li><div class="src-line"><a name="a104"></a><span class="src-var">$initialValue&nbsp;</span>=&nbsp;<span class="src-str">'&lt;p&gt;This&nbsp;is&nbsp;some&nbsp;&lt;strong&gt;sample&nbsp;text&lt;/strong&gt;.&nbsp;You&nbsp;are&nbsp;using&nbsp;&lt;a&nbsp;href=&quot;http://ckeditor.com/&quot;&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a105"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a106"></a><span class="src-comm">//&nbsp;Event&nbsp;that&nbsp;will&nbsp;be&nbsp;handled&nbsp;only&nbsp;by&nbsp;the&nbsp;first&nbsp;editor.</span></div></li>
+<li><div class="src-line"><a name="a107"></a><span class="src-var">$CKEditor</span><span class="src-sym">-&gt;</span><span class="src-id">addEventHandler</span><span class="src-sym">(</span><span class="src-str">'instanceReady'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'function&nbsp;(evt)&nbsp;{</span></div></li>
+<li><div class="src-line"><a name="a108"></a><span class="src-str">&nbsp;&nbsp;&nbsp;&nbsp;alert(&quot;Loaded&nbsp;editor:&nbsp;&quot;&nbsp;+&nbsp;evt.editor.name);</span></div></li>
+<li><div class="src-line"><a name="a109"></a><span class="src-str">}'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a110"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a111"></a><span class="src-comm">//&nbsp;Create&nbsp;the&nbsp;first&nbsp;instance.</span></div></li>
+<li><div class="src-line"><a name="a112"></a><span class="src-var">$CKEditor</span><span class="src-sym">-&gt;</span><span class="src-id">editor</span><span class="src-sym">(</span><span class="src-str">&quot;editor1&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-var">$initialValue</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a113"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a114"></a><span class="src-comm">//&nbsp;Clear&nbsp;event&nbsp;handlers.&nbsp;Instances&nbsp;that&nbsp;will&nbsp;be&nbsp;created&nbsp;later&nbsp;will&nbsp;not&nbsp;have</span></div></li>
+<li><div class="src-line"><a name="a115"></a><span class="src-comm">//&nbsp;the&nbsp;'instanceReady'&nbsp;listener&nbsp;defined&nbsp;a&nbsp;couple&nbsp;of&nbsp;lines&nbsp;above.</span></div></li>
+<li><div class="src-line"><a name="a116"></a><span class="src-var">$CKEditor</span><span class="src-sym">-&gt;</span><span class="src-id">clearEventHandlers</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a117"></a><span class="src-php">?&gt;</span></div></li>
+<li><div class="src-line"><a name="a118"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;br&nbsp;/&gt;</div></li>
+<li><div class="src-line"><a name="a119"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&gt;Editor&nbsp;2:&lt;/label&gt;</div></li>
+<li><div class="src-line"><a name="a120"></a><span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><a name="a121"></a><span class="src-comm">//&nbsp;Configuration&nbsp;that&nbsp;will&nbsp;only&nbsp;be&nbsp;used&nbsp;by&nbsp;the&nbsp;second&nbsp;editor.</span></div></li>
+<li><div class="src-line"><a name="a122"></a><span class="src-var">$config</span><span class="src-sym">[</span><span class="src-str">'width'</span><span class="src-sym">]&nbsp;</span>=&nbsp;<span class="src-str">'600'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a123"></a><span class="src-var">$config</span><span class="src-sym">[</span><span class="src-str">'toolbar'</span><span class="src-sym">]&nbsp;</span>=&nbsp;<span class="src-str">'Basic'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a124"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a125"></a><span class="src-comm">//&nbsp;Add&nbsp;some&nbsp;global&nbsp;event&nbsp;handlers&nbsp;(for&nbsp;all&nbsp;editors).</span></div></li>
+<li><div class="src-line"><a name="a126"></a><a rel="contents" href="default/_template---Backend---js---ckeditor---_samples---php---events.php.html#functionCKEditorHideLinkTargetTab">CKEditorHideLinkTargetTab</a><span class="src-sym">(</span><span class="src-var">$CKEditor</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a127"></a><a rel="contents" href="default/_template---Backend---js---ckeditor---_samples---php---events.php.html#functionCKEditorNotifyAboutOpenedDialog">CKEditorNotifyAboutOpenedDialog</a><span class="src-sym">(</span><span class="src-var">$CKEditor</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a128"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a129"></a><span class="src-comm">//&nbsp;Event&nbsp;that&nbsp;will&nbsp;only&nbsp;be&nbsp;handled&nbsp;by&nbsp;the&nbsp;second&nbsp;editor.</span></div></li>
+<li><div class="src-line"><a name="a130"></a><span class="src-comm">//&nbsp;Instead&nbsp;of&nbsp;calling&nbsp;addEventHandler(),&nbsp;events&nbsp;may&nbsp;be&nbsp;passed&nbsp;as&nbsp;an&nbsp;argument.</span></div></li>
+<li><div class="src-line"><a name="a131"></a><span class="src-var">$events</span><span class="src-sym">[</span><span class="src-str">'instanceReady'</span><span class="src-sym">]&nbsp;</span>=&nbsp;<span class="src-str">'function&nbsp;(evt)&nbsp;{</span></div></li>
+<li><div class="src-line"><a name="a132"></a><span class="src-str">&nbsp;&nbsp;&nbsp;&nbsp;alert(&quot;Loaded&nbsp;second&nbsp;editor:&nbsp;&quot;&nbsp;+&nbsp;evt.editor.name);</span></div></li>
+<li><div class="src-line"><a name="a133"></a><span class="src-str">}'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a134"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a135"></a><span class="src-comm">//&nbsp;Create&nbsp;the&nbsp;second&nbsp;instance.</span></div></li>
+<li><div class="src-line"><a name="a136"></a><span class="src-var">$CKEditor</span><span class="src-sym">-&gt;</span><span class="src-id">editor</span><span class="src-sym">(</span><span class="src-str">&quot;editor2&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-var">$initialValue</span><span class="src-sym">,&nbsp;</span><span class="src-var">$config</span><span class="src-sym">,&nbsp;</span><span class="src-var">$events</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a137"></a><span class="src-php">?&gt;</span></div></li>
+<li><div class="src-line"><a name="a138"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;</div></li>
+<li><div class="src-line"><a name="a139"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input&nbsp;type=&quot;submit&quot;&nbsp;value=&quot;Submit&quot;/&gt;</div></li>
+<li><div class="src-line"><a name="a140"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;</div></li>
+<li><div class="src-line"><a name="a141"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/form&gt;</div></li>
+<li><div class="src-line"><a name="a142"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;id=&quot;footer&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a143"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;hr&nbsp;/&gt;</div></li>
+<li><div class="src-line"><a name="a144"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;</div></li>
+<li><div class="src-line"><a name="a145"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CKEditor&nbsp;-&nbsp;The&nbsp;text&nbsp;editor&nbsp;for&nbsp;the&nbsp;Internet&nbsp;-&nbsp;&lt;a&nbsp;class=&quot;samples&quot;&nbsp;href=&quot;http://ckeditor.com/&quot;&gt;http://ckeditor.com&lt;/a&gt;</div></li>
+<li><div class="src-line"><a name="a146"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;</div></li>
+<li><div class="src-line"><a name="a147"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&nbsp;id=&quot;copy&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a148"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copyright&nbsp;&amp;copy;&nbsp;2003-2011,&nbsp;&lt;a&nbsp;class=&quot;samples&quot;&nbsp;href=&quot;http://cksource.com/&quot;&gt;CKSource&lt;/a&gt;&nbsp;-&nbsp;Frederico</div></li>
+<li><div class="src-line"><a name="a149"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Knabben.&nbsp;All&nbsp;rights&nbsp;reserved.</div></li>
+<li><div class="src-line"><a name="a150"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;</div></li>
+<li><div class="src-line"><a name="a151"></a>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</div></li>
+<li><div class="src-line"><a name="a152"></a>&lt;/body&gt;</div></li>
+<li><div class="src-line"><a name="a153"></a>&lt;/html&gt;</div></li>
+</ol>
+    </div>
+</div>

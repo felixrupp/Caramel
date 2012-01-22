@@ -21,6 +21,7 @@ require_once BASEDIR.'/inc/view/TemplateView.php';
  * @version $Id$
  * @copyright Copyright (c) 2011, Felix Rupp, Nicole Reinhardt
  * @license http://www.opensource.org/licenses/mit-license.php MIT-License
+ * @license http://www.gnu.org/licenses/gpl.html GNU GPL
  * 
  * @package inc
  * @subpackage controller

@@ -11,19 +11,19 @@
 
 	<form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" method="post">
 		<fieldset>
-			<label for="admin_username"><?php echo $admin["admin_username"]['label']; ?></label> <input type="text" name="admin_username" id="admin_username" value='<?php echo $admin["admin_username"]["value"]; ?>'>
+			<!-- <label for="template"><?php echo $template["template"]['label']; ?></label> <input type="text" name="template" id="template" value='<?php echo $template["template"]["value"]; ?>'> -->
+			
+			<label for="template"><?php echo $template["template"]['label']; ?></label> <select name="template" id="template">
+				<?php foreach($template["template"]["acceptedValues"] as $option) { ?>
+				<option value="<?php echo $option; ?>"<?php if($option==$template["template"]["value"]){echo ' selected';} ?>><?php echo $option; ?></option>
+				<?php } ?>		
+			</select>
+			
 			<br>
-			<label for="admin_password"><?php echo $admin["admin_password"]['label']; ?></label> <input type="password" name="admin_password" id="admin_password" value="">
-			<br>
-			<label for="password_verification">Please re-type the new password:</label> <input type="password" name="password_verification" id="password_verification" value="">
-			<br>
-			<label for="admin_email"><?php echo $admin["admin_email"]['label']; ?></label> <input type="text" name="admin_email" id="admin_email" value='<?php echo $admin["admin_email"]["value"]; ?>'>
-			<br>
-			<label for="contact_email"><?php echo $admin["contact_email"]['label']; ?></label> <input type="text" name="contact_email" id="contact_email" value='<?php echo $admin["contact_email"]["value"]; ?>'>
-			<br>
+			
 		</fieldset>
 			
-		<input type="hidden" name="editusers" id="editusers">
+		<input type="hidden" name="edittemplates" id="edittemplates">
 		<label>&nbsp;</label> <input type="submit" name="submit" id="submit" value="Save">
 	</form>
 

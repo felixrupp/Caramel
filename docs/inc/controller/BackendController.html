@@ -22,9 +22,10 @@
 				<li><span class="field">version:</span> $Id$</li>
 				<li><span class="field">copyright:</span> Copyright (c) 2011, Felix Rupp, Nicole Reinhardt</li>
 				<li><span class="field">license:</span> <a href="http://www.opensource.org/licenses/mit-license.php" rel="contents">MIT-License</a></li>
+				<li><span class="field">license:</span> <a href="http://www.gnu.org/licenses/gpl.html" rel="contents">GNU GPL</a></li>
 			</ul>
             <p class="notes">
-                Located in <a class="field" href="inc/controller/_inc---controller---BackendController.php.html" rel='contents'>/inc/controller/BackendController.php</a> (line <span class="field"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a29" rel="contents">29</a></span>)
+                Located in <a class="field" href="inc/controller/_inc---controller---BackendController.php.html" rel='contents'>/inc/controller/BackendController.php</a> (line <span class="field"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a30" rel="contents">30</a></span>)
             </p>
             
                         
@@ -72,7 +73,7 @@
             </div>
             <div class="info-box-body">			
                 <div class="method-summary">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="method-definition">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div class="method-definition">
                         <img src="images/Constructor.png" alt=" "/>
                         <a href="#BackendController" title="details" class="method-name">BackendController</a>
                                                 ()
@@ -100,7 +101,7 @@
                         <img src="images/Method.png" alt=" "/>
                         <a href="#getGlobalConfig" title="details" class="method-name">getGlobalConfig</a>
                                                 ()
-                                                                            <span class="method-result">void</span>
+                                                                            <span class="method-result">Array</span>
                                             </div>
                                                                                 <div class="method-definition">
                         <img src="images/Method.png" alt=" "/>
@@ -125,6 +126,12 @@
                         <a href="#getSession" title="details" class="method-name">getSession</a>
                                                 ()
                                                                             <span class="method-result">TRUE</span>
+                                            </div>
+                                                                                <div class="method-definition">
+                        <img src="images/Method.png" alt=" "/>
+                        <a href="#getTemplateConfig" title="details" class="method-name">getTemplateConfig</a>
+                                                ()
+                                                                            <span class="method-result">Array</span>
                                             </div>
                                                                                 <div class="method-definition">
                         <img src="images/Method.png" alt=" "/>
@@ -166,11 +173,11 @@
             <div class="info-box-body">
                 <A NAME='method_detail'></A>
 <a name="BackendController" id="BackendController"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="images/Constructor.png" />
-		<span class="method-title">Constructor BackendController</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a44" rel="contents">44</a></span>)
+		<span class="method-title">Constructor BackendController</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a45" rel="contents">45</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -191,11 +198,11 @@
 			
 	</div>
 <a name="ajaxAction" id="ajaxAction"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">ajaxAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a286" rel="contents">286</a></span>)
+		<span class="method-title">ajaxAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a314" rel="contents">314</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -223,11 +230,11 @@
 			
 	</div>
 <a name="backendOutputAction" id="backendOutputAction"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">backendOutputAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a67" rel="contents">67</a></span>)
+		<span class="method-title">backendOutputAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a68" rel="contents">68</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -248,11 +255,11 @@
 			
 	</div>
 <a name="getBaseUrl" id="getBaseUrl"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getBaseUrl</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a465" rel="contents">465</a></span>)
+		<span class="method-title">getBaseUrl</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a493" rel="contents">493</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -274,20 +281,22 @@
 			
 	</div>
 <a name="getGlobalConfig" id="getGlobalConfig"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getGlobalConfig</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a495" rel="contents">495</a></span>)
+		<span class="method-title">getGlobalConfig</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a529" rel="contents">529</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This method returns a correct formatted array with all global settings</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> with global configuration</li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Array</span>
 		<span class="method-name">
 			getGlobalConfig
 		</span>
@@ -298,11 +307,11 @@
 			
 	</div>
 <a name="getMeta" id="getMeta"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getMeta</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a482" rel="contents">482</a></span>)
+		<span class="method-title">getMeta</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a510" rel="contents">510</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -324,11 +333,11 @@
 			
 	</div>
 <a name="getParametersBefore" id="getParametersBefore"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getParametersBefore</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a386" rel="contents">386</a></span>)
+		<span class="method-title">getParametersBefore</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a414" rel="contents">414</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -350,11 +359,11 @@
 			
 	</div>
 <a name="getParametersBehind" id="getParametersBehind"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getParametersBehind</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a418" rel="contents">418</a></span>)
+		<span class="method-title">getParametersBehind</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a446" rel="contents">446</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -376,11 +385,11 @@
 			
 	</div>
 <a name="getSession" id="getSession"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getSession</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a369" rel="contents">369</a></span>)
+		<span class="method-title">getSession</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a397" rel="contents">397</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -401,12 +410,38 @@
 		
 			
 	</div>
+<a name="getTemplateConfig" id="getTemplateConfig"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="images/Method.png" />
+		<span class="method-title">getTemplateConfig</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a548" rel="contents">548</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This method returns a correct formatted array with our template settings</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> with template configuration</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Array</span>
+		<span class="method-name">
+			getTemplateConfig
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
 <a name="headTagAction" id="headTagAction"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">headTagAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a329" rel="contents">329</a></span>)
+		<span class="method-title">headTagAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a357" rel="contents">357</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -432,7 +467,7 @@
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">logoutAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a350" rel="contents">350</a></span>)
+		<span class="method-title">logoutAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a378" rel="contents">378</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -457,7 +492,7 @@
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">sessionAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a300" rel="contents">300</a></span>)
+		<span class="method-title">sessionAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a328" rel="contents">328</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -482,7 +517,7 @@
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">versionInformationAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a314" rel="contents">314</a></span>)
+		<span class="method-title">versionInformationAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a342" rel="contents">342</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -528,7 +563,7 @@
 		<span class="const-title">
 			<span class="const-name">VERSION</span>
 			 = <span class="const-default"> &quot;0.1.5&quot;</span>
-			(line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a37" rel="contents">37</a></span>)
+			(line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a38" rel="contents">38</a></span>)
 		</span>
 	</div>
 
@@ -544,7 +579,7 @@
 		<span class="const-title">
 			<span class="const-name">VERSION_DATE</span>
 			 = <span class="const-default"> &quot;2012-01-14&quot;</span>
-			(line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a38" rel="contents">38</a></span>)
+			(line <span class="line-number"><a href="__filesource/fsource_inc_controller_inccontrollerBackendController.php.html#a39" rel="contents">39</a></span>)
 		</span>
 	</div>
 
