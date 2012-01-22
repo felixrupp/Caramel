@@ -15,12 +15,12 @@ The following features are implemented until now:
 * Self-written templating-engine with HTML, CSS and JS support. No complex XSL-Transformations!
 * Object-oriented PHP5 code with mvc-architecture
 * Selecting between multiple templates
+* Backend functionality for changing page-contents
 
 
 Todo
 ----
 
-* Backend functionality for changing page-contents
 * Ajax readyness
 
 

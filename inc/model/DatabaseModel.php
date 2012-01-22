@@ -455,14 +455,9 @@ class DatabaseModel {
 				throw new CaramelException(10);
 			}
 			
-			
 		}
 		
-		$result = file_put_contents(BASEDIR.'/database/data.xml', $this->_dataBase->asXML());
-		
-		$this->reloadDatabaseFile();
-		
-		return $result;
+		return file_put_contents(BASEDIR.'/database/data.xml', $this->_dataBase->asXML());
 		
 	}
 	

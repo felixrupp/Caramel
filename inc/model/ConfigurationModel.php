@@ -29,12 +29,12 @@ class ConfigurationModel {
 	
 	
 	/**
-	 * @var SimpleXMLElement $_configFile Contains the SimpleXMLElement of our xml-configfile
+	 * @var SimpleXMLExtended $_configFile Contains the SimpleXMLExtended of our xml-configfile
 	 */
 	private $_configFile;
 	
 	/**
-	 * @var SimpleXMLElement $_adminConfigFile Contains the SimpleXMLElement of our admin configfile
+	 * @var SimpleXMLExtended $_adminConfigFile Contains the SimpleXMLExtended of our admin configfile
 	 */
 	private $_adminConfigFile;
 	
@@ -129,12 +129,12 @@ class ConfigurationModel {
 					
 				$valueArray = stripslashes((string)$valueArray["value"]);
 					
-				$result = $this->setConfigString($key, $valueArray);
+				$this->setConfigString($key, $valueArray);
 					
 			}
 		}
 			
-		return $result;
+		return file_put_contents(BASEDIR.'/config/site.xml', $this->_configFile->asXML());
 			
 	} // End of method declaration
 	
@@ -180,13 +180,30 @@ class ConfigurationModel {
 					
 				$valueArray = stripslashes((string)$valueArray["value"]);
 					
-				$result = $this->setAdminConfigString($key, $valueArray);
-					
+				$this->setAdminConfigString($key, $valueArray);
+									
 			}
 		}
 			
-		return $result;
+		return file_put_contents(BASEDIR.'/config/admin.xml', $this->_adminConfigFile->asXML());
 			
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Method to set new template file for frontend
+	 * 
+	 * @param string $newTemplate New template to set
+	 * 
+	 * @return void
+	 */
+	public function setTemplateAction($newTemplate) {
+		
+		$this->setConfigString("TEMPLATE", $newTemplate);
+		
+		return file_put_contents(BASEDIR.'/config/site.xml', $this->_configFile->asXML());
+		
 	} // End of method declaration
 	
 	
@@ -231,22 +248,19 @@ class ConfigurationModel {
 	 * @throws CaramelException
 	 * @return void
 	 */
-	public function setConfigStringAction($key, $newValue) {
+	protected function setConfigString($key, $newValue) {
 	
 		$setting = $this->_configFile->xpath('//setting[@key="'.$key.'"]');
 	
 		if(count($setting)>0) {
 	
 			$setting[0][0] = null;
-			$setting[0][0] = $newValue;
+			$setting[0][0]->addCData($newValue);
 	
 		}
 		else {
 			throw new CaramelException(10);
 		}
-		
-		//TODO: Don't save on every run of this method
-		return file_put_contents(BASEDIR.'/config/site.xml', $this->_configFile->asXML());
 	
 	} // End of method declaration
 	
@@ -282,22 +296,19 @@ class ConfigurationModel {
 	* @throws CaramelException
 	* @return void
 	*/
-	public function setAdminConfigStringAction($key, $newValue) {
+	protected function setAdminConfigString($key, $newValue) {
 	
 		$setting = $this->_adminConfigFile->xpath('//setting[@key="'.$key.'"]');
 	
 		if(count($setting)>0) {
 	
 			$setting[0][0] = null;
-			$setting[0][0] = $newValue;
+			$setting[0][0]->addCData($newValue);
 	
 		}
 		else {
 			throw new CaramelException(10);
 		}
-	
-		//TODO: Don't save on every run of this method
-		return file_put_contents(BASEDIR.'/config/admin.xml', $this->_adminConfigFile->asXML());
 	
 	} // End of method declaration
 	
@@ -312,7 +323,7 @@ class ConfigurationModel {
 	protected function reloadConfigFile() {
 			
 		try {
-			$this->_configFile = simplexml_load_file(BASEDIR.'/config/site.xml', 'SimpleXMLElement'); #, LIBXML_NOCDATA
+			$this->_configFile = simplexml_load_file(BASEDIR.'/config/site.xml', "SimpleXMLExtended", LIBXML_NOCDATA);
 		}
 		catch(Exception $e) {
 			throw new CaramelException(11);
@@ -331,7 +342,8 @@ class ConfigurationModel {
 	protected function reloadAdminConfigFile() {
 
 		try {
-			$this->_adminConfigFile = simplexml_load_file(BASEDIR.'/config/admin.xml', 'SimpleXMLElement'); #, LIBXML_NOCDATA
+			$this->_adminConfigFile = simplexml_load_file(BASEDIR.'/config/admin.xml', "SimpleXMLExtended", LIBXML_NOCDATA);
+			
 		}
 		catch(Exception $e) {
 			throw new CaramelException(11);

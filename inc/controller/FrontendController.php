@@ -135,7 +135,7 @@ class FrontendController {
 	 */
 	public function versionInformationAction() {
 		
-		$comment = "<!-- \n######### Caramel CMS\n######### Version: ".self::VERSION."\n######### Release: ".self::VERSION_DATE."\n\n######### Licensed under the MIT-License: http://www.opensource.org/licenses/mit-license.php\n\n######### Copyright (c) Felix Rupp, Nicole Reinhardt\n\n######### http://www.caramel-cms.com/\n -->\n";
+		$comment = "<!-- \n######### Caramel CMS\n######### Version: ".self::VERSION."\n######### Release: ".self::VERSION_DATE."\n\n######### Dual-licensed under the MIT-License: http://www.opensource.org/licenses/mit-license.php and the GNU GPL: http://www.gnu.org/licenses/gpl.html\n\n######### Copyright (c) Felix Rupp, Nicole Reinhardt\n\n######### http://www.caramel-cms.com/\n -->\n";
 				
 		return $comment;
 	
