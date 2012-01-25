@@ -142,7 +142,12 @@ class BackendController {
 			}
 			if(isset($_GET["q"]) && $_GET["q"]=="editpages" && !isset($_GET["id"])) {
 				
-				$allPages = $this->_dataBase->getWebsitePagesAction("en");
+				try {
+					$allPages = $this->_dataBase->getWebsitePagesAction("en");
+				}
+				catch(CaramelException $e) {
+					$e->getDetails();
+				}
 					
 				#var_dump($allPages);
 				
@@ -158,8 +163,13 @@ class BackendController {
 			
 				$id = (int)trim($_GET["id"]);
 				
-				$page = $this->_dataBase->getPageInformation($id);
-				
+				try {
+					$page = $this->_dataBase->getPageInformation($id);
+				}
+				catch(CaramelException $e) {
+					$e->getDetails();
+				}
+					
 				#var_dump($page);
 							
 				$navigation = TRUE;
@@ -211,42 +221,43 @@ class BackendController {
 			
 			if(isset($_POST["editonepage"]) && isset($_POST["pageid"])) {
 				
-				#var_dump($_POST);
-				
+								
 				$id = (int)trim($_POST["pageid"]);
 				
-				$page = $this->_dataBase->getPageInformation($id);
+				try {
+					$page = $this->_dataBase->getPageInformation($id);
+				}
+				catch(CaramelException $e) {
+					$e->getDetails();
+				}
+				
+				$page["path"]["value"] = trim($_POST["path"]);
 				
 				foreach($_POST as $key => $value) {
 					
-					if($key != "editonepage" && $key != "submit" && $key != "pageid") {
+					if($key!="editonepage" && $key!="submit" && $key!="pageid" && $key!="path") {
 						
 						# Current language
 						$lang = substr($key, strrpos($key, "_")+1, strlen($key));
 							
 						$key = substr($key, 0, strrpos($key, "_"));
-							
-						#var_dump($key);
-						
+												
 						$page["records"][$lang][$key]["value"] = $value;
 					}
 				}
 				
-				#var_dump($page);
 				
-				//TODO: Set the new page information
 				try{
-					$result = $this->_dataBase->setPageInformation($id, $page);	
-						
-				} catch(CaramelException $e) {
+					$result = $this->_dataBase->setPageInformation($id, $page);
+					$page = $this->_dataBase->getPageInformation($id);
+				} 
+				catch(CaramelException $e) {
 					$e->getDetails();
 				}
-				
+								
 				$navigation = TRUE;
 				$login = FALSE;
-				$welcome = FALSE;
-				
-				$page = $this->_dataBase->getPageInformation($id);
+				$welcome = FALSE;				
 					
 				$this->_templateView->assign("page", $page);
 				$this->_templateView->assign("editonepage", TRUE);
@@ -259,7 +270,12 @@ class BackendController {
 				
 				$newTemplate = $_POST["template"];
 				
-				$this->_config->setTemplateAction($newTemplate);
+				try {
+					$this->_config->setTemplateAction($newTemplate);
+				}
+				catch(CaramelException $e) {
+					$e->getDetails();
+				}
 				
 				$navigation = TRUE;
 				$login = FALSE;
@@ -340,10 +356,9 @@ class BackendController {
 				}
 			
 				try{
-					
 					$result = $this->_config->setAdminAction($admin);
-					
-				} catch(CaramelException $e) {
+				} 
+				catch(CaramelException $e) {
 					$e->getDetails();
 				}
 			
@@ -483,8 +498,15 @@ class BackendController {
 	 */
 	protected function getParametersBefore() {
 		$serverQueryString = $_SERVER['QUERY_STRING'];
-					
-		if($this->_config->getConfigStringAction("SPEAKING_URLS") == "false") {
+
+		try {
+			$speakingUrls = $this->_config->getConfigStringAction("SPEAKING_URLS");
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
+		}
+			
+		if($speakingUrls == "false") {
 				
 			if(preg_match('/lang/',$serverQueryString)) {		
 				$newQueryString = '?'.substr($serverQueryString,0,7).'&amp;';
@@ -498,7 +520,7 @@ class BackendController {
 			
 		}
 		
-		if($this->_config->getConfigStringAction("SPEAKING_URLS") == "true") {
+		if($speakingUrls == "true") {
 			$newQueryString = substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], $this->getLanguage())+strlen($this->getLanguage()));
 		}
 		
@@ -515,8 +537,15 @@ class BackendController {
 	 */
 	protected function getParametersBehind() {
 		$serverQueryString = $_SERVER['QUERY_STRING'];
-					
-		if($this->_config->getConfigStringAction("SPEAKING_URLS") == "false") {
+
+		try {
+			$speakingUrls = $this->_config->getConfigStringAction("SPEAKING_URLS");
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
+		}
+			
+		if($speakingUrls == "false") {
 		
 			if(preg_match('/lang/',$serverQueryString)) {				
 						
@@ -539,7 +568,7 @@ class BackendController {
 			
 		}
 		
-		elseif($this->_config->getConfigStringAction("SPEAKING_URLS") == "true") {
+		elseif($speakingUrls == "true") {
 				
 			if(isset($_GET['display'])) {
 				$newQueryString = '/'.substr($serverQueryString,16).'/';
@@ -562,7 +591,15 @@ class BackendController {
 	 */
 	protected function getBaseUrl() {
 	
-		if($this->_config->getConfigStringAction("SPEAKING_URLS") == "true") {
+		try {
+			$speakingUrls = $this->_config->getConfigStringAction("SPEAKING_URLS");
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
+		}
+		
+		
+		if($speakingUrls == "true") {
 			return "<base href=\"".$this->_config->getConfigStringAction('BASE')."\">\n";
 		} else {
 			return "";
@@ -617,7 +654,12 @@ class BackendController {
 	 */
 	protected function getTemplateConfig() {
 		
-		$template = $this->_config->getConfigStringAction("TEMPLATE");
+		try {
+			$template = $this->_config->getConfigStringAction("TEMPLATE");
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
+		}
 		
 		$acceptedValues = array();
 		

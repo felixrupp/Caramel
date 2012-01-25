@@ -17,7 +17,7 @@
 			<br>
 			<label for="startpage"><?php echo $globals["startpage"]['label']; ?></label> <select name="startpage" id="startpage">
 				<?php foreach($globals["startpage"]["acceptedValues"] as $option) { ?>
-				<option value="<?php echo $option; ?>"<?php if($option==$globals["startpage"]["value"]){echo ' selected';} ?>><?php echo $option; ?></option>
+				<option value="<?php echo $option["id"]; ?>"<?php if($option["id"]==$globals["startpage"]["value"]){echo ' selected';} ?>><?php echo $option["path"]; ?></option>
 				<?php } ?>		
 			</select>
 			<br>

@@ -22,9 +22,9 @@ fieldset {
 	margin:10px 0;
 }
 
-fieldset.formButtons {
+/*fieldset.formButtons {
   left: 320px;
-}
+}*/
 
 input {
 	margin-bottom:10px;
@@ -51,6 +51,11 @@ input[type="submit"]:hover {
 
 input[type="radio"] {
   margin: 10px 6px;
+}
+
+textarea {
+	width: 250px;	
+	height: 60px;
 }
 
 select {
@@ -202,6 +207,8 @@ div#content {
   border-left: 3px outset #BBB;
 }
 
+
+
 /*********************************
  * footer
  *********************************/ 
@@ -239,3 +246,8 @@ div#footer {
   color: #FFF;
   font-size: 0.8em;
 }
+
+/*********************************
+ * misc
+ *********************************/ 
+

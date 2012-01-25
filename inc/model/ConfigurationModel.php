@@ -20,12 +20,11 @@
  */
 class ConfigurationModel {
 
-	# Attributes
 	/**
 	* @var ConfigurationModel $_configurator Contains single instance of our ConfigurationModel
 	* @staticvar $_configurator
 	*/
-		private static $_configurator = NULL;
+	private static $_configurator = NULL;
 	
 	
 	/**
@@ -45,14 +44,15 @@ class ConfigurationModel {
 	 * @return void
 	 */
 	private function ConfigurationModel() {
-		# Import config-file:
+
 		try {
-		$this->reloadConfigFile();
-		$this->reloadAdminConfigFile();
-	}
-	catch(CaramelException $e) {
-		$e->getDetails();
-	}
+			$this->reloadConfigFile();
+			$this->reloadAdminConfigFile();
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
+		}
+		
 	} // End of constructor declaration
 	
 	
@@ -114,7 +114,7 @@ class ConfigurationModel {
 	 *
 	 * @param array $globals Array that contains all global settings
 	 *
-	 * throws CaramelException
+	 * @throws CaramelException
 	 * @return void
 	 */
 	public function setGlobalsAction($globals) {
@@ -129,12 +129,12 @@ class ConfigurationModel {
 					
 				$valueArray = stripslashes((string)$valueArray["value"]);
 					
-				$this->setConfigString($key, $valueArray);
-					
+				$result = $this->setConfigString($key, $valueArray);
+				
 			}
 		}
 			
-		return file_put_contents(BASEDIR.'/config/site.xml', $this->_configFile->asXML());
+		return $result;
 			
 	} // End of method declaration
 	
@@ -165,8 +165,8 @@ class ConfigurationModel {
 	*
 	* @param array $globals Array that contains all admin settings
 	*
-	* throws CaramelException
-	* @return void
+	* @throws CaramelException
+	* @return Result of file_put_contents
 	*/
 	public function setAdminAction($admin) {
 			
@@ -180,12 +180,12 @@ class ConfigurationModel {
 					
 				$valueArray = stripslashes((string)$valueArray["value"]);
 					
-				$this->setAdminConfigString($key, $valueArray);
+				$result = $this->setAdminConfigString($key, $valueArray);
 									
 			}
 		}
 			
-		return file_put_contents(BASEDIR.'/config/admin.xml', $this->_adminConfigFile->asXML());
+		return $result;
 			
 	} // End of method declaration
 	
@@ -196,7 +196,8 @@ class ConfigurationModel {
 	 * 
 	 * @param string $newTemplate New template to set
 	 * 
-	 * @return void
+	 * @throws CaramelException
+	 * @return Result of file_put_contents
 	 */
 	public function setTemplateAction($newTemplate) {
 		
@@ -246,7 +247,7 @@ class ConfigurationModel {
 	 * @param string $newValue New value for the setting
 	 *
 	 * @throws CaramelException
-	 * @return void
+	 * @return Result of file_put_contents
 	 */
 	protected function setConfigString($key, $newValue) {
 	
@@ -261,6 +262,8 @@ class ConfigurationModel {
 		else {
 			throw new CaramelException(10);
 		}
+		
+		return file_put_contents(BASEDIR.'/config/site.xml', $this->_configFile->asXML());		
 	
 	} // End of method declaration
 	
@@ -270,6 +273,8 @@ class ConfigurationModel {
 	 * Get String from key of admin configfile
 	 *
 	 * @param string $key Key to lookup in config-file
+	 * 
+	 * @throws CaramelException
 	 * @return string Value for given key
 	 */
 	public function getAdminConfigStringAction($key) {
@@ -294,7 +299,7 @@ class ConfigurationModel {
 	* @param string $newValue New value for the setting
 	*
 	* @throws CaramelException
-	* @return void
+	* @return Result of file_put_contents
 	*/
 	protected function setAdminConfigString($key, $newValue) {
 	
@@ -310,6 +315,8 @@ class ConfigurationModel {
 			throw new CaramelException(10);
 		}
 	
+		return file_put_contents(BASEDIR.'/config/admin.xml', $this->_adminConfigFile->asXML());
+		
 	} // End of method declaration
 	
 	
@@ -343,7 +350,6 @@ class ConfigurationModel {
 
 		try {
 			$this->_adminConfigFile = simplexml_load_file(BASEDIR.'/config/admin.xml', "SimpleXMLExtended", LIBXML_NOCDATA);
-			
 		}
 		catch(Exception $e) {
 			throw new CaramelException(11);

@@ -68,13 +68,32 @@ class FrontendController {
 		
 		$lang = $this->getLanguage();
 		$pageName = $this->getDisplay();
-				
-		$navigation = $this->_dataBase->getWebsiteNavigationAction($lang); # This is an array with to much information for navigation
+		$pageId = NULL;
 		
-		# Build navigation links from given information. Returned array is very compact
-		$navigation = $this->getNavigationLinks($navigation);
+		if(!$pageName) { // no page is set for display
+			
+			try {
+				$pageId = $this->_config->getConfigStringAction("STARTPAGE");
+			}
+			catch(CaramelException $e) {
+				$e->getDetails();
+			}
+			
+			$pageName = NULL;
+		}
 		
-		$content = $this->_dataBase->getWebsiteContentAction($lang, $pageName); # This is a string with our content
+		try {
+			$navigation = $this->_dataBase->getWebsiteNavigationAction($lang); # This is an array with to much information for navigation
+			
+			# Build navigation links from given information. Returned array is very compact
+			$navigation = $this->getNavigationLinks($navigation);
+			
+			$content = $this->_dataBase->getWebsiteContentAction($lang, $pageName, $pageId); # This is a string with our content
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
+		}
+
 				
 		$this->_templateView->assign("content", $content);
 		$this->_templateView->assign("navigation", $navigation);
@@ -94,8 +113,15 @@ class FrontendController {
 	public function languageRedirectAction() {
 		
 		if(!isset($_GET['lang'])) {
+			
+			try {
+				$speakingUrls = $this->_config->getConfigStringAction("SPEAKING_URLS");
+			}
+			catch(CaramelException $e) {
+				$e->getDetails();
+			}
 		
-			if($this->_config->getConfigStringAction("SPEAKING_URLS") == "false") {
+			if($speakingUrls == "false") {
 		
 				$language = explode(',',$_SERVER['HTTP_ACCEPT_LANGUAGE']);
 				$language = strtolower(substr(chop($language[0]),0,2));
@@ -109,7 +135,7 @@ class FrontendController {
 				}
 		
 			}
-			elseif($this->_config->getConfigStringAction("SPEAKING_URLS") == "true"){
+			elseif($speakingUrls == "true"){
 		
 				$language = explode(',',$_SERVER['HTTP_ACCEPT_LANGUAGE']);
 				$language = strtolower(substr(chop($language[0]),0,2));
@@ -161,16 +187,30 @@ class FrontendController {
 	 */	
 	public function headTagAction() {
 		
-		$metaRobots = '<meta name="robots" content="'.$this->_config->getConfigStringAction('ROBOTS').'">';
 		$metaGenerator = "<meta name=\"generator\" content=\"Caramel CMS ".self::VERSION."\">";
 		
 		$lang = $this->getLanguage();
 		$pageName = $this->getDisplay();
+		$pageId = NULL;
 		
-		$meta = $this->_dataBase->getAllMetaTagsAction($lang, $pageName).$metaRobots."\n".$metaGenerator."\n";
-		
-		$title = $this->_config->getConfigStringAction("WEBSITE_TITLE").$this->_config->getConfigStringAction("WEBSITE_TITLE_SEPERATOR").$this->_dataBase->getWebsiteTitleAction($lang, $pageName);
+		try {
 			
+			$metaRobots = '<meta name="robots" content="'.$this->_config->getConfigStringAction('ROBOTS').'">';
+			
+			if(!$pageName) { // no page is set for display
+				$pageId = $this->_config->getConfigStringAction("STARTPAGE");
+				$pageName = NULL;
+			}
+			
+			$meta = $this->_dataBase->getAllMetaTagsAction($lang, $pageName, $pageId).$metaRobots."\n".$metaGenerator."\n";
+		
+			$title = $this->_config->getConfigStringAction("WEBSITE_TITLE").$this->_config->getConfigStringAction("WEBSITE_TITLE_SEPERATOR").$this->_dataBase->getWebsiteTitleAction($lang, $pageName, $pageId);
+		
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
+		}
+		
 		$headTag = $this->getBaseUrl()."\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$meta."\n<link rel=\"shortcut icon\" href=\"favicon.ico\" type=\"image/ico\">\n\n<title>".$title."</title>\n\n";
 		$headTag .= $this->_templateView->addCssJs();
 		
@@ -207,7 +247,14 @@ class FrontendController {
 		$naviLink = (empty($_SERVER['QUERY_STRING']) ? '?' : $newQueryString).'display=';
 	
 		# Set navigation class
-		if($this->_config->getConfigStringAction("NAVIGATION_CLASS") !="") {
+		try {
+			$navClass = $this->_config->getConfigStringAction("NAVIGATION_CLASS");
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
+		}
+		
+		if($navClass !="") {
 			$navigationClass = ' class="'.$this->_config->getConfigStringAction("NAVIGATION_CLASS").'"';
 		} else {
 			$navigationClass = "";
@@ -217,7 +264,14 @@ class FrontendController {
 			
 			# Active Marker
 			if($page["path"] == $this->getDisplay()) {
-				$active = $this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER");
+			
+				try {
+					$active = $this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER");
+				}
+				catch(CaramelException $e) {
+					$e->getDetails();
+				}
+				
 			} else {
 				$active = "";
 			}
@@ -231,6 +285,7 @@ class FrontendController {
 				$link .= $navigationClass;
 				
 				# Define link-syntax (speaking urls or not)
+				//TODO: try-catch
 				if($this->_config->getConfigStringAction("SPEAKING_URLS") == "false") {
 					$link .= " href=\"".$naviLink.$page["path"]."\"";
 				}
@@ -247,6 +302,7 @@ class FrontendController {
 				$link .= " title=\"".$page["titletag"]."\">";
 				
 				# Evaluate position of NAVIGATION_ACTIVE_MARKER
+				//TODO: Try-catch
 				if($this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION") == "before") {
 					$link .= $active.$page["navigation"];
 				}
@@ -267,6 +323,7 @@ class FrontendController {
 				foreach($page["subpages"] as $subPageId => $page) {
 					
 					# Active Marker
+					//TODO: Try-catch
 					if($page["path"] == $this->getDisplay()) {
 						$active = $this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER");
 					} else {
@@ -282,6 +339,7 @@ class FrontendController {
 						$link .= $navigationClass;
 					
 						# Define link-syntax (speaking urls or not)
+						//TODO: Try-catch
 						if($this->_config->getConfigStringAction("SPEAKING_URLS") == "false") {
 							$link .= " href=\"".$naviLink.$page["path"]."\"";
 						}
@@ -298,6 +356,7 @@ class FrontendController {
 						$link .= " title=\"".$page["titletag"]."\">";
 					
 						# Evaluate position of NAVIGATION_ACTIVE_MARKER
+						//TODO: Try-catch
 						if($this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION") == "before") {
 							$link .= $active.$page["navigation"];
 						}
@@ -335,16 +394,31 @@ class FrontendController {
 		
 		$selectorLinks = array();
 		
-		foreach($this->_dataBase->getAllLanguagesAction() as $langCode) {
+		try {
+			$allLangs = $this->_dataBase->getAllLanguagesAction();
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
+		}
+		
+		foreach($allLangs as $langCode) {
+			
 			if($this->getLanguage() != $langCode) {
 			
 				# Get Parameters before ampersand
 				$newQueryString = $this->getParametersBehind();
-			
-				if($this->_config->getConfigStringAction("SPEAKING_URLS") == "false") {
+				
+				try {
+					$speakingUrls = $this->_config->getConfigStringAction("SPEAKING_URLS");
+				}
+				catch(CaramelException $e) {
+					$e->getDetails();
+				}
+				
+				if($speakingUrls == "false") {
 					array_push($selectorLinks, '<a title="" href="?lang=en'.$newQueryString.'">'.strtoupper($langCode).'</a>');
 				}
-				elseif($this->_config->getConfigStringAction("SPEAKING_URLS") == "true") {
+				elseif($speakingUrls == "true") {
 					array_push($selectorLinks, '<a title="" href="'.substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], $this->getLanguage())).$langCode.$newQueryString.'">'.strtoupper($langCode).'</a>');
 				}	
 
@@ -361,7 +435,13 @@ class FrontendController {
 				if($key == count($selectorLinks)-1) {
 					$languageSelector .= $link;
 				} else {
-					$languageSelector .= $link.$this->_config->getConfigStringAction("LANGUAGE_SELECTOR_SEPERATOR");
+					
+					try {
+						$languageSelector .= $link.$this->_config->getConfigStringAction("LANGUAGE_SELECTOR_SEPERATOR");
+					}
+					catch(CaramelException $e) {
+						$e->getDetails();
+					}
 				}
 			}
 		}
@@ -388,7 +468,15 @@ class FrontendController {
 			echo $e->getDetails();
 		}*/
 		
-		if($this->_config->getConfigStringAction("LANGUAGE_SELECTOR_IN_FOOTER") == 'true') {
+		
+		try {
+			$langSelectInFooter = $this->_config->getConfigStringAction("LANGUAGE_SELECTOR_IN_FOOTER");
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
+		}
+		
+		if($langSelectInFooter == 'true') {
 			$languageSelector = $this->getLanguageSelector()."&nbsp;";
 		}
 		
@@ -406,8 +494,15 @@ class FrontendController {
 	 * @return string Actual language
 	 */
 	protected function getLanguage() {
+		
+		try {
+			$allLangs = $this->_dataBase->getAllLanguagesAction();
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
+		}
 	
-		if(isset($_GET['lang']) and in_array($_GET['lang'], $this->_dataBase->getAllLanguagesAction())) { # Test if set language is in our language array
+		if(isset($_GET['lang']) and in_array($_GET['lang'], $allLangs)) { # Test if set language is in our language array
 			$language = $_GET['lang'];
 		}
 		else {
@@ -429,7 +524,7 @@ class FrontendController {
 			$display = $_GET['display'];
 		}
 		else {
-			$display = $this->_config->getConfigStringAction("STARTPAGE");
+			$display = FALSE;
 		}
 		
 		return $display;
@@ -445,7 +540,14 @@ class FrontendController {
 	protected function getParametersBefore() {
 		$serverQueryString = $_SERVER['QUERY_STRING'];
 					
-		if($this->_config->getConfigStringAction("SPEAKING_URLS") == "false") {
+		try {
+			$speakingUrls = $this->_config->getConfigStringAction("SPEAKING_URLS");
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
+		}
+			
+		if($speakingUrls == "false") {
 				
 			if(preg_match('/lang/',$serverQueryString)) {		
 				$newQueryString = '?'.substr($serverQueryString,0,7).'&amp;';
@@ -459,7 +561,7 @@ class FrontendController {
 			
 		}
 		
-		if($this->_config->getConfigStringAction("SPEAKING_URLS") == "true") {
+		if($speakingUrls == "true") {
 			$newQueryString = substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], $this->getLanguage())+strlen($this->getLanguage()));
 		}
 		
@@ -476,7 +578,14 @@ class FrontendController {
 	protected function getParametersBehind() {
 		$serverQueryString = $_SERVER['QUERY_STRING'];
 					
-		if($this->_config->getConfigStringAction("SPEAKING_URLS") == "false") {
+		try {
+			$speakingUrls = $this->_config->getConfigStringAction("SPEAKING_URLS");
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
+		}
+			
+		if($speakingUrls == "false") {
 		
 			if(preg_match('/lang/',$serverQueryString)) {				
 						
@@ -499,7 +608,7 @@ class FrontendController {
 			
 		}
 		
-		elseif($this->_config->getConfigStringAction("SPEAKING_URLS") == "true") {
+		elseif($speakingUrls == "true") {
 				
 			if(isset($_GET['display'])) {
 				$newQueryString = '/'.substr($serverQueryString,16).'/';
@@ -523,7 +632,14 @@ class FrontendController {
 	 */
 	protected function getBaseUrl() {
 	
-		if($this->_config->getConfigStringAction("SPEAKING_URLS") == "true") {
+		try {
+			$speakingUrls = $this->_config->getConfigStringAction("SPEAKING_URLS");
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
+		}
+			
+		if($speakingUrls == "true") {
 			return "<base href=\"".$this->_config->getConfigStringAction('BASE')."\">\n";
 		} else {
 			return "";
@@ -555,6 +671,7 @@ class FrontendController {
 	 * Print out facebook like button in index.php
 	 * 
 	 * @return string Facebook like button
+	 * @deprecated
 	 */
 	protected function getSocialbar() {
 	 

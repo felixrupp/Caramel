@@ -64,9 +64,7 @@
   						<br>
   						<label for="password">Password:</label> <input type="password" name="password" id="password">
   					</fieldset>
-  					<fieldset class="formButtons">
-  					 <label>&nbsp;</label> <input type="submit" value="Login" id="submit" name="submit">
-  					</fieldset>
+  					 <input type="submit" value="Login" id="submit" name="submit">
   				</form>
   			
   			</div>

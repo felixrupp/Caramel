@@ -7,18 +7,17 @@
 
 <h1>Page Management</h1>
 
-<div>
-
+<div class="pageManagement">
 
 <ul>
 	<?php foreach($pages as $naventry) { ?>
 
-		<li><a href="?q=editpages&id=<?php echo $naventry["id"] ?>"><?php echo $naventry["navigation"]; ?></a>
+		<li><a href="?q=editpages&id=<?php echo $naventry["id"] ?>"><?php echo $naventry["navigation"]; ?></a><span> | <a href="#" onClick="javascript:if(confirm('Really delete this page with all records?')) {return true;} else {return false;}">Delete</a></span>
 		
 		<?php if(isset($naventry["subpages"]) && count($naventry["subpages"]>0)) {?>
 			<ul>
 				<?php foreach($naventry["subpages"] as $subentry) {?>
-					<li><a href="?q=editpages&id=<?php echo $subentry["id"] ?>"><?php echo $subentry["navigation"]; ?></a></li>
+					<li><a href="?q=editpages&id=<?php echo $subentry["id"] ?>"><?php echo $subentry["navigation"]; ?></a><span> | <a href="#" onClick="javascript:if(confirm('Really delete this page with all records?')) {return true;} else {return false;}">Delete</a></span></li>
 				<?php } ?>
 			</ul>
 		<?php } ?>

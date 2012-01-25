@@ -91,6 +91,7 @@ class DatabaseModel {
 			foreach($xPathResult as $langCode) {
 				array_push($allLanguages, (string)$langCode); # Convert SimpleXMLElements into strings
 			}
+			
 		} catch(CaramelException $e) {
 			$e->getDetails();
 		}
@@ -110,9 +111,20 @@ class DatabaseModel {
 	 * @throws CaramelException
 	 * @return string String with all needed meta information to one page
 	 */
-	public function getAllMetaTagsAction($lang, $pageName) {
+	public function getAllMetaTagsAction($lang, $pageName=NULL, $pageId=NULL) {
 		
-		$xPathResultMetaDescription = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="description"]');
+		#$xPathResultMetaDescription = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="description"]');
+		
+		if($pageName!=NULL && $pageId==NULL) {
+			$xPathResultMetaDescription = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="description"]');
+		}
+		else if($pageId!=NULL && $pageName==NULL) {
+			$xPathResultMetaDescription = $this->_dataBase->xpath('//page[@id="'.$pageId.'"]/record[@lang="'.$lang.'"]/meta[@name="description"]');
+		}
+		else{
+			$xPathResultMetaDescription = $this->_dataBase->xpath('//page/record[@lang="'.$lang.'"]/meta[@name="description"]');
+		}
+		
 		if(count($xPathResultMetaDescription)>0) {
 			$metaDescription = "<meta name=\"description\" content=\"".$xPathResultMetaDescription[0]."\">";
 		}
@@ -120,7 +132,20 @@ class DatabaseModel {
 			throw new CaramelException(10);
 		}
 		
-		$xPathResultMetaKeywords = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="keywords"]');
+		
+		
+		#$xPathResultMetaKeywords = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="keywords"]');
+		
+		if($pageName!=NULL && $pageId==NULL) {
+			$xPathResultMetaKeywords = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="keywords"]');
+		}
+		else if($pageId!=NULL && $pageName==NULL) {
+			$xPathResultMetaKeywords = $this->_dataBase->xpath('//page[@id="'.$pageId.'"]/record[@lang="'.$lang.'"]/meta[@name="keywords"]');
+		}
+		else{
+			$xPathResultMetaKeywords = $this->_dataBase->xpath('//page/record[@lang="'.$lang.'"]/meta[@name="keywords"]');
+		}
+		
 		if(count($xPathResultMetaKeywords)>0) {
 			$metaKeywords = "<meta name=\"keywords\" content=\"".$xPathResultMetaKeywords[0]."\">";
 		}
@@ -128,7 +153,20 @@ class DatabaseModel {
 			throw new CaramelException(10);
 		}
 		
-		$xPathResultMetaAuthor = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="author"]');
+		
+		
+		#$xPathResultMetaAuthor = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="author"]');
+		
+		if($pageName!=NULL && $pageId==NULL) {
+			$xPathResultMetaAuthor = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="author"]');
+		}
+		else if($pageId!=NULL && $pageName==NULL) {
+			$xPathResultMetaAuthor = $this->_dataBase->xpath('//page[@id="'.$pageId.'"]/record[@lang="'.$lang.'"]/meta[@name="author"]');
+		}
+		else{
+			$xPathResultMetaAuthor = $this->_dataBase->xpath('//page/record[@lang="'.$lang.'"]/meta[@name="author"]');
+		}
+		
 		if(count($xPathResultMetaAuthor)>0) {
 			$metaAuthor = "<meta name=\"author\" content=\"".$xPathResultMetaAuthor[0]."\">";
 		}
@@ -145,6 +183,7 @@ class DatabaseModel {
 	/**
 	 * Method to return only all page paths
 	 * 
+	 * @throws CaramelException
 	 * @return Array with all page paths.
 	 */
 	public function getAllPageNamesAction() {
@@ -157,7 +196,7 @@ class DatabaseModel {
 						
 			foreach($xPathResultPages as $page) {
 			
-				$pageNames[] = (string)$page->attributes()->path;
+				$pageNames[] = array("path"=>(string)$page->attributes()->path, "id"=>(int)$page->attributes()->id);
 				
 			}
 		}
@@ -180,12 +219,22 @@ class DatabaseModel {
 	 * @throws CaramelException
 	 * @return string String with correct website title
 	 */
-	public function getWebsiteTitleAction($lang, $pageName) {
+	public function getWebsiteTitleAction($lang, $pageName=NULL, $pageId=NULL) {
 		
-		$xPathResultTitle = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/title');
+		#$xPathResultTitle = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/title');
+		
+		if($pageName!=NULL && $pageId==NULL) {
+			$xPathResultTitle = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/title');
+		}
+		else if($pageId!=NULL && $pageName==NULL) {
+			$xPathResultTitle = $this->_dataBase->xpath('//page[@id="'.$pageId.'"]/record[@lang="'.$lang.'"]/title');
+		}
+		else{
+			$xPathResultTitle = $this->_dataBase->xpath('//page/record[@lang="'.$lang.'"]/title');
+		}
 		
 		if(count($xPathResultTitle)>0) {
-			$title = (string)$xPathResultTitle[0];
+			$title = (string)$xPathResultTitle[0][0];
 		}
 		else {
 			throw new CaramelException(10);
@@ -206,17 +255,29 @@ class DatabaseModel {
 	 * @throws CaramelException
 	 * @return string String with correct website content
 	 */
-	public function getWebsiteContentAction($lang, $pageName) {
+	public function getWebsiteContentAction($lang, $pageName=NULL, $pageId=NULL) {
 		
-		$xPathResultContent = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/content');
+		
+		if($pageName!=NULL && $pageId==NULL) {
+			$xPathResultContent = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/content');
+		}
+		else if($pageId!=NULL && $pageName==NULL) {
+			$xPathResultContent = $this->_dataBase->xpath('//page[@id="'.$pageId.'"]/record[@lang="'.$lang.'"]/content');
+		}
+		else{
+			$xPathResultContent = $this->_dataBase->xpath('//page/record[@lang="'.$lang.'"]/content');
+		}
+		
 		
 		if(count($xPathResultContent)>0) {
-			$content = (string)$xPathResultContent[0];
+						
+			$content = (string)$xPathResultContent[0][0];
+
 		}
 		else {
 			throw new CaramelException(10);
 		}
-			
+		
 		return $content;
 		
 	} // End of method declaration
@@ -229,6 +290,7 @@ class DatabaseModel {
 	 * 
 	 * @param string $lang Current language
 	 * 
+	 * @throws CaramelException
 	 * @return Array with localized navigation information
 	 */
 	public function getWebsiteNavigationAction($lang) {
@@ -252,6 +314,8 @@ class DatabaseModel {
 					"titletag" => (string)$record->titletag,
 				);
 				
+			} else {
+				throw new CaramelException(10);
 			}
 			
 			$orderedNavi[(int)$page->attributes()->id]["subpages"] = array();
@@ -277,12 +341,10 @@ class DatabaseModel {
 						"titletag" => (string)$subRecord->titletag,
 					);
 	
+				} else {
+					throw new CaramelException(10);
 				}
-
-				
 			}
-			
-			
 		}
 		
 		return $orderedNavi;
@@ -296,6 +358,7 @@ class DatabaseModel {
 	*
 	* @param string $lang Current language
 	*
+	* @throws CaramelException
 	* @return Array with all pages
 	*/
 	public function getWebsitePagesAction($lang) {
@@ -318,6 +381,8 @@ class DatabaseModel {
 						"navigation" => (string)$record->navigation,
 				);
 	
+			} else {
+				throw new CaramelException(10);
 			}
 			
 			$orderedNavi[(int)$page->attributes()->id]["subpages"] = array();
@@ -342,12 +407,10 @@ class DatabaseModel {
 						"navigation" => (string)$subRecord->navigation,
 					);
 	
+				} else {
+					throw new CaramelException(10);
 				}
-	
-					
 			}
-			
-			
 		}
 	
 		return $orderedNavi;
@@ -371,9 +434,11 @@ class DatabaseModel {
 		$page = array();
 		
 		$page["id"] = $id;
-		$page["path"] = (string)$xPathResultPage[0]->attributes()->path;
+		$page["path"]["label"] = "URL path to page";
 		
 		if(count($xPathResultPage)>0) {
+			
+			$page["path"]["value"] = (string)$xPathResultPage[0]["path"];
 			
 			foreach($xPathResultPage[0]->record as $record) {
 				
@@ -423,9 +488,25 @@ class DatabaseModel {
 	* @param array $page Array with modified page information
 	*
 	* @throws CaramelException
-	* @return Array with all information to page with $id
+	* @return Result of file_put_contents
 	*/
-	public function setPageInformation($id, $page) {	
+	public function setPageInformation($id, $page) {
+		
+		$result = false;
+		
+		$xPathResultPage = $this->_dataBase->xpath('//page[@id="'.$id.'"]');
+		
+		if(count($xPathResultPage)>0) {
+			
+			$xPathResultPage[0]["path"] = $page["path"]["value"];
+			
+			$result = file_put_contents(BASEDIR.'/database/data.xml', $this->_dataBase->asXML());
+			
+		}
+		else {
+			throw new CaramelException(10);
+		}
+		
 		
 		foreach($page["records"] as $lang => $record) {
 			
@@ -450,6 +531,8 @@ class DatabaseModel {
 				$xPathResultRecord[0]->content = null;
 				$xPathResultRecord[0]->content->addCData(stripslashes(trim($record["content"]["value"])));
 				
+				$result = file_put_contents(BASEDIR.'/database/data.xml', $this->_dataBase->asXML());
+				
 			}
 			else {
 				throw new CaramelException(10);
@@ -457,7 +540,7 @@ class DatabaseModel {
 			
 		}
 		
-		return file_put_contents(BASEDIR.'/database/data.xml', $this->_dataBase->asXML());
+		return $result;
 		
 	}
 	

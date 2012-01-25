@@ -5,11 +5,18 @@
  */
 ?>
 
-<h1>Edit page: "<?php echo $page["path"] ?>"</h1>
+<h1>Edit page: "<?php echo $page["path"]["value"] ?>"</h1>
+
+<p><a href="?q=editpages">back to page overview</a></p>
 
 <div>
 
 	<form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" method="post">
+	
+		<fieldset>
+			<legend>Page settings</legend>
+			<label for="path"><?php echo $page["path"]["label"]; ?></label> <input type="text" name="path" id="path" value='<?php echo $page["path"]["value"]; ?>'>
+		</fieldset>
 	
 		<?php foreach($page["records"] as $language => $record) { ?>
 	
