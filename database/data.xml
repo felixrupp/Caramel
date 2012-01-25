@@ -11,22 +11,20 @@
 -->
 <database version="1.0">
 
-	<page id="1" path="home">
+	<page id="1" path="caramel">
 
 		<record lang="en">
 			<navigation pos="1">Caramel</navigation>
 			<title>Open Source CMS</title>
 			<titletag>Caramel</titletag>
 			<meta name="description">English description for Home</meta>
-			<meta name="keywords">English keywords for Home</meta>
-			<meta name="author">Felix Rupp english</meta>
+			<meta name="keywords">Caramel CMS, CMS, XML, PHP5, OpenSource, Open, Source</meta>
+			<meta name="author">Felix Rupp</meta>
 			<socialbar>false</socialbar>
-			<content>&lt;div id="bcolorbox19234735" style=""&gt;
-	&amp;nbsp;&lt;/div&gt;
-&lt;h2&gt;
+			<content>&lt;h2&gt;
 	Overview&lt;/h2&gt;
 &lt;p&gt;
-	&lt;span style="color:#ff8c00;"&gt;CARAMEL CMS&lt;/span&gt; is a Content Managemant System for small sites and waived on an external database and an extensive user management. Otherwise CARAMEL provides a lot of features to create a website according to your wishes. In addition, CARAMEL released under the MIT license and may be used both for private and commercial purposes freely.&lt;/p&gt;
+	&lt;span style="\"&gt;Caramel CMS&lt;/span&gt; is a Content Management System for small websites. It&amp;rsquo;s not based on an external database and abandons extensive user management. Caramel CMS provides a lot of features to create a website according to your wishes. In addition, Caramel is released under the &lt;a href="\"&gt;MIT-license&lt;/a&gt; and the &lt;a href="\"&gt;GNU GPL&lt;/a&gt; and may be used both, for private and commercial purposes freely.&lt;/p&gt;
 &lt;h3&gt;
 	Features&lt;/h3&gt;
 &lt;ul&gt;
@@ -43,15 +41,13 @@
 			<title>Open Source CMS</title>
 			<titletag>Caramel</titletag>
 			<meta name="description">Deutsche Beschreibung für Start</meta>
-			<meta name="keywords">Deutsche Schlüsselwörter für Start</meta>
-			<meta name="author">Felix Rupp deutsch</meta>
+			<meta name="keywords">Caramel CMS, CMS, XML, PHP5, OpenSource, Open, Source</meta>
+			<meta name="author">Felix Rupp</meta>
 			<socialbar>false</socialbar>
-			<content>&lt;div id="bcolorbox19234735" style=""&gt;
-	&amp;nbsp;&lt;/div&gt;
-&lt;h2&gt;
+			<content>&lt;h2&gt;
 	&amp;Uuml;berblick&lt;/h2&gt;
 &lt;p&gt;
-	&lt;span style="color:#ff8c00;"&gt;CARAMEL CMS&lt;/span&gt; ist ein Content-Managemant-System f&amp;uuml;r kleine Websites und verzichtet daher auf eine externe Datenbank und eine umfangreiche Benutzerverwaltung. Ansonsten bietet CARAMEL eine Menge Funktionen, um eine Website nach Ihren W&amp;uuml;nschen zu erstellen. Zudem steht CARAMEL unter der MIT-Lizenz und darf somit sowohl privat als auch kommerziell frei verwendet werden.&lt;/p&gt;
+	&lt;span style="\"&gt;Caramel CMS&lt;/span&gt; ist ein Content-Management-System f&amp;uuml;r kleine Websites und verzichtet daher auf eine externe Datenbank und eine umfangreiche Benutzerverwaltung. Ansonsten bietet Caramel eine Menge Funktionen, um eine Website nach Ihren W&amp;uuml;nschen zu erstellen. Zudem steht Caramel unter der &lt;a href="\"&gt;MIT&lt;/a&gt;- und der &lt;a href="\"&gt;GNU GPL&lt;/a&gt;-Lizenz und darf somit sowohl privat als auch kommerziell frei verwendet werden.&lt;/p&gt;
 &lt;h3&gt;
 	Features&lt;/h3&gt;
 &lt;ul&gt;
@@ -134,70 +130,50 @@
 		<page id="3" path="documentation/user">
 
 			<record lang="en">
-				<navigation pos="1">
-					User documentation
-				</navigation>
-				<title>
-					user documentation
-				</title>
-				<titletag>
-					user documentation
-				</titletag>
-				<meta name="description">
-					English description for Info
-				</meta>
-				<meta name="keywords">
-					English keywords for Info
-				</meta>
-				<meta name="author">
-					Felix Rupp english
-				</meta>
+				<navigation pos="1">User documentation</navigation>
+				<title>user documentation</title>
+				<titletag>user documentation</titletag>
+				<meta name="description">English description for Info</meta>
+				<meta name="keywords">English keywords for Info</meta>
+				<meta name="author">Felix Rupp english</meta>
 				<socialbar>false</socialbar>
-				<content>
-					
-					&lt;h3&gt;User documentation&lt;/h3&gt;
-					&lt;ul&gt;
-					 &lt;li&gt;Installation&lt;/li&gt;
-					 &lt;li&gt;Global Settings&lt;/li&gt;
-					 &lt;li&gt;Administrator&lt;/li&gt;
-					 &lt;li&gt;Page Management&lt;/li&gt;
-					 &lt;li&gt;Template Management&lt;/li&gt;
-					&lt;/ul&gt;
-					
-				</content>
+				<content>&lt;h2&gt;
+	User documentation&lt;/h2&gt;
+&lt;ul&gt;
+	&lt;li&gt;
+		Installation&lt;/li&gt;
+	&lt;li&gt;
+		Global Settings&lt;/li&gt;
+	&lt;li&gt;
+		Administrator&lt;/li&gt;
+	&lt;li&gt;
+		Page Management&lt;/li&gt;
+	&lt;li&gt;
+		Template Management&lt;/li&gt;
+&lt;/ul&gt;</content>
 			</record>
 			<record lang="de">
-				<navigation pos="1">
-					Benutzerdokumentation
-				</navigation>
-				<title>
-					Benutzerdokumentation
-				</title>
-				<titletag>
-					Benutzerdokumentation
-				</titletag>
-				<meta name="description">
-					Deutsche Beschreibung für Info
-				</meta>
-				<meta name="keywords">
-					Deutsche Schlüsselwörter für Info
-				</meta>
-				<meta name="author">
-					Felix Rupp deutsch
-				</meta>
+				<navigation pos="1">Benutzerdokumentation</navigation>
+				<title>Benutzerdokumentation</title>
+				<titletag>Benutzerdokumentation</titletag>
+				<meta name="description">Deutsche Beschreibung für Info</meta>
+				<meta name="keywords">Deutsche Schlüsselwörter für Info</meta>
+				<meta name="author">Felix Rupp deutsch</meta>
 				<socialbar>false</socialbar>
-				<content>
-					
-					&lt;h3&gt;Benutzerdokumentation&lt;/h3&gt;
-					&lt;ul&gt;
-					 &lt;li&gt;Installation&lt;/li&gt;
-					 &lt;li&gt;Globale Einstellungen&lt;/li&gt;
-					 &lt;li&gt;Administrator&lt;/li&gt;
-					 &lt;li&gt;Seitenverwaltung&lt;/li&gt;
-					 &lt;li&gt;Templateverwaltung&lt;/li&gt;
-					&lt;/ul&gt;
-					
-				</content>
+				<content>&lt;h2&gt;
+	Benutzerdokumentation&lt;/h2&gt;
+&lt;ul&gt;
+	&lt;li&gt;
+		Installation&lt;/li&gt;
+	&lt;li&gt;
+		Globale Einstellungen&lt;/li&gt;
+	&lt;li&gt;
+		Administrator&lt;/li&gt;
+	&lt;li&gt;
+		Seitenverwaltung&lt;/li&gt;
+	&lt;li&gt;
+		Templateverwaltung&lt;/li&gt;
+&lt;/ul&gt;</content>
 			</record>
 		</page>
 		
@@ -276,80 +252,78 @@
 	<page id="5" path="download">
 
 		<record lang="en">
-			<navigation pos="3"><![CDATA[Download]]></navigation>
-			<title><![CDATA[Download]]></title>
-			<titletag><![CDATA[Download Caramel CMS]]></titletag>
-			<meta name="description"><![CDATA[Download page for Caramel CMS. Here you can download the most recent version of Caramel CMS.]]></meta>
-			<meta name="keywords"><![CDATA[Caramel CMS, CMS, XML, PHP5, OpenSource, Open, Source, Download, zip]]></meta>
-			<meta name="author"><![CDATA[Felix Rupp]]></meta>
-			<socialbar><![CDATA[false]]></socialbar>
-			<content><![CDATA[<div id="bcolorbox19234735" style="">
-	&nbsp;</div>
-<div id="bcolorbox19234735" style="">
-	&nbsp;</div>
-<h2>
-	Download</h2>
-<p>
-	Here you can download the latest release as a zip-file.</p>]]></content>
+			<navigation pos="3">Download</navigation>
+			<title>Download</title>
+			<titletag>Download Caramel CMS</titletag>
+			<meta name="description">Download page for Caramel CMS. Here you can download the most recent version of Caramel CMS.</meta>
+			<meta name="keywords">Caramel CMS, CMS, XML, PHP5, OpenSource, Open, Source, Download, zip</meta>
+			<meta name="author">Felix Rupp</meta>
+			<socialbar>false</socialbar>
+			<content>&lt;h2&gt;
+	Download&lt;/h2&gt;
+&lt;p&gt;
+	Here you can download the latest release of Caramel CMS as a zip-file.&lt;/p&gt;</content>
 		</record>
 		<record lang="de">
-			<navigation pos="3"><![CDATA[Laden]]></navigation>
-			<title><![CDATA[Caramel CMS laden]]></title>
-			<titletag><![CDATA[Caramel CMS laden]]></titletag>
-			<meta name="description"><![CDATA[Hier können Sie Caramel CMS herunterladen. Sie erhalten immer die jeweils aktuellste Version der Software.]]></meta>
-			<meta name="keywords"><![CDATA[Caramel CMS, CMS, XML, PHP5, OpenSource, Open, Source, Download, zip]]></meta>
-			<meta name="author"><![CDATA[Felix Rupp]]></meta>
-			<socialbar><![CDATA[false]]></socialbar>
-			<content><![CDATA[<div id="bcolorbox19234735" style="">
-	&nbsp;</div>
-<div id="bcolorbox19234735" style="">
-	&nbsp;</div>
-<h2>
-	Download</h2>
-<p>
-	Hier k&ouml;nnen Sie die aktuellste Version als Zip-Archiv herunterladen.</p>]]></content>
+			<navigation pos="3">Laden</navigation>
+			<title>Caramel CMS laden</title>
+			<titletag>Caramel CMS laden</titletag>
+			<meta name="description">Hier können Sie Caramel CMS herunterladen. Sie erhalten immer die jeweils aktuellste Version der Software.</meta>
+			<meta name="keywords">Caramel CMS, CMS, XML, PHP5, OpenSource, Open, Source, Download, zip</meta>
+			<meta name="author">Felix Rupp</meta>
+			<socialbar>false</socialbar>
+			<content>&lt;h2&gt;
+	Download&lt;/h2&gt;
+&lt;p&gt;
+	Hier k&amp;ouml;nnen Sie die aktuellste Version von Caramel CMS als Zip-Archiv herunterladen.&lt;/p&gt;</content>
 		</record>
 	</page>
 	
 	<page id="6" path="impressum">
 
 		<record lang="en">
-			<navigation pos="4">Imprint</navigation>
-			<title>Imprint</title>
-			<titletag>Imprint</titletag>
-			<meta name="description">This is the Imprint of Caramel CMS</meta>
-			<meta name="keywords">Caramel CMS, CMS, XML, PHP5, OpenSource, Open, Source, Imprint, Legal</meta>
-			<meta name="author">Nicole Reinhardt</meta>
-			<socialbar>false</socialbar>
-			<content>&lt;div id="bcolorbox19234735" style=""&gt;
-	&amp;nbsp;&lt;/div&gt;
-&lt;h2&gt;
-	Impressum&lt;/h2&gt;
-&lt;h4&gt;
-	Disclaimer&lt;/h4&gt;
-&lt;p&gt;
-	The contents of this website was created with the utmost care and in good conscience. Nevertheless, be given no guarantee on the completeness, accuracy and currency of the information. Furthermore, no responsibility be assumed for damages incurred directly or indirectly from the use of this site.&lt;br /&gt;
-	&lt;br /&gt;
-	Also for the content of external links is not liable. For the content of external sites are solely responsible.&lt;/p&gt;</content>
+			<navigation pos="4"><![CDATA[Imprint]]></navigation>
+			<title><![CDATA[Imprint]]></title>
+			<titletag><![CDATA[Imprint]]></titletag>
+			<meta name="description"><![CDATA[This is the Imprint of Caramel CMS]]></meta>
+			<meta name="keywords"><![CDATA[Caramel CMS, CMS, XML, PHP5, OpenSource, Open, Source, Imprint, Legal]]></meta>
+			<meta name="author"><![CDATA[Nicole Reinhardt]]></meta>
+			<socialbar><![CDATA[false]]></socialbar>
+			<content><![CDATA[<h2>
+	Imprint</h2>
+<h4>
+	This&nbsp;website is run by:</h4>
+<p>
+	Caramel CMS</p>
+<p>
+	Nicole Reinhardt &amp; Felix Rupp</p>
+<h4>
+	Disclaimer:</h4>
+<p>
+	The author is not responsible for any contents linked or referred to from his pages &ndash; If any damage occurs by the use of information presented there, only the author of the respective pages might be liable, not the one who has linked to these pages.</p>]]></content>
 		</record>
 		<record lang="de">
-			<navigation pos="4">Impressum</navigation>
-			<title>Impressum</title>
-			<titletag>Impressum</titletag>
-			<meta name="description">Das ist das Impressum für Caramel CMS</meta>
-			<meta name="keywords">Caramel CMS, CMS, XML, PHP5, OpenSource, Open, Source, Imprint, Legal</meta>
-			<meta name="author">Nicole Reinhardt</meta>
-			<socialbar>false</socialbar>
-			<content>&lt;div id="bcolorbox19234735" style=""&gt;
-	&amp;nbsp;&lt;/div&gt;
-&lt;h2&gt;
-	Impressum&lt;/h2&gt;
-&lt;h4&gt;
-	Haftungshinweis&lt;/h4&gt;
-&lt;p&gt;
-	Die Inhalte dieser Website wurden mit gr&amp;ouml;&amp;szlig;tm&amp;ouml;glicher Sorgfalt und nach bestem Gewissen erstellt. Dennoch wird keine Garantie f&amp;uuml;r die Vollst&amp;auml;ndigkeit, Richtigkeit und Aktualit&amp;auml;t der dargestellten Informationen &amp;uuml;bernommen. Des Weiteren kann keine Verantwortung f&amp;uuml;r Sch&amp;auml;den &amp;uuml;bernommen werden, die direkt oder indirekt aus der Nutzung dieser Website entstehen.&lt;br /&gt;
-	&lt;br /&gt;
-	Auch f&amp;uuml;r die Inhalte externer Links wird keine Haftung &amp;uuml;bernommen. F&amp;uuml;r den Inhalt externer Seiten sind ausschlie&amp;szlig;lich deren Betreiber verantwortlich.&lt;/p&gt;</content>
+			<navigation pos="4"><![CDATA[Impressum]]></navigation>
+			<title><![CDATA[Impressum]]></title>
+			<titletag><![CDATA[Impressum]]></titletag>
+			<meta name="description"><![CDATA[Das ist das Impressum für Caramel CMS]]></meta>
+			<meta name="keywords"><![CDATA[Caramel CMS, CMS, XML, PHP5, OpenSource, Open, Source, Imprint, Legal]]></meta>
+			<meta name="author"><![CDATA[Nicole Reinhardt]]></meta>
+			<socialbar><![CDATA[false]]></socialbar>
+			<content><![CDATA[<h2>
+	Impressum</h2>
+<h4>
+	Diese Website wird betrieben von:</h4>
+<p>
+	Caramel CMS</p>
+<p>
+	Nicole Reinhardt &amp; Felix Rupp</p>
+<h4>
+	Haftungshinweis:</h4>
+<p>
+	Die Inhalte dieser Website wurden mit gr&ouml;&szlig;tm&ouml;glicher Sorgfalt und nach bestem Gewissen erstellt. Dennoch wird keine Garantie f&uuml;r die Vollst&auml;ndigkeit, Richtigkeit und Aktualit&auml;t der dargestellten Informationen &uuml;bernommen. Des Weiteren kann keine Verantwortung f&uuml;r Sch&auml;den &uuml;bernommen werden, die direkt oder indirekt aus der Nutzung dieser Website entstehen.<br />
+	<br />
+	Auch f&uuml;r die Inhalte externer Links wird keine Haftung &uuml;bernommen. F&uuml;r den Inhalt externer Seiten sind ausschlie&szlig;lich deren Betreiber verantwortlich.</p>]]></content>
 		</record>
 	</page>
 </database>

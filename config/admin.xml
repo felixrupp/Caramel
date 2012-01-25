@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!-- 
  *
  * Database for page-content
@@ -15,9 +14,9 @@
 	<!-- Admin setup -->
 	<setting key="ADMIN_USERNAME" blank="false"><![CDATA[admin]]></setting>
 	<setting key="ADMIN_PASSWORD" blank="false"><![CDATA[21232f297a57a5a743894a0e4a801fc3]]></setting>
-	<setting key="ADMIN_EMAIL" blank="false">admin@sierupp.com</setting>
+	<setting key="ADMIN_EMAIL" blank="false"><![CDATA[admin@yourdomain.com]]></setting>
 	
 	<!-- E-Mail used in contactform -->
-	<setting key="CONTACT_EMAIL" blank="false">info@sierupp.com</setting>
+	<setting key="CONTACT_EMAIL" blank="false"><![CDATA[contact@yourdomain.com]]></setting>
 	
 </caramel-plist>

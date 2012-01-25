@@ -23,7 +23,8 @@ define("BASEDIR", substr($_SERVER["SCRIPT_FILENAME"], 0, strrpos($_SERVER["SCRIP
 /**
  * @var string TEMPLATEDIR Constant which represents the template directory of Caramel CMS installation
  */
-define("TEMPLATEDIR", dirname($_SERVER["SCRIPT_NAME"])."/template");
+#define("TEMPLATEDIR", dirname($_SERVER["SCRIPT_NAME"])."template");
+define("TEMPLATEDIR", substr($_SERVER["SCRIPT_NAME"], 0, strrpos($_SERVER["SCRIPT_NAME"],"/"))."/template");
 
 require_once(BASEDIR.'/inc/controller/FrontendController.php');
 
