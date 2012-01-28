@@ -51,7 +51,7 @@
                                                 ()
                                                                             <span class="method-result"><a rel="contents" href="inc/model/ConfigurationModel.html">ConfigurationModel</a></span>
                                             </div>
-                                                                                                                                                                                                                                                                                                                                                                                            <div class="method-definition">
+                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="method-definition">
                         <img src="images/Method.png" alt=" "/>
                         <a href="#getAdminAction" title="details" class="method-name">getAdminAction</a>
                                                 ()
@@ -91,25 +91,31 @@
                         <img src="images/Method.png" alt=" "/>
                         <a href="#setAdminAction" title="details" class="method-name">setAdminAction</a>
                                                     (<span class="var-type"></span>&nbsp;<span class="var-name">$admin</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$globals</span>)
-                                                                            <span class="method-result">void</span>
+                                                                            <span class="method-result">Result</span>
                                             </div>
                                                                                 <div class="method-definition">
                         <img src="images/Method.png" alt=" "/>
-                        <a href="#setAdminConfigStringAction" title="details" class="method-name">setAdminConfigStringAction</a>
+                        <a href="#setAdminConfigString" title="details" class="method-name">setAdminConfigString</a>
                                                     (<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$newValue</span>)
-                                                                            <span class="method-result">void</span>
+                                                                            <span class="method-result">Result</span>
                                             </div>
                                                                                 <div class="method-definition">
                         <img src="images/Method.png" alt=" "/>
-                        <a href="#setConfigStringAction" title="details" class="method-name">setConfigStringAction</a>
+                        <a href="#setConfigString" title="details" class="method-name">setConfigString</a>
                                                     (<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$newValue</span>)
-                                                                            <span class="method-result">void</span>
+                                                                            <span class="method-result">Result</span>
                                             </div>
                                                                                 <div class="method-definition">
                         <img src="images/Method.png" alt=" "/>
                         <a href="#setGlobalsAction" title="details" class="method-name">setGlobalsAction</a>
                                                     (<span class="var-type">array</span>&nbsp;<span class="var-name">$globals</span>)
                                                                             <span class="method-result">void</span>
+                                            </div>
+                                                                                <div class="method-definition">
+                        <img src="images/Method.png" alt=" "/>
+                        <a href="#setTemplateAction" title="details" class="method-name">setTemplateAction</a>
+                                                    (<span class="var-type">string</span>&nbsp;<span class="var-name">$newTemplate</span>)
+                                                                            <span class="method-result">Result</span>
                                             </div>
                                                         </div>
             </div>
@@ -157,7 +163,7 @@
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getAdminAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a148" rel="contents">148</a></span>)
+		<span class="method-title">getAdminAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a150" rel="contents">150</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -183,13 +189,14 @@
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getAdminConfigStringAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a260" rel="contents">260</a></span>)
+		<span class="method-title">getAdminConfigStringAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a282" rel="contents">282</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Get String from key of admin configfile</p>
 	<ul class="tags">
 				<li><span class="field">return:</span> Value for given key</li>
+				<li><span class="field">throws:</span> CaramelException</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -214,7 +221,7 @@
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getConfigStringAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a210" rel="contents">210</a></span>)
+		<span class="method-title">getConfigStringAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a230" rel="contents">230</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -272,7 +279,7 @@
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">reloadAdminConfigFile</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a329" rel="contents">329</a></span>)
+		<span class="method-title">reloadAdminConfigFile</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a351" rel="contents">351</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -298,7 +305,7 @@
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">reloadConfigFile</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a310" rel="contents">310</a></span>)
+		<span class="method-title">reloadConfigFile</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a332" rel="contents">332</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -324,17 +331,19 @@
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">setAdminAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a171" rel="contents">171</a></span>)
+		<span class="method-title">setAdminAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a173" rel="contents">173</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Method to save admin config</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> of file_put_contents</li>
+				<li><span class="field">throws:</span> CaramelException</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Result</span>
 		<span class="method-name">
 			setAdminAction
 		</span>
@@ -344,7 +353,7 @@
 			<ul class="parameters">
 					<li>
 				<span class="var-type">array</span>
-				<span class="var-name">$globals</span><span class="var-description">: <p>Array that contains all admin settings</p><p>throws CaramelException</p></span>			</li>
+				<span class="var-name">$globals</span><span class="var-description">: Array that contains all admin settings</span>			</li>
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$admin</span>			</li>
@@ -352,25 +361,26 @@
 		
 			
 	</div>
-<a name="setAdminConfigStringAction" id="setAdminConfigStringAction"><!-- --></a>
+<a name="setAdminConfigString" id="setAdminConfigString"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">setAdminConfigStringAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a284" rel="contents">284</a></span>)
+		<span class="method-title">setAdminConfigString</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a306" rel="contents">306</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Set String from key of admin config-file</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> of file_put_contents</li>
 				<li><span class="field">throws:</span> CaramelException</li>
-				<li><span class="field">access:</span> public</li>
+				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Result</span>
 		<span class="method-name">
-			setAdminConfigStringAction
+			setAdminConfigString
 		</span>
 					(<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$newValue</span>)
 			</div>
@@ -386,25 +396,26 @@
 		
 			
 	</div>
-<a name="setConfigStringAction" id="setConfigStringAction"><!-- --></a>
+<a name="setConfigString" id="setConfigString"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">setConfigStringAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a234" rel="contents">234</a></span>)
+		<span class="method-title">setConfigString</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a254" rel="contents">254</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Set String from key of config-file</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> of file_put_contents</li>
 				<li><span class="field">throws:</span> CaramelException</li>
-				<li><span class="field">access:</span> public</li>
+				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">Result</span>
 		<span class="method-name">
-			setConfigStringAction
+			setConfigString
 		</span>
 					(<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$newValue</span>)
 			</div>
@@ -425,12 +436,13 @@
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">setGlobalsAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a120" rel="contents">120</a></span>)
+		<span class="method-title">setGlobalsAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a122" rel="contents">122</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Method to save global config</p>
 	<ul class="tags">
+				<li><span class="field">throws:</span> CaramelException</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -445,7 +457,39 @@
 			<ul class="parameters">
 					<li>
 				<span class="var-type">array</span>
-				<span class="var-name">$globals</span><span class="var-description">: <p>Array that contains all global settings</p><p>throws CaramelException</p></span>			</li>
+				<span class="var-name">$globals</span><span class="var-description">: Array that contains all global settings</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="setTemplateAction" id="setTemplateAction"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="images/Method.png" />
+		<span class="method-title">setTemplateAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a204" rel="contents">204</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Method to set new template file for frontend</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> of file_put_contents</li>
+				<li><span class="field">throws:</span> CaramelException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Result</span>
+		<span class="method-name">
+			setTemplateAction
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$newTemplate</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$newTemplate</span><span class="var-description">: New template to set</span>			</li>
 				</ul>
 		
 			
