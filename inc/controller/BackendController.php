@@ -36,8 +36,8 @@ class BackendController {
 	private $_templateView;
 		
 	# Constants
-	const VERSION = "0.2";
-	const VERSION_DATE = "2012-01-25";
+	const VERSION = "0.2.1";
+	const VERSION_DATE = "2012-01-28";
 	
 
 	/**
@@ -123,7 +123,7 @@ class BackendController {
 			$login = FALSE;
 			$welcome = TRUE;
 			
-			
+			# Logout
 			if(isset($_GET["q"]) && $_GET["q"]=="logout") {
 				$this->logoutAction();
 				
@@ -132,15 +132,17 @@ class BackendController {
 				$welcome = FALSE;
 				
 			}
+			# New page
 			if(isset($_GET["q"]) && $_GET["q"]=="newpage") {
-			
+				
 				$navigation = TRUE;
 				$login = FALSE;
 				$welcome = FALSE;
 				$this->_templateView->assign("newpage", TRUE);
 			
 			}
-			if(isset($_GET["q"]) && $_GET["q"]=="editpages" && !isset($_GET["id"])) {
+			# Page overview
+			if(isset($_GET["q"]) && $_GET["q"]=="editpages" && !isset($_GET["id"]) && !isset($_GET["delete"])) {
 				
 				try {
 					$allPages = $this->_dataBase->getWebsitePagesAction("en");
@@ -159,7 +161,8 @@ class BackendController {
 				$this->_templateView->assign("editpages", TRUE);
 					
 			}
-			if(isset($_GET["q"]) && $_GET["q"]=="editpages" && isset($_GET["id"])) {
+			# Edit a single page
+			if(isset($_GET["q"]) && $_GET["q"]=="editpages" && isset($_GET["id"]) && !isset($_GET["delete"])) {
 			
 				$id = (int)trim($_GET["id"]);
 				
@@ -180,6 +183,30 @@ class BackendController {
 				$this->_templateView->assign("editonepage", TRUE);
 					
 			}
+			# Delete a single page
+			if(isset($_GET["q"]) && $_GET["q"]=="editpages" && isset($_GET["id"]) && isset($_GET["delete"])) {
+					
+				$id = (int)trim($_GET["id"]);
+			
+				try {
+					$result = $this->_dataBase->deletePageAction($id);
+					$allPages = $this->_dataBase->getWebsitePagesAction("en");
+				}
+				catch(CaramelException $e) {
+					$e->getDetails();
+				}
+					
+				#var_dump($page);
+					
+				$navigation = TRUE;
+				$login = FALSE;
+				$welcome = FALSE;
+					
+				$this->_templateView->assign("pages", $allPages);
+				$this->_templateView->assign("editpages", TRUE);
+					
+			}
+			# Edit admin user
 			if(isset($_GET["q"]) && $_GET["q"]=="editusers") {
 					
 				$admin = $this->_config->getAdminAction();
@@ -192,6 +219,7 @@ class BackendController {
 				$this->_templateView->assign("editusers", TRUE);
 					
 			}
+			# Edit templates
 			if(isset($_GET["q"]) && $_GET["q"]=="edittemplates") {
 					
 				$template = $this->getTemplateConfig();
@@ -204,6 +232,7 @@ class BackendController {
 				$this->_templateView->assign("edittemplates", TRUE);
 					
 			}
+			# Edit global settings
 			if(isset($_GET["q"]) && $_GET["q"]=="editglobals") {
 				
 				$globals = $this->getGlobalConfig();
@@ -218,6 +247,42 @@ class BackendController {
 			}
 			
 			####### POST
+			
+			if(isset($_POST["newpage"])) {
+			
+				#var_dump($_POST);
+			
+				$path = strtolower(trim($_POST["path"]));
+				$defaultLang = strtolower(trim($_POST["defaultLanguage"]));
+				
+				$recordContents["navigation"] = trim($_POST["navigation"]);
+				$recordContents["title"] = trim($_POST["title"]);
+				$recordContents["titletag"] = trim($_POST["titletag"]);
+				$recordContents["metadescription"] = trim($_POST["metadescription"]);
+				$recordContents["metakeywords"] = trim($_POST["metakeywords"]);
+				$recordContents["metaauthor"] = trim($_POST["metaauthor"]);
+				$recordContents["content"] = trim($_POST["content"]);
+				
+			
+				try {
+					
+					$result = $this->_dataBase->createPageAction($path, $defaultLang, $recordContents);
+					
+					$allPages = $this->_dataBase->getWebsitePagesAction("en");
+					
+				}
+				catch(CaramelException $e) {
+					$e->getDetails();
+				}
+								
+				$navigation = TRUE;
+				$login = FALSE;
+				$welcome = FALSE;
+				
+				$this->_templateView->assign("pages", $allPages);
+				$this->_templateView->assign("editpages", TRUE);
+			
+			}
 			
 			if(isset($_POST["editonepage"]) && isset($_POST["pageid"])) {
 				

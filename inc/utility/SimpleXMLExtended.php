@@ -20,11 +20,18 @@
  */
 class SimpleXMLExtended extends SimpleXMLElement {
 	
+	/**
+	 * @var SimpleXMLExtended
+	 */
+	private $child;
+	
 	
 	/**
 	 * Method to append proper CDATA to a node
 	 * 
 	 * @param string $cdata_text
+	 * 
+	 * @return void
 	 */
 	public function addCData($cdata_text){
 		
@@ -32,6 +39,45 @@ class SimpleXMLExtended extends SimpleXMLElement {
 		$no = $node->ownerDocument;
 		$node->appendChild($no->createCDATASection($cdata_text));
 		
-	}
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Create a child with CDATA value
+	 * 
+	 * @param string $name The name of the child element to add.
+	 * @param string $cdataText The CDATA value of the child element.
+	 * 
+	 * @return Child element that has been added as SimpleXMLExtended object
+	 */
+	public function addChildCData($name, $cdataText="") {
+		
+		$child = $this->addChild($name);
+				
+		if(strlen($cdataText)>0) {
+			
+			$child->addCData($cdataText);
+			
+		}
+		
+		return $child;
+		
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Method to remove a node
+	 * 
+	 * @return void
+	 */
+	public function removeNode() {
+		
+		$node = dom_import_simplexml($this);
+		$node->parentNode->removeChild($node);
+		
+	} // End of method declaration
+	
 }
 ?>

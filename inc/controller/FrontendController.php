@@ -35,8 +35,8 @@ class FrontendController {
 	private $_templateView;
 	
 	# Constants
-	const VERSION = "0.2";
-	const VERSION_DATE = "2012-01-25";
+	const VERSION = "0.2.1";
+	const VERSION_DATE = "2012-01-28";
 		
 
 	/**
@@ -93,7 +93,6 @@ class FrontendController {
 		catch(CaramelException $e) {
 			$e->getDetails();
 		}
-
 				
 		$this->_templateView->assign("content", $content);
 		$this->_templateView->assign("navigation", $navigation);

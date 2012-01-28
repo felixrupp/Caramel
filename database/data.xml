@@ -326,4 +326,34 @@
 	Auch f&uuml;r die Inhalte externer Links wird keine Haftung &uuml;bernommen. F&uuml;r den Inhalt externer Seiten sind ausschlie&szlig;lich deren Betreiber verantwortlich.</p>]]></content>
 		</record>
 	</page>
+	
+	
+	
+	<page id="7" path="test">
+
+		<record lang="en">
+			<navigation pos="4"><![CDATA[Test]]></navigation>
+			<title><![CDATA[Test]]></title>
+			<titletag><![CDATA[Test]]></titletag>
+			<meta name="description"><![CDATA[This is the Imprint of Caramel CMS]]></meta>
+			<meta name="keywords"><![CDATA[Caramel CMS, CMS, XML, PHP5, OpenSource, Open, Source, Imprint, Legal]]></meta>
+			<meta name="author"><![CDATA[Nicole Reinhardt]]></meta>
+			<socialbar><![CDATA[false]]></socialbar>
+			<content><![CDATA[<h2>
+	Test</h2>]]></content>
+		</record>
+		<record lang="de">
+			<navigation pos="4"><![CDATA[Test]]></navigation>
+			<title><![CDATA[Test]]></title>
+			<titletag><![CDATA[Test]]></titletag>
+			<meta name="description"><![CDATA[Das ist das Impressum für Caramel CMS]]></meta>
+			<meta name="keywords"><![CDATA[Caramel CMS, CMS, XML, PHP5, OpenSource, Open, Source, Imprint, Legal]]></meta>
+			<meta name="author"><![CDATA[Nicole Reinhardt]]></meta>
+			<socialbar><![CDATA[false]]></socialbar>
+			<content><![CDATA[<h2>
+	Test</h2>
+]]></content>
+		</record>
+	</page>
+
 </database>

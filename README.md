@@ -1,8 +1,8 @@
 Caramel CMS
 =============
-Version 0.2
+Version 0.2.1
 
-2012-01-25
+2012-01-28
 
 
 Features
