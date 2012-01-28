@@ -21,7 +21,12 @@ The following features are implemented until now:
 Todo
 ----
 
-* Ajax readyness
+* Ability to select position of new page when creating
+* Ability to create new records in a page 
+* Ability to move pages to other positions (including subpaging)
+* Ability to hide and unhide pages
+* Ability to upload pictures in ckEditor in backend
+* Ajax readyness in front- and backend
 
 
 Installation

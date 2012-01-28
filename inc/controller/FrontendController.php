@@ -115,6 +115,7 @@ class FrontendController {
 			
 			try {
 				$speakingUrls = $this->_config->getConfigStringAction("SPEAKING_URLS");
+				$defaultLanguage = $this->_config->getConfigStringAction("DEFAULT_LANGUAGE");
 			}
 			catch(CaramelException $e) {
 				$e->getDetails();
@@ -126,11 +127,11 @@ class FrontendController {
 				$language = strtolower(substr(chop($language[0]),0,2));
 		
 		
-				if(preg_match("/[a-z]{2}/", $language)) {
+				if(preg_match("/[a-z]{2}/", $language) && in_array($language, $this->_dataBase->getAllLanguagesAction())) {
 					header("Location: ./?lang=".$language);
 				}
 				else {
-					header("Location: ./?lang=en");
+					header("Location: ./?lang=".$defaultLanguage);
 				}
 		
 			}
@@ -139,11 +140,11 @@ class FrontendController {
 				$language = explode(',',$_SERVER['HTTP_ACCEPT_LANGUAGE']);
 				$language = strtolower(substr(chop($language[0]),0,2));
 		
-				if(preg_match("/[a-z]{2}/", $language)) {
+				if(preg_match("/[a-z]{2}/", $language) && in_array($language, $this->_dataBase->getAllLanguagesAction())) {
 					header("Location: ./".$language."/");
 				}
 				else {
-					header("Location: ./en/");
+					header("Location: ./".$defaultLanguage."/");
 				}
 		
 			}
@@ -496,16 +497,17 @@ class FrontendController {
 		
 		try {
 			$allLangs = $this->_dataBase->getAllLanguagesAction();
+			$defaultLanguage = $this->_config->getConfigStringAction("DEFAULT_LANGUAGE");
 		}
 		catch(CaramelException $e) {
 			$e->getDetails();
 		}
-	
-		if(isset($_GET['lang']) and in_array($_GET['lang'], $allLangs)) { # Test if set language is in our language array
+			
+		if(isset($_GET['lang']) && in_array($_GET['lang'], $allLangs)) { # Test if set language is in our language array
 			$language = $_GET['lang'];
 		}
 		else {
-			$language = "en";
+			$language = $defaultLanguage;
 		}
 		
 		return $language;
@@ -563,6 +565,10 @@ class FrontendController {
 		if($speakingUrls == "true") {
 			$newQueryString = substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], $this->getLanguage())+strlen($this->getLanguage()));
 		}
+		
+		#var_dump($_SERVER['REQUEST_URI']);
+		#var_dump($this->getLanguage());
+		#var_dump($newQueryString);
 		
 		return $newQueryString;
 		

@@ -101,6 +101,8 @@ class ConfigurationModel {
 	 			"navigation_class" => array("label" => "Navigation class:", "value" => stripslashes($this->getConfigStringAction("NAVIGATION_CLASS")), "blank" => true),
 	 			"language_selector_in_footer" => array("label" => "Language selector in footer:", "value" => stripslashes($this->getConfigStringAction("LANGUAGE_SELECTOR_IN_FOOTER")), "blank" => false),
 	 			"language_selector_seperator" => array("label" => "Language selector seperator:", "value" => stripslashes($this->getConfigStringAction("LANGUAGE_SELECTOR_SEPERATOR")), "blank" => false),
+				"default_language" => array("label" => "Default language for frontend:", "value" => stripslashes($this->getConfigStringAction("DEFAULT_LANGUAGE")), "blank" => false),
+		
 		);
 			
 		return $globals;
