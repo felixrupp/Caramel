@@ -2,41 +2,42 @@
 
 <!ELEMENT database (page)+>
 <!ATTLIST database
-    xmlns CDATA #FIXED ''
-    version CDATA #REQUIRED>
+  xmlns CDATA #FIXED ''
+  version CDATA #REQUIRED>
 
-<!ELEMENT page (record|page)+>
+<!ELEMENT page (page|record)*>
 <!ATTLIST page
-    xmlns CDATA #FIXED ''
-    name CDATA #REQUIRED>
-    
-<!ELEMENT record (content|navigation|title|titletag|meta|facebook-like)+>
-<!ATTLIST page
-    xmlns CDATA #FIXED ''
-    lang NMTOKEN #REQUIRED>
+  xmlns CDATA #FIXED ''
+  id CDATA #REQUIRED
+  path CDATA #REQUIRED>
 
-<!ELEMENT content (#PCDATA)>
-<!ATTLIST content
-    xmlns CDATA #FIXED ''>
+<!ELEMENT record (navigation,title,titletag,meta+,socialbar,content)>
+<!ATTLIST record
+  xmlns CDATA #FIXED ''
+  lang NMTOKEN #REQUIRED>
 
 <!ELEMENT navigation (#PCDATA)>
 <!ATTLIST navigation
-    xmlns CDATA #FIXED ''
-    pos CDATA #REQUIRED>
+  xmlns CDATA #FIXED ''
+  pos CDATA #REQUIRED>
 
 <!ELEMENT title (#PCDATA)>
 <!ATTLIST title
-    xmlns CDATA #FIXED ''>
+  xmlns CDATA #FIXED ''>
 
 <!ELEMENT titletag (#PCDATA)>
 <!ATTLIST titletag
-    xmlns CDATA #FIXED ''>
+  xmlns CDATA #FIXED ''>
 
 <!ELEMENT meta (#PCDATA)>
 <!ATTLIST meta
-    xmlns CDATA #FIXED ''
-    name NMTOKEN #REQUIRED>
-    
-<!ELEMENT facebook-like (#PCDATA)>
-<!ATTLIST facebook-like
-    xmlns CDATA #FIXED ''>
+  xmlns CDATA #FIXED ''
+  name NMTOKEN #REQUIRED>
+
+<!ELEMENT socialbar (#PCDATA)>
+<!ATTLIST socialbar
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT content (#PCDATA)>
+<!ATTLIST content
+  xmlns CDATA #FIXED ''>

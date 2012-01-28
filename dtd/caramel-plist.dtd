@@ -2,11 +2,11 @@
 
 <!ELEMENT caramel-plist (setting)+>
 <!ATTLIST caramel-plist
-    xmlns CDATA #FIXED ''
-    version CDATA #REQUIRED>
+  xmlns CDATA #FIXED ''
+  version CDATA #REQUIRED>
 
 <!ELEMENT setting (#PCDATA)>
 <!ATTLIST setting
-    xmlns CDATA #FIXED ''
-    blank (true|false) #REQUIRED
-    key NMTOKEN #REQUIRED>
+  xmlns CDATA #FIXED ''
+  blank NMTOKEN #REQUIRED
+  key NMTOKEN #REQUIRED>

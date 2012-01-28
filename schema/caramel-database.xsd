@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="database">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="page"/>
+      </xs:sequence>
+      <xs:attribute name="version" use="required" type="xs:decimal"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="page">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="page"/>
+        <xs:element ref="record"/>
+      </xs:choice>
+      <xs:attribute name="id" use="required" type="xs:integer"/>
+      <xs:attribute name="path" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="record">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="navigation"/>
+        <xs:element ref="title"/>
+        <xs:element ref="titletag"/>
+        <xs:element maxOccurs="unbounded" ref="meta"/>
+        <xs:element ref="socialbar"/>
+        <xs:element ref="content"/>
+      </xs:sequence>
+      <xs:attribute name="lang" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="navigation">
+    <xs:complexType mixed="true">
+      <xs:attribute name="pos" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="title" type="xs:string"/>
+  <xs:element name="titletag" type="xs:string"/>
+  <xs:element name="meta">
+    <xs:complexType mixed="true">
+      <xs:attribute name="name" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="socialbar" type="xs:boolean"/>
+  <xs:element name="content" type="xs:string"/>
+</xs:schema>
