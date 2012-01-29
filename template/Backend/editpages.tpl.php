@@ -22,13 +22,13 @@
 	        <?php foreach($pages as $naventry) { ?>
             <tr>
 		          <td><a href="?q=editpages&id=<?php echo $naventry["id"] ?>"><?php echo $naventry["navigation"]; ?></a></td> 
-              <td><a href="#" class="delete" onClick="javascript:if(confirm('Really delete this page with all records?')) {return true;} else {return false;}"><img src="<?php echo TEMPLATEDIR; ?>/Backend/images/inactive.png" width=" 15px" title="Delete" alt="Delete"></a></td>
+              <td><a href="?q=editpages&id=<?php echo $naventry["id"] ?>&delete" class="delete" onClick="javascript:if(confirm('Really delete this page with all records?')) {return true;} else {return false;}"><img src="<?php echo TEMPLATEDIR; ?>/Backend/images/inactive.png" width=" 15px" title="Delete" alt="Delete"></a></td>
 		        </tr>
         		<?php if(isset($naventry["subpages"]) && count($naventry["subpages"]>0)) {?>
         				<?php foreach($naventry["subpages"] as $subentry) {?>
         					<tr>
                    <td><a href="?q=editpages&id=<?php echo $subentry["id"] ?>"><img src="<?php echo TEMPLATEDIR; ?>/Backend/images/subpage.png" title="Subpage" alt="Subpage"><?php echo $subentry["navigation"]; ?></a></td>
-                   <td><a href="#" class="delete" onClick="javascript:if(confirm('Really delete this page with all records?')) {return true;} else {return false;}"><img src="<?php echo TEMPLATEDIR; ?>/Backend/images/inactive.png" width=" 15px" title="Delete" alt="Delete"></a></td>
+                   <td><a href="?q=editpages&id=<?php echo $subentry["id"] ?>&delete" class="delete" onClick="javascript:if(confirm('Really delete this page with all records?')) {return true;} else {return false;}"><img src="<?php echo TEMPLATEDIR; ?>/Backend/images/inactive.png" width=" 15px" title="Delete" alt="Delete"></a></td>
         				  </tr>
                 <?php } ?>
         		<?php } ?>
