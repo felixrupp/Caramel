@@ -20,11 +20,6 @@
  */
 class SimpleXMLExtended extends SimpleXMLElement {
 	
-	/**
-	 * @var SimpleXMLExtended
-	 */
-	private $child;
-	
 	
 	/**
 	 * Method to append proper CDATA to a node
