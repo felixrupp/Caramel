@@ -11,6 +11,32 @@
 
 <p><a href="?q=newpage">Create new page &hellip;</a></p>
 
+	<table id="pageManagementTable">
+		    <thead>
+		      <tr>
+		        <th width="60%">Sitename</th>
+		        <th width="10%">Options</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	        <?php foreach($pages as $naventry) { ?>
+            <tr>
+		          <td><a href="?q=editpages&id=<?php echo $naventry["id"] ?>"><?php echo $naventry["navigation"]; ?></a></td> 
+              <td><a href="#" class="delete" onClick="javascript:if(confirm('Really delete this page with all records?')) {return true;} else {return false;}"><img src="<?php echo TEMPLATEDIR; ?>/Backend/images/inactive.png" width=" 15px" title="Delete" alt="Delete"></a></td>
+		        </tr>
+        		<?php if(isset($naventry["subpages"]) && count($naventry["subpages"]>0)) {?>
+        				<?php foreach($naventry["subpages"] as $subentry) {?>
+        					<tr>
+                   <td><a href="?q=editpages&id=<?php echo $subentry["id"] ?>"><img src="<?php echo TEMPLATEDIR; ?>/Backend/images/subpage.png" title="Subpage" alt="Subpage"><?php echo $subentry["navigation"]; ?></a></td>
+                   <td><a href="#" class="delete" onClick="javascript:if(confirm('Really delete this page with all records?')) {return true;} else {return false;}"><img src="<?php echo TEMPLATEDIR; ?>/Backend/images/inactive.png" width=" 15px" title="Delete" alt="Delete"></a></td>
+        				  </tr>
+                <?php } ?>
+        		<?php } ?>
+        	<?php } ?>
+        </tbody>
+      </table>
+
+<!-- 
 <ul>
 	<?php foreach($pages as $naventry) { ?>
 
@@ -26,55 +52,5 @@
 		</li>
 	<?php } ?>
 </ul>
-
-	<!-- <form action="#" method="post">
-		<fieldset>
-		  <table>
-		    <thead>
-		      <tr>
-		        <th></th>
-		        <th>Sitename</th>
-		        <th>Active</th>
-		        <th>Typ</th>
-		        <th>Menu</th>
-		        <th>Position</th>
-	        </tr>
-	      </thead>
-	      <tbody>
-	        <tr>
-	         <td><input type="radio" name="page" id="page" value="caramel"></td>
-           <td>Caramel</td>
-           <td><img src="../template/Backend/images/active.png" class="position"/></td>
-           <td>Standard</td>
-           <td>Caramel</td>
-           <td><img src="../template/Backend/images/down.png" class="position"/></td>
-          </tr>
-          <tr>
-		       <td><input type="radio" name="page" id="page" value="download"></td> 
-           <td>Download</td>
-           <td><img src="../template/Backend/images/inactive.png" class="position"/></td>
-           <td>Standard</td>
-           <td>Download</td>
-           <td><img src="../template/Backend/images/up.png" class="position"/><img src="../template/Backend/images/down.png" class="position"/></td>
-          </tr>
-          <tr>
-		       <td><input type="radio" name="page" id="page" value="dokumentation"></td>
-           <td>Dokumentation</td>
-           <td><img src="../template/Backend/images/active.png" class="position"/></td>
-           <td>Standard</td>
-           <td>Dokumentation</td>
-           <td><img src="../template/Backend/images/up.png" class="position"/></td>
-          </tr>
-        </tbody>
-      </table>
-		</fieldset>
-		
-		<fieldset class="formButtons">
-		  <label>&nbsp;</label> <input type="submit" name="submit" id="submit" value="Save">
-		</fieldset>
-	</form> -->
-	
-	
-	
-
+ -->
 </div>

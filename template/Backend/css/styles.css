@@ -83,7 +83,7 @@ th {
 td {
   background-color: #EEE;
   vertical-align: middle;
-  padding: 0px 4px;
+  padding: 4px 4px;
 }
 
 img.position {
@@ -231,6 +231,10 @@ div#content li a {
 div#content li a:hover {
   text-decoration: underline;
   color: #333333;
+}
+
+table#pageManagementTable {
+	width: 80%;
 }
 
 /*********************************
