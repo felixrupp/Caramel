@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE database SYSTEM "../dtd/caramel-plist.dtd">
+<!DOCTYPE caramel-plist SYSTEM "../dtd/caramel-plist.dtd">
 <!-- 
  *
  * Database for page-content
