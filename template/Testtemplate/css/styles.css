@@ -1,129 +1,149 @@
 @CHARSET "UTF-8";
 
-body {
-  margin: 0 20px;
-  padding: 0;
+/****************************************************
+ * Basis-Layout
+ * *************************************************/
+ 
+* {
+  margin: 0;
+	padding: 0;
+	color: #666666;
+}
+
+html, body {
   font-family: "Helvetica", "Tahoma", Arial, sans-serif;
-  height: 100%;
+	margin: 15px;
+	background: #F2F2F2;
+}
+		
+div#site  {
+  margin: 0 auto;
+  width: 100%;
+	background: #DDDDDD;
+	border: 2px outset #DDDDDD;					
 }
 
-/* menu */
-div#menu {
-  margin: 0; 
-  padding: 0;
-  height:45px;
-  color:#fff;
-  font-weight: bold;
-  background: #172322 url(../images/menu_right.png) no-repeat bottom right;
+div#site h1 {
+  background: #E97820;
+  color: #FFFFFF;
+  height: 100px;
+	text-align: center;
+	line-height: 100px;
+	font-family: "Georgia";
 }
 
-div#menu a { 
-  color:#fff; 
-  text-decoration:none; 
+div#site div#wrapper  {
+  float: left;
+	width: 100%;
+}
+			
+div#site div#content {
+	margin: 0 200px;
+	background: #FFFFFF;
+	min-height: 250px;
+	padding: 10px;
 }
 
-div#menu ul{ 
-  display:inline-block;
-  margin:0px; 
-  padding:0 150px 0 0;
-  list-style:none;   
-  float:left; 
-  z-index:1000; 
+div#site div#menu {
+  width: 250px;
+	float: left;
+	margin-left: -100%;
+  margin-top: 20px;
+  padding: 15px;
+}
+			
+#menu ul, #menu ul li { 
+	width: 150px;
+  list-style-type: none; 
+  font-weight: bold; 
+  text-align:center; 
+} 
+
+#menu ul li ul {
+  margin: 0 10px;
+}
+
+#menu li a { 
+  text-decoration: none; 
+  display: block; 
+  width:100%; 
+  padding: 5px; 
+} 
+      
+#menu a:link, #menu a:visited { 
+  color: #FFFFFF; 
+  background-color: #E97820; 
+  border: 2px outset #E97820; 
+} 
+      
+#menu #akt { 
+  color: #FFFFFF; 
+  background-color: #BF1800; 
+  border: 2px inset #E97820; 
+} 
+      
+#menu a:hover, #menu a:hover#akt { 
+  color: #FFFFFF; 
+  background-color: #BF1800; 
+  border: 2px inset #E97820; 
+}
+      
+div#site div#footer {
+	background: #E97820;
+	color: #FFFFFF;
+	height:	15px;
+	clear: both;
+	padding: 15px 10px;		
+}
+
+/****************************************************
+ * Content elements
+ * *************************************************/
+ 
+h2 {
+  padding: 5px 10px;
+} 
+
+h3, h4 {
+  padding: 0 10px;
+  color: #666666;
+}
+
+p {
+  padding: 0 10px;
+}
+
+
+div#infobox {
+  padding: 0 10px;
+}
+
+div.infoheader {
+ border: 1px inset #DDDDDD;
+ padding: 5px 10px;
+ background: #DDDDDD;
+}
+
+div.info {
+ border: 1px inset #DDDDDD;
+ display: none;
+ padding: 10px;
+}
+
+a {
+  color: #E97820;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a.documentation {
   
 }
 
-div#menu ul li { 
-  cursor:pointer;
-  float:left; 
-  position:relative;
-  padding:10px 10px;
+ul {
+  list-style-image: url(../images/list.png);
 }
 
-div#menu ul li.logo {
-  height: inherit;
-  background: #E97820 url(../images/menu_left.png) no-repeat bottom left; 
-  padding: 0 0 0 20px;
-  width: 130px;
-  height: 45px;
-}
-
-div#menu ul li a:hover {
-  color:#E97820;
-}
-
-/* sub-menus*/
-
-div#menu ul li:hover ul { 
-  display:block;
-}
-
-div#menu ul ul{ 
-  padding:0px; 
-  margin:0px; 
-  display:inline;
-  background: url(../images/menu_right.png) no-repeat bottom right;
-}
-
-div#menu ul li ul { 
-  position:absolute; 
-  left:-10px; 
-  top:0px; 
-  margin-top:45px; 
-  width:150px; 
-  line-height:16px;
-  background-color:#172322; 
-  color:#0395CC; 
-  /* for IE */ 
-  display:none; 
-}
-
-div#menu ul li ul li{ 
-  display:block; 
-  margin:5px 20px; 
-  padding: 5px 0px;  
-  border-top: dotted 1px #606060;
-  list-style-type:none;
-}
-
-div#menu ul li ul li:first-child { 
-  border-top: none; 
-}
-
-div#menu ul li ul li a { 
-  display:block;  
-}
-
-div#menu ul li ul li a:hover { 
-  color:#E97820; 
-}
-
-div#content {
-  clear:both;
-  margin: 20px;
-  padding: 20px 0;
-  min-height: 100%;
-}
-
-div#footer {
-  height: 45px;
-  background: #172322 url(../images/footer_right.png) no-repeat right top;
-  clear:both;
-  color: #FFF;
-  font-size: 1.0em;
-}
-
-.footer_left {
-  position: absolute;
-  height: inherit;
-  width: 25px;
-  background: url(../images/footer_left.png) no-repeat left top;
-  padding: 12px 25px;
-}
-
-div#footer a {
-  color: #FFF;
-}
-
-div#footer a:hover {
-  color: #E97820;
-}

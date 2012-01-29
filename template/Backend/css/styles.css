@@ -18,8 +18,9 @@ h1 {
 }
 
 fieldset {
-	border:2px dashed #E97820;
+	border:2px inset #DDD;
 	margin:10px 0;
+	padding-top: 20px;
 }
 
 /*fieldset.formButtons {
@@ -90,6 +91,10 @@ img.position {
   width: 25px;
   margin: 0 5px;
   vertical-align:middle;
+}
+
+a.delete {
+  
 }
 /*********************************
  * header
@@ -207,7 +212,26 @@ div#content {
   border-left: 3px outset #BBB;
 }
 
+div#content ul li {
+ list-style: none;
+ margin: 5px 0;
+ border: 1px inset #DDD;
+ padding: 5px;
+}
 
+div#content ul li ul li {
+  border: 0;
+}
+
+div#content li a {
+  text-decoration: none;
+  color: #333333;
+}
+
+div#content li a:hover {
+  text-decoration: underline;
+  color: #333333;
+}
 
 /*********************************
  * footer
