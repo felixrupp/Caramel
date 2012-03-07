@@ -41,6 +41,8 @@
 			<br>
 			<label for="navigation_active_marker"><?php echo $globals["navigation_active_marker"]['label']; ?></label> <input type="text" name="navigation_active_marker" id="navigation_active_marker" value='<?php echo $globals["navigation_active_marker"]["value"]; ?>'>
 			<br>
+			<label for="navigation_active_class"><?php echo $globals["navigation_active_class"]['label']; ?></label> <input type="text" name="navigation_active_class" id="navigation_active_class" value='<?php echo $globals["navigation_active_class"]["value"]; ?>'>
+			<br>
 			<label for="navigation_class"><?php echo $globals["navigation_class"]['label']; ?></label> <input type="text" name="navigation_class" id="navigation_class" value='<?php echo $globals["navigation_class"]["value"]; ?>'>
 		</fieldset>
 		

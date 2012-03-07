@@ -35,8 +35,8 @@ class FrontendController {
 	private $_templateView;
 	
 	# Constants
-	const VERSION = "0.2.1";
-	const VERSION_DATE = "2012-01-28";
+	const VERSION = "0.2.2";
+	const VERSION_DATE = "2012-03-07";
 		
 
 	/**
@@ -255,7 +255,7 @@ class FrontendController {
 		}
 		
 		if($navClass !="") {
-			$navigationClass = ' class="'.$this->_config->getConfigStringAction("NAVIGATION_CLASS").'"';
+			$navigationClass = ' class="'.$this->_config->getConfigStringAction("NAVIGATION_CLASS");
 		} else {
 			$navigationClass = "";
 		}
@@ -267,6 +267,13 @@ class FrontendController {
 			
 				try {
 					$active = $this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER");
+					
+					if(strlen($navigationClass)<1) { # No navigationClass set
+						$activeClass = ' class="'.$this->_config->getConfigStringAction("NAVIGATION_ACTIVE_CLASS").'"';
+					}
+					else { # navigationClass set
+						$activeClass = " ".$this->_config->getConfigStringAction("NAVIGATION_ACTIVE_CLASS").'"';
+					}
 				}
 				catch(CaramelException $e) {
 					$e->getDetails();
@@ -274,6 +281,15 @@ class FrontendController {
 				
 			} else {
 				$active = "";
+				
+				if(strlen($navigationClass)<1) {
+					# No navigationClass set
+					$activeClass = "";
+				}
+				else { # navigationClass set
+					$activeClass = '"';
+				}
+				
 			}
 			
 			# Build navigation link
@@ -282,7 +298,7 @@ class FrontendController {
 				$link = "<a";
 				
 				# Set navigation class
-				$link .= $navigationClass;
+				$link .= $navigationClass.$activeClass;
 				
 				# Define link-syntax (speaking urls or not)
 				//TODO: try-catch

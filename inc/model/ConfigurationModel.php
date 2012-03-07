@@ -98,6 +98,7 @@ class ConfigurationModel {
 	 			"speaking_urls" => array("label" => "Speaking URLs:", "value" => stripslashes($this->getConfigStringAction("SPEAKING_URLS")), "blank" => false),
 	 			"navigation_active_marker_position" => array("label" => "Position of active-navigation-marker:", "value" => stripslashes($this->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION")), "blank" => false),
 	 			"navigation_active_marker" => array("label" => "Marker for active-navigation:", "value" => stripslashes($this->getConfigStringAction("NAVIGATION_ACTIVE_MARKER")), "blank" => true),
+	 			"navigation_active_class" => array("label" => "Class for active-navigation links:", "value" => stripslashes($this->getConfigStringAction("NAVIGATION_ACTIVE_CLASS")), "blank" => true),
 	 			"navigation_class" => array("label" => "Navigation class:", "value" => stripslashes($this->getConfigStringAction("NAVIGATION_CLASS")), "blank" => true),
 	 			"language_selector_in_footer" => array("label" => "Language selector in footer:", "value" => stripslashes($this->getConfigStringAction("LANGUAGE_SELECTOR_IN_FOOTER")), "blank" => false),
 	 			"language_selector_seperator" => array("label" => "Language selector seperator:", "value" => stripslashes($this->getConfigStringAction("LANGUAGE_SELECTOR_SEPERATOR")), "blank" => false),

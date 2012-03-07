@@ -32,6 +32,7 @@
 	<!-- Navigation -->
 	<setting key="NAVIGATION_ACTIVE_MARKER_POSITION" blank="false"><![CDATA[disabled]]></setting>
 	<setting key="NAVIGATION_ACTIVE_MARKER" blank="true"><![CDATA[» ]]></setting>
+	<setting key="NAVIGATION_ACTIVE_CLASS" blank="true"><![CDATA[menuActive]]></setting>
 	<setting key="NAVIGATION_CLASS" blank="true"><![CDATA[menuLink]]></setting>
 	<setting key="NAVIGATION_REL" blank="true"> rel="internal"</setting>
 	
