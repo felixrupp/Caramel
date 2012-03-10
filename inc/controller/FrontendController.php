@@ -211,7 +211,7 @@ class FrontendController {
 			$e->getDetails();
 		}
 		
-		$headTag = $this->getBaseUrl()."\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$meta."\n<link rel=\"shortcut icon\" href=\"".TEMPLATEDIR."/".$this->_templateView->getActiveTemplate()."/favicon.ico\" type=\"image/ico\">\n\n<title>".$title."</title>\n\n";
+		$headTag = $this->getBaseUrl()."\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$meta."\n\n<title>".$title."</title>\n\n";
 		$headTag .= $this->_templateView->addCssJs();
 		
 		return $headTag;
