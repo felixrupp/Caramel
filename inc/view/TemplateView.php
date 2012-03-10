@@ -139,6 +139,17 @@ class TemplateView {
 	} // End of method declaration
 	
 	
+	
+	/**
+	 * Method to return activeTemplate-path
+	 * 
+	 * @return activeTemplate-path
+	 */
+	public function getActiveTemplate() {
+		return $this->_activeTemplate;
+	}
+	
+	
 }
 
 
