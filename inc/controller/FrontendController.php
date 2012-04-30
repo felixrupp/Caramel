@@ -35,8 +35,8 @@ class FrontendController {
 	private $_templateView;
 	
 	# Constants
-	const VERSION = "0.2.2";
-	const VERSION_DATE = "2012-03-07";
+	const VERSION = "0.2.3";
+	const VERSION_DATE = "2012-04-30";
 		
 
 	/**
@@ -212,6 +212,7 @@ class FrontendController {
 		}
 		
 		$headTag = $this->getBaseUrl()."\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$meta."\n\n<title>".$title."</title>\n\n";
+				
 		$headTag .= $this->_templateView->addCssJs();
 		
 		return $headTag;

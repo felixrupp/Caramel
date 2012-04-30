@@ -36,6 +36,17 @@ class TemplateView {
 	 */
 	private $_templateFile;
 	
+	/**
+	 * @var array Array with additional CSS files to load
+	 */
+	private $_additionalCssFiles = array();
+	
+	/**
+	 * @var array Array with additional JS files to load
+	 */
+	private $_additionalJsFiles = array();
+	
+	
 	
 	/**
 	 * Constructor of TemplateView
@@ -79,7 +90,16 @@ class TemplateView {
 		
 		$cssJs = "<link rel=\"shortcut icon\" href=\"".TEMPLATEDIR."/".$this->_activeTemplate."/images/favicon.ico\" type=\"image/ico\">\n";
 		$cssJs .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"".TEMPLATEDIR."/".$this->_activeTemplate."/css/styles.css\">\n";
-		$cssJs .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."/".$this->_activeTemplate."/js/scripts.js\"></script>";
+		
+		foreach($this->_additionalCssFiles as $cssFile) {
+			$cssJs .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"".TEMPLATEDIR."/".$this->_activeTemplate."/css/".$cssFile.".css\">\n";
+		}
+		
+		$cssJs .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."/".$this->_activeTemplate."/js/scripts.js\"></script>\n";
+		
+		foreach($this->_additionalJsFiles as $jsFile) {
+			$cssJs .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."/".$this->_activeTemplate."/js/".$jsFile.".js\"></script>\n";
+		}
 		
 		return $cssJs;
 		
@@ -147,6 +167,26 @@ class TemplateView {
 	 */
 	public function getActiveTemplate() {
 		return $this->_activeTemplate;
+	}
+	
+	
+	
+	/**
+	 * Method to add new CSS files to array
+	 * 
+	 * @param String $cssFilename
+	 */
+	public function addCssFile($cssFilename) {
+		array_push($_additionalCssFiles, $cssFilename);
+	}
+	
+	/**
+	* Method to add new JS files to array
+	*
+	* @param String $jsFilename
+	*/
+	public function addJsFile($jsFilename) {
+		array_push($_additionalJsFiles, $jsFilename);
 	}
 	
 	

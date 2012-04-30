@@ -36,8 +36,8 @@ class BackendController {
 	private $_templateView;
 		
 	# Constants
-	const VERSION = "0.2.2";
-	const VERSION_DATE = "2012-03-07";
+	const VERSION = "0.2.3";
+	const VERSION_DATE = "2012-04-30";
 	
 
 	/**
