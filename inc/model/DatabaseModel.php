@@ -111,13 +111,10 @@ class DatabaseModel {
 	 * @throws CaramelException
 	 * @return string String with all needed meta information to one page
 	 */
-	public function getAllMetaTagsAction($lang, $pageName=NULL, $pageId=NULL) {
+	public function getAllMetaTagsAction($lang, $pageId) {
 		
 		
-		if($pageName!=NULL && $pageId==NULL) {
-			$xPathResultMetaDescription = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="description"]');
-		}
-		else if($pageId!=NULL && $pageName==NULL) {
+		if($pageId!=NULL) {
 			$xPathResultMetaDescription = $this->_dataBase->xpath('//page[@id="'.$pageId.'"]/record[@lang="'.$lang.'"]/meta[@name="description"]');
 		}
 		else{
@@ -130,10 +127,7 @@ class DatabaseModel {
 		}
 		else { // Take first language
 			
-			if($pageName!=NULL && $pageId==NULL) {
-				$xPathResultMetaDescription = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record/meta[@name="description"]');
-			}
-			else if($pageId!=NULL && $pageName==NULL) {
+			if($pageId!=NULL) {
 				$xPathResultMetaDescription = $this->_dataBase->xpath('//page[@id="'.$pageId.'"]/record/meta[@name="description"]');
 			}
 			else{
@@ -153,10 +147,7 @@ class DatabaseModel {
 		
 		
 		
-		if($pageName!=NULL && $pageId==NULL) {
-			$xPathResultMetaKeywords = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="keywords"]');
-		}
-		else if($pageId!=NULL && $pageName==NULL) {
+		if($pageId!=NULL) {
 			$xPathResultMetaKeywords = $this->_dataBase->xpath('//page[@id="'.$pageId.'"]/record[@lang="'.$lang.'"]/meta[@name="keywords"]');
 		}
 		else{
@@ -168,10 +159,7 @@ class DatabaseModel {
 		}
 		else { // Take first language
 			
-			if($pageName!=NULL && $pageId==NULL) {
-				$xPathResultMetaKeywords = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record/meta[@name="keywords"]');
-			}
-			else if($pageId!=NULL && $pageName==NULL) {
+			if($pageId!=NULL) {
 				$xPathResultMetaKeywords = $this->_dataBase->xpath('//page[@id="'.$pageId.'"]/record/meta[@name="keywords"]');
 			}
 			else{
@@ -190,10 +178,7 @@ class DatabaseModel {
 		
 		
 		
-		if($pageName!=NULL && $pageId==NULL) {
-			$xPathResultMetaAuthor = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/meta[@name="author"]');
-		}
-		else if($pageId!=NULL && $pageName==NULL) {
+		if($pageId!=NULL) {
 			$xPathResultMetaAuthor = $this->_dataBase->xpath('//page[@id="'.$pageId.'"]/record[@lang="'.$lang.'"]/meta[@name="author"]');
 		}
 		else{
@@ -205,10 +190,7 @@ class DatabaseModel {
 		}
 		else { // Take first language
 			
-			if($pageName!=NULL && $pageId==NULL) {
-				$xPathResultMetaAuthor = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record/meta[@name="author"]');
-			}
-			else if($pageId!=NULL && $pageName==NULL) {
+			if($pageId!=NULL) {
 				$xPathResultMetaAuthor = $this->_dataBase->xpath('//page[@id="'.$pageId.'"]/record/meta[@name="author"]');
 			}
 			else{
@@ -269,12 +251,9 @@ class DatabaseModel {
 	 * @throws CaramelException
 	 * @return string String with correct website title
 	 */
-	public function getWebsiteTitleAction($lang, $pageName=NULL, $pageId=NULL) {
+	public function getWebsiteTitleAction($lang, $pageId) {
 				
-		if($pageName!=NULL && $pageId==NULL) {
-			$xPathResultTitle = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/title');
-		}
-		else if($pageId!=NULL && $pageName==NULL) {
+		if($pageId!=NULL) {
 			$xPathResultTitle = $this->_dataBase->xpath('//page[@id="'.$pageId.'"]/record[@lang="'.$lang.'"]/title');
 		}
 		else{
@@ -286,10 +265,7 @@ class DatabaseModel {
 		}
 		else { // Take first language
 			
-			if($pageName!=NULL && $pageId==NULL) {
-				$xPathResultTitle = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record/title');
-			}
-			else if($pageId!=NULL && $pageName==NULL) {
+			if($pageId!=NULL) {
 				$xPathResultTitle = $this->_dataBase->xpath('//page[@id="'.$pageId.'"]/record/title');
 			}
 			else{
@@ -320,13 +296,10 @@ class DatabaseModel {
 	 * @throws CaramelException
 	 * @return string String with correct website content
 	 */
-	public function getWebsiteContentAction($lang, $pageName=NULL, $pageId=NULL) {
+	public function getWebsiteContentAction($lang, $pageId) {
 		
 		
-		if($pageName!=NULL && $pageId==NULL) {
-			$xPathResultContent = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record[@lang="'.$lang.'"]/content');
-		}
-		else if($pageId!=NULL && $pageName==NULL) {
+		if($pageId!=NULL) {
 			$xPathResultContent = $this->_dataBase->xpath('//page[@id="'.$pageId.'"]/record[@lang="'.$lang.'"]/content');
 		}
 		else{
@@ -341,10 +314,7 @@ class DatabaseModel {
 		}
 		else { // take first language available
 			
-			if($pageName!=NULL && $pageId==NULL) {
-				$xPathResultContent = $this->_dataBase->xpath('//page[@path="'.$pageName.'"]/record/content');
-			}
-			else if($pageId!=NULL && $pageName==NULL) {
+			if($pageId!=NULL) {
 				$xPathResultContent = $this->_dataBase->xpath('//page[@id="'.$pageId.'"]/record/content');
 			}
 			else{
@@ -583,11 +553,16 @@ class DatabaseModel {
 		$page = array();
 		
 		$page["id"] = $id;
-		$page["path"]["label"] = "URL path to page";
+		$page["path"]["label"] = "URL path to page:";
+		$page["stylesheet"]["label"] = "Additional CSS file (only filename, not path):";
+		$page["scriptfile"]["label"] = "Additional JavaScript file (only filename, not path):";
 		
 		if(count($xPathResultPage)>0) {
 			
 			$page["path"]["value"] = (string)$xPathResultPage[0]["path"];
+			
+			$page["stylesheet"]["value"] = stripslashes(trim((string)$xPathResultPage[0]->stylesheet));
+			$page["scriptfile"]["value"] = stripslashes(trim((string)$xPathResultPage[0]->scriptfile));
 			
 			foreach($xPathResultPage[0]->record as $record) {
 				
@@ -648,6 +623,13 @@ class DatabaseModel {
 		if(count($xPathResultPage)>0) {
 			
 			$xPathResultPage[0]["path"] = $page["path"]["value"];
+			
+			# Set stylesheet and javascript file
+			$xPathResultPage[0]->stylesheet = null;
+			$xPathResultPage[0]->stylesheet->addCData(stripslashes(trim($page["stylesheet"]["value"])));
+			
+			$xPathResultPage[0]->scriptfile = null;
+			$xPathResultPage[0]->scriptfile->addCData(stripslashes(trim($page["scriptfile"]["value"])));
 			
 			$result = file_put_contents(BASEDIR.'/database/data.xml', $this->_dataBase->asXML());
 			
@@ -796,6 +778,111 @@ class DatabaseModel {
 		
 		return $result;
 		
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Method to get the additional CSS file for this page
+	 * 
+	 * @param String $id ID of the page
+	 * @throws CaramelException
+	 * 
+	 * @return Name of the additional CSS file
+	 */
+	public function getPageAdditionalCss($id) {
+	
+		$xPathResultPage = $this->_dataBase->xpath('//page[@id="'.$id.'"]');
+			
+		if(count($xPathResultPage)>0) {
+				
+			return stripslashes(trim((string)$xPathResultPage[0]->stylesheet));
+		}
+		else {
+			throw new CaramelException(10);
+		}
+		
+	} // End of method declaration
+	
+	
+	/**
+	 * Method to get the additional JS file for this page
+	 * 
+	 * @param String $id ID of the page
+	 * @throws CaramelException
+	 * 
+	 * @return Name of the additional JS file
+	 */
+	public function getPageAdditionalJs($id) {
+	
+		$xPathResultPage = $this->_dataBase->xpath('//page[@id="'.$id.'"]');
+			
+		if(count($xPathResultPage)>0) {
+	
+			return stripslashes(trim((string)$xPathResultPage[0]->scriptfile));
+		}
+		else {
+			throw new CaramelException(10);
+		}
+	
+	} // End of method declaration
+	
+	
+	/**
+	 * Method to return a page ID for given page path
+	 * 
+	 * @param String $pagePath
+	 * @throws CaramelException
+	 * 
+	 * @return Integer of the page ID
+	 */
+	public function getPageId($pagePath) {
+		
+		if($pagePath != false) {
+		
+			$xPathResultPage = $this->_dataBase->xpath('//page[@path="'.$pagePath.'"]');
+				
+			if(count($xPathResultPage)>0) {
+			
+				return (int)stripslashes(trim((string)$xPathResultPage[0]["id"]));
+			}
+			else {
+				throw new CaramelException(10);
+			}
+			
+		} else {
+			return false;
+		}
+		
+	} // End of method declaration
+	
+	
+	/**
+	 * Method to return a page path for given page ID
+	 * 
+	 * @param String $pageId
+	 * @throws CaramelException
+	 * 
+	 * @return String of the page path
+	 */
+	public function getPagePath($pageId) {
+		
+		if($pageId > 0) {
+	
+			$xPathResultPage = $this->_dataBase->xpath('//page[@id="'.$pageId.'"]');
+				
+			if(count($xPathResultPage)>0) {
+		
+				return (int)stripslashes(trim((string)$xPathResultPage[0]["path"]));
+			}
+			else {
+				throw new CaramelException(10);
+			}
+		
+		} else {
+			return false;
+		}
+	
 	} // End of method declaration
 	
 	

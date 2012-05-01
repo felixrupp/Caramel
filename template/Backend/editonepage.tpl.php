@@ -16,6 +16,11 @@
 		<fieldset>
 			<legend>Page settings</legend>
 			<label for="path"><?php echo $page["path"]["label"]; ?></label> <input type="text" name="path" id="path" value='<?php echo $page["path"]["value"]; ?>'>
+			<br>
+			<label for="stylesheet"><?php echo $page["stylesheet"]["label"]; ?></label> <input type="text" name="stylesheet" id="stylesheet" value='<?php echo $page["stylesheet"]["value"]; ?>'>
+			<br>
+			<label for="scriptfile"><?php echo $page["scriptfile"]["label"]; ?></label> <input type="text" name="scriptfile" id="scriptfile" value='<?php echo $page["scriptfile"]["value"]; ?>'>
+			
 		</fieldset>
 	
 		<?php foreach($page["records"] as $language => $record) { ?>

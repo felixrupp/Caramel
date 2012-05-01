@@ -177,7 +177,7 @@ class TemplateView {
 	 * @param String $cssFilename
 	 */
 	public function addCssFile($cssFilename) {
-		array_push($_additionalCssFiles, $cssFilename);
+		array_push($this->_additionalCssFiles, $cssFilename);
 	}
 	
 	/**
@@ -186,7 +186,7 @@ class TemplateView {
 	* @param String $jsFilename
 	*/
 	public function addJsFile($jsFilename) {
-		array_push($_additionalJsFiles, $jsFilename);
+		array_push($this->_additionalJsFiles, $jsFilename);
 	}
 	
 	

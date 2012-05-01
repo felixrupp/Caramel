@@ -13,6 +13,9 @@
 <database version="1.0">
 
 	<page id="1" path="caramel">
+		
+		<stylesheet></stylesheet>
+		<scriptfile></scriptfile>
 
 		<record lang="en">
 			<navigation pos="1"><![CDATA[Caramel]]></navigation>
@@ -64,6 +67,9 @@
 	
 	
 	<page id="2" path="documentation">
+		
+		<stylesheet></stylesheet>
+		<scriptfile></scriptfile>
 
 		<record lang="en">
 			<navigation pos="2">
@@ -129,6 +135,9 @@
 		</record>
 		
 		<page id="3" path="documentation/user">
+			
+			<stylesheet></stylesheet>
+			<scriptfile></scriptfile>
 
 			<record lang="en">
 				<navigation pos="1">User documentation</navigation>
@@ -206,6 +215,9 @@
 		
 		
 		<page id="4" path="documentation/faq">
+			
+			<stylesheet></stylesheet>
+			<scriptfile></scriptfile>
 
 			<record lang="en">
 				<navigation pos="2">
@@ -277,6 +289,9 @@
 	</page>
 	
 	<page id="5" path="download">
+		
+		<stylesheet></stylesheet>
+		<scriptfile></scriptfile>
 
 		<record lang="en">
 			<navigation pos="3">Download</navigation>
@@ -307,6 +322,9 @@
 	</page>
 	
 	<page id="6" path="imprint">
+		
+		<stylesheet></stylesheet>
+		<scriptfile></scriptfile>
 
 		<record lang="en">
 			<navigation pos="4">Imprint</navigation>
@@ -357,6 +375,9 @@
 	
 	
 	<page id="7" path="test">
+		
+		<stylesheet></stylesheet>
+		<scriptfile></scriptfile>
 
 		<record lang="en">
 			<navigation pos="4">Test</navigation>

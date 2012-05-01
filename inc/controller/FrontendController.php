@@ -35,8 +35,8 @@ class FrontendController {
 	private $_templateView;
 	
 	# Constants
-	const VERSION = "0.2.3";
-	const VERSION_DATE = "2012-04-30";
+	const VERSION = "0.2.4";
+	const VERSION_DATE = "2012-05-01";
 		
 
 	/**
@@ -68,18 +68,17 @@ class FrontendController {
 		
 		$lang = $this->getLanguage();
 		$pageName = $this->getDisplay();
-		$pageId = NULL;
 		
-		if(!$pageName) { // no page is set for display
-			
-			try {
+		try {
+			if(!$pageName) { // no page is set for display
 				$pageId = $this->_config->getConfigStringAction("STARTPAGE");
 			}
-			catch(CaramelException $e) {
-				$e->getDetails();
+			else {
+				$pageId = $this->_dataBase->getPageId($pageName);
 			}
-			
-			$pageName = NULL;
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
 		}
 		
 		try {
@@ -88,7 +87,7 @@ class FrontendController {
 			# Build navigation links from given information. Returned array is very compact
 			$navigation = $this->getNavigationLinks($navigation);
 			
-			$content = $this->_dataBase->getWebsiteContentAction($lang, $pageName, $pageId); # This is a string with our content
+			$content = $this->_dataBase->getWebsiteContentAction($lang, $pageId); # This is a string with our content
 		}
 		catch(CaramelException $e) {
 			$e->getDetails();
@@ -191,20 +190,20 @@ class FrontendController {
 		
 		$lang = $this->getLanguage();
 		$pageName = $this->getDisplay();
-		$pageId = NULL;
 		
 		try {
 			
 			$metaRobots = '<meta name="robots" content="'.$this->_config->getConfigStringAction('ROBOTS').'">';
-			
+						
 			if(!$pageName) { // no page is set for display
 				$pageId = $this->_config->getConfigStringAction("STARTPAGE");
-				$pageName = NULL;
+			} else {
+				$pageId = $this->_dataBase->getPageId($pageName);
 			}
 			
-			$meta = $this->_dataBase->getAllMetaTagsAction($lang, $pageName, $pageId).$metaRobots."\n".$metaGenerator."\n";
+			$meta = $this->_dataBase->getAllMetaTagsAction($lang, $pageId).$metaRobots."\n".$metaGenerator."\n";
 		
-			$title = $this->_config->getConfigStringAction("WEBSITE_TITLE").$this->_config->getConfigStringAction("WEBSITE_TITLE_SEPERATOR").$this->_dataBase->getWebsiteTitleAction($lang, $pageName, $pageId);
+			$title = $this->_config->getConfigStringAction("WEBSITE_TITLE").$this->_config->getConfigStringAction("WEBSITE_TITLE_SEPERATOR").$this->_dataBase->getWebsiteTitleAction($lang, $pageId);
 		
 		}
 		catch(CaramelException $e) {
@@ -212,7 +211,20 @@ class FrontendController {
 		}
 		
 		$headTag = $this->getBaseUrl()."\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$meta."\n\n<title>".$title."</title>\n\n";
-				
+		
+		
+		$additionalCssFile = $this->_dataBase->getPageAdditionalCss($pageId);
+		if(strlen($additionalCssFile) > 1) {		
+			$this->_templateView->addCssFile($additionalCssFile);
+		}
+		
+		
+		$additionalJsFile = $this->_dataBase->getPageAdditionalJs($pageId);
+		if(strlen($additionalJsFile) > 1) {
+			$this->_templateView->addJsFile($additionalJsFile);
+		}
+		
+		
 		$headTag .= $this->_templateView->addCssJs();
 		
 		return $headTag;

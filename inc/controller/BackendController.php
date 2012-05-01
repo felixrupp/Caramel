@@ -36,8 +36,8 @@ class BackendController {
 	private $_templateView;
 		
 	# Constants
-	const VERSION = "0.2.3";
-	const VERSION_DATE = "2012-04-30";
+	const VERSION = "0.2.4";
+	const VERSION_DATE = "2012-05-01";
 	
 
 	/**
@@ -298,9 +298,12 @@ class BackendController {
 				
 				$page["path"]["value"] = trim($_POST["path"]);
 				
+				$page["stylesheet"]["value"] = trim($_POST["stylesheet"]);
+				$page["scriptfile"]["value"] = trim($_POST["scriptfile"]);
+				
 				foreach($_POST as $key => $value) {
 					
-					if($key!="editonepage" && $key!="submit" && $key!="pageid" && $key!="path") {
+					if($key!="editonepage" && $key!="submit" && $key!="pageid" && $key!="path" && $key != "stylesheet" && $key != "scriptfile") {
 						
 						# Current language
 						$lang = substr($key, strrpos($key, "_")+1, strlen($key));
