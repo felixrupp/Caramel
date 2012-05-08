@@ -95,6 +95,8 @@ class TemplateView {
 			$cssJs .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"".TEMPLATEDIR."/".$this->_activeTemplate."/css/".$cssFile.".css\">\n";
 		}
 		
+		$cssJs .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."/".$this->_activeTemplate."/js/jquery.min.js\"></script>\n";
+		
 		$cssJs .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."/".$this->_activeTemplate."/js/scripts.js\"></script>\n";
 		
 		foreach($this->_additionalJsFiles as $jsFile) {

@@ -510,13 +510,11 @@ class BackendController {
 		
 		$headTag = "\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$meta."\n\n<title>Caramel CMS Backend</title>\n\n";
 	
-		$headTag .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."/Backend/js/jquery.min.js\"></script>\n";
+		$headTag .= $this->_templateView->addCssJs();
 		
 		$headTag .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."/Backend/js/ckeditor/ckeditor.js\"></script>\n";
 		$headTag .= "<script type=\"text/javascript\" src=\"".TEMPLATEDIR."/Backend/js/ckeditor/adapters/jquery.js\"></script>\n";
-		
-		$headTag .= $this->_templateView->addCssJs();
-	
+			
 		return $headTag;
 	
 	} // End of method declaration

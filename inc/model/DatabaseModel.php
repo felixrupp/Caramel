@@ -896,7 +896,7 @@ class DatabaseModel {
 	protected function reloadDatabaseFile() {
 		# Try to import the database-file
 		try {
-			$this->_dataBase = simplexml_load_file(BASEDIR.'/database/data.xml', "SimpleXMLExtended", LIBXML_NOCDATA);
+			$this->_dataBase = simplexml_load_file(BASEDIR.'/database/data.xml', "SimpleXMLExtended");
 		}
 		catch(Exception $e) {
 			var_dump($e->getMessage());

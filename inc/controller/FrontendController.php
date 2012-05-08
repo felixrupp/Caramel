@@ -272,11 +272,30 @@ class FrontendController {
 		} else {
 			$navigationClass = "";
 		}
-	
-		foreach($navigationArray as $pageId => $page) {
+		
+		# Test if STARTPAGE is active or not
+		$pageName = $this->getDisplay();
+				
+		try {
+			if(!$pageName) {
+				// no page is set for display
+				$pageId = intval($this->_config->getConfigStringAction("STARTPAGE"));
+			}
+			else {
+				$pageId = intval($this->_dataBase->getPageId($pageName));
+			}
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
+		}
+
+		
+		
+		# For loop to build nav links
+		foreach($navigationArray as $navPageId => $page) {
 			
 			# Active Marker
-			if($page["path"] == $this->getDisplay()) {
+			if(intval($navPageId) == $pageId) {
 			
 				try {
 					$active = $this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER");
@@ -292,7 +311,8 @@ class FrontendController {
 					$e->getDetails();
 				}
 				
-			} else {
+			} 
+			else {
 				$active = "";
 				
 				if(strlen($navigationClass)<1) {
@@ -344,8 +364,8 @@ class FrontendController {
 				
 				$link .="</a>";
 				
-				$navigation[$pageId]["path"] = $page["path"];
-				$navigation[$pageId]["link"] = $link;
+				$navigation[$navPageId]["path"] = $page["path"];
+				$navigation[$navPageId]["link"] = $link;
 				
 				
 				# Subpage links
@@ -353,11 +373,34 @@ class FrontendController {
 				foreach($page["subpages"] as $subPageId => $page) {
 					
 					# Active Marker
-					//TODO: Try-catch
-					if($page["path"] == $this->getDisplay()) {
-						$active = $this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER");
-					} else {
+					if(intval($subPageId) == $pageId) {
+					
+						try {
+							$active = $this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER");
+							
+							if(strlen($navigationClass)<1) { # No navigationClass set
+								$activeClass = ' class="'.$this->_config->getConfigStringAction("NAVIGATION_ACTIVE_CLASS").'"';
+							}
+							else { # navigationClass set
+								$activeClass = " ".$this->_config->getConfigStringAction("NAVIGATION_ACTIVE_CLASS").'"';
+							}
+						}
+						catch(CaramelException $e) {
+							$e->getDetails();
+						}
+						
+					} 
+					else {
 						$active = "";
+						
+						if(strlen($navigationClass)<1) {
+							# No navigationClass set
+							$activeClass = "";
+						}
+						else { # navigationClass set
+							$activeClass = '"';
+						}
+						
 					}
 						
 					# Build navigation link
@@ -409,7 +452,7 @@ class FrontendController {
 			}			
 			
 		}
-		
+				
 		return $navigation;
 		
 	} // End of method declaration

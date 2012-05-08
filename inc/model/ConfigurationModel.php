@@ -333,7 +333,7 @@ class ConfigurationModel {
 	protected function reloadConfigFile() {
 			
 		try {
-			$this->_configFile = simplexml_load_file(BASEDIR.'/config/site.xml', "SimpleXMLExtended", LIBXML_NOCDATA);
+			$this->_configFile = simplexml_load_file(BASEDIR.'/config/site.xml', "SimpleXMLExtended");
 		}
 		catch(Exception $e) {
 			throw new CaramelException(11);
@@ -352,7 +352,7 @@ class ConfigurationModel {
 	protected function reloadAdminConfigFile() {
 
 		try {
-			$this->_adminConfigFile = simplexml_load_file(BASEDIR.'/config/admin.xml', "SimpleXMLExtended", LIBXML_NOCDATA);
+			$this->_adminConfigFile = simplexml_load_file(BASEDIR.'/config/admin.xml', "SimpleXMLExtended");
 		}
 		catch(Exception $e) {
 			throw new CaramelException(11);
