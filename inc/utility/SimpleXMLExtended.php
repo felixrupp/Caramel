@@ -74,5 +74,39 @@ class SimpleXMLExtended extends SimpleXMLElement {
 		
 	} // End of method declaration
 	
+	
+	
+	/**
+	 * Method to move a node above one other
+	 * 
+	 */
+	public function moveNodeUp($refNode) {
+		
+		$oldNode = dom_import_simplexml($this);
+		$refNode = dom_import_simplexml($refNode);
+	
+		$node = $refNode->parentNode->removeChild($oldNode);
+		
+		$refNode->parentNode->insertBefore($node, $refNode);
+		
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Method to move a node after one other
+	 *
+	 */
+	public function moveNodeDown($refNode) {
+			
+		$oldNode = dom_import_simplexml($this);
+		$refNode = dom_import_simplexml($refNode);
+		
+		$node = $refNode->parentNode->removeChild($oldNode);
+			
+		$refNode->parentNode->insertBefore($node, $refNode->nextSibling);
+	
+	} // End of method declaration
+	
 }
 ?>

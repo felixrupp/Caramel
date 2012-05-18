@@ -18,7 +18,7 @@
 		<scriptfile></scriptfile>
 
 		<record lang="en">
-			<navigation pos="1"><![CDATA[Caramel]]></navigation>
+			<navigation visible="true"><![CDATA[Caramel]]></navigation>
 			<title><![CDATA[Open Source CMS]]></title>
 			<titletag><![CDATA[Caramel]]></titletag>
 			<meta name="description"><![CDATA[English description for Home]]></meta>
@@ -41,7 +41,7 @@
 </ul>]]></content>
 		</record>
 		<record lang="de">
-			<navigation pos="1"><![CDATA[Caramel]]></navigation>
+			<navigation visible="true"><![CDATA[Caramel]]></navigation>
 			<title><![CDATA[Open Source CMS]]></title>
 			<titletag><![CDATA[Caramel]]></titletag>
 			<meta name="description"><![CDATA[Deutsche Beschreibung für Start]]></meta>
@@ -72,7 +72,7 @@
 		<scriptfile></scriptfile>
 
 		<record lang="en">
-			<navigation pos="2">
+			<navigation visible="true>
 				Documentation
 			</navigation>
 			<title>
@@ -140,7 +140,7 @@
 			<scriptfile></scriptfile>
 
 			<record lang="en">
-				<navigation pos="1">User documentation</navigation>
+				<navigation visible="true">User documentation</navigation>
 				<title>user documentation</title>
 				<titletag>user documentation</titletag>
 				<meta name="description">English description for Info</meta>
@@ -163,7 +163,7 @@
 &lt;/ul&gt;</content>
 			</record>
 			<record lang="de">
-				<navigation pos="1">Benutzerdokumentation</navigation>
+				<navigation visible="true">Benutzerdokumentation</navigation>
 				<title>Benutzerdokumentation</title>
 				<titletag>Benutzerdokumentation</titletag>
 				<meta name="description">Deutsche Beschreibung für Info</meta>
@@ -220,7 +220,7 @@
 			<scriptfile></scriptfile>
 
 			<record lang="en">
-				<navigation pos="2">
+				<navigation visible="true">
 					FAQ
 				</navigation>
 				<title>
@@ -252,7 +252,7 @@
 				</content>
 			</record>
 			<record lang="de">
-				<navigation pos="2">
+				<navigation visible="true">
 					Häufige Fragen (FAQ)
 				</navigation>
 				<title>
@@ -294,7 +294,7 @@
 		<scriptfile></scriptfile>
 
 		<record lang="en">
-			<navigation pos="3">Download</navigation>
+			<navigation visible="true">Download</navigation>
 			<title>Download</title>
 			<titletag>Download Caramel CMS</titletag>
 			<meta name="description">Download page for Caramel CMS. Here you can download the most recent version of Caramel CMS.</meta>
@@ -307,7 +307,7 @@
 	Here you can download the latest release of Caramel CMS as a zip-file.&lt;/p&gt;</content>
 		</record>
 		<record lang="de">
-			<navigation pos="3">Laden</navigation>
+			<navigation visible="true">Laden</navigation>
 			<title>Caramel CMS laden</title>
 			<titletag>Caramel CMS laden</titletag>
 			<meta name="description">Hier können Sie Caramel CMS herunterladen. Sie erhalten immer die jeweils aktuellste Version der Software.</meta>
@@ -327,7 +327,7 @@
 		<scriptfile></scriptfile>
 
 		<record lang="en">
-			<navigation pos="4">Imprint</navigation>
+			<navigation visible="false">Imprint</navigation>
 			<title>Imprint</title>
 			<titletag>Imprint</titletag>
 			<meta name="description">This is the Imprint of Caramel CMS</meta>
@@ -348,7 +348,7 @@
 	The author is not responsible for any contents linked or referred to from his pages &amp;ndash; If any damage occurs by the use of information presented there, only the author of the respective pages might be liable, not the one who has linked to these pages.&lt;/p&gt;</content>
 		</record>
 		<record lang="de">
-			<navigation pos="4">Impressum</navigation>
+			<navigation visible="false">Impressum</navigation>
 			<title>Impressum</title>
 			<titletag>Impressum</titletag>
 			<meta name="description">Das ist das Impressum für Caramel CMS</meta>
@@ -380,7 +380,7 @@
 		<scriptfile></scriptfile>
 
 		<record lang="en">
-			<navigation pos="4">Test</navigation>
+			<navigation visible="true">Test</navigation>
 			<title>Test</title>
 			<titletag>Test</titletag>
 			<meta name="description">This is the Imprint of Caramel CMS</meta>
@@ -391,7 +391,7 @@
 	Test&lt;/h2&gt;</content>
 		</record>
 		<record lang="de">
-			<navigation pos="4">Test</navigation>
+			<navigation visible="true">Test</navigation>
 			<title>Test</title>
 			<titletag>Test</titletag>
 			<meta name="description">Das ist das Impressum für Caramel CMS</meta>

@@ -210,6 +210,9 @@
 		
 		<fieldset name="fieldset">
 			<legend class="collapsableFieldset">Record for default language</legend>
+			
+			<label for="visible">Visible in navigation:</label> <input type="checkbox" name="visible" id="visible" value="true" checked>
+			<br>
 							
 			<label for="navigation">Name used in navigation:</label> <input type="text" name="navigation" id="navigation" value=''>
 			<br>

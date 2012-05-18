@@ -328,7 +328,7 @@ class FrontendController {
 			}
 			
 			# Build navigation link
-			if($page["pos"]!=-1) { # Negative values are not appearing in standard navigation
+			if($page["visible"]=="true") { # false values are not appearing in standard navigation
 				
 				$link = "<a";
 				
@@ -336,12 +336,16 @@ class FrontendController {
 				$link .= $navigationClass.$activeClass;
 				
 				# Define link-syntax (speaking urls or not)
-				//TODO: try-catch
-				if($this->_config->getConfigStringAction("SPEAKING_URLS") == "false") {
-					$link .= " href=\"".$naviLink.$page["path"]."\"";
+				try {
+					if($this->_config->getConfigStringAction("SPEAKING_URLS") == "false") {
+						$link .= " href=\"".$naviLink.$page["path"]."\"";
+					}
+					elseif($this->_config->getConfigStringAction("SPEAKING_URLS") == "true") {
+						$link .= " href=\"".$this->getParametersBefore().'/'.$page["path"]."/\"";
+					}
 				}
-				elseif($this->_config->getConfigStringAction("SPEAKING_URLS") == "true") {
-					$link .= " href=\"".$this->getParametersBefore().'/'.$page["path"]."/\"";
+				catch(CaramelException $e) {
+					$e->getDetails();
 				}
 				
 				# Set rel-attribute
@@ -353,15 +357,19 @@ class FrontendController {
 				$link .= " title=\"".$page["titletag"]."\">";
 				
 				# Evaluate position of NAVIGATION_ACTIVE_MARKER
-				//TODO: Try-catch
-				if($this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION") == "before") {
-					$link .= $active.$page["navigation"];
+				try {
+					if($this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION") == "before") {
+						$link .= $active.$page["navigation"];
+					}
+					elseif($this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION") == "after") {
+						$link .= $page["navigation"].$active;
+					}
+					elseif($this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION") == "disabled") {
+						$link .= $page["navigation"];
+					}
 				}
-				elseif($this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION") == "after") {
-					$link .= $page["navigation"].$active;
-				}
-				elseif($this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION") == "disabled") {
-					$link .= $page["navigation"];
+				catch(CaramelException $e) {
+					$e->getDetails();
 				}
 				
 				$link .="</a>";
@@ -406,7 +414,7 @@ class FrontendController {
 					}
 						
 					# Build navigation link
-					if($page["pos"]!=-1) { # Negative values are not appearing in standard navigation
+					if($page["visible"]=="true") { # false values are not appearing in standard navigation
 					
 						$link = "<a";
 					
@@ -414,13 +422,18 @@ class FrontendController {
 						$link .= $navigationClass;
 					
 						# Define link-syntax (speaking urls or not)
-						//TODO: Try-catch
-						if($this->_config->getConfigStringAction("SPEAKING_URLS") == "false") {
-							$link .= " href=\"".$naviLink.$page["path"]."\"";
+						try {
+							if($this->_config->getConfigStringAction("SPEAKING_URLS") == "false") {
+								$link .= " href=\"".$naviLink.$page["path"]."\"";
+							}
+							elseif($this->_config->getConfigStringAction("SPEAKING_URLS") == "true") {
+								$link .= " href=\"".$this->getParametersBefore().'/'.$page["path"]."/\"";
+							}
 						}
-						elseif($this->_config->getConfigStringAction("SPEAKING_URLS") == "true") {
-							$link .= " href=\"".$this->getParametersBefore().'/'.$page["path"]."/\"";
+						catch(CaramelException $e) {
+							$e->getDetails();
 						}
+					
 									
 						# Set rel-attribute
 						# DEACTIVATED BECAUSE OF HTML5 DOCTYPE
@@ -431,15 +444,19 @@ class FrontendController {
 						$link .= " title=\"".$page["titletag"]."\">";
 					
 						# Evaluate position of NAVIGATION_ACTIVE_MARKER
-						//TODO: Try-catch
-						if($this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION") == "before") {
-							$link .= $active.$page["navigation"];
+						try {
+							if($this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION") == "before") {
+								$link .= $active.$page["navigation"];
+							}
+							elseif($this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION") == "after") {
+								$link .= $page["navigation"].$active;
+							}
+							elseif($this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION") == "disabled") {
+								$link .= $page["navigation"];
+							}
 						}
-						elseif($this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION") == "after") {
-							$link .= $page["navigation"].$active;
-						}
-						elseif($this->_config->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION") == "disabled") {
-							$link .= $page["navigation"];
+						catch(CaramelException $e) {
+							$e->getDetails();
 						}
 					
 						$link .="</a>";

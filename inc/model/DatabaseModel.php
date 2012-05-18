@@ -360,7 +360,7 @@ class DatabaseModel {
 			
 				$orderedNavi[(int)$page->attributes()->id] = array(
 					"path" => (string)$page->attributes()->path, 
-					"pos" => (int)$record->navigation->attributes()->pos,
+					"visible" => (string)$record->navigation->attributes()->visible,
 					"navigation" => (string)$record->navigation,
 					"title" => (string)$record->title,
 					"titletag" => (string)$record->titletag,
@@ -375,7 +375,7 @@ class DatabaseModel {
 						
 					$orderedNavi[(int)$page->attributes()->id] = array(
 						"path" => (string)$page->attributes()->path, 
-						"pos" => (int)$record->navigation->attributes()->pos,
+						"visible" => (string)$record->navigation->attributes()->visible,
 						"navigation" => (string)$record->navigation,
 						"title" => (string)$record->title,
 						"titletag" => (string)$record->titletag,
@@ -404,7 +404,7 @@ class DatabaseModel {
 							
 					$orderedNavi[(int)$page->attributes()->id]["subpages"][(int)$subPage->attributes()->id] = array(
 						"path" => (string)$subPage->attributes()->path,
-						"pos" => (int)$subRecord->navigation->attributes()->pos,
+						"visible" => (string)$subRecord->navigation->attributes()->visible,
 						"navigation" => (string)$subRecord->navigation,
 						"title" => (string)$subRecord->title,
 						"titletag" => (string)$subRecord->titletag,
@@ -420,7 +420,7 @@ class DatabaseModel {
 							
 						$orderedNavi[(int)$page->attributes()->id]["subpages"][(int)$subPage->attributes()->id] = array(
 							"path" => (string)$subPage->attributes()->path,
-							"pos" => (int)$subRecord->navigation->attributes()->pos,
+							"visible" => (string)$subRecord->navigation->attributes()->visible,
 							"navigation" => (string)$subRecord->navigation,
 							"title" => (string)$subRecord->title,
 							"titletag" => (string)$subRecord->titletag,
@@ -463,7 +463,7 @@ class DatabaseModel {
 				
 				$orderedNavi[(int)$page->attributes()->id] = array(
 					"path" => (string)$page->attributes()->path, 
-					"pos" => (int)$record->navigation->attributes()->pos,
+					"visible" => (string)$record->navigation->attributes()->visible,
 					"id" => (int)$page->attributes()->id,
 					"navigation" => (string)$record->navigation,
 				);
@@ -478,7 +478,7 @@ class DatabaseModel {
 				
 					$orderedNavi[(int)$page->attributes()->id] = array(
 						"path" => (string)$page->attributes()->path, 
-						"pos" => (int)$record->navigation->attributes()->pos,
+						"visible" => (string)$record->navigation->attributes()->visible,
 						"id" => (int)$page->attributes()->id,
 						"navigation" => (string)$record->navigation,
 					);
@@ -505,7 +505,7 @@ class DatabaseModel {
 			
 					$orderedNavi[(int)$page->attributes()->id]["subpages"][(int)$subPage->attributes()->id] = array(
 						"path" => (string)$subPage->attributes()->path,
-						"pos" => (int)$subRecord->navigation->attributes()->pos,
+						"visible" => (string)$subRecord->navigation->attributes()->visible,
 						"id" => (int)$subPage->attributes()->id,
 						"navigation" => (string)$subRecord->navigation,
 					);
@@ -520,7 +520,7 @@ class DatabaseModel {
 				
 						$orderedNavi[(int)$page->attributes()->id]["subpages"][(int)$subPage->attributes()->id] = array(
 							"path" => (string)$subPage->attributes()->path,
-							"pos" => (int)$subRecord->navigation->attributes()->pos,
+							"visible" => (string)$subRecord->navigation->attributes()->visible,
 							"id" => (int)$subPage->attributes()->id,
 							"navigation" => (string)$subRecord->navigation,
 						);
@@ -567,6 +567,9 @@ class DatabaseModel {
 			foreach($xPathResultPage[0]->record as $record) {
 				
 				$lang = (string)$record->attributes()->lang;
+				
+				$page["records"][$lang]["visible"]["label"] = "Visible in navigation:";
+				$page["records"][$lang]["visible"]["value"] = stripslashes(trim((string)$record->navigation["visible"]));
 				
 				$page["records"][$lang]["navigation"]["label"] = "Name used in navigation:";
 				$page["records"][$lang]["navigation"]["value"] = stripslashes(trim((string)$record->navigation));
@@ -645,8 +648,15 @@ class DatabaseModel {
 			
 			if(count($xPathResultRecord)>0) {
 				
+				if(stripslashes(trim($record["visible"]["value"])) == "true") {
+					$visible = "true";
+				} else {
+					$visible = "false";
+				}
+				
 				$xPathResultRecord[0]->navigation = null;
 				$xPathResultRecord[0]->navigation->addCData(stripslashes(trim($record["navigation"]["value"])));
+				$xPathResultRecord[0]->navigation->attributes()->visible = $visible;
 				$xPathResultRecord[0]->title = null;
 				$xPathResultRecord[0]->title->addCData(stripslashes(trim($record["title"]["value"])));
 				$xPathResultRecord[0]->titletag = null;
@@ -752,6 +762,13 @@ class DatabaseModel {
 			## Add rest of children
 			$navigation = $newRecord->addChildCData("navigation", $recordContents["navigation"]);
 			
+			if($recordContents["visible"]=="true") {
+				$navigation->addAttribute("visible", "true");
+			}
+			else {
+				$navigation->addAttribute("visible", "false");
+			}
+			
 			$newRecord->addChild("title", $recordContents["title"]);
 			
 			$newRecord->addChild("titletag", $recordContents["titletag"]);
@@ -778,6 +795,78 @@ class DatabaseModel {
 		
 		return $result;
 		
+	} // End of method declaration
+	
+	
+	/**
+	 * Wrapper method to move a node one up
+	 * 
+	 * @param int $id ID of the page-node
+	 * 
+	 * @throws CaramelException
+	 * @return Result of the save action
+	 */
+	public function movePageUpAction($id) {
+		
+		$result = false;
+		
+		$xPathResultPage = $this->_dataBase->xpath('//page[@id="'.$id.'"]');
+				
+		if(count($xPathResultPage)>0) {
+			
+			$xPathResultSibling = $xPathResultPage[0]->xpath('preceding-sibling::*[1]');
+				
+			if(count($xPathResultSibling)>0) {
+				
+				$xPathResultPage[0]->moveNodeUp($xPathResultSibling[0]);
+					
+				$result = file_put_contents(BASEDIR.'/database/data.xml', $this->_dataBase->asXML());
+			}
+						
+		}
+		else {
+			throw new CaramelException(10);
+		}
+		
+		return $result;
+		
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Wrapper method to move a node one down
+	 * 
+	 * @param int $id ID of the page-node
+	 * 
+	 * @throws CaramelException
+	 * @return Result of the save action
+	 */
+	public function movePageDownAction($id) {
+	
+		$result = false;
+	
+		$xPathResultPage = $this->_dataBase->xpath('//page[@id="'.$id.'"]');
+	
+		if(count($xPathResultPage)>0) {
+			
+			$xPathResultSibling = $xPathResultPage[0]->xpath('following-sibling::*[1]');
+			
+			if(count($xPathResultSibling)>0) {
+				
+				$xPathResultPage[0]->moveNodeDown($xPathResultSibling[0]);
+				
+				$result = file_put_contents(BASEDIR.'/database/data.xml', $this->_dataBase->asXML());
+				
+			}
+						
+		}
+		else {
+			throw new CaramelException(10);
+		}
+		
+		return $result;
+	
 	} // End of method declaration
 	
 	

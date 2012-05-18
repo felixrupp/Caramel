@@ -159,6 +159,48 @@ class BackendController {
 				$this->_templateView->assign("editpages", TRUE);
 					
 			}
+			# Move page up
+			if(isset($_GET["q"]) && $_GET["q"]=="moveup" && isset($_GET["id"])) {
+				
+				$id = (int)trim($_GET["id"]);
+				
+				try {
+					$result = $this->_dataBase->movePageUpAction($id);
+					$allPages = $this->_dataBase->getWebsitePagesAction("en");
+				}
+				catch(CaramelException $e) {
+					$e->getDetails();
+				}
+								
+				$this->_navigation = TRUE;
+				$this->_login = FALSE;
+				$this->_welcome = FALSE;
+				
+				$this->_templateView->assign("pages", $allPages);
+				$this->_templateView->assign("editpages", TRUE);
+				
+			}
+			# Move page down
+			if(isset($_GET["q"]) && $_GET["q"]=="movedown" && isset($_GET["id"])) {
+			
+				$id = (int)trim($_GET["id"]);
+			
+				try {
+					$result = $this->_dataBase->movePageDownAction($id);
+					$allPages = $this->_dataBase->getWebsitePagesAction("en");
+				}
+				catch(CaramelException $e) {
+					$e->getDetails();
+				}
+			
+				$this->_navigation = TRUE;
+				$this->_login = FALSE;
+				$this->_welcome = FALSE;
+			
+				$this->_templateView->assign("pages", $allPages);
+				$this->_templateView->assign("editpages", TRUE);
+			
+			}
 			# Edit a single page
 			if(isset($_GET["q"]) && $_GET["q"]=="editpages" && isset($_GET["id"]) && !isset($_GET["delete"])) {
 			
@@ -302,10 +344,23 @@ class BackendController {
 						$lang = substr($key, strrpos($key, "_")+1, strlen($key));
 							
 						$key = substr($key, 0, strrpos($key, "_"));
-												
-						$page["records"][$lang][$key]["value"] = $value;
+						
+						if($key != "visible") {
+							
+							$page["records"][$lang][$key]["value"] = $value;
+							
+						}
+						else if($key == "visible") {
+							
+							$page["records"][$lang][$key]["value"] = "true";
+							
+						}
+						
 					}
+										
 				}
+				
+				
 				
 				
 				try{

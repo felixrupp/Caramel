@@ -9,7 +9,7 @@ $(document).ready(function(){
 				// nothing done here
 			},
 			{ // Options
-				width: "700px",
+				width: "800px",
 				toolbar: "Caramel",
 				stylesSet: "caramel"
 			}

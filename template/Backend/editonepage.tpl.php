@@ -27,6 +27,9 @@
 	
 			<fieldset name="fieldset_<?php echo $language ?>">
 				<legend class="collapsableFieldset">Language: <?php echo $language ?></legend>
+					
+				<label for="visible_<?php echo $language ?>"><?php echo $record["visible"]["label"]; ?></label> <input type="checkbox" name="visible_<?php echo $language ?>" id="visible_<?php echo $language ?>" value="true"<?php if($record["visible"]["value"]=="true") echo " checked"?>>
+				<br>				
 								
 				<label for="navigation_<?php echo $language ?>"><?php echo $record["navigation"]["label"]; ?></label> <input type="text" name="navigation_<?php echo $language ?>" id="navigation_<?php echo $language ?>" value='<?php echo $record["navigation"]["value"]; ?>'>
 				<br>
