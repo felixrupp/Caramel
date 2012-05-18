@@ -16,11 +16,11 @@
   xmlns CDATA #FIXED ''
   lang NMTOKEN #REQUIRED>
 
-<!ELEMENT scriptfile EMPTY>
+<!ELEMENT scriptfile (#PCDATA)>
 <!ATTLIST scriptfile
   xmlns CDATA #FIXED ''>
 
-<!ELEMENT stylesheet EMPTY>
+<!ELEMENT stylesheet (#PCDATA)>
 <!ATTLIST stylesheet
   xmlns CDATA #FIXED ''>
 
