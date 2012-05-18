@@ -40,8 +40,8 @@ class BackendController {
 	private $_welcome = FALSE;
 		
 	# Constants
-	const VERSION = "0.2.4";
-	const VERSION_DATE = "2012-05-01";
+	const VERSION = "0.2.5";
+	const VERSION_DATE = "2012-05-18";
 	
 
 	/**
