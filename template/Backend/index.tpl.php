@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @package template
  * @subpackage Backend
@@ -11,55 +11,49 @@
 
 <div id="container">
 
-  <div id="header">
-    <div class="header_left"></div>
-    <div class="header_center">Caramel CMS Backend </div>
-    <div class="header_right">
-      <?php if(isset($navigation) && $navigation!=FALSE) {?>
-        <a href="?q=logout" title="Logout" class="right"><img src="../template/Backend/images/off.png" border="0"/></a>
-      <?php } ?>
-    </div>
-  </div>
+	<div id="header">Caramel CMS Backend
+	
+	<?php if(isset($navigation) && $navigation!=FALSE) {?>
+		<a href="?q=logout" title="Logout" class="floatRight"><img src="../template/Backend/images/off.png" alt="Logout"> </a>
+	<?php } ?>
+	</div>
+	
+	
+	<?php if(isset($navigation) && $navigation!=FALSE) {?>
   
-  
-  
-  <?php if(isset($navigation) && $navigation!=FALSE) {?>
-  
-    <div id="menu">
-      <ul>
-        <li><a href="?q=editglobals" class="settings"></a></li>
-        <li><a href="?q=editusers" class="admin"></a></li>
-        <li><a href="?q=editpages" class="site"></a></li>
-        <li><a href="?q=edittemplates" class="template"></a></li>
-      </ul>
-    </div>
+	<div id="menu">
+		<ul>
+			<li><a href="?q=editglobals" class="settings"></a></li>
+			<li><a href="?q=editusers" class="admin"></a></li>
+			<li><a href="?q=editpages" class="site"></a></li>
+			<li><a href="?q=edittemplates" class="template"></a></li>
+		</ul>
+	</div>
     
-  <?php } ?>
+	<?php } ?>
   
+
+	<div id="content">
   
-  
-  
-  <div id="content">
-  
-  	<?php if(isset($welcome) && $welcome!=FALSE) {?>
-  		<div id="welcome">
+	<?php if(isset($welcome) && $welcome!=FALSE) {?>
+		<div id="welcome">
   	
-  			<h1>Welcome at admin backend of Caramel CMS</h1>
-  			<p>It's great to have you here!</p>
+			<h1>Welcome at admin backend of Caramel CMS</h1>
+			<p>It's great to have you here!</p>
   		
-  		</div>
-  	<?php } ?>
+		</div>
+	<?php } ?>
   
   	
-  	<?php if(isset($login) && $login!=FALSE) {?>
-  		<div id="adminlogin">
+	<?php if(isset($login) && $login!=FALSE) {?>
+		<div id="adminlogin">
   		
-  			<div id="wrapper">
+			<div id="wrapper">
   	
-  				<h2>Please login below:</h2>
+				<h2>Please login below:</h2>
   
-  				<form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
-  					<fieldset>
+				<form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
+					<fieldset>
   						<label for="username">Username:</label> <input type="text" name="username" id="username">
   						<br>
   						<label for="password">Password:</label> <input type="password" name="password" id="password">
@@ -96,13 +90,11 @@
   	
   	?>
   
-  </div>
+	</div>
   
-  <div id="footer">
-    <div class="footer_left"></div>
-    <div class="footer_center"></div>
-    <div class="footer_right">&copy; 2012 Caramel</div>
-  </div>
+	<div id="footer">
+		<p>&copy; 2012 Caramel</p>
+	</div>
 
 </div>
 

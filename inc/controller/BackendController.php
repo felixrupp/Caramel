@@ -34,6 +34,10 @@ class BackendController {
 	private $_config;
 	private $_dataBase;
 	private $_templateView;
+	
+	private $_navigation = FALSE;
+	private $_login = FALSE;
+	private $_welcome = FALSE;
 		
 	# Constants
 	const VERSION = "0.2.4";
@@ -68,16 +72,12 @@ class BackendController {
 	 */
 	public function backendOutputAction() {
 		
-		$navigation = FALSE;
-		$login = FALSE;
-		$welcome = FALSE;
-		
-		if($this->getSession() == FALSE) {
+		if($this->getSession() == FALSE) { # No session, so please show login
 			
-			$login = TRUE;
-							
+			$this->_login = TRUE;
+				
 			if(isset($_POST) && isset($_POST["username"]) && isset($_POST["password"])) {
-
+			
 				# Check login data
 				$realAdmin = "";
 				$realPassword = "";
@@ -91,53 +91,53 @@ class BackendController {
 				}
 					
 				if($_POST["username"]==$realAdmin && md5($_POST["password"])==$realPassword) {
-
+				
 					# Set loggedin
 					$_SESSION["loggedin"] = TRUE;
 					$_SESSION["timestamp"] = time();
+						
+					$this->_navigation = TRUE;
+					$this->_login = FALSE;
+					$this->_welcome = TRUE;
+						
+					} else {
+							
+						$this->_navigation = FALSE;
+						$this->_login = TRUE;
+						$this->_welcome = FALSE;
+							
+					}
 					
-					$navigation = TRUE;
-					$login = FALSE;
-					$welcome = TRUE;
-					
-				} else {
-					
-					$navigation = FALSE;
-					$login = TRUE;
-					$welcome = FALSE;
-					
-				}
+			} else {
+			
+				$this->_navigation = FALSE;
+				$this->_login = TRUE;
+				$this->_welcome = FALSE;
+			
 			}
-			else {
-				
-				$navigation = FALSE;
-				$login = TRUE;
-				$welcome = FALSE;
-				
-			}			
 			
 		}
-		else {
+		else { # Already logged in
 			
-			$navigation = TRUE;
-			$login = FALSE;
-			$welcome = TRUE;
+			$this->_navigation = TRUE;
+			$this->_login = FALSE;
+			$this->_welcome = TRUE;
 			
 			# Logout
 			if(isset($_GET["q"]) && $_GET["q"]=="logout") {
 				$this->logoutAction();
 				
-				$navigation = FALSE;
-				$login = TRUE;
-				$welcome = FALSE;
+				$this->_navigation = FALSE;
+				$this->_login = TRUE;
+				$this->_welcome = FALSE;
 				
 			}
 			# New page
 			if(isset($_GET["q"]) && $_GET["q"]=="newpage") {
 				
-				$navigation = TRUE;
-				$login = FALSE;
-				$welcome = FALSE;
+				$this->_navigation = TRUE;
+				$this->_login = FALSE;
+				$this->_welcome = FALSE;
 				$this->_templateView->assign("newpage", TRUE);
 			
 			}
@@ -150,12 +150,10 @@ class BackendController {
 				catch(CaramelException $e) {
 					$e->getDetails();
 				}
-					
-				#var_dump($allPages);
-				
-				$navigation = TRUE;
-				$login = FALSE;
-				$welcome = FALSE;
+								
+				$this->_navigation = TRUE;
+				$this->_login = FALSE;
+				$this->_welcome = FALSE;
 				
 				$this->_templateView->assign("pages", $allPages);
 				$this->_templateView->assign("editpages", TRUE);
@@ -172,12 +170,10 @@ class BackendController {
 				catch(CaramelException $e) {
 					$e->getDetails();
 				}
-					
-				#var_dump($page);
-							
-				$navigation = TRUE;
-				$login = FALSE;
-				$welcome = FALSE;
+											
+				$this->_navigation = TRUE;
+				$this->_login = FALSE;
+				$this->_welcome = FALSE;
 			
 				$this->_templateView->assign("page", $page);
 				$this->_templateView->assign("editonepage", TRUE);
@@ -195,12 +191,10 @@ class BackendController {
 				catch(CaramelException $e) {
 					$e->getDetails();
 				}
-					
-				#var_dump($page);
-					
-				$navigation = TRUE;
-				$login = FALSE;
-				$welcome = FALSE;
+									
+				$this->_navigation = TRUE;
+				$this->_login = FALSE;
+				$this->_welcome = FALSE;
 					
 				$this->_templateView->assign("pages", $allPages);
 				$this->_templateView->assign("editpages", TRUE);
@@ -208,12 +202,12 @@ class BackendController {
 			}
 			# Edit admin user
 			if(isset($_GET["q"]) && $_GET["q"]=="editusers") {
-					
+				
 				$admin = $this->_config->getAdminAction();
 				
-				$navigation = TRUE;
-				$login = FALSE;
-				$welcome = FALSE;
+				$this->_navigation = TRUE;
+				$this->_login = FALSE;
+				$this->_welcome = FALSE;
 				
 				$this->_templateView->assign("admin", $admin);
 				$this->_templateView->assign("editusers", TRUE);
@@ -224,9 +218,9 @@ class BackendController {
 					
 				$template = $this->getTemplateConfig();
 				
-				$navigation = TRUE;
-				$login = FALSE;
-				$welcome = FALSE;
+				$this->_navigation = TRUE;
+				$this->_login = FALSE;
+				$this->_welcome = FALSE;
 				
 				$this->_templateView->assign("template", $template);
 				$this->_templateView->assign("edittemplates", TRUE);
@@ -237,9 +231,9 @@ class BackendController {
 				
 				$globals = $this->getGlobalConfig();
 					
-				$navigation = TRUE;
-				$login = FALSE;
-				$welcome = FALSE;
+				$this->_navigation = TRUE;
+				$this->_login = FALSE;
+				$this->_welcome = FALSE;
 				
 				$this->_templateView->assign("globals", $globals);
 				$this->_templateView->assign("editglobals", TRUE);
@@ -248,10 +242,9 @@ class BackendController {
 			
 			####### POST
 			
+			# New page
 			if(isset($_POST["newpage"])) {
-			
-				#var_dump($_POST);
-			
+						
 				$path = strtolower(trim($_POST["path"]));
 				$defaultLang = strtolower(trim($_POST["defaultLanguage"]));
 				
@@ -275,15 +268,15 @@ class BackendController {
 					$e->getDetails();
 				}
 								
-				$navigation = TRUE;
-				$login = FALSE;
-				$welcome = FALSE;
+				$this->_navigation = TRUE;
+				$this->_login = FALSE;
+				$this->_welcome = FALSE;
 				
 				$this->_templateView->assign("pages", $allPages);
 				$this->_templateView->assign("editpages", TRUE);
 			
 			}
-			
+			# Edit one page
 			if(isset($_POST["editonepage"]) && isset($_POST["pageid"])) {
 				
 								
@@ -323,19 +316,17 @@ class BackendController {
 					$e->getDetails();
 				}
 								
-				$navigation = TRUE;
-				$login = FALSE;
-				$welcome = FALSE;				
+				$this->_navigation = TRUE;
+				$this->_login = FALSE;
+				$this->_welcome = FALSE;				
 					
 				$this->_templateView->assign("page", $page);
 				$this->_templateView->assign("editonepage", TRUE);
 				
 			}
-			
+			# Edit template config
 			if(isset($_POST["edittemplates"])) {
-				
-				#var_dump($_POST);
-				
+								
 				$newTemplate = $_POST["template"];
 				
 				try {
@@ -345,9 +336,9 @@ class BackendController {
 					$e->getDetails();
 				}
 				
-				$navigation = TRUE;
-				$login = FALSE;
-				$welcome = FALSE;
+				$this->_navigation = TRUE;
+				$this->_login = FALSE;
+				$this->_welcome = FALSE;
 				
 				$template = $this->getTemplateConfig();
 				
@@ -355,11 +346,9 @@ class BackendController {
 				$this->_templateView->assign("edittemplates", TRUE);
 								
 			}
-			
+			# Edit global config
 			if(isset($_POST["editglobals"])) {
-				
-				#var_dump($_POST);
-								
+												
 				$globals = $this->getGlobalConfig();
 				
 				$globals["speaking_urls"]["value"] = "false";
@@ -393,18 +382,17 @@ class BackendController {
 				
 				$globals = $this->getGlobalConfig();
 									
-				$navigation = TRUE;
-				$login = FALSE;
-				$welcome = FALSE;
+				$this->_navigation = TRUE;
+				$this->_login = FALSE;
+				$this->_welcome = FALSE;
+				
 				$this->_templateView->assign("globals", $globals);
 				$this->_templateView->assign("editglobals", TRUE);
 					
 			}
-			
+			# Edit users
 			if(isset($_POST["editusers"])) {
-			
-				#var_dump($_POST);
-			
+							
 				$admin = $this->_config->getAdminAction();
 			
 				foreach($_POST as $key => $value) {
@@ -432,9 +420,10 @@ class BackendController {
 			
 				$admin = $this->_config->getAdminAction();
 					
-				$navigation = TRUE;
-				$login = FALSE;
-				$welcome = FALSE;
+				$this->_navigation = TRUE;
+				$this->_login = FALSE;
+				$this->_welcome = FALSE;
+				
 				$this->_templateView->assign("admin", $admin);
 				$this->_templateView->assign("editusers", TRUE);
 					
@@ -442,31 +431,15 @@ class BackendController {
 
 		}
 		
-		$this->_templateView->assign("navigation", $navigation);
-		$this->_templateView->assign("login", $login);
-		$this->_templateView->assign("welcome", $welcome);
+		$this->_templateView->assign("navigation", $this->_navigation);
+		$this->_templateView->assign("login", $this->_login);
+		$this->_templateView->assign("welcome", $this->_welcome);
 
 		$this->_templateView->render();
 		
 	} // End of method declaration
 	
 	
-	
-	/**
-	 * Method to make ajax requests
-	 * 
-	 * @param String $actionName Name of the ajax action to perform
-	 * 
-	 * @return Content of templatefile
-	 * 
-	 * @deprecated
-	 */
-	public function ajaxAction($actionName) {
-		
-		$this->_templateView->setTemplateFile($actionName);
-		return $this->_templateView->returnTemplate();
-		
-	}
 	
 	
 	
@@ -666,7 +639,14 @@ class BackendController {
 		
 		
 		if($speakingUrls == "true") {
-			return "<base href=\"".$this->_config->getConfigStringAction('BASE')."\">\n";
+			
+			try {
+				return "<base href=\"".$this->_config->getConfigStringAction('BASE')."\">\n";
+			}
+			catch(CaramelException $e) {
+				$e->getDetails();
+			}
+			
 		} else {
 			return "";
 		}
@@ -701,13 +681,18 @@ class BackendController {
 	 */
 	protected function getGlobalConfig() {
 		
-		$globals = $this->_config->getGlobalsAction();
-				
-		$globals["startpage"]["acceptedValues"] = $this->_dataBase->getAllPageNamesAction();
-		$globals["robots"]["acceptedValues"] = array("index,follow", "index,nofollow", "noindex,follow", "noindex,nofollow");
-		$globals["navigation_active_marker_position"]["acceptedValues"] = array("disabled", "before", "after");
-				
-		return $globals;
+		try {
+			$globals = $this->_config->getGlobalsAction();
+					
+			$globals["startpage"]["acceptedValues"] = $this->_dataBase->getAllPageNamesAction();
+			$globals["robots"]["acceptedValues"] = array("index,follow", "index,nofollow", "noindex,follow", "noindex,nofollow");
+			$globals["navigation_active_marker_position"]["acceptedValues"] = array("disabled", "before", "after");
+					
+			return $globals;
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
+		}
 		
 	} // End of method declaration
 	

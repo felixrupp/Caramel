@@ -262,16 +262,18 @@ class FrontendController {
 		# Set navigation class
 		try {
 			$navClass = $this->_config->getConfigStringAction("NAVIGATION_CLASS");
+			
+			if($navClass !="") {
+				$navigationClass = ' class="'.$this->_config->getConfigStringAction("NAVIGATION_CLASS");
+			} else {
+				$navigationClass = "";
+			}
+			
 		}
 		catch(CaramelException $e) {
 			$e->getDetails();
 		}
 		
-		if($navClass !="") {
-			$navigationClass = ' class="'.$this->_config->getConfigStringAction("NAVIGATION_CLASS");
-		} else {
-			$navigationClass = "";
-		}
 		
 		# Test if STARTPAGE is active or not
 		$pageName = $this->getDisplay();
@@ -595,8 +597,11 @@ class FrontendController {
 	 * @return string Actual page displayed
 	 */
 	protected function getDisplay() {
+		
 		if(isset($_GET['display'])) {
+			
 			$display = $_GET['display'];
+			
 		}
 		else {
 			$display = FALSE;
@@ -639,10 +644,6 @@ class FrontendController {
 		if($speakingUrls == "true") {
 			$newQueryString = substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], $this->getLanguage())+strlen($this->getLanguage()));
 		}
-		
-		#var_dump($_SERVER['REQUEST_URI']);
-		#var_dump($this->getLanguage());
-		#var_dump($newQueryString);
 		
 		return $newQueryString;
 		
@@ -719,7 +720,14 @@ class FrontendController {
 		}
 			
 		if($speakingUrls == "true") {
-			return "<base href=\"".$this->_config->getConfigStringAction('BASE')."\">\n";
+			
+			try {
+				return "<base href=\"".$this->_config->getConfigStringAction('BASE')."\">\n";
+			}
+			catch(CaramelException $e) {
+				$e->getDetails();
+			}
+			
 		} else {
 			return "";
 		}
