@@ -72,7 +72,7 @@
 		<scriptfile></scriptfile>
 
 		<record lang="en">
-			<navigation visible="true>
+			<navigation visible="true">
 				Documentation
 			</navigation>
 			<title>
@@ -103,7 +103,7 @@
 			</content>
 		</record>
 		<record lang="de">
-			<navigation pos="2">
+			<navigation visible="true">
 				Dokumentation
 			</navigation>
 			<title>

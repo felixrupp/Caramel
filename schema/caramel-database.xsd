@@ -13,6 +13,8 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="page"/>
         <xs:element ref="record"/>
+        <xs:element ref="scriptfile"/>
+        <xs:element ref="stylesheet"/>
       </xs:choice>
       <xs:attribute name="id" use="required" type="xs:integer"/>
       <xs:attribute name="path" use="required"/>
@@ -33,7 +35,7 @@
   </xs:element>
   <xs:element name="navigation">
     <xs:complexType mixed="true">
-      <xs:attribute name="pos" use="required" type="xs:integer"/>
+      <xs:attribute name="visible" use="required" type="xs:boolean"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="title" type="xs:string"/>
@@ -45,4 +47,10 @@
   </xs:element>
   <xs:element name="socialbar" type="xs:boolean"/>
   <xs:element name="content" type="xs:string"/>
+  <xs:element name="scriptfile">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="stylesheet">
+    <xs:complexType/>
+  </xs:element>
 </xs:schema>

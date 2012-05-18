@@ -5,7 +5,7 @@
   xmlns CDATA #FIXED ''
   version CDATA #REQUIRED>
 
-<!ELEMENT page (page|record)*>
+<!ELEMENT page (page|record|scriptfile|stylesheet)*>
 <!ATTLIST page
   xmlns CDATA #FIXED ''
   id CDATA #REQUIRED
@@ -16,10 +16,18 @@
   xmlns CDATA #FIXED ''
   lang NMTOKEN #REQUIRED>
 
+<!ELEMENT scriptfile EMPTY>
+<!ATTLIST scriptfile
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT stylesheet EMPTY>
+<!ATTLIST stylesheet
+  xmlns CDATA #FIXED ''>
+
 <!ELEMENT navigation (#PCDATA)>
 <!ATTLIST navigation
   xmlns CDATA #FIXED ''
-  pos CDATA #REQUIRED>
+  visible NMTOKEN #REQUIRED>
 
 <!ELEMENT title (#PCDATA)>
 <!ATTLIST title
