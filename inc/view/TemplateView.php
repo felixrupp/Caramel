@@ -144,6 +144,66 @@ class TemplateView {
 	
 	
 	/**
+	* Method to render the template with gzip compression
+	*
+	* @return void
+	*/
+	public function renderGzipped() {
+	
+		ob_start();
+		ob_implicit_flush(0);
+	
+		$this->render();
+	
+		global $HTTP_ACCEPT_ENCODING;
+	
+		if(headers_sent()){
+				
+			$encoding = false;
+				
+		} elseif( strpos($HTTP_ACCEPT_ENCODING, 'x-gzip') !== false ) {
+				
+			$encoding = 'x-gzip';
+				
+		} elseif( strpos($HTTP_ACCEPT_ENCODING,'gzip') !== false ) {
+				
+			$encoding = 'gzip';
+				
+		} else {
+				
+			$encoding = false;
+				
+		}
+	
+		if($encoding) {
+				
+			$contents = ob_get_contents();
+				
+			ob_end_clean();
+				
+			header('Content-Encoding: '.$encoding);
+				
+			print("\x1f\x8b\x08\x00\x00\x00\x00\x00");
+				
+			$size = strlen($contents);
+				
+			$contents = gzcompress($contents, 9);
+				
+			$contents = substr($contents, 0, $size);
+				
+			print($contents);
+				
+		} else {
+				
+			ob_end_flush();
+	
+		}
+	
+	} // End of method declaration
+	
+	
+	
+	/**
 	 * Method to return template content as string
 	 * 
 	 * @return Content of templatefile
@@ -169,7 +229,7 @@ class TemplateView {
 	 */
 	public function getActiveTemplate() {
 		return $this->_activeTemplate;
-	}
+	} // End of method declaration
 	
 	
 	
@@ -180,7 +240,7 @@ class TemplateView {
 	 */
 	public function addCssFile($cssFilename) {
 		array_push($this->_additionalCssFiles, $cssFilename);
-	}
+	} // End of method declaration
 	
 	/**
 	* Method to add new JS files to array
@@ -189,10 +249,8 @@ class TemplateView {
 	*/
 	public function addJsFile($jsFilename) {
 		array_push($this->_additionalJsFiles, $jsFilename);
-	}
-	
+	} // End of method declaration
+
 	
 }
-
-
 ?>

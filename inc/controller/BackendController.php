@@ -495,7 +495,7 @@ class BackendController {
 		$this->_templateView->assign("login", $this->_login);
 		$this->_templateView->assign("welcome", $this->_welcome);
 
-		$this->_templateView->render();
+		$this->_templateView->renderGzipped();
 		
 	} // End of method declaration
 	

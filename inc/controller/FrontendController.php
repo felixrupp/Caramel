@@ -98,7 +98,7 @@ class FrontendController {
 		$this->_templateView->assign("languageSelector", $this->getLanguageSelector());
 		$this->_templateView->assign("footer", $this->getFooter());
 		
-		$this->_templateView->render();
+		$this->_templateView->renderGzipped();
 		
 	} // End of method declaration
 	
