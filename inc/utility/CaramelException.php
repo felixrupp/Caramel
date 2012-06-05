@@ -26,7 +26,8 @@ class CaramelException extends Exception {
 	 */
 	private $_codeArray = array(
 		10 => "XML-Error",
-		11 => "XML-file could not be loaded"
+		11 => "XML-file could not be loaded",
+		66 => "Bcrypt is not supported on this server!"
 	);
 	
 	
@@ -45,11 +46,14 @@ class CaramelException extends Exception {
 	
 	
 	
-	
+	/**
+	 * Method to print exception details
+	 * 
+	 */
 	public function getDetails() {
 		
-		return $this->message."<br>in file: ".$this->file." at line: ".$this->line."<br><br>Please contact the administrator of this page.";
-		
+		print($this->message."<br>in file: ".$this->file." at line: ".$this->line."<br><br>Please contact the administrator of this page.");
+		exit;
 		
 	} // End of method declaration
 		

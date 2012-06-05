@@ -42,7 +42,7 @@ class BackendController {
 	# Constants
 	const VERSION = "0.2.6";
 	const VERSION_DATE = "2012-06-05";
-	const SYSTEM_SALT = 'D?h79n2+8TsM-59#unf2Nb8+uB=*KM=$P5H7a6JcF7b&f?Ud#hW@@r5_884-2Pzp';
+	const SYSTEM_SALT = 'Mv7DAYvR782k5PgANTYG262P3h6b4p757e2k2jA788ESdAHKP2wBfV93SK3u87Ks';
 	
 
 	/**
@@ -455,14 +455,14 @@ class BackendController {
 			
 				foreach($_POST as $key => $value) {
 					
-					if($key != "editusers" && $key != "submit" && $key != "admin_password") {
+					if($key != "editusers" && $key != "submit" && $key != "admin_password" && $key != "password_verification") {
 						$admin[$key]["value"] = $value;
 					}
 					
 					# Handle password
 					if($key=="admin_password" && $value!="" && $_POST["password_verification"]!="") {
 						
-						if($value==$_POST["password_verification"]) { # verifiy password
+						if($value==$_POST["password_verification"] && strlen($_POST["admin_email"])>1) { # verifiy password, save only when email is provided
 							
 							$admin["admin_password"]["value"] = $this->bcryptEncode($_POST["admin_email"], $value);
 						
@@ -808,14 +808,23 @@ class BackendController {
 	 * 
 	 * @param String $email eMail adress
 	 * @param String $password Password to encode
+	 * 
+	 * @return BCrypt hashed password.
 	 */
 	protected function bcryptEncode($email, $password) {
 		
-		$salt = 'p3L_AL5&TU87GHqf!-Y4U7Pt#G9Z-8=s7*a9zGUj7*37886*QSn7J7*-5*6?38!k';
-		$string = hash_hmac("whirlpool", str_pad ($password, strlen ($password)*4, sha1($email), STR_PAD_BOTH ), self::SYSTEM_SALT, true );
-		$rounds = '12';
-						
-		return crypt($string, '$2a$'.$rounds.'$'.$salt);
+		try {
+			$result = $this->checkBlowfish();
+			
+			$salt = 'q8JJ4Ere8w75fCQ3yMZj5A8Yr632zm8keZDSbphjY43r3Z9cY4L5A6V4vK75p4xP';
+			$string = hash_hmac("whirlpool", str_pad ($password, strlen ($password)*4, sha1($email), STR_PAD_BOTH ), self::SYSTEM_SALT, true );
+			$rounds = '12';
+				
+			return crypt($string, '$2a$'.$rounds.'$'.$salt);
+			
+		} catch(CaramelException $e) {
+			$e->getDetails();
+		}
 		
 	} // End of method declaration
 	
@@ -827,13 +836,41 @@ class BackendController {
 	 * @param String $email eMail adress
 	 * @param String $password Password given to check
 	 * @param String $stored Password to check against
+	 * 
+	 * @return Boolean value. True if password is valid.
 	 */
 	protected function bcryptCheck($email, $password, $stored) {
 		
-		$string = hash_hmac("whirlpool", str_pad($password, strlen($password)*4, sha1($email), STR_PAD_BOTH), self::SYSTEM_SALT, true);
+		try {
+			$result = $this->checkBlowfish();
+			
+			$string = hash_hmac("whirlpool", str_pad($password, strlen($password)*4, sha1($email), STR_PAD_BOTH), self::SYSTEM_SALT, true);
+			
+			return crypt($string, substr($stored, 0, 30)) == $stored;
+			
+		} catch(CaramelException $e) {
+			$e->getDetails();
+		}
 		
-		return crypt($string, substr($stored, 0, 30)) == $stored;
 		
+		
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Method to check if Blowfish algorithm is available on this server.
+	 * 
+	 * @throws CaramelException
+	 */
+	protected function checkBlowfish() {
+		
+		if (!defined('CRYPT_BLOWFISH')) {
+			
+			throw new CaramelException(66);
+			
+		}
+			
 	} // End of method declaration
 	
 
