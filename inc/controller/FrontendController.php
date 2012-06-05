@@ -35,8 +35,8 @@ class FrontendController {
 	private $_templateView;
 	
 	# Constants
-	const VERSION = "0.2.5";
-	const VERSION_DATE = "2012-05-18";
+	const VERSION = "0.2.6";
+	const VERSION_DATE = "2012-06-05";
 		
 
 	/**

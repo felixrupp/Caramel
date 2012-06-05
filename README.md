@@ -1,8 +1,8 @@
 #Caramel CMS
 
-*Version 0.2.5*
+*Version 0.2.6*
 
-*2012-05-18*
+*2012-06-05*
 
 
 ##Features
@@ -40,11 +40,6 @@ The following features are implemented until now:
 * Ability to upload pictures in ckEditor in backend
 
 
-###Frontend & Backend:
-
-* Ajax readyness in front- and backend
-
-
 ##Installation
 
 Coming soon!
@@ -56,7 +51,6 @@ Coming soon!
 
 
 ##License
-
 
 Dual-licensed under the [MIT-License](http://www.opensource.org/licenses/mit-license.php) and the [GNU GPL](http://www.gnu.org/licenses/gpl.html).
 

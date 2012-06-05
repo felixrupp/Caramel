@@ -40,8 +40,9 @@ class BackendController {
 	private $_welcome = FALSE;
 		
 	# Constants
-	const VERSION = "0.2.5";
-	const VERSION_DATE = "2012-05-18";
+	const VERSION = "0.2.6";
+	const VERSION_DATE = "2012-06-05";
+	const SYSTEM_SALT = 'D?h79n2+8TsM-59#unf2Nb8+uB=*KM=$P5H7a6JcF7b&f?Ud#hW@@r5_884-2Pzp';
 	
 
 	/**
@@ -81,16 +82,18 @@ class BackendController {
 				# Check login data
 				$realAdmin = "";
 				$realPassword = "";
+				$realEmail = "";
 					
 				try {
 					$realAdmin = $this->_config->getAdminConfigStringAction("ADMIN_USERNAME");
 					$realPassword = $this->_config->getAdminConfigStringAction("ADMIN_PASSWORD");
+					$realEmail = $this->_config->getAdminConfigStringAction("ADMIN_EMAIL");
 				}
 				catch(CaramelException $e) {
 					echo $e->getDetails();
 				}
 					
-				if($_POST["username"]==$realAdmin && md5($_POST["password"])==$realPassword) {
+				if($_POST["username"]==$realAdmin && $this->bcryptCheck($realEmail, $_POST["password"], $realPassword)) {
 				
 					# Set loggedin
 					$_SESSION["loggedin"] = TRUE;
@@ -460,7 +463,9 @@ class BackendController {
 					if($key=="admin_password" && $value!="" && $_POST["password_verification"]!="") {
 						
 						if($value==$_POST["password_verification"]) { # verifiy password
-							$admin["admin_password"]["value"] = md5($value);
+							
+							$admin["admin_password"]["value"] = $this->bcryptEncode($_POST["admin_email"], $value);
+						
 						}
 					}
 					
@@ -795,6 +800,42 @@ class BackendController {
 		return $templateArray;
 		
 	} // End of method declaration
+	
+	
+	
+	/**
+	 * Method to hash via bcrypt.
+	 * 
+	 * @param String $email eMail adress
+	 * @param String $password Password to encode
+	 */
+	protected function bcryptEncode($email, $password) {
+		
+		$salt = 'p3L_AL5&TU87GHqf!-Y4U7Pt#G9Z-8=s7*a9zGUj7*37886*QSn7J7*-5*6?38!k';
+		$string = hash_hmac("whirlpool", str_pad ($password, strlen ($password)*4, sha1($email), STR_PAD_BOTH ), self::SYSTEM_SALT, true );
+		$rounds = '12';
+						
+		return crypt($string, '$2a$'.$rounds.'$'.$salt);
+		
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Method to check bcrypt encoded passwords
+	 * 
+	 * @param String $email eMail adress
+	 * @param String $password Password given to check
+	 * @param String $stored Password to check against
+	 */
+	protected function bcryptCheck($email, $password, $stored) {
+		
+		$string = hash_hmac("whirlpool", str_pad($password, strlen($password)*4, sha1($email), STR_PAD_BOTH), self::SYSTEM_SALT, true);
+		
+		return crypt($string, substr($stored, 0, 30)) == $stored;
+		
+	} // End of method declaration
+	
 
 } // End of class declaration
 
