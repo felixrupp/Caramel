@@ -56,7 +56,6 @@ function registerCkeditorConfig() {
 		 	{ name : 'Red Title' , element : 'h3', styles : { 'color' : 'Red' } },*/
 			 
 		 	// Inline styles
-		 	{ name : 'CSS Style', element : 'span', attributes : { 'class' : 'my_style' } },
-		 	{ name : 'Marker: Yellow', element : 'span', styles : { 'background-color' : 'Yellow' } }
+		 	{ name : 'Mark with color', element : 'span', attributes : { 'class' : 'colored' } }
 		 ]);
 }
