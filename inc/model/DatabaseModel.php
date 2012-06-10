@@ -27,13 +27,12 @@ class DatabaseModel {
 	 */
 	private static $_databaseModel = NULL;
 
-
 	/**
 	 * @var SimpleXMLExtended $_dataBase Contains the SimpleXMLExtended of our xml-database
 	 */
 	private $_dataBase;
 
-	
+
 	/**
 	 * Configurator class-constructor
 	 * 
@@ -41,16 +40,22 @@ class DatabaseModel {
 	 */
 	private function DatabaseModel() {
 		
-		$this->reloadDatabaseFile();
+		try {
+			$this->reloadDatabaseFile();
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
+		}
 			
 	} // End of constructor declaration
-
-
+	
+	
+	
 	/**
 	 * Singleton-create-method
 	 * 
 	 * @static
-	 * @return DatabaseModel Single instance of DatabaseModel-Class
+	 * @return Single instance of DatabaseModel-Class
 	 */
 	public static function getDatabaseModel() {
 	
@@ -60,9 +65,9 @@ class DatabaseModel {
 		return self::$_databaseModel;
 
 	} // End of method declaration
-
-
-	# Prevent cloning
+	
+	
+	
 	/**
 	 * Overwrite __clone() method to prevent instance-cloning
 	 * 
@@ -109,7 +114,7 @@ class DatabaseModel {
 	 * @param string $pageName Name of the current page
 	 * 
 	 * @throws CaramelException
-	 * @return string String with all needed meta information to one page
+	 * @return String with all needed meta information to one page
 	 */
 	public function getAllMetaTagsAction($lang, $pageId) {
 		
@@ -249,7 +254,7 @@ class DatabaseModel {
 	 * @param string $pageName Name of the current page
 	 * 
 	 * @throws CaramelException
-	 * @return string String with correct website title
+	 * @return String with correct website title
 	 */
 	public function getWebsiteTitleAction($lang, $pageId) {
 				
@@ -294,7 +299,7 @@ class DatabaseModel {
 	 * @param string $pageName Name of the current page
 	 * 
 	 * @throws CaramelException
-	 * @return string String with correct website content
+	 * @return String with correct website content
 	 */
 	public function getWebsiteContentAction($lang, $pageId) {
 		
@@ -437,6 +442,7 @@ class DatabaseModel {
 		return $orderedNavi;
 		
 	} // End of method declaration
+	
 	
 	
 	/**
@@ -609,14 +615,14 @@ class DatabaseModel {
 	
 	
 	/**
-	* Method to get all page information incl. records for one page-id
-	*
-	* @param int $id Id from one specific page
-	* @param array $page Array with modified page information
-	*
-	* @throws CaramelException
-	* @return Result of file_put_contents
-	*/
+	 * Method to get all page information incl. records for one page-id
+	 *
+	 * @param int $id Id from one specific page
+	 * @param array $page Array with modified page information
+	 *
+	 * @throws CaramelException
+	 * @return Result of file_put_contents
+	 */
 	public function setPageInformation($id, $page) {
 		
 		$result = false;
@@ -686,13 +692,14 @@ class DatabaseModel {
 	}
 	
 	
+	
 	/**
 	 * Method to delete a single page with all records
 	 * 
 	 * @param int $pageId Id of the page
 	 * 
 	 * @throws CaramelException
-	 * @return Results of file_put_contents
+	 * @return Result of file_put_contents
 	 */
 	public function deletePageAction($pageId) {
 		
@@ -798,6 +805,7 @@ class DatabaseModel {
 	} // End of method declaration
 	
 	
+	
 	/**
 	 * Wrapper method to move a node one up
 	 * 
@@ -894,6 +902,7 @@ class DatabaseModel {
 	} // End of method declaration
 	
 	
+	
 	/**
 	 * Method to get the additional JS file for this page
 	 * 
@@ -915,6 +924,7 @@ class DatabaseModel {
 		}
 	
 	} // End of method declaration
+	
 	
 	
 	/**
@@ -944,6 +954,7 @@ class DatabaseModel {
 		}
 		
 	} // End of method declaration
+	
 	
 	
 	/**
@@ -982,16 +993,24 @@ class DatabaseModel {
 ##
 ########################
 
-	protected function reloadDatabaseFile() {
+	
+	/**
+	 * Method to reload the database file
+	 * 
+	 * @throws CaramelException
+	 * @return void
+	 */
+	private function reloadDatabaseFile() {
+		
 		# Try to import the database-file
 		try {
 			$this->_dataBase = simplexml_load_file(BASEDIR.'/database/data.xml', "SimpleXMLExtended");
 		}
 		catch(Exception $e) {
-			var_dump($e->getMessage());
-			printf("\n\nAchtung: Eine der relevanten Dateien konnte nicht geladen werden!");
+			throw new CaramelException(11);
 		}
-	}
+		
+	} // End of method declaration
 	
 }
 ?>

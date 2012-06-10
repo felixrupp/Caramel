@@ -26,7 +26,6 @@ class ConfigurationModel {
 	*/
 	private static $_configurator = NULL;
 	
-	
 	/**
 	 * @var SimpleXMLExtended $_configFile Contains the SimpleXMLExtended of our xml-configfile
 	 */
@@ -90,19 +89,19 @@ class ConfigurationModel {
 	public function getGlobalsAction() {
 			
 		$globals = array(
-	 			"website_title" => array("label" => "Global website-title:", "value" => stripslashes($this->getConfigStringAction("WEBSITE_TITLE")), "blank" => false),
-	 			"website_title_seperator" => array("label" => "Website-title seperator:", "value" => stripslashes($this->getConfigStringAction("WEBSITE_TITLE_SEPERATOR")), "blank" => false),
-	 			"startpage" => array("label" => "Homepage:", "value" => stripslashes($this->getConfigStringAction("STARTPAGE")), "acceptedValues" => array(), "blank" => false),
-	 			"base" => array("label" => "Basepath:", "value" => stripslashes($this->getConfigStringAction("BASE")), "blank" => false),
-	 			"robots" => array("label" => "Robot settings:", "value" => stripslashes($this->getConfigStringAction("ROBOTS")), "acceptedValues" => array(), "blank" => false),
-	 			"speaking_urls" => array("label" => "Speaking URLs:", "value" => stripslashes($this->getConfigStringAction("SPEAKING_URLS")), "blank" => false),
-	 			"navigation_active_marker_position" => array("label" => "Position of active-navigation-marker:", "value" => stripslashes($this->getConfigStringAction("NAVIGATION_ACTIVE_MARKER_POSITION")), "blank" => false),
-	 			"navigation_active_marker" => array("label" => "Marker for active-navigation:", "value" => stripslashes($this->getConfigStringAction("NAVIGATION_ACTIVE_MARKER")), "blank" => true),
-	 			"navigation_active_class" => array("label" => "Class for active-navigation links:", "value" => stripslashes($this->getConfigStringAction("NAVIGATION_ACTIVE_CLASS")), "blank" => true),
-	 			"navigation_class" => array("label" => "Navigation class:", "value" => stripslashes($this->getConfigStringAction("NAVIGATION_CLASS")), "blank" => true),
-	 			"language_selector_in_footer" => array("label" => "Language selector in footer:", "value" => stripslashes($this->getConfigStringAction("LANGUAGE_SELECTOR_IN_FOOTER")), "blank" => false),
-	 			"language_selector_seperator" => array("label" => "Language selector seperator:", "value" => stripslashes($this->getConfigStringAction("LANGUAGE_SELECTOR_SEPERATOR")), "blank" => false),
-				"default_language" => array("label" => "Default language for frontend:", "value" => stripslashes($this->getConfigStringAction("DEFAULT_LANGUAGE")), "blank" => false),
+	 			"website_title" => array("label" => "Global website-title:", "value" => stripslashes($this->getConfigString("WEBSITE_TITLE")), "blank" => false),
+	 			"website_title_seperator" => array("label" => "Website-title seperator:", "value" => stripslashes($this->getConfigString("WEBSITE_TITLE_SEPERATOR")), "blank" => false),
+	 			"startpage" => array("label" => "Homepage:", "value" => stripslashes($this->getConfigString("STARTPAGE")), "acceptedValues" => array(), "blank" => false),
+	 			"base" => array("label" => "Basepath:", "value" => stripslashes($this->getConfigString("BASE")), "blank" => false),
+	 			"robots" => array("label" => "Robot settings:", "value" => stripslashes($this->getConfigString("ROBOTS")), "acceptedValues" => array(), "blank" => false),
+	 			"speaking_urls" => array("label" => "Speaking URLs:", "value" => stripslashes($this->getConfigString("SPEAKING_URLS")), "blank" => false),
+	 			"navigation_active_marker_position" => array("label" => "Position of active-navigation-marker:", "value" => stripslashes($this->getConfigString("NAVIGATION_ACTIVE_MARKER_POSITION")), "blank" => false),
+	 			"navigation_active_marker" => array("label" => "Marker for active-navigation:", "value" => stripslashes($this->getConfigString("NAVIGATION_ACTIVE_MARKER")), "blank" => true),
+	 			"navigation_active_class" => array("label" => "Class for active-navigation links:", "value" => stripslashes($this->getConfigString("NAVIGATION_ACTIVE_CLASS")), "blank" => true),
+	 			"navigation_class" => array("label" => "Navigation class:", "value" => stripslashes($this->getConfigString("NAVIGATION_CLASS")), "blank" => true),
+	 			"language_selector_in_footer" => array("label" => "Language selector in footer:", "value" => stripslashes($this->getConfigString("LANGUAGE_SELECTOR_IN_FOOTER")), "blank" => false),
+	 			"language_selector_seperator" => array("label" => "Language selector seperator:", "value" => stripslashes($this->getConfigString("LANGUAGE_SELECTOR_SEPERATOR")), "blank" => false),
+				"default_language" => array("label" => "Default language for frontend:", "value" => stripslashes($this->getConfigString("DEFAULT_LANGUAGE")), "blank" => false),
 		
 		);
 			
@@ -144,17 +143,38 @@ class ConfigurationModel {
 	
 	
 	/**
+	 * Method to return the base admin login information
+	 * 
+	 * @throws CaramelException
+	 * @return Simple array with admin login info to check while logging in
+	 */
+	public function getLoginInfoAction() {
+		
+		$loginInformation = array();
+		
+		$loginInformation["username"] = $this->getAdminConfigString("ADMIN_USERNAME");
+		$loginInformation["password"] = $this->getAdminConfigString("ADMIN_PASSWORD");
+		$loginInformation["email"] = $this->getAdminConfigString("ADMIN_EMAIL");
+		
+		return $loginInformation;
+		
+	} // End of method declaration
+	
+	
+	
+	/**
 	* This method returns an ordered array with all admin settings
 	*
+	* @throws CaramelException
 	* @return Array with all admin settings
 	*/
 	public function getAdminAction() {
 			
 		$admin = array(
-		 		"admin_username" => array("label" => "Admin name:", "value" => stripslashes($this->getAdminConfigStringAction("ADMIN_USERNAME")), "blank" => false),
-				"admin_password" => array("label" => "New admin password:", "value" => stripslashes($this->getAdminConfigStringAction("ADMIN_PASSWORD")), "blank" => false),
-		 		"admin_email" => array("label" => "Admin eMail-address:", "value" => stripslashes($this->getAdminConfigStringAction("ADMIN_EMAIL")), "blank" => false),
-		 		"contact_email" => array("label" => "eMail-address for receiver of contactform:", "value" => stripslashes($this->getAdminConfigStringAction("CONTACT_EMAIL")), "blank" => false),
+		 		"admin_username" => array("label" => "Admin name:", "value" => stripslashes($this->getAdminConfigString("ADMIN_USERNAME")), "blank" => false),
+				"admin_password" => array("label" => "New admin password:", "value" => stripslashes($this->getAdminConfigString("ADMIN_PASSWORD")), "blank" => false),
+		 		"admin_email" => array("label" => "Admin eMail-address:", "value" => stripslashes($this->getAdminConfigString("ADMIN_EMAIL")), "blank" => false),
+		 		"contact_email" => array("label" => "eMail-address for receiver of contactform:", "value" => stripslashes($this->getAdminConfigString("CONTACT_EMAIL")), "blank" => false),
 		);
 			
 		return $admin;
@@ -195,6 +215,20 @@ class ConfigurationModel {
 	
 	
 	/**
+	 * Method to get current active template
+	 * 
+	 * @throws CaramelException
+	 * @return The current template set in template settings
+	 */
+	public function getTemplateAction() {
+		
+		return $this->getConfigString("TEMPLATE");
+		
+	} // End of method declaration
+	
+	
+	
+	/**
 	 * Method to set new template file for frontend
 	 * 
 	 * @param string $newTemplate New template to set
@@ -208,6 +242,42 @@ class ConfigurationModel {
 		
 		return file_put_contents(BASEDIR.'/config/site.xml', $this->_configFile->asXML());
 		
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Wrapper for getConfigString
+	 * 
+	 * @see getConfigString
+	 *
+	 * @param string $key Key to lookup in config-file
+	 *
+	 * @throws CaramelException
+	 * @return string Value for given key
+	 */
+	public function getConfigStringAction($key) {
+	
+		return $this->getConfigString($key);
+	
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Wrapper for getAdminConfigString
+	 * 
+	 * @see getAdminConfigString
+	 *
+	 * @param string $key Key to lookup in config-file
+	 *
+	 * @throws CaramelException
+	 * @return string Value for given key
+	 */
+	public function getAdminConfigStringAction($key) {
+	
+		return $this->getAdminConfigString($key);
+	
 	} // End of method declaration
 	
 	
@@ -228,7 +298,7 @@ class ConfigurationModel {
 	 * @throws CaramelException
 	 * @return string Value for given key
 	 */
-	public function getConfigStringAction($key) {
+	private function getConfigString($key) {
 	
 		$setting = $this->_configFile->xpath('//setting[@key="'.$key.'"]');
 	
@@ -252,7 +322,7 @@ class ConfigurationModel {
 	 * @throws CaramelException
 	 * @return Result of file_put_contents
 	 */
-	protected function setConfigString($key, $newValue) {
+	private function setConfigString($key, $newValue) {
 	
 		$setting = $this->_configFile->xpath('//setting[@key="'.$key.'"]');
 	
@@ -280,7 +350,7 @@ class ConfigurationModel {
 	 * @throws CaramelException
 	 * @return string Value for given key
 	 */
-	public function getAdminConfigStringAction($key) {
+	private function getAdminConfigString($key) {
 	
 		$setting = $this->_adminConfigFile->xpath('//setting[@key="'.$key.'"]');
 	
@@ -304,7 +374,7 @@ class ConfigurationModel {
 	* @throws CaramelException
 	* @return Result of file_put_contents
 	*/
-	protected function setAdminConfigString($key, $newValue) {
+	private function setAdminConfigString($key, $newValue) {
 	
 		$setting = $this->_adminConfigFile->xpath('//setting[@key="'.$key.'"]');
 	
@@ -330,7 +400,7 @@ class ConfigurationModel {
 	 * @throws CaramelException
 	 * @return void
 	 */
-	protected function reloadConfigFile() {
+	private function reloadConfigFile() {
 			
 		try {
 			$this->_configFile = simplexml_load_file(BASEDIR.'/config/site.xml', "SimpleXMLExtended");
@@ -349,7 +419,7 @@ class ConfigurationModel {
 	 * @throws CaramelException
 	 * @return void
 	 */
-	protected function reloadAdminConfigFile() {
+	private function reloadAdminConfigFile() {
 
 		try {
 			$this->_adminConfigFile = simplexml_load_file(BASEDIR.'/config/admin.xml', "SimpleXMLExtended");

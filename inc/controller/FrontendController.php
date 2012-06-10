@@ -29,18 +29,36 @@ require_once BASEDIR.'/inc/view/TemplateView.php';
  */
 class FrontendController {
 
-	# Attributes
+	/**
+	 * @var ConfigurationModel $_config Holds an instance of a Config
+	 */
 	private $_config;
+
+	/**
+	 * @var DatabaseModel $_dataBase Holds the Database
+	 */
 	private $_dataBase;
+	
+	/**
+	 * @var TemplateView $_templateView Holds an instance of our TemplatingEngine
+	 */
 	private $_templateView;
 	
-	# Constants
-	const VERSION = "0.2.6";
-	const VERSION_DATE = "2012-06-05";
+	/**
+	 * @var String VERSION Constant for system version
+	 */
+	const VERSION = "0.2.7";
+	
+	/**
+	 * @var String VERSION Constant for version date
+	 */
+	const VERSION_DATE = "2012-06-10";
 		
 
 	/**
 	 * Constructor
+	 * 
+	 * @return void
 	 */
 	public function FrontendController() {
 
@@ -48,7 +66,7 @@ class FrontendController {
 		$this->_config = ConfigurationModel::getConfigurationModel();
 		
 		# Get TemplatingEngine
-		$this->_templateView = new TemplateView($this->_config->getConfigStringAction("TEMPLATE"));
+		$this->_templateView = new TemplateView($this->_config->getTemplateAction());
 		
 		# Get Database 
 		$this->_dataBase = DatabaseModel::getDatabaseModel();		
@@ -103,6 +121,7 @@ class FrontendController {
 	} // End of method declaration
 	
 	
+	
 	/**
 	 * Redirects the user to the language set in browser
 	 * 
@@ -151,12 +170,13 @@ class FrontendController {
 		}
 		
 	} // End of method declaration
-
-
+	
+	
+	
 	/**
 	 * Print out version-information in index.php
 	 * 
-	 * @return string Version information comment
+	 * @return Version information comment
 	 */
 	public function versionInformationAction() {
 		
@@ -167,22 +187,24 @@ class FrontendController {
 	} // End of method declaration
 	
 	
+	
 	/**
 	 * Print out current language code in index.php
 	 * 
-	 * @return string Language code for current language
+	 * @return Language code for current language
 	 */
-	 public function languageCodeAction() {
+	public function languageCodeAction() {
 	 
-	 	return $this->getLanguage();
+		return $this->getLanguage();
 	 	
-	 } // End of method declaration
+	} // End of method declaration
 	
+	 
 	
 	/**
 	 * Print out head-tag in index.php
 	 * 
-	 * @return string Whole head-tag
+	 * @return Whole head-tag
 	 */	
 	public function headTagAction() {
 		
@@ -249,7 +271,7 @@ class FrontendController {
 	 * 
 	 * @return Array with link information for navigation
 	 */
-	protected function getNavigationLinks($navigationArray) {
+	private function getNavigationLinks($navigationArray) {
 		
 		$navigation = array();
 		
@@ -481,9 +503,9 @@ class FrontendController {
 	/**
 	 * Print out language selector in index.php
 	 * 
-	 * @return string All language selectors
+	 * @return All language selectors
 	 */
-	protected function getLanguageSelector() {
+	private function getLanguageSelector() {
 		
 		$selectorLinks = array();
 		
@@ -544,23 +566,15 @@ class FrontendController {
 	} // End of method declaration
 	
 	
+	
 	/**
 	 * Print out footer in footer of index.php
 	 * 
-	 * @return string Website footer
+	 * @return Website footer
 	 */
-	protected function getFooter() {
+	private function getFooter() {
 
-		$facebookLike = "";
 		$languageSelector = "";
-		
-		/*try {
-			$facebookLike = $this->getSocialbar();
-		}
-		catch(CaramelException $e) {
-			echo $e->getDetails();
-		}*/
-		
 		
 		try {
 			$langSelectInFooter = $this->_config->getConfigStringAction("LANGUAGE_SELECTOR_IN_FOOTER");
@@ -573,7 +587,7 @@ class FrontendController {
 			$languageSelector = $this->getLanguageSelector()."&nbsp;";
 		}
 		
-		$footer = $languageSelector.$facebookLike;
+		$footer = $languageSelector;
 		
 		return $footer;
 	
@@ -584,9 +598,9 @@ class FrontendController {
 	/**
 	 * Extract language from GET-query
 	 * 
-	 * @return string Actual language
+	 * @return Actual language
 	 */
-	protected function getLanguage() {
+	private function getLanguage() {
 		
 		try {
 			$allLangs = $this->_dataBase->getAllLanguagesAction();
@@ -608,12 +622,13 @@ class FrontendController {
 	} // End of method declaration
 	
 	
+	
 	/**
 	 * Get display from GET-query
 	 * 
-	 * @return string Actual page displayed
+	 * @return Actual page displayed
 	 */
-	protected function getDisplay() {
+	private function getDisplay() {
 		
 		if(isset($_GET['display'])) {
 			
@@ -629,12 +644,13 @@ class FrontendController {
 	} // End of method declaration
 	
 	
+	
 	/**
 	 * Get parameters of GET-query before ampersand 
 	 * 
-	 * @return string New querystring for building correct URL
+	 * @return New querystring for building correct URL
 	 */
-	protected function getParametersBefore() {
+	private function getParametersBefore() {
 		$serverQueryString = $_SERVER['QUERY_STRING'];
 					
 		try {
@@ -667,12 +683,13 @@ class FrontendController {
 	} // End of method declaration
 	
 	
+	
 	/**
 	 * Get parameters of GET-query behind ampersand 
 	 * 
-	 * @return string New querystring for building correct URL
+	 * @return New querystring for building correct URL
 	 */
-	protected function getParametersBehind() {
+	private function getParametersBehind() {
 		$serverQueryString = $_SERVER['QUERY_STRING'];
 					
 		try {
@@ -721,13 +738,12 @@ class FrontendController {
 	
 	
 	
-	
 	/**
 	 * Print out base url in index.php
 	 * 
-	 * @return string Base url
+	 * @return The Base-URL
 	 */
-	protected function getBaseUrl() {
+	private function getBaseUrl() {
 	
 		try {
 			$speakingUrls = $this->_config->getConfigStringAction("SPEAKING_URLS");
@@ -749,79 +765,6 @@ class FrontendController {
 			return "";
 		}
 		
-	} // End of method declaration
-	
-	
-	
-	
-	
-	/**
-	 * Return minified JS and CSS files
-	 * 
-	 * @return string Minified js and css
-	 * @deprecated
-	 */
-	protected function getJsAndCss() {
-		
-		$jsAndCss = "<link rel=\"stylesheet\" type=\"text/css\" href=\"caramel/min/?f=caramel/css/screen.css\">\n";
-		$jsAndCss .= "<script type=\"text/javascript\" src=\"caramel/min/?f=caramel/js/script.js\"></script>";
-				
-		return $jsAndCss;
-		
-	} // End of method declaration
-	
-	
-	/**
-	 * Print out facebook like button in index.php
-	 * 
-	 * @return string Facebook like button
-	 * @deprecated
-	 */
-	protected function getSocialbar() {
-	 
-		$lang = $this->getLanguage();
-		$pageName = $this->getDisplay();
-		 
-		$xPathResultFacebook = $this->_dataBase->xpath('//page[@name="'.$pageName.'"]/record[@lang="'.$lang.'"]/socialbar');
-		 
-		if(count($xPathResultFacebook)>0) {
-		 	
-			if(((string)$xPathResultFacebook[0]) == "true") {
-		 		
-				if(isset($_SERVER['HTTPS'])) {
-					if($_SERVER['HTTPS'] == "" or $_SERVER['HTTPS'] == null) {
-						$url = "https://";
-					}
-				} else {
-					$url = "http://";
-				}
-	
-		 		$url .= $_SERVER['SERVER_NAME'];
-		 		
-		 		$url .= "/";
-		 		
-		 		$url = urlencode($url);
-		 	
-		 		# Define locale if not english
-		 		if($this->getLanguage()!="en") {
-		 			$facebookLang = "locale=".$this->getLanguage()."_".strtoupper($this->getLanguage())."&amp;";
-		 		} else {
-		 			$facebookLang = "";
-		 		}
-			 		
-		 		$facebookLike = '<iframe src="http://www.facebook.com/plugins/like.php?href='.$url.'&amp;'.$facebookLang.'send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" style="border:none; overflow:hidden; width:150px; height:20px; background:transparent;"></iframe>';
-			 		
-		 	} else {
-		 		$facebookLike = "";
-	 		}
-		 
-		 }
-		 else {
-		 	throw new CaramelException(10);
-		 }
-			 
-		 return $facebookLike;
-		 
 	} // End of method declaration
 
 

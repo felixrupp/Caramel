@@ -62,6 +62,7 @@ class CaramelException extends Exception {
 	/**
 	 * Method to print exception details
 	 * 
+	 * @return void
 	 */
 	public function getDetails() {
 		

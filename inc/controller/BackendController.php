@@ -30,23 +30,56 @@ require_once BASEDIR.'/inc/view/TemplateView.php';
  */
 class BackendController {
 
-	# Attributes
+	/**
+	 * @var ConfigurationModel $_config Holds an instance of a Config
+	 */
 	private $_config;
+
+	/**
+	 * @var DatabaseModel $_dataBase Holds the Database
+	 */
 	private $_dataBase;
+	
+	/**
+	 * @var TemplateView $_templateView Holds an instance of our TemplatingEngine
+	 */
 	private $_templateView;
 	
+	/**
+	 * @var boolean $_navigation Boolean: Show navigation or not
+	 */
 	private $_navigation = FALSE;
+	
+	/**
+	 * @var boolean $_login Boolean: Show loginform or not
+	 */
 	private $_login = FALSE;
+	
+	/**
+	 * @var boolean $_welcome Boolean: Show welcome page or not
+	 */
 	private $_welcome = FALSE;
 		
-	# Constants
-	const VERSION = "0.2.6";
-	const VERSION_DATE = "2012-06-05";
+	/**
+	 * @var String VERSION Constant for system version
+	 */
+	const VERSION = "0.2.7";
+	
+	/**
+	 * @var String VERSION Constant for version date
+	 */
+	const VERSION_DATE = "2012-06-10";
+	
+	/**
+	 * @var String SYSTEM_SALT System Salt for bcrypt hashing
+	 */
 	const SYSTEM_SALT = 'Mv7DAYvR782k5PgANTYG262P3h6b4p757e2k2jA788ESdAHKP2wBfV93SK3u87Ks';
 	
 
 	/**
 	 * Constructor
+	 * 
+	 * @return void
 	 */
 	public function BackendController() {
 
@@ -85,15 +118,13 @@ class BackendController {
 				$realEmail = "";
 					
 				try {
-					$realAdmin = $this->_config->getAdminConfigStringAction("ADMIN_USERNAME");
-					$realPassword = $this->_config->getAdminConfigStringAction("ADMIN_PASSWORD");
-					$realEmail = $this->_config->getAdminConfigStringAction("ADMIN_EMAIL");
+					$loginInformation = $this->_config->getLoginInfoAction();
 				}
 				catch(CaramelException $e) {
-					echo $e->getDetails();
+					$e->getDetails();
 				}
 					
-				if($_POST["username"]==$realAdmin && $this->bcryptCheck($realEmail, $_POST["password"], $realPassword)) {
+				if($_POST["username"]==$loginInformation["username"] && $this->bcryptCheck($loginInformation["email"], $_POST["password"], $loginInformation["password"])) {
 				
 					# Set loggedin
 					$_SESSION["loggedin"] = TRUE;
@@ -501,8 +532,6 @@ class BackendController {
 	
 	
 	
-	
-	
 	/**
 	 * Method to initialize login session
 	 * 
@@ -520,7 +549,7 @@ class BackendController {
 	/**
 	 * Print out version-information in index.php
 	 * 
-	 * @return string Version information comment
+	 * @return Version information comment
 	 */
 	public function versionInformationAction() {
 		
@@ -533,10 +562,10 @@ class BackendController {
 	
 	
 	/**
-	* Print out head-tag in index.php
-	*
-	* @return string Whole head-tag
-	*/
+	 * Print out head-tag in index.php
+	 *
+	 * @return Complete head-tag
+	 */
 	public function headTagAction() {
 		
 		$meta = $this->getMeta();
@@ -555,10 +584,10 @@ class BackendController {
 	
 	
 	/**
-	* This action logs the user off
-	*
-	* @return void
-	*/
+	 * This action logs the user off
+	 *
+	 * @return void
+	 */
 	public function logoutAction() {
 	
 		if($this->getSession()==TRUE) {
@@ -578,7 +607,7 @@ class BackendController {
 	 * 
 	 * @return TRUE or FALSE, wether a session is active or not
 	 */
-	protected function getSession() {
+	private function getSession() {
 		
 		if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"]==FALSE) {
 			return FALSE;
@@ -593,9 +622,9 @@ class BackendController {
 	/**
 	 * Get parameters of GET-query before ampersand 
 	 * 
-	 * @return string New querystring for building correct URL
+	 * @return New querystring for building correct URL
 	 */
-	protected function getParametersBefore() {
+	private function getParametersBefore() {
 		$serverQueryString = $_SERVER['QUERY_STRING'];
 
 		try {
@@ -632,9 +661,9 @@ class BackendController {
 	/**
 	 * Get parameters of GET-query behind ampersand 
 	 * 
-	 * @return string New querystring for building correct URL
+	 * @return New querystring for building correct URL
 	 */
-	protected function getParametersBehind() {
+	private function getParametersBehind() {
 		$serverQueryString = $_SERVER['QUERY_STRING'];
 
 		try {
@@ -686,9 +715,9 @@ class BackendController {
 	/**
 	 * Print out base url in index.php
 	 * 
-	 * @return string Base url
+	 * @return The Base-URL
 	 */
-	protected function getBaseUrl() {
+	private function getBaseUrl() {
 	
 		try {
 			$speakingUrls = $this->_config->getConfigStringAction("SPEAKING_URLS");
@@ -718,9 +747,9 @@ class BackendController {
 	/**
 	 * Print out meta-tags in index.php
 	 * 
-	 * @return string Meta-tags for author, keywords and description
+	 * @return Meta-tags for author, keywords and description
 	 */
-	protected function getMeta() {
+	private function getMeta() {
 		
 		$metaAuthor = "<meta name=\"author\" content=\"Felix Rupp, Nicole Reinhardt\">";
 		
@@ -739,7 +768,7 @@ class BackendController {
 	 * 
 	 * @return Array with global configuration
 	 */
-	protected function getGlobalConfig() {
+	private function getGlobalConfig() {
 		
 		try {
 			$globals = $this->_config->getGlobalsAction();
@@ -763,10 +792,10 @@ class BackendController {
 	 * 
 	 * @return Array with template configuration
 	 */
-	protected function getTemplateConfig() {
+	private function getTemplateConfig() {
 		
 		try {
-			$template = $this->_config->getConfigStringAction("TEMPLATE");
+			$template = $this->_config->getTemplateAction();
 		}
 		catch(CaramelException $e) {
 			$e->getDetails();
@@ -811,7 +840,7 @@ class BackendController {
 	 * 
 	 * @return BCrypt hashed password.
 	 */
-	protected function bcryptEncode($email, $password) {
+	private function bcryptEncode($email, $password) {
 		
 		try {
 			$result = $this->checkBlowfish();
@@ -839,7 +868,7 @@ class BackendController {
 	 * 
 	 * @return Boolean value. True if password is valid.
 	 */
-	protected function bcryptCheck($email, $password, $stored) {
+	private function bcryptCheck($email, $password, $stored) {
 		
 		try {
 			$result = $this->checkBlowfish();
@@ -863,7 +892,7 @@ class BackendController {
 	 * 
 	 * @throws CaramelException
 	 */
-	protected function checkBlowfish() {
+	private function checkBlowfish() {
 		
 		if (!defined('CRYPT_BLOWFISH')) {
 			
