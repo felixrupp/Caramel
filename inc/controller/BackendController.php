@@ -179,7 +179,7 @@ class BackendController {
 			if(isset($_GET["q"]) && $_GET["q"]=="editpages" && !isset($_GET["id"]) && !isset($_GET["delete"])) {
 				
 				try {
-					$allPages = $this->_dataBase->getWebsitePagesAction("en");
+					$allPages = $this->_dataBase->backendGetWebsitePagesAction("en");
 				}
 				catch(CaramelException $e) {
 					$e->getDetails();
@@ -199,8 +199,8 @@ class BackendController {
 				$id = (int)trim($_GET["id"]);
 				
 				try {
-					$result = $this->_dataBase->movePageUpAction($id);
-					$allPages = $this->_dataBase->getWebsitePagesAction("en");
+					$result = $this->_dataBase->backendMovePageUpAction($id);
+					$allPages = $this->_dataBase->backendGetWebsitePagesAction("en");
 				}
 				catch(CaramelException $e) {
 					$e->getDetails();
@@ -220,8 +220,8 @@ class BackendController {
 				$id = (int)trim($_GET["id"]);
 			
 				try {
-					$result = $this->_dataBase->movePageDownAction($id);
-					$allPages = $this->_dataBase->getWebsitePagesAction("en");
+					$result = $this->_dataBase->backendMovePageDownAction($id);
+					$allPages = $this->_dataBase->backendGetWebsitePagesAction("en");
 				}
 				catch(CaramelException $e) {
 					$e->getDetails();
@@ -241,7 +241,7 @@ class BackendController {
 				$id = (int)trim($_GET["id"]);
 				
 				try {
-					$page = $this->_dataBase->getPageInformation($id);
+					$page = $this->_dataBase->backendGetPageInformation($id);
 				}
 				catch(CaramelException $e) {
 					$e->getDetails();
@@ -261,8 +261,8 @@ class BackendController {
 				$id = (int)trim($_GET["id"]);
 			
 				try {
-					$result = $this->_dataBase->deletePageAction($id);
-					$allPages = $this->_dataBase->getWebsitePagesAction("en");
+					$result = $this->_dataBase->backendDeletePageAction($id);
+					$allPages = $this->_dataBase->backendGetWebsitePagesAction("en");
 				}
 				catch(CaramelException $e) {
 					$e->getDetails();
@@ -335,9 +335,9 @@ class BackendController {
 			
 				try {
 					
-					$result = $this->_dataBase->createPageAction($path, $defaultLang, $recordContents);
+					$result = $this->_dataBase->backendCreatePageAction($path, $defaultLang, $recordContents);
 					
-					$allPages = $this->_dataBase->getWebsitePagesAction("en");
+					$allPages = $this->_dataBase->backendGetWebsitePagesAction("en");
 					
 				}
 				catch(CaramelException $e) {
@@ -359,7 +359,7 @@ class BackendController {
 				$id = (int)trim($_POST["pageid"]);
 				
 				try {
-					$page = $this->_dataBase->getPageInformation($id);
+					$page = $this->_dataBase->backendGetPageInformation($id);
 				}
 				catch(CaramelException $e) {
 					$e->getDetails();
@@ -398,8 +398,8 @@ class BackendController {
 				
 				
 				try{
-					$result = $this->_dataBase->setPageInformation($id, $page);
-					$page = $this->_dataBase->getPageInformation($id);
+					$result = $this->_dataBase->backendSetPageInformation($id, $page);
+					$page = $this->_dataBase->backendGetPageInformation($id);
 				} 
 				catch(CaramelException $e) {
 					$e->getDetails();
@@ -773,7 +773,7 @@ class BackendController {
 		try {
 			$globals = $this->_config->getGlobalsAction();
 					
-			$globals["startpage"]["acceptedValues"] = $this->_dataBase->getAllPageNamesAction();
+			$globals["startpage"]["acceptedValues"] = $this->_dataBase->backendGetAllPageNamesAction();
 			$globals["robots"]["acceptedValues"] = array("index,follow", "index,nofollow", "noindex,follow", "noindex,nofollow");
 			$globals["navigation_active_marker_position"]["acceptedValues"] = array("disabled", "before", "after");
 					

@@ -100,12 +100,12 @@ class FrontendController {
 		}
 		
 		try {
-			$navigation = $this->_dataBase->getWebsiteNavigationAction($lang); # This is an array with to much information for navigation
+			$navigation = $this->_dataBase->frontendGetWebsiteNavigationAction($lang); # This is an array with to much information for navigation
 			
 			# Build navigation links from given information. Returned array is very compact
 			$navigation = $this->getNavigationLinks($navigation);
 			
-			$content = $this->_dataBase->getWebsiteContentAction($lang, $pageId); # This is a string with our content
+			$content = $this->_dataBase->frontendGetWebsiteContentAction($lang, $pageId); # This is a string with our content
 		}
 		catch(CaramelException $e) {
 			$e->getDetails();
@@ -145,7 +145,7 @@ class FrontendController {
 				$language = strtolower(substr(chop($language[0]),0,2));
 		
 		
-				if(preg_match("/[a-z]{2}/", $language) && in_array($language, $this->_dataBase->getAllLanguagesAction())) {
+				if(preg_match("/[a-z]{2}/", $language) && in_array($language, $this->_dataBase->frontendGetAllLanguagesAction())) {
 					header("Location: ./?lang=".$language);
 				}
 				else {
@@ -158,7 +158,7 @@ class FrontendController {
 				$language = explode(',',$_SERVER['HTTP_ACCEPT_LANGUAGE']);
 				$language = strtolower(substr(chop($language[0]),0,2));
 		
-				if(preg_match("/[a-z]{2}/", $language) && in_array($language, $this->_dataBase->getAllLanguagesAction())) {
+				if(preg_match("/[a-z]{2}/", $language) && in_array($language, $this->_dataBase->frontendGetAllLanguagesAction())) {
 					header("Location: ./".$language."/");
 				}
 				else {
@@ -223,9 +223,9 @@ class FrontendController {
 				$pageId = $this->_dataBase->getPageId($pageName);
 			}
 			
-			$meta = $this->_dataBase->getAllMetaTagsAction($lang, $pageId).$metaRobots."\n".$metaGenerator."\n";
+			$meta = $this->_dataBase->frontendGetAllMetaTagsAction($lang, $pageId).$metaRobots."\n".$metaGenerator."\n";
 		
-			$title = $this->_config->getConfigStringAction("WEBSITE_TITLE").$this->_config->getConfigStringAction("WEBSITE_TITLE_SEPERATOR").$this->_dataBase->getWebsiteTitleAction($lang, $pageId);
+			$title = $this->_config->getConfigStringAction("WEBSITE_TITLE").$this->_config->getConfigStringAction("WEBSITE_TITLE_SEPERATOR").$this->_dataBase->frontendGetWebsiteTitleAction($lang, $pageId);
 		
 		}
 		catch(CaramelException $e) {
@@ -235,13 +235,13 @@ class FrontendController {
 		$headTag = $this->getBaseUrl()."\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$meta."\n\n<title>".$title."</title>\n\n";
 		
 		
-		$additionalCssFile = $this->_dataBase->getPageAdditionalCss($pageId);
+		$additionalCssFile = $this->_dataBase->frontendGetPageAdditionalCss($pageId);
 		if(strlen($additionalCssFile) > 1) {		
 			$this->_templateView->addCssFile($additionalCssFile);
 		}
 		
 		
-		$additionalJsFile = $this->_dataBase->getPageAdditionalJs($pageId);
+		$additionalJsFile = $this->_dataBase->frontendGetPageAdditionalJs($pageId);
 		if(strlen($additionalJsFile) > 1) {
 			$this->_templateView->addJsFile($additionalJsFile);
 		}
@@ -510,7 +510,7 @@ class FrontendController {
 		$selectorLinks = array();
 		
 		try {
-			$allLangs = $this->_dataBase->getAllLanguagesAction();
+			$allLangs = $this->_dataBase->frontendGetAllLanguagesAction();
 		}
 		catch(CaramelException $e) {
 			$e->getDetails();
@@ -603,7 +603,7 @@ class FrontendController {
 	private function getLanguage() {
 		
 		try {
-			$allLangs = $this->_dataBase->getAllLanguagesAction();
+			$allLangs = $this->_dataBase->frontendGetAllLanguagesAction();
 			$defaultLanguage = $this->_config->getConfigStringAction("DEFAULT_LANGUAGE");
 		}
 		catch(CaramelException $e) {

@@ -13,28 +13,23 @@
 <caramel-plist version="1.0">
 
 	<!-- Essentials -->
-	<!--<setting key="DOCUMENT_SUBFOLDER" blank="false"><![CDATA[/doc]]></setting>-->
 	<setting key="STARTPAGE" blank="false"><![CDATA[1]]></setting>
 	<setting key="BASE" blank="false"><![CDATA[http://test.felixrupp.com/]]></setting>
 	<setting key="TEMPLATE" blank="false">Default</setting>
 	<setting key="DEFAULT_LANGUAGE" blank="false">en</setting>
 	
-	
 	<!-- Robots, Meta, etc. -->
 	<setting key="ROBOTS" blank="false"><![CDATA[index,follow]]></setting>
-	
 	
 	<!-- Website specific -->
 	<setting key="WEBSITE_TITLE" blank="false"><![CDATA[Caramel CMS]]></setting>
 	<setting key="WEBSITE_TITLE_SEPERATOR" blank="false"><![CDATA[ - ]]></setting>
-	
 	
 	<!-- Navigation -->
 	<setting key="NAVIGATION_ACTIVE_MARKER_POSITION" blank="false"><![CDATA[disabled]]></setting>
 	<setting key="NAVIGATION_ACTIVE_MARKER" blank="true"><![CDATA[» ]]></setting>
 	<setting key="NAVIGATION_ACTIVE_CLASS" blank="true"><![CDATA[menuActive]]></setting>
 	<setting key="NAVIGATION_CLASS" blank="true"><![CDATA[menuLink]]></setting>
-	<setting key="NAVIGATION_REL" blank="true"> rel="internal"</setting>
 	
 	<!-- URL Setup -->
 	<setting key="SPEAKING_URLS" blank="false"><![CDATA[true]]></setting>
@@ -42,6 +37,5 @@
 	<!-- Footer -->
 	<setting key="LANGUAGE_SELECTOR_IN_FOOTER" blank="false"><![CDATA[true]]></setting> <!-- if false then include footer yourself -->
 	<setting key="LANGUAGE_SELECTOR_SEPERATOR" blank="false"><![CDATA[ | ]]></setting>
-	
 	
 </caramel-plist>

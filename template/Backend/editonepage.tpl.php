@@ -27,7 +27,7 @@
 	
 			<fieldset name="fieldset_<?php echo $language ?>">
 				<legend class="collapsableFieldset">Language: <?php echo $language ?></legend>
-					
+								
 				<label for="visible_<?php echo $language ?>"><?php echo $record["visible"]["label"]; ?></label> <input type="checkbox" name="visible_<?php echo $language ?>" id="visible_<?php echo $language ?>" value="true"<?php if($record["visible"]["value"]=="true") echo " checked"?>>
 				<br>				
 								
@@ -54,14 +54,6 @@
 				<textarea class="ckContent" name="content_<?php echo $language ?>" id="content_<?php echo $language ?>"><?php echo $record["content"]["value"]; ?></textarea>
 				<br>
 
-				<!-- <label for="startpage"><?php echo $globals["startpage"]['label']; ?></label> <select name="startpage" id="startpage">
-					<?php foreach($globals["startpage"]["acceptedValues"] as $option) { ?>
-					<option value="<?php echo $option; ?>"<?php if($option==$globals["startpage"]["value"]){echo ' selected';} ?>><?php echo $option; ?></option>
-					<?php } ?>		
-				</select>
-				<br>
-				<label for="speaking_urls"><?php echo $globals["speaking_urls"]['label']; ?></label> <input type="checkbox" name="speaking_urls" id="speaking_urls" value="true"<?php if($globals["speaking_urls"]["value"]=="true") echo " checked"?>>
-			 -->
 			</fieldset>
 			
 		<?php } ?>

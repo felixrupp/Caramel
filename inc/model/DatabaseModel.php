@@ -83,7 +83,7 @@ class DatabaseModel {
 	 * @throws CaramelException
 	 * @return Array with all used language-codes
 	 */
-	public function getAllLanguagesAction() {
+	public function frontendGetAllLanguagesAction() {
 		
 		$allLanguages = array();
 		
@@ -116,7 +116,7 @@ class DatabaseModel {
 	 * @throws CaramelException
 	 * @return String with all needed meta information to one page
 	 */
-	public function getAllMetaTagsAction($lang, $pageId) {
+	public function frontendGetAllMetaTagsAction($lang, $pageId) {
 		
 		
 		if($pageId!=NULL) {
@@ -218,36 +218,6 @@ class DatabaseModel {
 	
 	
 	/**
-	 * Method to return only all page paths
-	 * 
-	 * @throws CaramelException
-	 * @return Array with all page paths.
-	 */
-	public function getAllPageNamesAction() {
-		
-		$pageNames = array();
-		
-		$xPathResultPages = $this->_dataBase->xpath("//page");
-		
-		if(count($xPathResultPages)>0) {
-						
-			foreach($xPathResultPages as $page) {
-			
-				$pageNames[] = array("path"=>(string)$page->attributes()->path, "id"=>(int)$page->attributes()->id);
-				
-			}
-		}
-		else{
-			throw new CaramelException(10);
-		}
-		
-		return $pageNames;		
-		
-	} // End of method declaration
-	
-	
-	
-	/**
 	 * Method to return the needed website title
 	 * 
 	 * @param string $lang Current language used
@@ -256,7 +226,7 @@ class DatabaseModel {
 	 * @throws CaramelException
 	 * @return String with correct website title
 	 */
-	public function getWebsiteTitleAction($lang, $pageId) {
+	public function frontendGetWebsiteTitleAction($lang, $pageId) {
 				
 		if($pageId!=NULL) {
 			$xPathResultTitle = $this->_dataBase->xpath('//page[@id="'.$pageId.'"]/record[@lang="'.$lang.'"]/title');
@@ -301,7 +271,7 @@ class DatabaseModel {
 	 * @throws CaramelException
 	 * @return String with correct website content
 	 */
-	public function getWebsiteContentAction($lang, $pageId) {
+	public function frontendGetWebsiteContentAction($lang, $pageId) {
 		
 		
 		if($pageId!=NULL) {
@@ -350,7 +320,7 @@ class DatabaseModel {
 	 * @throws CaramelException
 	 * @return Array with localized navigation information
 	 */
-	public function getWebsiteNavigationAction($lang) {
+	public function frontendGetWebsiteNavigationAction($lang) {
 				
 		$orderedNavi = array();
 		
@@ -446,15 +416,63 @@ class DatabaseModel {
 	
 	
 	/**
-	* Method to return array with all pages and subpages
-	* Note: Navigation is restricted to one sublevel
-	*
-	* @param string $lang Current language
-	*
-	* @throws CaramelException
-	* @return Array with all pages
-	*/
-	public function getWebsitePagesAction($lang) {
+	 * Method to get the additional CSS file for this page
+	 *
+	 * @param String $id ID of the page
+	 * @throws CaramelException
+	 *
+	 * @return Name of the additional CSS file
+	 */
+	public function frontendGetPageAdditionalCss($id) {
+	
+		$xPathResultPage = $this->_dataBase->xpath('//page[@id="'.$id.'"]');
+			
+		if(count($xPathResultPage)>0) {
+	
+			return stripslashes(trim((string)$xPathResultPage[0]->stylesheet));
+		}
+		else {
+			throw new CaramelException(10);
+		}
+	
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Method to get the additional JS file for this page
+	 *
+	 * @param String $id ID of the page
+	 * @throws CaramelException
+	 *
+	 * @return Name of the additional JS file
+	 */
+	public function frontendGetPageAdditionalJs($id) {
+	
+		$xPathResultPage = $this->_dataBase->xpath('//page[@id="'.$id.'"]');
+			
+		if(count($xPathResultPage)>0) {
+	
+			return stripslashes(trim((string)$xPathResultPage[0]->scriptfile));
+		}
+		else {
+			throw new CaramelException(10);
+		}
+	
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Method to return array with all pages and subpages
+	 * Note: Navigation is restricted to one sublevel
+	 *
+	 * @param string $lang Current language
+	 *
+	 * @throws CaramelException
+	 * @return Array with all pages
+	 */
+	public function backendGetWebsitePagesAction($lang) {
 	
 		$orderedNavi = array();
 	
@@ -552,9 +570,13 @@ class DatabaseModel {
 	 * @throws CaramelException
 	 * @return Array with all information to page with $id
 	 */
-	public function getPageInformation($id) {
+	public function backendGetPageInformation($id) {
+		
+		date_default_timezone_set('Europe/Berlin');
 		
 		$xPathResultPage = $this->_dataBase->xpath('//page[@id="'.$id.'"]');
+		
+		$versions = array();
 		
 		$page = array();
 		
@@ -603,14 +625,26 @@ class DatabaseModel {
 				
 			}
 			
+			
+			foreach($xPathResultPage[0]->version as $version) {
+			
+				$lang = (string)$version->attributes()->lang;
+				$timestamp = intval($version->attributes()->timestamp);
+
+				$page["records"][$lang]["versions"]["label"] = "Versions for this record:";
+				$page["records"][$lang]["versions"]["timestamps"][$timestamp]["label"] = "Version: ".strftime("%d.%m.%Y %H:%M:%S %Z", $timestamp);
+				
+			}
+			
+			
 		}
 		else {
 			throw new CaramelException(10);
 		}
-			
+		
 		return $page;
 		
-	}
+	} // End of method declaration
 	
 	
 	
@@ -623,7 +657,7 @@ class DatabaseModel {
 	 * @throws CaramelException
 	 * @return Result of file_put_contents
 	 */
-	public function setPageInformation($id, $page) {
+	public function backendSetPageInformation($id, $page) {
 		
 		$result = false;
 		
@@ -689,7 +723,7 @@ class DatabaseModel {
 		
 		return $result;
 		
-	}
+	} // End of method declaration
 	
 	
 	
@@ -701,7 +735,7 @@ class DatabaseModel {
 	 * @throws CaramelException
 	 * @return Result of file_put_contents
 	 */
-	public function deletePageAction($pageId) {
+	public function backendDeletePageAction($pageId) {
 		
 		$result = false;
 		
@@ -734,7 +768,7 @@ class DatabaseModel {
 	 * @throws CaramelException
 	 * @return Result of file_put_contents
 	 */
-	public function createPageAction($path, $defaultLang, $recordContents) {
+	public function backendCreatePageAction($path, $defaultLang, $recordContents) {
 		
 		$result = false;
 		$idArray = array();
@@ -814,7 +848,7 @@ class DatabaseModel {
 	 * @throws CaramelException
 	 * @return Result of the save action
 	 */
-	public function movePageUpAction($id) {
+	public function backendMovePageUpAction($id) {
 		
 		$result = false;
 		
@@ -850,7 +884,7 @@ class DatabaseModel {
 	 * @throws CaramelException
 	 * @return Result of the save action
 	 */
-	public function movePageDownAction($id) {
+	public function backendMovePageDownAction($id) {
 	
 		$result = false;
 	
@@ -880,48 +914,30 @@ class DatabaseModel {
 	
 	
 	/**
-	 * Method to get the additional CSS file for this page
-	 * 
-	 * @param String $id ID of the page
+	 * Method to return only all page paths
+	 *
 	 * @throws CaramelException
-	 * 
-	 * @return Name of the additional CSS file
+	 * @return Array with all page paths.
 	 */
-	public function getPageAdditionalCss($id) {
+	public function backendGetAllPageNamesAction() {
 	
-		$xPathResultPage = $this->_dataBase->xpath('//page[@id="'.$id.'"]');
-			
-		if(count($xPathResultPage)>0) {
-				
-			return stripslashes(trim((string)$xPathResultPage[0]->stylesheet));
+		$pageNames = array();
+	
+		$xPathResultPages = $this->_dataBase->xpath("//page");
+	
+		if(count($xPathResultPages)>0) {
+	
+			foreach($xPathResultPages as $page) {
+					
+				$pageNames[] = array("path"=>(string)$page->attributes()->path, "id"=>(int)$page->attributes()->id);
+	
+			}
 		}
-		else {
+		else{
 			throw new CaramelException(10);
 		}
-		
-	} // End of method declaration
 	
-	
-	
-	/**
-	 * Method to get the additional JS file for this page
-	 * 
-	 * @param String $id ID of the page
-	 * @throws CaramelException
-	 * 
-	 * @return Name of the additional JS file
-	 */
-	public function getPageAdditionalJs($id) {
-	
-		$xPathResultPage = $this->_dataBase->xpath('//page[@id="'.$id.'"]');
-			
-		if(count($xPathResultPage)>0) {
-	
-			return stripslashes(trim((string)$xPathResultPage[0]->scriptfile));
-		}
-		else {
-			throw new CaramelException(10);
-		}
+		return $pageNames;
 	
 	} // End of method declaration
 	
