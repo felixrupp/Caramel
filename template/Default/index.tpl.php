@@ -1,3 +1,10 @@
+<?php 
+/**
+ * @package template
+ * @subpackage Default
+ */
+?>
+
 <!-- This is our default template -->
 <div id="container">
 

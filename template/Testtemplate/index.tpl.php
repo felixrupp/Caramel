@@ -1,3 +1,10 @@
+<?php 
+/**
+ * @package template
+ * @subpackage Testtemplate
+ */
+?>
+
 <!-- This is our test template -->
 
 <div id="site">

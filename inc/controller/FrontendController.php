@@ -47,12 +47,12 @@ class FrontendController {
 	/**
 	 * @var String VERSION Constant for system version
 	 */
-	const VERSION = "0.2.7";
+	const VERSION = "0.2.8";
 	
 	/**
 	 * @var String VERSION Constant for version date
 	 */
-	const VERSION_DATE = "2012-06-10";
+	const VERSION_DATE = "2012-07-18";
 		
 
 	/**
@@ -66,8 +66,13 @@ class FrontendController {
 		$this->_config = ConfigurationModel::getConfigurationModel();
 		
 		# Get TemplatingEngine
-		$this->_templateView = new TemplateView($this->_config->getTemplateAction());
-		
+		try {
+			$this->_templateView = new TemplateView($this->_config->getTemplateAction());
+		}
+		catch(CaramelException $e) {
+			$e->getDetails();
+		}
+	
 		# Get Database 
 		$this->_dataBase = DatabaseModel::getDatabaseModel();		
 				
@@ -208,7 +213,7 @@ class FrontendController {
 	 */	
 	public function headTagAction() {
 		
-		$metaGenerator = "<meta name=\"generator\" content=\"Caramel CMS ".self::VERSION."\">";
+		$metaGenerator = "<meta name=\"generator\" content=\"Caramel CMS\">";
 		
 		$lang = $this->getLanguage();
 		$pageName = $this->getDisplay();
@@ -232,18 +237,24 @@ class FrontendController {
 			$e->getDetails();
 		}
 		
-		$headTag = $this->getBaseUrl()."\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$meta."\n\n<title>".$title."</title>\n\n";
+		$headTag = $this->getBaseUrl()."\n<meta charset=\"utf-8\">\n\n".$meta."\n\n<title>".$title."</title>\n\n";
 		
 		
-		$additionalCssFile = $this->_dataBase->frontendGetPageAdditionalCss($pageId);
-		if(strlen($additionalCssFile) > 1) {		
-			$this->_templateView->addCssFile($additionalCssFile);
+		try {
+		
+			$additionalCssFile = $this->_dataBase->frontendGetPageAdditionalCss($pageId);
+			if(strlen($additionalCssFile) > 1) {		
+				$this->_templateView->addCssFile($additionalCssFile);
+			}
+		
+		
+			$additionalJsFile = $this->_dataBase->frontendGetPageAdditionalJs($pageId);
+			if(strlen($additionalJsFile) > 1) {
+				$this->_templateView->addJsFile($additionalJsFile);
+			}
 		}
-		
-		
-		$additionalJsFile = $this->_dataBase->frontendGetPageAdditionalJs($pageId);
-		if(strlen($additionalJsFile) > 1) {
-			$this->_templateView->addJsFile($additionalJsFile);
+		catch(CaramelException $e) {
+			$e->getDetails();
 		}
 		
 		

@@ -44,84 +44,114 @@
             </div>
             <div class="info-box-body">			
                 <div class="method-summary">
-                                                                                                                                                                                                                                                                    <div class="method-definition">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="method-definition">
                         <img src="images/StaticMethod.png" alt=" "/>
                         static
                         <a href="#getDatabaseModel" title="details" class="method-name" rel='subsection'>getDatabaseModel</a>
                                                 ()
-                                                                            <span class="method-result"><a rel="contents" href="inc/model/DatabaseModel.html">DatabaseModel</a></span>
+                                                                            <span class="method-result">Single</span>
                                             </div>
-                                                                                                                                                                                                                                                                                                                                                                                            <div class="method-definition">
+                                                                                                                                                                                    <div class="method-definition">
                         <img src="images/Method.png" alt=" "/>
-                        <a href="#createPageAction" title="details" class="method-name">createPageAction</a>
+                        <a href="#backendCreatePageAction" title="details" class="method-name">backendCreatePageAction</a>
                                                     (<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$defaultLang</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$recordContents</span>)
                                                                             <span class="method-result">Result</span>
                                             </div>
                                                                                 <div class="method-definition">
                         <img src="images/Method.png" alt=" "/>
-                        <a href="#deletePageAction" title="details" class="method-name">deletePageAction</a>
+                        <a href="#backendDeletePageAction" title="details" class="method-name">backendDeletePageAction</a>
                                                     (<span class="var-type">int</span>&nbsp;<span class="var-name">$pageId</span>)
-                                                                            <span class="method-result">Results</span>
+                                                                            <span class="method-result">Result</span>
                                             </div>
                                                                                 <div class="method-definition">
                         <img src="images/Method.png" alt=" "/>
-                        <a href="#getAllLanguagesAction" title="details" class="method-name">getAllLanguagesAction</a>
+                        <a href="#backendGetAllPageNamesAction" title="details" class="method-name">backendGetAllPageNamesAction</a>
                                                 ()
                                                                             <span class="method-result">Array</span>
                                             </div>
                                                                                 <div class="method-definition">
                         <img src="images/Method.png" alt=" "/>
-                        <a href="#getAllMetaTagsAction" title="details" class="method-name">getAllMetaTagsAction</a>
-                                                    (<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$pageName</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$pageId</span> = <span class="var-default">NULL</span>])
-                                                                            <span class="method-result">string</span>
-                                            </div>
-                                                                                <div class="method-definition">
-                        <img src="images/Method.png" alt=" "/>
-                        <a href="#getAllPageNamesAction" title="details" class="method-name">getAllPageNamesAction</a>
-                                                ()
-                                                                            <span class="method-result">Array</span>
-                                            </div>
-                                                                                                                        <div class="method-definition">
-                        <img src="images/Method.png" alt=" "/>
-                        <a href="#getPageInformation" title="details" class="method-name">getPageInformation</a>
+                        <a href="#backendGetPageInformation" title="details" class="method-name">backendGetPageInformation</a>
                                                     (<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
                                                                             <span class="method-result">Array</span>
                                             </div>
                                                                                 <div class="method-definition">
                         <img src="images/Method.png" alt=" "/>
-                        <a href="#getWebsiteContentAction" title="details" class="method-name">getWebsiteContentAction</a>
-                                                    (<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$pageName</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$pageId</span> = <span class="var-default">NULL</span>])
-                                                                            <span class="method-result">string</span>
-                                            </div>
-                                                                                <div class="method-definition">
-                        <img src="images/Method.png" alt=" "/>
-                        <a href="#getWebsiteNavigationAction" title="details" class="method-name">getWebsiteNavigationAction</a>
+                        <a href="#backendGetWebsitePagesAction" title="details" class="method-name">backendGetWebsitePagesAction</a>
                                                     (<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>)
                                                                             <span class="method-result">Array</span>
                                             </div>
                                                                                 <div class="method-definition">
                         <img src="images/Method.png" alt=" "/>
-                        <a href="#getWebsitePagesAction" title="details" class="method-name">getWebsitePagesAction</a>
-                                                    (<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>)
-                                                                            <span class="method-result">Array</span>
+                        <a href="#backendMovePageDownAction" title="details" class="method-name">backendMovePageDownAction</a>
+                                                    (<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
+                                                                            <span class="method-result">Result</span>
                                             </div>
                                                                                 <div class="method-definition">
                         <img src="images/Method.png" alt=" "/>
-                        <a href="#getWebsiteTitleAction" title="details" class="method-name">getWebsiteTitleAction</a>
-                                                    (<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$pageName</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$pageId</span> = <span class="var-default">NULL</span>])
-                                                                            <span class="method-result">string</span>
+                        <a href="#backendMovePageUpAction" title="details" class="method-name">backendMovePageUpAction</a>
+                                                    (<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
+                                                                            <span class="method-result">Result</span>
                                             </div>
                                                                                 <div class="method-definition">
                         <img src="images/Method.png" alt=" "/>
-                        <a href="#reloadDatabaseFile" title="details" class="method-name">reloadDatabaseFile</a>
-                                                ()
-                                                                            <span class="method-result">void</span>
-                                            </div>
-                                                                                <div class="method-definition">
-                        <img src="images/Method.png" alt=" "/>
-                        <a href="#setPageInformation" title="details" class="method-name">setPageInformation</a>
+                        <a href="#backendSetPageInformation" title="details" class="method-name">backendSetPageInformation</a>
                                                     (<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$page</span>)
                                                                             <span class="method-result">Result</span>
+                                            </div>
+                                                                                <div class="method-definition">
+                        <img src="images/Method.png" alt=" "/>
+                        <a href="#frontendGetAllLanguagesAction" title="details" class="method-name">frontendGetAllLanguagesAction</a>
+                                                ()
+                                                                            <span class="method-result">Array</span>
+                                            </div>
+                                                                                <div class="method-definition">
+                        <img src="images/Method.png" alt=" "/>
+                        <a href="#frontendGetAllMetaTagsAction" title="details" class="method-name">frontendGetAllMetaTagsAction</a>
+                                                    (<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$pageId</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$pageName</span>)
+                                                                            <span class="method-result">String</span>
+                                            </div>
+                                                                                <div class="method-definition">
+                        <img src="images/Method.png" alt=" "/>
+                        <a href="#frontendGetPageAdditionalCss" title="details" class="method-name">frontendGetPageAdditionalCss</a>
+                                                    (<span class="var-type">String</span>&nbsp;<span class="var-name">$id</span>)
+                                                                            <span class="method-result">Name</span>
+                                            </div>
+                                                                                <div class="method-definition">
+                        <img src="images/Method.png" alt=" "/>
+                        <a href="#frontendGetPageAdditionalJs" title="details" class="method-name">frontendGetPageAdditionalJs</a>
+                                                    (<span class="var-type">String</span>&nbsp;<span class="var-name">$id</span>)
+                                                                            <span class="method-result">Name</span>
+                                            </div>
+                                                                                <div class="method-definition">
+                        <img src="images/Method.png" alt=" "/>
+                        <a href="#frontendGetWebsiteContentAction" title="details" class="method-name">frontendGetWebsiteContentAction</a>
+                                                    (<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$pageId</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$pageName</span>)
+                                                                            <span class="method-result">String</span>
+                                            </div>
+                                                                                <div class="method-definition">
+                        <img src="images/Method.png" alt=" "/>
+                        <a href="#frontendGetWebsiteNavigationAction" title="details" class="method-name">frontendGetWebsiteNavigationAction</a>
+                                                    (<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>)
+                                                                            <span class="method-result">Array</span>
+                                            </div>
+                                                                                <div class="method-definition">
+                        <img src="images/Method.png" alt=" "/>
+                        <a href="#frontendGetWebsiteTitleAction" title="details" class="method-name">frontendGetWebsiteTitleAction</a>
+                                                    (<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$pageId</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$pageName</span>)
+                                                                            <span class="method-result">String</span>
+                                            </div>
+                                                                                                                        <div class="method-definition">
+                        <img src="images/Method.png" alt=" "/>
+                        <a href="#getPageId" title="details" class="method-name">getPageId</a>
+                                                    (<span class="var-type">String</span>&nbsp;<span class="var-name">$pagePath</span>)
+                                                                            <span class="method-result">Integer</span>
+                                            </div>
+                                                                                <div class="method-definition">
+                        <img src="images/Method.png" alt=" "/>
+                        <a href="#getPagePath" title="details" class="method-name">getPagePath</a>
+                                                    (<span class="var-type">String</span>&nbsp;<span class="var-name">$pageId</span>)
+                                                                            <span class="method-result">String</span>
                                             </div>
                                                         </div>
             </div>
@@ -143,18 +173,18 @@
 	
 	<div class="method-header">
 		<img src="images/StaticMethod.png" />
-		<span class="method-title">static getDatabaseModel</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a55" rel="contents">55</a></span>)
+		<span class="method-title">static getDatabaseModel</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a60" rel="contents">60</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Singleton-create-method</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> Single instance of DatabaseModel-Class</li>
+				<li><span class="field">return:</span> instance of DatabaseModel-Class</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result"><a rel="contents" href="inc/model/DatabaseModel.html">DatabaseModel</a></span>
+		<span class="method-result">Single</span>
 		<span class="method-name">
 			getDatabaseModel
 		</span>
@@ -164,12 +194,12 @@
 		
 			
 	</div>
-<a name="createPageAction" id="createPageAction"><!-- --></a>
+<a name="backendCreatePageAction" id="backendCreatePageAction"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">createPageAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a738" rel="contents">738</a></span>)
+		<span class="method-title">backendCreatePageAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a771" rel="contents">771</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -183,7 +213,7 @@
 	<div class="method-signature">
 		<span class="method-result">Result</span>
 		<span class="method-name">
-			createPageAction
+			backendCreatePageAction
 		</span>
 					(<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$defaultLang</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$recordContents</span>)
 			</div>
@@ -202,12 +232,12 @@
 		
 			
 	</div>
-<a name="deletePageAction" id="deletePageAction"><!-- --></a>
+<a name="backendDeletePageAction" id="backendDeletePageAction"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">deletePageAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a705" rel="contents">705</a></span>)
+		<span class="method-title">backendDeletePageAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a738" rel="contents">738</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -219,9 +249,9 @@
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">Results</span>
+		<span class="method-result">Result</span>
 		<span class="method-name">
-			deletePageAction
+			backendDeletePageAction
 		</span>
 					(<span class="var-type">int</span>&nbsp;<span class="var-name">$pageId</span>)
 			</div>
@@ -234,77 +264,12 @@
 		
 			
 	</div>
-<a name="getAllLanguagesAction" id="getAllLanguagesAction"><!-- --></a>
+<a name="backendGetAllPageNamesAction" id="backendGetAllPageNamesAction"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getAllLanguagesAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a81" rel="contents">81</a></span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Method to get all used languages out of database</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> with all used language-codes</li>
-				<li><span class="field">throws:</span> CaramelException</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">Array</span>
-		<span class="method-name">
-			getAllLanguagesAction
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="getAllMetaTagsAction" id="getAllMetaTagsAction"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="images/Method.png" />
-		<span class="method-title">getAllMetaTagsAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a114" rel="contents">114</a></span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Method to return all meta information for the given page/language</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> String with all needed meta information to one page</li>
-				<li><span class="field">throws:</span> CaramelException</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			getAllMetaTagsAction
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$pageName</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$pageId</span> = <span class="var-default">NULL</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$lang</span><span class="var-description">: Current language used</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$pageName</span><span class="var-description">: Name of the current page</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$pageId</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="getAllPageNamesAction" id="getAllPageNamesAction"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="images/Method.png" />
-		<span class="method-title">getAllPageNamesAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a239" rel="contents">239</a></span>)
+		<span class="method-title">backendGetAllPageNamesAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a922" rel="contents">922</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -318,7 +283,7 @@
 	<div class="method-signature">
 		<span class="method-result">Array</span>
 		<span class="method-name">
-			getAllPageNamesAction
+			backendGetAllPageNamesAction
 		</span>
 				()
 			</div>
@@ -326,12 +291,12 @@
 		
 			
 	</div>
-<a name="getPageInformation" id="getPageInformation"><!-- --></a>
+<a name="backendGetPageInformation" id="backendGetPageInformation"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getPageInformation</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a579" rel="contents">579</a></span>)
+		<span class="method-title">backendGetPageInformation</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a573" rel="contents">573</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -345,7 +310,7 @@
 	<div class="method-signature">
 		<span class="method-result">Array</span>
 		<span class="method-name">
-			getPageInformation
+			backendGetPageInformation
 		</span>
 					(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
 			</div>
@@ -358,82 +323,12 @@
 		
 			
 	</div>
-<a name="getWebsiteContentAction" id="getWebsiteContentAction"><!-- --></a>
+<a name="backendGetWebsitePagesAction" id="backendGetWebsitePagesAction"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getWebsiteContentAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a323" rel="contents">323</a></span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Method to return the content of a page</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> String with correct website content</li>
-				<li><span class="field">throws:</span> CaramelException</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			getWebsiteContentAction
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$pageName</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$pageId</span> = <span class="var-default">NULL</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$lang</span><span class="var-description">: Current language used</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$pageName</span><span class="var-description">: Name of the current page</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$pageId</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="getWebsiteNavigationAction" id="getWebsiteNavigationAction"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="images/Method.png" />
-		<span class="method-title">getWebsiteNavigationAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a378" rel="contents">378</a></span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Method to return array with localized navigation  Note: Navigation is restricted to one sublevel</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> with localized navigation information</li>
-				<li><span class="field">throws:</span> CaramelException</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">Array</span>
-		<span class="method-name">
-			getWebsiteNavigationAction
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$lang</span><span class="var-description">: Current language</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="getWebsitePagesAction" id="getWebsitePagesAction"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="images/Method.png" />
-		<span class="method-title">getWebsitePagesAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a481" rel="contents">481</a></span>)
+		<span class="method-title">backendGetWebsitePagesAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a475" rel="contents">475</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -447,7 +342,7 @@
 	<div class="method-signature">
 		<span class="method-result">Array</span>
 		<span class="method-name">
-			getWebsitePagesAction
+			backendGetWebsitePagesAction
 		</span>
 					(<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>)
 			</div>
@@ -460,28 +355,154 @@
 		
 			
 	</div>
-<a name="getWebsiteTitleAction" id="getWebsiteTitleAction"><!-- --></a>
+<a name="backendMovePageDownAction" id="backendMovePageDownAction"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getWebsiteTitleAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a272" rel="contents">272</a></span>)
+		<span class="method-title">backendMovePageDownAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a887" rel="contents">887</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Method to return the needed website title</p>
+<p class="short-description">Wrapper method to move a node one down</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> String with correct website title</li>
+				<li><span class="field">return:</span> of the save action</li>
 				<li><span class="field">throws:</span> CaramelException</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">string</span>
+		<span class="method-result">Result</span>
 		<span class="method-name">
-			getWebsiteTitleAction
+			backendMovePageDownAction
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$pageName</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$pageId</span> = <span class="var-default">NULL</span>])
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$id</span><span class="var-description">: ID of the page-node</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="backendMovePageUpAction" id="backendMovePageUpAction"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="images/Method.png" />
+		<span class="method-title">backendMovePageUpAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a851" rel="contents">851</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Wrapper method to move a node one up</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> of the save action</li>
+				<li><span class="field">throws:</span> CaramelException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Result</span>
+		<span class="method-name">
+			backendMovePageUpAction
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$id</span><span class="var-description">: ID of the page-node</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="backendSetPageInformation" id="backendSetPageInformation"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="images/Method.png" />
+		<span class="method-title">backendSetPageInformation</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a660" rel="contents">660</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Method to get all page information incl. records for one page-id</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> of file_put_contents</li>
+				<li><span class="field">throws:</span> CaramelException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Result</span>
+		<span class="method-name">
+			backendSetPageInformation
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$page</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$id</span><span class="var-description">: Id from one specific page</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$page</span><span class="var-description">: Array with modified page information</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="frontendGetAllLanguagesAction" id="frontendGetAllLanguagesAction"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="images/Method.png" />
+		<span class="method-title">frontendGetAllLanguagesAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a86" rel="contents">86</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Method to get all used languages out of database</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> with all used language-codes</li>
+				<li><span class="field">throws:</span> CaramelException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Array</span>
+		<span class="method-name">
+			frontendGetAllLanguagesAction
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="frontendGetAllMetaTagsAction" id="frontendGetAllMetaTagsAction"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="images/Method.png" />
+		<span class="method-title">frontendGetAllMetaTagsAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a119" rel="contents">119</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Method to return all meta information for the given page/language</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> with all needed meta information to one page</li>
+				<li><span class="field">throws:</span> CaramelException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			frontendGetAllMetaTagsAction
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$pageId</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$pageName</span>)
 			</div>
 	
 			<ul class="parameters">
@@ -498,61 +519,238 @@
 		
 			
 	</div>
-<a name="reloadDatabaseFile" id="reloadDatabaseFile"><!-- --></a>
+<a name="frontendGetPageAdditionalCss" id="frontendGetPageAdditionalCss"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">reloadDatabaseFile</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a809" rel="contents">809</a></span>)
+		<span class="method-title">frontendGetPageAdditionalCss</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a426" rel="contents">426</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Method to get the additional CSS file for this page</p>
 	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			reloadDatabaseFile
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="setPageInformation" id="setPageInformation"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="images/Method.png" />
-		<span class="method-title">setPageInformation</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a642" rel="contents">642</a></span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Method to get all page information incl. records for one page-id</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> of file_put_contents</li>
+				<li><span class="field">return:</span> of the additional CSS file</li>
 				<li><span class="field">throws:</span> CaramelException</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">Result</span>
+		<span class="method-result">Name</span>
 		<span class="method-name">
-			setPageInformation
+			frontendGetPageAdditionalCss
 		</span>
-					(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$page</span>)
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$id</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$id</span><span class="var-description">: Id from one specific page</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$id</span><span class="var-description">: ID of the page</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="frontendGetPageAdditionalJs" id="frontendGetPageAdditionalJs"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="images/Method.png" />
+		<span class="method-title">frontendGetPageAdditionalJs</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a450" rel="contents">450</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Method to get the additional JS file for this page</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> of the additional JS file</li>
+				<li><span class="field">throws:</span> CaramelException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Name</span>
+		<span class="method-name">
+			frontendGetPageAdditionalJs
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
 					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$page</span><span class="var-description">: Array with modified page information</span>			</li>
+				<span class="var-type">String</span>
+				<span class="var-name">$id</span><span class="var-description">: ID of the page</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="frontendGetWebsiteContentAction" id="frontendGetWebsiteContentAction"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="images/Method.png" />
+		<span class="method-title">frontendGetWebsiteContentAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a274" rel="contents">274</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Method to return the content of a page</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> with correct website content</li>
+				<li><span class="field">throws:</span> CaramelException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			frontendGetWebsiteContentAction
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$pageId</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$pageName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$lang</span><span class="var-description">: Current language used</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$pageName</span><span class="var-description">: Name of the current page</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$pageId</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="frontendGetWebsiteNavigationAction" id="frontendGetWebsiteNavigationAction"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="images/Method.png" />
+		<span class="method-title">frontendGetWebsiteNavigationAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a323" rel="contents">323</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Method to return array with localized navigation  Note: Navigation is restricted to one sublevel</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> with localized navigation information</li>
+				<li><span class="field">throws:</span> CaramelException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Array</span>
+		<span class="method-name">
+			frontendGetWebsiteNavigationAction
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$lang</span><span class="var-description">: Current language</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="frontendGetWebsiteTitleAction" id="frontendGetWebsiteTitleAction"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="images/Method.png" />
+		<span class="method-title">frontendGetWebsiteTitleAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a229" rel="contents">229</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Method to return the needed website title</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> with correct website title</li>
+				<li><span class="field">throws:</span> CaramelException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			frontendGetWebsiteTitleAction
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$pageId</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$pageName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$lang</span><span class="var-description">: Current language used</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$pageName</span><span class="var-description">: Name of the current page</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$pageId</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="getPageId" id="getPageId"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="images/Method.png" />
+		<span class="method-title">getPageId</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a954" rel="contents">954</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Method to return a page ID for given page path</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> of the page ID</li>
+				<li><span class="field">throws:</span> CaramelException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Integer</span>
+		<span class="method-name">
+			getPageId
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$pagePath</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$pagePath</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="getPagePath" id="getPagePath"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="images/Method.png" />
+		<span class="method-title">getPagePath</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelDatabaseModel.php.html#a984" rel="contents">984</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Method to return a page path for given page ID</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> of the page path</li>
+				<li><span class="field">throws:</span> CaramelException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			getPagePath
+		</span>
+					(<span class="var-type">String</span>&nbsp;<span class="var-name">$pageId</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$pageId</span>			</li>
 				</ul>
 		
 			

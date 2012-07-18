@@ -63,12 +63,12 @@ class BackendController {
 	/**
 	 * @var String VERSION Constant for system version
 	 */
-	const VERSION = "0.2.7";
+	const VERSION = "0.2.8";
 	
 	/**
 	 * @var String VERSION Constant for version date
 	 */
-	const VERSION_DATE = "2012-06-10";
+	const VERSION_DATE = "2012-07-18";
 	
 	/**
 	 * @var String SYSTEM_SALT System Salt for bcrypt hashing
@@ -570,7 +570,7 @@ class BackendController {
 		
 		$meta = $this->getMeta();
 		
-		$headTag = "\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\n".$meta."\n\n<title>Caramel CMS Backend</title>\n\n";
+		$headTag = "\n<meta charset=\"utf-8\">\n\n".$meta."\n\n<title>Caramel CMS Backend</title>\n\n";
 	
 		$headTag .= $this->_templateView->addCssJs();
 		

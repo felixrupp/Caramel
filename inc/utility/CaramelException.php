@@ -66,8 +66,11 @@ class CaramelException extends Exception {
 	 */
 	public function getDetails() {
 		
-		print("<div style=\"margin: 20px auto; width: 80%; padding:12px 16px; border: 2px solid #ec4040; background-color: #fb8b8b; color:white; font-weight: bold; font-family: 'Courier New', Courier, monospace; font-size: 1.2em;\"><p>Error:</p><p>".$this->message."<br>raised in file: ".$this->file." at line: ".$this->line."</p><p>Please contact the administrator of this page via ".$this->_adminEmail.".</p></div>");
+		print("</head><body><div style=\"margin: 20px auto; width: 80%; padding:12px 16px; border: 2px solid #ec4040; background-color: #fb8b8b; color:white; font-weight: bold; font-family: 'Courier New', Courier, monospace; font-size: 1.2em;\"><p>Error:</p><p>".$this->message."<br>raised in file: ".$this->file." at line: ".$this->line."</p><p>Please contact the administrator of this page via ".$this->_adminEmail.".</p></div></body></html>");
 		
+		exit;
+	
+	
 	} // End of method declaration
 		
 }
