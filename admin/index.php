@@ -14,6 +14,11 @@
  *
  */
 
+# Error reporting for testing
+ini_set('display_errors',1);
+error_reporting(E_ALL|E_STRICT);
+
+
 /**
  * @var string BASEDIR Constant which represents the basedir of the server
  * @ignore
@@ -30,13 +35,8 @@ require_once(BASEDIR.'/inc/controller/BackendController.php');
 # New backend controller
 $backendController = new BackendController();
 
-# Initialize session
+# Initialize session	
 $backendController->sessionAction();
-
-
-# Error reporting for testing
-ini_set('display_errors',1);
-error_reporting(E_ALL|E_STRICT);
 
 ?>
 

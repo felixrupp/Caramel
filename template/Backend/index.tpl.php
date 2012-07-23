@@ -11,7 +11,7 @@
 
 <div id="container">
 
-	<div id="header">Caramel CMS Backend
+	<div id="header"><a href="index.php">Caramel CMS Backend</a>
 	
 	<?php if(isset($navigation) && $navigation!=FALSE) {?>
 		<a href="?q=logout" title="Logout" class="floatRight"><img src="../template/Backend/images/off.png" alt="Logout"> </a>
@@ -34,7 +34,15 @@
   
 
 	<div id="content">
+	
+	
+	<?php if(isset($error)) { ?>
+		<div id="backendError">
+			<p>Error: <?php echo $error; ?></p>
+		</div>
+	<?php } ?>
   
+	
 	<?php if(isset($welcome) && $welcome!=FALSE) {?>
 		<div id="welcome">
   	

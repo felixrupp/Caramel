@@ -47,12 +47,12 @@ class FrontendController {
 	/**
 	 * @var String VERSION Constant for system version
 	 */
-	const VERSION = "0.2.8";
+	const VERSION = "0.2.9";
 	
 	/**
 	 * @var String VERSION Constant for version date
 	 */
-	const VERSION_DATE = "2012-07-18";
+	const VERSION_DATE = "2012-07-23";
 		
 
 	/**

@@ -144,6 +144,11 @@ div#header {
 	border-top-left-radius: 1em;
 }
 
+div#header a {
+	color: #fff;
+	text-decoration: none;
+}
+
 
 
 /*********************************
@@ -228,6 +233,17 @@ table#pageManagementTable {
 	width: 80%;
 }
 
+div#backendError {
+	margin: 0 auto 20px auto; 
+	width: 80%; 
+	padding:12px 16px; 
+	border: 2px solid #ec4040; 
+	background-color: #fb8b8b; 
+	color:white; 
+	font-weight: bold; 
+	font-family: 'Courier New', Courier, monospace; 
+	font-size: 1.2em;
+}
 
 
 /* footer */

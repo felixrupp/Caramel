@@ -63,12 +63,12 @@ class BackendController {
 	/**
 	 * @var String VERSION Constant for system version
 	 */
-	const VERSION = "0.2.8";
+	const VERSION = "0.2.9";
 	
 	/**
 	 * @var String VERSION Constant for version date
 	 */
-	const VERSION_DATE = "2012-07-18";
+	const VERSION_DATE = "2012-07-23";
 	
 	/**
 	 * @var String SYSTEM_SALT System Salt for bcrypt hashing
@@ -124,30 +124,40 @@ class BackendController {
 					$e->getDetails();
 				}
 					
-				if($_POST["username"]==$loginInformation["username"] && $this->bcryptCheck($loginInformation["email"], $_POST["password"], $loginInformation["password"])) {
-				
-					# Set loggedin
-					$_SESSION["loggedin"] = TRUE;
-					$_SESSION["timestamp"] = time();
-						
-					$this->_navigation = TRUE;
-					$this->_login = FALSE;
-					$this->_welcome = TRUE;
-						
-					} else {
+				if($_POST["username"]==$loginInformation["username"]) {
+					
+					if($this->bcryptCheck($loginInformation["email"], $_POST["password"], $loginInformation["password"])) {
+					
+						# Set loggedin
+						$_SESSION["loggedin"] = TRUE;
+						$_SESSION["timestamp"] = time();
 							
+						$this->_navigation = TRUE;
+						$this->_login = FALSE;
+						$this->_welcome = TRUE;
+					}
+					else {
+						# Password wrong
 						$this->_navigation = FALSE;
 						$this->_login = TRUE;
 						$this->_welcome = FALSE;
 							
+						$this->_templateView->assign("error", "The password you provided seems to be wrong. Please try again.");
 					}
+				} else {
+					# Username wrong
+					$this->_navigation = FALSE;
+					$this->_login = TRUE;
+					$this->_welcome = FALSE;
 					
+					$this->_templateView->assign("error", "The username you provided seems to be wrong. Please try again.");
+				}
 			} else {
 			
 				$this->_navigation = FALSE;
 				$this->_login = TRUE;
 				$this->_welcome = FALSE;
-			
+							
 			}
 			
 		}
@@ -538,8 +548,8 @@ class BackendController {
 	 * @return void
 	 */
 	public function sessionAction() {
-		
-		session_set_cookie_params(604800); # Cookie stays for 7 days
+				
+		session_set_cookie_params(604800); # 7 Days		
 		session_start();
 		
 	} // End of method declaration
@@ -592,6 +602,7 @@ class BackendController {
 	
 		if($this->getSession()==TRUE) {
 			session_destroy();
+			session_unset();
 		}
 	
 	} // End of method declaration
@@ -901,7 +912,6 @@ class BackendController {
 		}
 			
 	} // End of method declaration
-	
 
 } // End of class declaration
 
