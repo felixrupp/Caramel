@@ -305,6 +305,18 @@ class DatabaseModel {
 
 		}
 		
+		# Replace mailto: to prevent email-spam
+		$content = str_replace("mailto:", "&#109;&#97;&#105;&#108;&#116;&#111;&#58;", $content);
+		
+		# Find all eMail adresses and save them in an array
+		$result = preg_match_all('/([-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@{1}([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?)/i', $content, $hits);
+		
+		foreach($hits[0] as $email) {
+			
+			$content = str_replace($email, $this->plainToUnicode($email), $content);
+			
+		}
+				
 		return $content;
 		
 	} // End of method declaration
@@ -1025,6 +1037,30 @@ class DatabaseModel {
 		catch(Exception $e) {
 			throw new CaramelException(11);
 		}
+		
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Method to return string encoded with unicode entities for eMail spam protection
+	 * 
+	 * @param string $string String to encode
+	 * 
+	 * @return String of unicode entities representing the input string
+	 */
+	private function plainToUnicode($string) {
+		
+		$stringArray = str_split($string);
+		$stringConverted = "";
+		
+		foreach($stringArray as $char) {
+			
+			$stringConverted .= "&#".ord($char).";";
+			
+		}
+		
+		return $stringConverted;
 		
 	} // End of method declaration
 	
