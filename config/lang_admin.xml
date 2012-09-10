@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<caramel-lang version="1.0">
+
+	<lang code="en">
+		<setting key="ADMIN_USERNAME"><![CDATA[Admin name]]></setting>
+		<setting key="ADMIN_PASSWORD"><![CDATA[New admin password]]></setting>
+		<setting key="ADMIN_PASSWORD_CONFIRM"><![CDATA[Please re-type the new password]]></setting>
+		<setting key="ADMIN_EMAIL"><![CDATA[Admin eMail-address]]></setting>
+		<setting key="CONTACT_EMAIL"><![CDATA[eMail-address for receiver of contactform]]></setting>
+		<setting key="BACKEND_LANGUAGE"><![CDATA[Language of the backend]]></setting>
+	</lang>
+	
+	<lang code="de">
+		<setting key="ADMIN_USERNAME"><![CDATA[Adminname]]></setting>
+		<setting key="ADMIN_PASSWORD"><![CDATA[Neues Adminpasswort]]></setting>
+		<setting key="ADMIN_PASSWORD_CONFIRM"><![CDATA[Passwort bestätigen]]></setting>
+		<setting key="ADMIN_EMAIL"><![CDATA[Admin E-Mail-Adresse]]></setting>
+		<setting key="CONTACT_EMAIL"><![CDATA[E-Mail-Adresse als Empfänger für Kontaktformular]]></setting>
+		<setting key="BACKEND_LANGUAGE"><![CDATA[Sprache des Backends]]></setting>
+	</lang>
+	
+</caramel-lang>

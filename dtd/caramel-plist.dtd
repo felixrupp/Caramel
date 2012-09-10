@@ -9,4 +9,6 @@
 <!ATTLIST setting
   xmlns CDATA #FIXED ''
   blank NMTOKEN #REQUIRED
-  key NMTOKEN #REQUIRED>
+  key NMTOKEN #REQUIRED
+  type NMTOKEN #IMPLIED
+  validate CDATA #REQUIRED>

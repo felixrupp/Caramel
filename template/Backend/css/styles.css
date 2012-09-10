@@ -274,3 +274,7 @@ div#footer {
 .floatRight {
 	float: right;
 }
+
+.smallText {
+	font-size: .8em;
+}

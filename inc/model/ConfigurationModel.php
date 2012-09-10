@@ -36,6 +36,207 @@ class ConfigurationModel {
 	 */
 	private $_adminConfigFile;
 	
+	/**
+	 * @var SimpleXMLExtended $_adminLangFile Contains the SimpleXMLExtended of our xml-languagefile for admin
+	 */
+	private $_adminLangFile;
+	
+	/**
+	 * @var string $_backendLang Contains iso language-code of the backend language
+	 */
+	private $_backendLang;
+	
+	/**
+	 * @var array $_isoLangCodes Contains all ISO language codes and respective language names
+	 */
+	private $_isoLangCodes = array(
+    'aa' => 'Afar',
+    'ab' => 'Abkhaz',
+    'ae' => 'Avestan',
+    'af' => 'Afrikaans',
+    'ak' => 'Akan',
+    'am' => 'Amharic',
+    'an' => 'Aragonese',
+    'ar' => 'Arabic',
+    'as' => 'Assamese',
+    'av' => 'Avaric',
+    'ay' => 'Aymara',
+    'az' => 'Azerbaijani',
+    'ba' => 'Bashkir',
+    'be' => 'Belarusian',
+    'bg' => 'Bulgarian',
+    'bh' => 'Bihari',
+    'bi' => 'Bislama',
+    'bm' => 'Bambara',
+    'bn' => 'Bengali',
+    'bo' => 'Tibetan Standard, Tibetan, Central',
+    'br' => 'Breton',
+    'bs' => 'Bosnian',
+    'ca' => 'Catalan; Valencian',
+    'ce' => 'Chechen',
+    'ch' => 'Chamorro',
+    'co' => 'Corsican',
+    'cr' => 'Cree',
+    'cs' => 'Czech',
+    'cu' => 'Old Church Slavonic, Church Slavic, Church Slavonic, Old Bulgarian, Old Slavonic',
+    'cv' => 'Chuvash',
+    'cy' => 'Welsh',
+    'da' => 'Danish',
+    'de' => 'German',
+    'dv' => 'Divehi; Dhivehi; Maldivian;',
+    'dz' => 'Dzongkha',
+    'ee' => 'Ewe',
+    'el' => 'Greek, Modern',
+    'en' => 'English',
+    'eo' => 'Esperanto',
+    'es' => 'Spanish; Castilian',
+    'et' => 'Estonian',
+    'eu' => 'Basque',
+    'fa' => 'Persian',
+    'ff' => 'Fula; Fulah; Pulaar; Pular',
+    'fi' => 'Finnish',
+    'fj' => 'Fijian',
+    'fo' => 'Faroese',
+    'fr' => 'French',
+    'fy' => 'Western Frisian',
+    'ga' => 'Irish',
+    'gd' => 'Scottish Gaelic; Gaelic',
+    'gl' => 'Galician',
+    'gn' => 'GuaranÃ­',
+    'gu' => 'Gujarati',
+    'gv' => 'Manx',
+    'ha' => 'Hausa',
+    'he' => 'Hebrew (modern)',
+    'hi' => 'Hindi',
+    'ho' => 'Hiri Motu',
+    'hr' => 'Croatian',
+    'ht' => 'Haitian; Haitian Creole',
+    'hu' => 'Hungarian',
+    'hy' => 'Armenian',
+    'hz' => 'Herero',
+    'ia' => 'Interlingua',
+    'id' => 'Indonesian',
+    'ie' => 'Interlingue',
+    'ig' => 'Igbo',
+    'ii' => 'Nuosu',
+    'ik' => 'Inupiaq',
+    'io' => 'Ido',
+    'is' => 'Icelandic',
+    'it' => 'Italian',
+    'iu' => 'Inuktitut',
+    'ja' => 'Japanese (ja)',
+    'jv' => 'Javanese (jv)',
+    'ka' => 'Georgian',
+    'kg' => 'Kongo',
+    'ki' => 'Kikuyu, Gikuyu',
+    'kj' => 'Kwanyama, Kuanyama',
+    'kk' => 'Kazakh',
+    'kl' => 'Kalaallisut, Greenlandic',
+    'km' => 'Khmer',
+    'kn' => 'Kannada',
+    'ko' => 'Korean',
+    'kr' => 'Kanuri',
+    'ks' => 'Kashmiri',
+    'ku' => 'Kurdish',
+    'kv' => 'Komi',
+    'kw' => 'Cornish',
+    'ky' => 'Kirghiz, Kyrgyz',
+    'la' => 'Latin',
+    'lb' => 'Luxembourgish, Letzeburgesch',
+    'lg' => 'Luganda',
+    'li' => 'Limburgish, Limburgan, Limburger',
+    'ln' => 'Lingala',
+    'lo' => 'Lao',
+    'lt' => 'Lithuanian',
+    'lu' => 'Luba-Katanga',
+    'lv' => 'Latvian',
+    'mg' => 'Malagasy',
+    'mh' => 'Marshallese',
+    'mi' => 'Maori',
+    'mk' => 'Macedonian',
+    'ml' => 'Malayalam',
+    'mn' => 'Mongolian',
+    'mr' => 'Marathi (Mara?hi)',
+    'ms' => 'Malay',
+    'mt' => 'Maltese',
+    'my' => 'Burmese',
+    'na' => 'Nauru',
+    'nb' => 'Norwegian BokmÃ¥l',
+    'nd' => 'North Ndebele',
+    'ne' => 'Nepali',
+    'ng' => 'Ndonga',
+    'nl' => 'Dutch',
+    'nn' => 'Norwegian Nynorsk',
+    'no' => 'Norwegian',
+    'nr' => 'South Ndebele',
+    'nv' => 'Navajo, Navaho',
+    'ny' => 'Chichewa; Chewa; Nyanja',
+    'oc' => 'Occitan',
+    'oj' => 'Ojibwe, Ojibwa',
+    'om' => 'Oromo',
+    'or' => 'Oriya',
+    'os' => 'Ossetian, Ossetic',
+    'pa' => 'Panjabi, Punjabi',
+    'pi' => 'Pali',
+    'pl' => 'Polish',
+    'ps' => 'Pashto, Pushto',
+    'pt' => 'Portuguese',
+    'qu' => 'Quechua',
+    'rm' => 'Romansh',
+    'rn' => 'Kirundi',
+    'ro' => 'Romanian, Moldavian, Moldovan',
+    'ru' => 'Russian',
+    'rw' => 'Kinyarwanda',
+    'sa' => 'Sanskrit (Sa?sk?ta)',
+    'sc' => 'Sardinian',
+    'sd' => 'Sindhi',
+    'se' => 'Northern Sami',
+    'sg' => 'Sango',
+    'si' => 'Sinhala, Sinhalese',
+    'sk' => 'Slovak',
+    'sl' => 'Slovene',
+    'sm' => 'Samoan',
+    'sn' => 'Shona',
+    'so' => 'Somali',
+    'sq' => 'Albanian',
+    'sr' => 'Serbian',
+    'ss' => 'Swati',
+    'st' => 'Southern Sotho',
+    'su' => 'Sundanese',
+    'sv' => 'Swedish',
+    'sw' => 'Swahili',
+    'ta' => 'Tamil',
+    'te' => 'Telugu',
+    'tg' => 'Tajik',
+    'th' => 'Thai',
+    'ti' => 'Tigrinya',
+    'tk' => 'Turkmen',
+    'tl' => 'Tagalog',
+    'tn' => 'Tswana',
+    'to' => 'Tonga (Tonga Islands)',
+    'tr' => 'Turkish',
+    'ts' => 'Tsonga',
+    'tt' => 'Tatar',
+    'tw' => 'Twi',
+    'ty' => 'Tahitian',
+    'ug' => 'Uighur, Uyghur',
+    'uk' => 'Ukrainian',
+    'ur' => 'Urdu',
+    'uz' => 'Uzbek',
+    've' => 'Venda',
+    'vi' => 'Vietnamese',
+    'vo' => 'VolapÃ¼k',
+    'wa' => 'Walloon',
+    'wo' => 'Wolof',
+    'xh' => 'Xhosa',
+    'yi' => 'Yiddish',
+    'yo' => 'Yoruba',
+    'za' => 'Zhuang, Chuang',
+    'zh' => 'Chinese',
+    'zu' => 'Zulu',
+);
+	
+	
 	
 	/**
 	 * Configurator class-constructor
@@ -47,6 +248,8 @@ class ConfigurationModel {
 		try {
 			$this->reloadConfigFile();
 			$this->reloadAdminConfigFile();
+			$this->reloadAdminLangFile();
+			$this->_backendLang = $this->getAdminConfigString("BACKEND_LANGUAGE");			
 		}
 		catch(CaramelException $e) {
 			$e->getDetails();
@@ -164,19 +367,50 @@ class ConfigurationModel {
 	
 	/**
 	* This method returns an ordered array with all admin settings
+	* 
+	* @param string $lang Language to fetch options for
 	*
 	* @throws CaramelException
 	* @return Array with all admin settings
 	*/
 	public function getAdminAction() {
+				
+		$adminConfigArray = array();
+		$adminConfigArray["ADMIN_USERNAME"] = $this->getAdminConfig("ADMIN_USERNAME");
+		$adminConfigArray["ADMIN_PASSWORD"] = $this->getAdminConfig("ADMIN_PASSWORD");
+		$adminConfigArray["ADMIN_PASSWORD_CONFIRM"] = $this->getAdminConfig("ADMIN_PASSWORD_CONFIRM");
+		$adminConfigArray["ADMIN_EMAIL"] = $this->getAdminConfig("ADMIN_EMAIL");
+		$adminConfigArray["CONTACT_EMAIL"] = $this->getAdminConfig("CONTACT_EMAIL");
+		$adminConfigArray["BACKEND_LANGUAGE"] = $this->getAdminConfig("BACKEND_LANGUAGE");
+		
+		$adminLanguageArray = array();
+		$adminLanguageArray["ADMIN_USERNAME"] = $this->getAdminLanguageStringAction("ADMIN_USERNAME");
+		$adminLanguageArray["ADMIN_PASSWORD"] = $this->getAdminLanguageStringAction("ADMIN_PASSWORD");
+		$adminLanguageArray["ADMIN_PASSWORD_CONFIRM"] = $this->getAdminLanguageStringAction("ADMIN_PASSWORD_CONFIRM");
+		$adminLanguageArray["ADMIN_EMAIL"] = $this->getAdminLanguageStringAction("ADMIN_EMAIL");
+		$adminLanguageArray["CONTACT_EMAIL"] = $this->getAdminLanguageStringAction("CONTACT_EMAIL");
+		$adminLanguageArray["BACKEND_LANGUAGE"] = $this->getAdminLanguageStringAction("BACKEND_LANGUAGE");
+		
+		# Don't show passwords:
+		$adminConfigArray["ADMIN_PASSWORD"][0] = null;
+		$adminConfigArray["ADMIN_PASSWORD"][0]->addCdata("");
+		
+		# Construct output array
+		foreach($adminConfigArray as $key => $node) {
+						
+			$admin[strtolower($key)] = array("label" => $adminLanguageArray[$key], "value" => stripslashes((string)$node), "type" => $node["type"], "blank" => $node["blank"], "validate" => $node["validate"]);
+		}
+		
+		# Provide all language which are in our lang_admin.xml file for html select-tag:
+		$admin["backend_language"]["acceptedValues"] = array();
+		
+		$languages = $this->getAdminLanguages();
+		
+		foreach($languages as $langCode) {
 			
-		$admin = array(
-		 		"admin_username" => array("label" => "Admin name:", "value" => stripslashes($this->getAdminConfigString("ADMIN_USERNAME")), "blank" => false),
-				"admin_password" => array("label" => "New admin password:", "value" => stripslashes($this->getAdminConfigString("ADMIN_PASSWORD")), "blank" => false),
-		 		"admin_email" => array("label" => "Admin eMail-address:", "value" => stripslashes($this->getAdminConfigString("ADMIN_EMAIL")), "blank" => false),
-		 		"contact_email" => array("label" => "eMail-address for receiver of contactform:", "value" => stripslashes($this->getAdminConfigString("CONTACT_EMAIL")), "blank" => false),
-		);
-			
+			$admin["backend_language"]["acceptedValues"][$langCode] = $this->_isoLangCodes[$langCode];
+		}
+		
 		return $admin;
 			
 	} // End of method declaration
@@ -281,6 +515,24 @@ class ConfigurationModel {
 	} // End of method declaration
 	
 	
+	
+	/**
+	 * Wrapper for getAdminLanguageString
+	 *
+	 * @see getAdminLanguageString
+	 *
+	 * @param string $key Key to lookup in config-file
+	 *
+	 * @throws CaramelException
+	 * @return Value for given key
+	 */
+	public function getAdminLanguageStringAction($key) {
+				
+		return $this->getAdminLanguageString($this->_backendLang, $key);
+	
+	} // End of method declaration
+	
+	
 		
 ############################################################################
 ##
@@ -289,14 +541,13 @@ class ConfigurationModel {
 ############################################################################
 	
 	
-	
 	/**
 	 * Get String from key of config-file
 	 *
 	 * @param string $key Key to lookup in config-file
 	 *
 	 * @throws CaramelException
-	 * @return string Value for given key
+	 * @return Value for given key
 	 */
 	private function getConfigString($key) {
 	
@@ -305,9 +556,9 @@ class ConfigurationModel {
 		if(count($setting)>0) {
 			return (string)$setting[0];
 		}
-		else {
+		/*else {
 			throw new CaramelException(10);
-		}
+		}*/
 	
 	} // End of method declaration
 	
@@ -348,7 +599,7 @@ class ConfigurationModel {
 	 * @param string $key Key to lookup in config-file
 	 * 
 	 * @throws CaramelException
-	 * @return string Value for given key
+	 * @return Value for given key
 	 */
 	private function getAdminConfigString($key) {
 	
@@ -395,6 +646,84 @@ class ConfigurationModel {
 	
 	
 	/**
+	 * Get whole node from admin config file
+	 * 
+	 * @param string $key The key of the admin setting
+	 * 
+	 * @throws CaramelException
+	 * @return SimpleXMLExtended node mathing the $key
+	 */
+	private function getAdminConfig($key) {
+		
+		$setting = $this->_adminConfigFile->xpath('//setting[@key="'.$key.'"]');
+		
+		if(count($setting)>0) {
+			return $setting[0];
+		}
+		else {
+			throw new CaramelException(10);
+		}
+		
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Get whole node from admin config file
+	 *
+	 * @param string $lang The language to fetch the string for
+	 * @param string $key The key of the language setting
+	 *
+	 * @throws CaramelException
+	 * @return Value mathing the $lang and the $key
+	 */
+	private function getAdminLanguageString($lang, $key) {
+	
+		$setting = $this->_adminLangFile->xpath('//lang[@code="'.$lang.'"]/setting[@key="'.$key.'"]');
+	
+		if(count($setting)>0) {
+			return (string)$setting[0];
+		}
+		else {
+			throw new CaramelException(10);
+		}
+	
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Get all languages in lang_admin.xml file
+	 *
+	 * @throws CaramelException
+	 * @return Value mathing the $lang and the $key
+	 */
+	private function getAdminLanguages() {
+	
+		$allLanguages = array();
+		
+		$setting = $this->_adminLangFile->xpath('//@code');
+	
+		if(count($setting)>0) {
+			
+			$setting = array_unique($setting); # Remove double entries
+				
+			foreach($setting as $langCode) {
+				array_push($allLanguages, (string)$langCode); # Convert SimpleXMLElements into strings
+			}
+			
+			return $allLanguages;
+			
+		}
+		else {
+			throw new CaramelException(10);
+		}
+	
+	} // End of method declaration
+	
+	
+	
+	/**
 	 * This method updates the contents of the local configFile in our singleton.
 	 *
 	 * @throws CaramelException
@@ -428,6 +757,25 @@ class ConfigurationModel {
 			throw new CaramelException(11);
 		}
 	
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * This method updates the contents of the local langFile in our singleton.
+	 *
+	 * @throws CaramelException
+	 * @return void
+	 */
+	private function reloadAdminLangFile() {
+			
+		try {
+			$this->_adminLangFile = simplexml_load_file(BASEDIR.'/config/lang_admin.xml', "SimpleXMLExtended");
+		}
+		catch(Exception $e) {
+			throw new CaramelException(11);
+		}
+			
 	} // End of method declaration
 
 

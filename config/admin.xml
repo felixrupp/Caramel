@@ -13,11 +13,14 @@
 <caramel-plist version="1.0">
 
 	<!-- Admin setup -->
-	<setting key="ADMIN_USERNAME" blank="false"><![CDATA[admin]]></setting>
-	<setting key="ADMIN_PASSWORD" blank="false"><![CDATA[$2BTBKf1V37sc]]]></setting>
-	<setting key="ADMIN_EMAIL" blank="false"><![CDATA[admin@yourdomain.com]]></setting>
+	<setting key="ADMIN_USERNAME" blank="false" type="text" validate="/^[a-z\d_]{5,20}$/i"><![CDATA[admin]]></setting>
+	<setting key="ADMIN_PASSWORD" blank="true" type="password" validate="/(\d+)([a-z]+)([A-Z]+)/"><![CDATA[$2BTBKf1V37sc]]]></setting>
+	<setting key="ADMIN_PASSWORD_CONFIRM" blank="true" type="password" validate="/(\d+)([a-z]+)([A-Z]+)/"></setting>
+	<setting key="ADMIN_EMAIL" blank="false" type="text" validate="/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/"><![CDATA[admin@yourdomain.com]]></setting>
 	
 	<!-- E-Mail used in contactform -->
-	<setting key="CONTACT_EMAIL" blank="false"><![CDATA[contact@yourdomain.com]]></setting>
+	<setting key="CONTACT_EMAIL" blank="false" type="text" validate="/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/"><![CDATA[contact@yourdomain.com]]></setting>
 	
+	<!-- Language of backend interface -->
+	<setting key="BACKEND_LANGUAGE" blank="false" type="select" validate="null"><![CDATA[en]]></setting>
 </caramel-plist>

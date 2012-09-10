@@ -23,8 +23,8 @@
   
 	<div id="menu">
 		<ul>
-			<li><a href="?q=editglobals" class="settings"></a></li>
-			<li><a href="?q=editusers" class="admin"></a></li>
+			<li><a href="?q=editglobal" class="settings"></a></li>
+			<li><a href="?q=editadmin" class="admin"></a></li>
 			<li><a href="?q=editpages" class="site"></a></li>
 			<li><a href="?q=edittemplates" class="template"></a></li>
 		</ul>
@@ -86,14 +86,14 @@
   	if(isset($editonepage) && $editonepage!=FALSE) {
   		include "editonepage.tpl.php";
   	}
-  	if(isset($editusers) && $editusers!=FALSE) {
-  		include "editusers.tpl.php";
+  	if(isset($editadmin) && $editadmin!=FALSE) {
+  		include "editadmin.tpl.php";
   	}
   	if(isset($edittemplates) && $edittemplates!=FALSE) {
   		include "edittemplates.tpl.php";
   	}
-  	if(isset($editglobals) && $editglobals!=FALSE) {
-  		include "editglobals.tpl.php";
+  	if(isset($editglobal) && $editglobal!=FALSE) {
+  		include "editglobal.tpl.php";
   	}
   	
   	?>

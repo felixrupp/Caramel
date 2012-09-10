@@ -287,16 +287,16 @@ class BackendController {
 					
 			}
 			# Edit admin user
-			if(isset($_GET["q"]) && $_GET["q"]=="editusers") {
+			if(isset($_GET["q"]) && $_GET["q"]=="editadmin") {
 				
-				$admin = $this->_config->getAdminAction();
+				$admin = $this->_config->getAdminAction(); 
 				
 				$this->_navigation = TRUE;
 				$this->_login = FALSE;
 				$this->_welcome = FALSE;
 				
 				$this->_templateView->assign("admin", $admin);
-				$this->_templateView->assign("editusers", TRUE);
+				$this->_templateView->assign("editadmin", TRUE);
 					
 			}
 			# Edit templates
@@ -313,7 +313,7 @@ class BackendController {
 					
 			}
 			# Edit global settings
-			if(isset($_GET["q"]) && $_GET["q"]=="editglobals") {
+			if(isset($_GET["q"]) && $_GET["q"]=="editglobal") {
 				
 				$globals = $this->getGlobalConfig();
 					
@@ -322,7 +322,7 @@ class BackendController {
 				$this->_welcome = FALSE;
 				
 				$this->_templateView->assign("globals", $globals);
-				$this->_templateView->assign("editglobals", TRUE);
+				$this->_templateView->assign("editglobal", TRUE);
 					
 			}
 			
@@ -446,7 +446,7 @@ class BackendController {
 								
 			}
 			# Edit global config
-			if(isset($_POST["editglobals"])) {
+			if(isset($_POST["editglobal"])) {
 												
 				$globals = $this->getGlobalConfig();
 				
@@ -456,7 +456,7 @@ class BackendController {
 				
 				foreach($_POST as $key => $value) {
 					
-					if($key != "editglobals" && $key != "submit") {
+					if($key != "editglobal" && $key != "submit") {
 						$globals[$key]["value"] = $value;
 					}
 					
@@ -486,17 +486,17 @@ class BackendController {
 				$this->_welcome = FALSE;
 				
 				$this->_templateView->assign("globals", $globals);
-				$this->_templateView->assign("editglobals", TRUE);
+				$this->_templateView->assign("editglobal", TRUE);
 					
 			}
 			# Edit users
-			if(isset($_POST["editusers"])) {
+			if(isset($_POST["editadmin"])) {
 							
 				$admin = $this->_config->getAdminAction();
 			
 				foreach($_POST as $key => $value) {
 					
-					if($key != "editusers" && $key != "submit" && $key != "admin_password" && $key != "password_verification") {
+					if($key != "editadmin" && $key != "submit" && $key != "admin_password" && $key != "password_verification") {
 						$admin[$key]["value"] = $value;
 					}
 					
@@ -526,7 +526,7 @@ class BackendController {
 				$this->_welcome = FALSE;
 				
 				$this->_templateView->assign("admin", $admin);
-				$this->_templateView->assign("editusers", TRUE);
+				$this->_templateView->assign("editadmin", TRUE);
 					
 			}
 
