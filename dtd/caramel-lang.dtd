@@ -1,0 +1,16 @@
+<?xml encoding="UTF-8"?>
+
+<!ELEMENT caramel-lang (lang)+>
+<!ATTLIST caramel-lang
+  xmlns CDATA #FIXED ''
+  version CDATA #REQUIRED>
+
+<!ELEMENT lang (setting)+>
+<!ATTLIST lang
+  xmlns CDATA #FIXED ''
+  code NMTOKEN #REQUIRED>
+
+<!ELEMENT setting (#PCDATA)>
+<!ATTLIST setting
+  xmlns CDATA #FIXED ''
+  key NMTOKEN #REQUIRED>

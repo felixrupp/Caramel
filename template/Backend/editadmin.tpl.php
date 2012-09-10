@@ -31,7 +31,7 @@
 		<span class="smallText">* Mandatory fields</span>
 		<br>
 		
-		<input type="hidden" name="editusers" id="editusers">
+		<input type="hidden" name="editadmin" id="editadmin">
 		<input type="submit" name="submit" id="submit" value="Save">
 	</form>
 

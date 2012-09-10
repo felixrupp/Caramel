@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE caramel-plist SYSTEM "../dtd/caramel-lang.dtd">
+<!-- 
+ *
+ * Language file for backend
+ * 
+ * @author Felix Rupp <kontakt@felixrupp.com>
+ * @version $Id$
+ * @copyright Copyright (c) Felix Rupp, Nicole Reinhardt
+ * @license http://www.opensource.org/licenses/mit-license.php MIT-License
+ * 
+-->
+<caramel-lang version="1.0">
+	<lang code="en">
+		<setting key="ADMIN_USERNAME"><![CDATA[Admin name]]></setting>
+		<setting key="ADMIN_PASSWORD"><![CDATA[New admin password]]></setting>
+		<setting key="ADMIN_PASSWORD_CONFIRM"><![CDATA[Please re-type the new password]]></setting>
+		<setting key="ADMIN_EMAIL"><![CDATA[Admin eMail-address]]></setting>
+		<setting key="CONTACT_EMAIL"><![CDATA[eMail-address for receiver of contactform]]></setting>
+		<setting key="BACKEND_LANGUAGE"><![CDATA[Language of the backend]]></setting>
+		<setting key="STARTPAGE"><![CDATA[Homepage]]></setting>
+		<setting key="BASE"><![CDATA[Base URL]]></setting>
+		<setting key="TEMPLATE"><![CDATA[Template]]></setting>
+		<setting key="DEFAULT_LANGUAGE"><![CDATA[Default frontend language]]></setting>
+		<setting key="ROBOTS"><![CDATA[Robot settings]]></setting>
+		<setting key="WEBSITE_TITLE"><![CDATA[Global website title]]></setting>
+		<setting key="WEBSITE_TITLE_SEPERATOR"><![CDATA[Website title seperator]]></setting>
+		<setting key="NAVIGATION_ACTIVE_MARKER_POSITION"><![CDATA[Position of active-navigation-marker]]></setting>
+		<setting key="NAVIGATION_ACTIVE_MARKER"><![CDATA[Marker for active-navigation]]></setting>
+		<setting key="NAVIGATION_ACTIVE_CLASS"><![CDATA[Class for active-navigation links]]></setting>
+		<setting key="NAVIGATION_CLASS"><![CDATA[Global navigation class]]></setting>
+		<setting key="SPEAKING_URLS"><![CDATA[Speaking URLs]]></setting>
+		<setting key="LANGUAGE_SELECTOR_IN_FOOTER"><![CDATA[Language selector in footer]]></setting> 
+		<setting key="LANGUAGE_SELECTOR_SEPERATOR"><![CDATA[Language selector seperator]]></setting>
+	</lang>
+	<lang code="de">
+		<setting key="ADMIN_USERNAME"><![CDATA[Adminname]]></setting>
+		<setting key="ADMIN_PASSWORD"><![CDATA[Neues Adminpasswort]]></setting>
+		<setting key="ADMIN_PASSWORD_CONFIRM"><![CDATA[Passwort bestätigen]]></setting>
+		<setting key="ADMIN_EMAIL"><![CDATA[Admin E-Mail-Adresse]]></setting>
+		<setting key="CONTACT_EMAIL"><![CDATA[E-Mail-Adresse als Empfänger für Kontaktformular]]></setting>
+		<setting key="BACKEND_LANGUAGE"><![CDATA[Sprache des Backends]]></setting>
+		<setting key="STARTPAGE"><![CDATA[Startseite]]></setting>
+		<setting key="BASE"><![CDATA[Basis URL]]></setting>
+		<setting key="TEMPLATE"><![CDATA[Template]]></setting>
+		<setting key="DEFAULT_LANGUAGE"><![CDATA[Standardsprache im Frontend]]></setting>
+		<setting key="ROBOTS"><![CDATA[Suchmaschinen-Einstellungen]]></setting>
+		<setting key="WEBSITE_TITLE"><![CDATA[Globaler Webseitentitel]]></setting>
+		<setting key="WEBSITE_TITLE_SEPERATOR"><![CDATA[Webseitentitel Trennzeichen]]></setting>
+		<setting key="NAVIGATION_ACTIVE_MARKER_POSITION"><![CDATA[Position des Markers für aktive Navigationslinks]]></setting>
+		<setting key="NAVIGATION_ACTIVE_MARKER"><![CDATA[Marker für aktive Navigationslinks]]></setting>
+		<setting key="NAVIGATION_ACTIVE_CLASS"><![CDATA[Klasse für aktive Navigationslinks]]></setting>
+		<setting key="NAVIGATION_CLASS"><![CDATA[Globale Klasse für Navigation]]></setting>
+		<setting key="SPEAKING_URLS"><![CDATA[Sprechende URLs]]></setting>
+		<setting key="LANGUAGE_SELECTOR_IN_FOOTER"><![CDATA[Sprachauswahl in der Fußzeile]]></setting> 
+		<setting key="LANGUAGE_SELECTOR_SEPERATOR"><![CDATA[Sprachauswahl Trennzeichen]]></setting>
+	</lang>
+</caramel-lang>

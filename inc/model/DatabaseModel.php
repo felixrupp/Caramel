@@ -671,6 +671,8 @@ class DatabaseModel {
 	 */
 	public function backendSetPageInformation($id, $page) {
 		
+		$this->createDatabaseBackup();
+		
 		$result = false;
 		
 		$xPathResultPage = $this->_dataBase->xpath('//page[@id="'.$id.'"]');
@@ -749,6 +751,8 @@ class DatabaseModel {
 	 */
 	public function backendDeletePageAction($pageId) {
 		
+		$this->createDatabaseBackup();
+		
 		$result = false;
 		
 		$xPathResultPage = $this->_dataBase->xpath('//page[@id="'.$pageId.'"]');
@@ -781,6 +785,8 @@ class DatabaseModel {
 	 * @return Result of file_put_contents
 	 */
 	public function backendCreatePageAction($path, $defaultLang, $recordContents) {
+		
+		$this->createDatabaseBackup();
 		
 		$result = false;
 		$idArray = array();
@@ -862,6 +868,8 @@ class DatabaseModel {
 	 */
 	public function backendMovePageUpAction($id) {
 		
+		$this->createDatabaseBackup();
+		
 		$result = false;
 		
 		$xPathResultPage = $this->_dataBase->xpath('//page[@id="'.$id.'"]');
@@ -897,6 +905,8 @@ class DatabaseModel {
 	 * @return Result of the save action
 	 */
 	public function backendMovePageDownAction($id) {
+		
+		$this->createDatabaseBackup();
 	
 		$result = false;
 	
@@ -1061,6 +1071,21 @@ class DatabaseModel {
 		}
 		
 		return $stringConverted;
+		
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Method to create a backup of the xml database file
+	 */
+	private function createDatabaseBackup() {		
+		
+		$result = file_put_contents(BASEDIR.'/database/data_'.date("Y-m-d-H-i-s", time()).'.xml', $this->_dataBase->asXML());
+		
+		if($result!=false) {
+			$this->reloadDatabaseFile();
+		}
 		
 	} // End of method declaration
 	

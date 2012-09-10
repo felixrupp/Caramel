@@ -2,40 +2,40 @@
 <!DOCTYPE caramel-plist SYSTEM "../dtd/caramel-plist.dtd">
 <!-- 
  *
- * Database for page-content
+ * Settings file for site
  * 
  * @author Felix Rupp <kontakt@felixrupp.com>
  * @version $Id$
- * @copyright Copyright (c) 2011, Felix Rupp, Nicole Reinhardt
+ * @copyright Copyright (c) Felix Rupp, Nicole Reinhardt
  * @license http://www.opensource.org/licenses/mit-license.php MIT-License
  * 
 -->
 <caramel-plist version="1.0">
 
 	<!-- Essentials -->
-	<setting key="STARTPAGE" blank="false" validate="/^(\d)+$/"><![CDATA[1]]></setting>
-	<setting key="BASE" blank="false" validate="/^(http://)(.)+$/"><![CDATA[http://test.felixrupp.com/]]></setting>
-	<setting key="TEMPLATE" blank="false" validate="null">Default</setting>
-	<setting key="DEFAULT_LANGUAGE" blank="false" validate="null">en</setting>
+	<setting key="STARTPAGE" blank="false" type="select" validate="/^(\d)+$/"><![CDATA[1]]></setting>
+	<setting key="BASE" blank="false" type="text" validate="/^(http://)(.)+$/"><![CDATA[http://test.felixrupp.com/]]></setting>
+	<setting key="TEMPLATE" blank="false" type="select" validate="null">Default</setting>
+	<setting key="DEFAULT_LANGUAGE" blank="false" type="select" validate="null">en</setting>
 	
 	<!-- Robots, Meta, etc. -->
-	<setting key="ROBOTS" blank="false" validate="null"><![CDATA[index,follow]]></setting>
+	<setting key="ROBOTS" blank="false" type="select" validate="null"><![CDATA[index,follow]]></setting>
 	
 	<!-- Website specific -->
-	<setting key="WEBSITE_TITLE" blank="false" validate="null"><![CDATA[Caramel CMS]]></setting>
-	<setting key="WEBSITE_TITLE_SEPERATOR" blank="false" validate="null"><![CDATA[ - ]]></setting>
+	<setting key="WEBSITE_TITLE" blank="false" type="text" validate="null"><![CDATA[Caramel CMS]]></setting>
+	<setting key="WEBSITE_TITLE_SEPERATOR" blank="false" type="text" validate="null"><![CDATA[ - ]]></setting>
 	
 	<!-- Navigation -->
-	<setting key="NAVIGATION_ACTIVE_MARKER_POSITION" blank="false" validate="null"><![CDATA[disabled]]></setting>
-	<setting key="NAVIGATION_ACTIVE_MARKER" blank="true" validate="null"><![CDATA[» ]]></setting>
-	<setting key="NAVIGATION_ACTIVE_CLASS" blank="true" validate="null"><![CDATA[menuActive]]></setting>
-	<setting key="NAVIGATION_CLASS" blank="true" validate="null"><![CDATA[menuLink]]></setting>
+	<setting key="NAVIGATION_ACTIVE_MARKER_POSITION" blank="false" type="select" validate="null"><![CDATA[disabled]]></setting>
+	<setting key="NAVIGATION_ACTIVE_MARKER" blank="true" type="text" validate="null"><![CDATA[» ]]></setting>
+	<setting key="NAVIGATION_ACTIVE_CLASS" blank="true" type="text" validate="null"><![CDATA[menuActive]]></setting>
+	<setting key="NAVIGATION_CLASS" blank="true" type="text" validate="null"><![CDATA[menuLink]]></setting>
 	
 	<!-- URL Setup -->
-	<setting key="SPEAKING_URLS" blank="false" validate="null"><![CDATA[true]]></setting>
+	<setting key="SPEAKING_URLS" blank="false" type="checkbox" validate="null"><![CDATA[true]]></setting>
 	
 	<!-- Footer -->
-	<setting key="LANGUAGE_SELECTOR_IN_FOOTER" blank="false" validate="null"><![CDATA[true]]></setting> <!-- if false then include footer yourself -->
-	<setting key="LANGUAGE_SELECTOR_SEPERATOR" blank="false" validate="null"><![CDATA[ | ]]></setting>
+	<setting key="LANGUAGE_SELECTOR_IN_FOOTER" blank="false" type="checkbox" validate="null"><![CDATA[true]]></setting> <!-- if false then include footer yourself -->
+	<setting key="LANGUAGE_SELECTOR_SEPERATOR" blank="false" type="text" validate="null"><![CDATA[ | ]]></setting>
 	
 </caramel-plist>

@@ -44,7 +44,7 @@
             </div>
             <div class="info-box-body">			
                 <div class="method-summary">
-                                                                                                                                                                                    <div class="method-definition">
+                                                                                                                                                                                                                            <div class="method-definition">
                         <img src="images/StaticMethod.png" alt=" "/>
                         static
                         <a href="#getConfigurationModel" title="details" class="method-name" rel='subsection'>getConfigurationModel</a>
@@ -54,7 +54,7 @@
                                                                                                                                                                                                                                                                                                                                                     <div class="method-definition">
                         <img src="images/Method.png" alt=" "/>
                         <a href="#getAdminAction" title="details" class="method-name">getAdminAction</a>
-                                                ()
+                                                    (<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>)
                                                                             <span class="method-result">Array</span>
                                             </div>
                                                                                 <div class="method-definition">
@@ -62,6 +62,12 @@
                         <a href="#getAdminConfigStringAction" title="details" class="method-name">getAdminConfigStringAction</a>
                                                     (<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>)
                                                                             <span class="method-result">string</span>
+                                            </div>
+                                                                                <div class="method-definition">
+                        <img src="images/Method.png" alt=" "/>
+                        <a href="#getBackendLanguageStringAction" title="details" class="method-name">getBackendLanguageStringAction</a>
+                                                    (<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>)
+                                                                            <span class="method-result">Value</span>
                                             </div>
                                                                                 <div class="method-definition">
                         <img src="images/Method.png" alt=" "/>
@@ -125,7 +131,7 @@
 	
 	<div class="method-header">
 		<img src="images/StaticMethod.png" />
-		<span class="method-title">static getConfigurationModel</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a63" rel="contents">63</a></span>)
+		<span class="method-title">static getConfigurationModel</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a280" rel="contents">280</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -151,7 +157,7 @@
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getAdminAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a171" rel="contents">171</a></span>)
+		<span class="method-title">getAdminAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a421" rel="contents">421</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -167,9 +173,14 @@
 		<span class="method-name">
 			getAdminAction
 		</span>
-				()
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$lang</span>)
 			</div>
 	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$lang</span><span class="var-description">: Language to fetch options for</span>			</li>
+				</ul>
 		
 			
 	</div>
@@ -178,7 +189,7 @@
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getAdminConfigStringAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a277" rel="contents">277</a></span>)
+		<span class="method-title">getAdminConfigStringAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a544" rel="contents">544</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -206,12 +217,45 @@
 		
 			
 	</div>
-<a name="getConfigStringAction" id="getConfigStringAction"><!-- --></a>
+<a name="getBackendLanguageStringAction" id="getBackendLanguageStringAction"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getConfigStringAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a259" rel="contents">259</a></span>)
+		<span class="method-title">getBackendLanguageStringAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a562" rel="contents">562</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Wrapper for getBackendLanguagestring</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> for given key</li>
+				<li><span class="field">see:</span> getBackendLanguagestring</li>
+				<li><span class="field">throws:</span> CaramelException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Value</span>
+		<span class="method-name">
+			getBackendLanguageStringAction
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$key</span><span class="var-description">: Key to lookup in config-file</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="getConfigStringAction" id="getConfigStringAction"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="images/Method.png" />
+		<span class="method-title">getConfigStringAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a526" rel="contents">526</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -240,11 +284,11 @@
 			
 	</div>
 <a name="getGlobalsAction" id="getGlobalsAction"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getGlobalsAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a89" rel="contents">89</a></span>)
+		<span class="method-title">getGlobalsAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a306" rel="contents">306</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -266,11 +310,11 @@
 			
 	</div>
 <a name="getLoginInfoAction" id="getLoginInfoAction"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getLoginInfoAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a151" rel="contents">151</a></span>)
+		<span class="method-title">getLoginInfoAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a399" rel="contents">399</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -293,11 +337,11 @@
 			
 	</div>
 <a name="getTemplateAction" id="getTemplateAction"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">getTemplateAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a223" rel="contents">223</a></span>)
+		<span class="method-title">getTemplateAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a490" rel="contents">490</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -320,11 +364,11 @@
 			
 	</div>
 <a name="setAdminAction" id="setAdminAction"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">setAdminAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a194" rel="contents">194</a></span>)
+		<span class="method-title">setAdminAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a461" rel="contents">461</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -355,11 +399,11 @@
 			
 	</div>
 <a name="setGlobalsAction" id="setGlobalsAction"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">setGlobalsAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a122" rel="contents">122</a></span>)
+		<span class="method-title">setGlobalsAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a370" rel="contents">370</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -386,11 +430,11 @@
 			
 	</div>
 <a name="setTemplateAction" id="setTemplateAction"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="images/Method.png" />
-		<span class="method-title">setTemplateAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a239" rel="contents">239</a></span>)
+		<span class="method-title">setTemplateAction</span> (line <span class="line-number"><a href="__filesource/fsource_inc_model_incmodelConfigurationModel.php.html#a506" rel="contents">506</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->

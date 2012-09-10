@@ -47,6 +47,17 @@ class ConfigurationModel {
 	private $_backendLang;
 	
 	/**
+	 * @var array $_backendLangugeData Contains SimpleXMLExtended object with backend language data
+	 */
+	private $_backendLangugeData;
+	
+	/**
+	 * @var array $_allBackendLanguages Contains an array with alle existing backend languages
+	 */
+	private $_allBackendLanguages;
+	
+	
+	/**
 	 * @var array $_isoLangCodes Contains all ISO language codes and respective language names
 	 */
 	private $_isoLangCodes = array(
@@ -249,7 +260,10 @@ class ConfigurationModel {
 			$this->reloadConfigFile();
 			$this->reloadAdminConfigFile();
 			$this->reloadAdminLangFile();
-			$this->_backendLang = $this->getAdminConfigString("BACKEND_LANGUAGE");			
+			
+			$this->_backendLang = $this->getAdminConfigString("BACKEND_LANGUAGE");
+			$this->_backendLangugeData = $this->getBackendLanguage($this->_backendLang);
+			$this->_allBackendLanguages = $this->getAllBackendLanguages();	
 		}
 		catch(CaramelException $e) {
 			$e->getDetails();
@@ -290,23 +304,33 @@ class ConfigurationModel {
 	 * @return Array with all global settings
 	 */
 	public function getGlobalsAction() {
-			
-		$globals = array(
-	 			"website_title" => array("label" => "Global website-title:", "value" => stripslashes($this->getConfigString("WEBSITE_TITLE")), "blank" => false),
-	 			"website_title_seperator" => array("label" => "Website-title seperator:", "value" => stripslashes($this->getConfigString("WEBSITE_TITLE_SEPERATOR")), "blank" => false),
-	 			"startpage" => array("label" => "Homepage:", "value" => stripslashes($this->getConfigString("STARTPAGE")), "acceptedValues" => array(), "blank" => false),
-	 			"base" => array("label" => "Basepath:", "value" => stripslashes($this->getConfigString("BASE")), "blank" => false),
-	 			"robots" => array("label" => "Robot settings:", "value" => stripslashes($this->getConfigString("ROBOTS")), "acceptedValues" => array(), "blank" => false),
-	 			"speaking_urls" => array("label" => "Speaking URLs:", "value" => stripslashes($this->getConfigString("SPEAKING_URLS")), "blank" => false),
-	 			"navigation_active_marker_position" => array("label" => "Position of active-navigation-marker:", "value" => stripslashes($this->getConfigString("NAVIGATION_ACTIVE_MARKER_POSITION")), "blank" => false),
-	 			"navigation_active_marker" => array("label" => "Marker for active-navigation:", "value" => stripslashes($this->getConfigString("NAVIGATION_ACTIVE_MARKER")), "blank" => true),
-	 			"navigation_active_class" => array("label" => "Class for active-navigation links:", "value" => stripslashes($this->getConfigString("NAVIGATION_ACTIVE_CLASS")), "blank" => true),
-	 			"navigation_class" => array("label" => "Navigation class:", "value" => stripslashes($this->getConfigString("NAVIGATION_CLASS")), "blank" => true),
-	 			"language_selector_in_footer" => array("label" => "Language selector in footer:", "value" => stripslashes($this->getConfigString("LANGUAGE_SELECTOR_IN_FOOTER")), "blank" => false),
-	 			"language_selector_seperator" => array("label" => "Language selector seperator:", "value" => stripslashes($this->getConfigString("LANGUAGE_SELECTOR_SEPERATOR")), "blank" => false),
-				"default_language" => array("label" => "Default language for frontend:", "value" => stripslashes($this->getConfigString("DEFAULT_LANGUAGE")), "blank" => false),
 		
-		);
+		$configArray = $this->getConfig($this->_configFile);
+		$globals = array();
+				
+		$languageArray = array();
+		foreach($this->_backendLangugeData as $xmlNode) {
+			$languageArray[(string)$xmlNode["key"]] = (string)$xmlNode;
+		}
+				
+		foreach($configArray as $node) {
+			
+			$globals[strtolower((string)$node["key"])] = array("label" => $languageArray[(string)$node["key"]], "value" => stripslashes((string)$node), "type" => (string)$node["type"], "blank" => (string)$node["blank"], "validate" => (string)$node["validate"]);
+			
+		}
+		
+		# Provide languages for default frontend language		
+		foreach($this->_isoLangCodes as $langCode => $langValue) {
+				
+			$globals["default_language"]["acceptedValues"][$langCode] = $langValue;
+		}
+		
+		# Set Robot and navigation active marker positions
+		$globals["robots"]["acceptedValues"] = array("index,follow"=>"index,follow", "index,nofollow"=>"index,nofollow", "noindex,follow"=>"noindex,follow", "noindex,nofollow"=>"noindex,nofollow");
+		$globals["navigation_active_marker_position"]["acceptedValues"] = array("disabled"=>"disabled", "before"=>"before", "after"=>"after");
+				
+		# Remove template settings:
+		if(isset($globals["template"])) {unset($globals["template"]);}	
 			
 		return $globals;
 			
@@ -375,39 +399,27 @@ class ConfigurationModel {
 	*/
 	public function getAdminAction() {
 				
-		$adminConfigArray = array();
-		$adminConfigArray["ADMIN_USERNAME"] = $this->getAdminConfig("ADMIN_USERNAME");
-		$adminConfigArray["ADMIN_PASSWORD"] = $this->getAdminConfig("ADMIN_PASSWORD");
-		$adminConfigArray["ADMIN_PASSWORD_CONFIRM"] = $this->getAdminConfig("ADMIN_PASSWORD_CONFIRM");
-		$adminConfigArray["ADMIN_EMAIL"] = $this->getAdminConfig("ADMIN_EMAIL");
-		$adminConfigArray["CONTACT_EMAIL"] = $this->getAdminConfig("CONTACT_EMAIL");
-		$adminConfigArray["BACKEND_LANGUAGE"] = $this->getAdminConfig("BACKEND_LANGUAGE");
-		
-		$adminLanguageArray = array();
-		$adminLanguageArray["ADMIN_USERNAME"] = $this->getAdminLanguageStringAction("ADMIN_USERNAME");
-		$adminLanguageArray["ADMIN_PASSWORD"] = $this->getAdminLanguageStringAction("ADMIN_PASSWORD");
-		$adminLanguageArray["ADMIN_PASSWORD_CONFIRM"] = $this->getAdminLanguageStringAction("ADMIN_PASSWORD_CONFIRM");
-		$adminLanguageArray["ADMIN_EMAIL"] = $this->getAdminLanguageStringAction("ADMIN_EMAIL");
-		$adminLanguageArray["CONTACT_EMAIL"] = $this->getAdminLanguageStringAction("CONTACT_EMAIL");
-		$adminLanguageArray["BACKEND_LANGUAGE"] = $this->getAdminLanguageStringAction("BACKEND_LANGUAGE");
+		$adminConfigArray = $this->getConfig($this->_adminConfigFile);
+				
+		$languageArray = array();
+		foreach($this->_backendLangugeData as $xmlNode) {
+			$languageArray[(string)$xmlNode["key"]] = (string)$xmlNode;
+		}
+				
+		foreach($adminConfigArray as $node) {
+			
+			$admin[strtolower((string)$node["key"])] = array("label" => $languageArray[(string)$node["key"]], "value" => stripslashes((string)$node), "type" => (string)$node["type"], "blank" => (string)$node["blank"], "validate" => (string)$node["validate"]);
+			
+		}
 		
 		# Don't show passwords:
-		$adminConfigArray["ADMIN_PASSWORD"][0] = null;
-		$adminConfigArray["ADMIN_PASSWORD"][0]->addCdata("");
-		
-		# Construct output array
-		foreach($adminConfigArray as $key => $node) {
-						
-			$admin[strtolower($key)] = array("label" => $adminLanguageArray[$key], "value" => stripslashes((string)$node), "type" => $node["type"], "blank" => $node["blank"], "validate" => $node["validate"]);
-		}
+		$admin["admin_password"]["value"] = "";
 		
 		# Provide all language which are in our lang_admin.xml file for html select-tag:
 		$admin["backend_language"]["acceptedValues"] = array();
-		
-		$languages = $this->getAdminLanguages();
-		
-		foreach($languages as $langCode) {
-			
+				
+		foreach($this->_allBackendLanguages as $langCode) {
+				
 			$admin["backend_language"]["acceptedValues"][$langCode] = $this->_isoLangCodes[$langCode];
 		}
 		
@@ -517,18 +529,18 @@ class ConfigurationModel {
 	
 	
 	/**
-	 * Wrapper for getAdminLanguageString
+	 * Wrapper for getBackendLanguagestring
 	 *
-	 * @see getAdminLanguageString
+	 * @see getBackendLanguagestring
 	 *
 	 * @param string $key Key to lookup in config-file
 	 *
 	 * @throws CaramelException
 	 * @return Value for given key
 	 */
-	public function getAdminLanguageStringAction($key) {
+	public function getBackendLanguageStringAction($key) {
 				
-		return $this->getAdminLanguageString($this->_backendLang, $key);
+		return $this->getBackendLanguageString($this->_backendLang, $key);
 	
 	} // End of method declaration
 	
@@ -539,6 +551,27 @@ class ConfigurationModel {
 ##  Helper methods
 ##
 ############################################################################
+	
+		
+	/**
+	 * Get full config from passed config file
+	 *
+	 * @throws CaramelException
+	 * @return SimpleXMLExtended node mathing the $key
+	 */
+	private function getConfig($configFile) {
+	
+		$setting = $configFile->xpath('setting');
+	
+		if(count($setting)>0) {
+			return $setting;
+		}
+		else {
+			throw new CaramelException(10);
+		}
+	
+	} // End of method declaration
+	
 	
 	
 	/**
@@ -556,9 +589,9 @@ class ConfigurationModel {
 		if(count($setting)>0) {
 			return (string)$setting[0];
 		}
-		/*else {
+		else {
 			throw new CaramelException(10);
-		}*/
+		}
 	
 	} // End of method declaration
 	
@@ -646,38 +679,16 @@ class ConfigurationModel {
 	
 	
 	/**
-	 * Get whole node from admin config file
-	 * 
-	 * @param string $key The key of the admin setting
-	 * 
-	 * @throws CaramelException
-	 * @return SimpleXMLExtended node mathing the $key
-	 */
-	private function getAdminConfig($key) {
-		
-		$setting = $this->_adminConfigFile->xpath('//setting[@key="'.$key.'"]');
-		
-		if(count($setting)>0) {
-			return $setting[0];
-		}
-		else {
-			throw new CaramelException(10);
-		}
-		
-	} // End of method declaration
-	
-	
-	
-	/**
-	 * Get whole node from admin config file
+	 * Get string from backend languagefile
 	 *
 	 * @param string $lang The language to fetch the string for
 	 * @param string $key The key of the language setting
 	 *
 	 * @throws CaramelException
 	 * @return Value mathing the $lang and the $key
+	 * @deprecated
 	 */
-	private function getAdminLanguageString($lang, $key) {
+	private function getBackendLanguageString($lang, $key) {
 	
 		$setting = $this->_adminLangFile->xpath('//lang[@code="'.$lang.'"]/setting[@key="'.$key.'"]');
 	
@@ -693,12 +704,35 @@ class ConfigurationModel {
 	
 	
 	/**
-	 * Get all languages in lang_admin.xml file
+	 * Get string from backend languagefile
+	 *
+	 * @param string $lang The language to fetch the string for
 	 *
 	 * @throws CaramelException
 	 * @return Value mathing the $lang and the $key
 	 */
-	private function getAdminLanguages() {
+	private function getBackendLanguage($lang) {
+	
+		$setting = $this->_adminLangFile->xpath('//lang[@code="'.$lang.'"]/setting');
+	
+		if(count($setting)>0) {
+			return $setting;
+		}
+		else {
+			throw new CaramelException(10);
+		}
+	
+	} // End of method declaration
+	
+	
+	
+	/**
+	 * Get all languages in lang file
+	 *
+	 * @throws CaramelException
+	 * @return Value mathing the $lang and the $key
+	 */
+	private function getAllBackendLanguages() {
 	
 		$allLanguages = array();
 		
@@ -770,7 +804,7 @@ class ConfigurationModel {
 	private function reloadAdminLangFile() {
 			
 		try {
-			$this->_adminLangFile = simplexml_load_file(BASEDIR.'/config/lang_admin.xml', "SimpleXMLExtended");
+			$this->_adminLangFile = simplexml_load_file(BASEDIR.'/config/lang.xml', "SimpleXMLExtended");
 		}
 		catch(Exception $e) {
 			throw new CaramelException(11);

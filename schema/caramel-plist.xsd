@@ -14,7 +14,7 @@
         <xs:extension base="xs:anyURI">
           <xs:attribute name="blank" use="required" type="xs:boolean"/>
           <xs:attribute name="key" use="required" type="xs:NCName"/>
-          <xs:attribute name="type" type="xs:NCName"/>
+          <xs:attribute name="type" use="required" type="xs:NCName"/>
           <xs:attribute name="validate" use="required"/>
         </xs:extension>
       </xs:simpleContent>

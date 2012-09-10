@@ -1,8 +1,8 @@
 #Caramel CMS
 
-*Version 0.2.9*
+*Version 0.3.0*
 
-*2012-07-23*
+*2012-09-10*
 
 
 ##Features

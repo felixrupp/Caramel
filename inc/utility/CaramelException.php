@@ -5,7 +5,9 @@
  * @subpackage utility
  */
 
-
+/**
+ * Import
+ */
 require_once BASEDIR.'/inc/model/ConfigurationModel.php';
 
 /**

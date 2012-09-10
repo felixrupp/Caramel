@@ -2,11 +2,11 @@
 <!DOCTYPE caramel-plist SYSTEM "../dtd/caramel-plist.dtd">
 <!-- 
  *
- * Database for page-content
+ * Settings file for admin
  * 
  * @author Felix Rupp <kontakt@felixrupp.com>
  * @version $Id$
- * @copyright Copyright (c) 2011, Felix Rupp, Nicole Reinhardt
+ * @copyright Copyright (c) Felix Rupp, Nicole Reinhardt
  * @license http://www.opensource.org/licenses/mit-license.php MIT-License
  * 
 -->

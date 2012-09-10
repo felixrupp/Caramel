@@ -63,12 +63,12 @@ class BackendController {
 	/**
 	 * @var String VERSION Constant for system version
 	 */
-	const VERSION = "0.2.9";
+	const VERSION = "0.3.0";
 	
 	/**
 	 * @var String VERSION Constant for version date
 	 */
-	const VERSION_DATE = "2012-07-23";
+	const VERSION_DATE = "2012-09-10";
 	
 	/**
 	 * @var String SYSTEM_SALT System Salt for bcrypt hashing
@@ -785,9 +785,7 @@ class BackendController {
 			$globals = $this->_config->getGlobalsAction();
 					
 			$globals["startpage"]["acceptedValues"] = $this->_dataBase->backendGetAllPageNamesAction();
-			$globals["robots"]["acceptedValues"] = array("index,follow", "index,nofollow", "noindex,follow", "noindex,nofollow");
-			$globals["navigation_active_marker_position"]["acceptedValues"] = array("disabled", "before", "after");
-					
+						
 			return $globals;
 		}
 		catch(CaramelException $e) {
