@@ -41,7 +41,7 @@ error_reporting(E_ALL|E_STRICT);
 ?>
 
 <!DOCTYPE HTML>
-<?php echo($frontendController->versionInformationAction()); ?>
+<?php /*echo($frontendController->versionInformationAction());*/ ?>
 
 <html lang="<?php echo($frontendController->languageCodeAction()); ?>">
 
