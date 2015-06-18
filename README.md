@@ -1,11 +1,11 @@
-#Caramel CMS
+# Caramel CMS
 
 *Version 0.3.0*
 
 *2012-09-10*
 
 
-##Features
+## Features
 
 
 The following features are implemented until now:
@@ -19,20 +19,20 @@ The following features are implemented until now:
 * Hiding pages from navigation 
 
 
-##Todo
+## Todo
 
 
-###Internals:
+### Internals:
 
 * Plug-In interface
 
 
-###Plug-Ins:
+### Plug-Ins:
 
 * Contactform
 
 
-###Backend:
+### Backend:
 
 * Keeping versions of saved records for backup
 * Ability to create new records in a page
@@ -41,17 +41,17 @@ The following features are implemented until now:
 * Ability to upload pictures in ckEditor in backend
 
 
-##Installation
+## Installation
 
 Coming soon!
 
 
-##Tips
+## Tips
 
 Coming soon!
 
 
-##License
+## License
 
 Dual-licensed under the [MIT-License](http://www.opensource.org/licenses/mit-license.php) and the [GNU GPL](http://www.gnu.org/licenses/gpl.html).
 
