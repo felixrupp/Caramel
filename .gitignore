@@ -22,3 +22,5 @@ CVS
 .project
 .settings/*
 .classpath
+
+.idea
