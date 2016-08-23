@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE caramel-plist SYSTEM "../dtd/caramel-plist.dtd">
-<!-- 
+<!--
  *
  * Settings file for admin
- * 
+ *
  * @author Felix Rupp <kontakt@felixrupp.com>
  * @version $Id$
  * @copyright Copyright (c) Felix Rupp, Nicole Reinhardt
  * @license http://www.opensource.org/licenses/mit-license.php MIT-License
- * 
+ *
 -->
 <caramel-plist version="1.0">
 
 	<!-- Admin setup -->
 	<setting key="ADMIN_USERNAME" blank="false" type="text" validate="/^[a-z\d_]{5,20}$/i"><![CDATA[admin]]></setting>
-	<setting key="ADMIN_PASSWORD" blank="true" type="password" validate="/(\d+)([a-z]+)([A-Z]+)/"><![CDATA[$2BTBKf1V37sc]]]></setting>
-	<setting key="ADMIN_PASSWORD_CONFIRM" blank="true" type="password" validate="/(\d+)([a-z]+)([A-Z]+)/"></setting>
-	<setting key="ADMIN_EMAIL" blank="false" type="text" validate="/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/"><![CDATA[admin@yourdomain.com]]></setting>
-	
+	<setting key="ADMIN_PASSWORD" blank="true" type="password" validate="/(\d+)([a-z]+)([A-Z]+)/"><![CDATA[$2a$12$q8JJ4Ere8w75fCQ3yMZj5.owWENEfCF0oz9ifLiSlSLcylv04bkN6]]></setting> <!-- PW: test1234 -->
+	<setting key="ADMIN_PASSWORD_CONFIRM" blank="true" type="password" validate="/(\d+)([a-z]+)([A-Z]+)/"><![CDATA[test1234]]></setting>
+	<setting key="ADMIN_EMAIL" blank="false" type="text" validate="/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/"><![CDATA[webmaster@localhost]]></setting>
+
 	<!-- E-Mail used in contactform -->
-	<setting key="CONTACT_EMAIL" blank="false" type="text" validate="/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/"><![CDATA[contact@yourdomain.com]]></setting>
-	
+	<setting key="CONTACT_EMAIL" blank="false" type="text" validate="/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/"><![CDATA[webmaster@localhost]]></setting>
+
 	<!-- Language of backend interface -->
-	<setting key="BACKEND_LANGUAGE" blank="false" type="select" validate="null"><![CDATA[en]]></setting>
+	<setting key="BACKEND_LANGUAGE" blank="false" type="select" validate="null"><![CDATA[de]]></setting>
 </caramel-plist>

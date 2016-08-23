@@ -496,14 +496,14 @@ class BackendController {
 			
 				foreach($_POST as $key => $value) {
 					
-					if($key != "editadmin" && $key != "submit" && $key != "admin_password" && $key != "password_verification") {
+					if($key != "editadmin" && $key != "submit" && $key != "admin_password" && $key != "admin_password_confirm") {
 						$admin[$key]["value"] = $value;
 					}
 					
 					# Handle password
-					if($key=="admin_password" && $value!="" && $_POST["password_verification"]!="") {
+					if($key=="admin_password" && $value!="" && $_POST["admin_password_confirm"]!="") {
 						
-						if($value==$_POST["password_verification"] && strlen($_POST["admin_email"])>1) { # verifiy password, save only when email is provided
+						if($value==$_POST["admin_password_confirm"] && strlen($_POST["admin_email"])>1) { # verifiy password, save only when email is provided
 							
 							$admin["admin_password"]["value"] = $this->bcryptEncode($_POST["admin_email"], $value);
 						
