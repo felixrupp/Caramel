@@ -14,7 +14,7 @@
 
 	<!-- Essentials -->
 	<setting key="STARTPAGE" blank="false" type="select" validate="/^(\d)+$/"><![CDATA[1]]></setting>
-	<setting key="BASE" blank="false" type="text" validate="/^(http://)(.)+$/"><![CDATA[http://test.felixrupp.com/]]></setting>
+	<setting key="BASE" blank="false" type="text" validate="/^(http://)(.)+$/"><![CDATA[http://localhost/]]></setting>
 	<setting key="TEMPLATE" blank="false" type="select" validate="null">Default</setting>
 	<setting key="DEFAULT_LANGUAGE" blank="false" type="select" validate="null">en</setting>
 	
